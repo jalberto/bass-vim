@@ -57,4 +57,4 @@
 * ysiw<b> -> <b>h</b>
 * M-v S<p class=x>
 
-/* vim: set ts=4 sw=4 tw=0 fdm=none tw=40: */
+/* vim: set ts=4 sw=4 tw=0 fdm=manual tw=40: */

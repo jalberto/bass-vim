@@ -76,6 +76,7 @@ set encoding=utf-8
 
 set background=dark
 let g:solarized_visibility="low" " Visibility of special chars
+let g:solarized_contrast="high"
 
 if has("gui_running")
   set guifont=Envy\ Code\ R\ 13
