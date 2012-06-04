@@ -115,6 +115,7 @@ endif
 " StatusLine (uses powerline plugin) {{{
 set ruler " cursor position in status
 set laststatus=2
+let g:Powerline_symbols = 'fancy'
 " }}}
 
 " }}}
