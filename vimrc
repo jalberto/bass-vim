@@ -286,6 +286,7 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+nmap <tab><tab> <C-w>w
 " }}}
 
 " Ruby - Rails {{{
@@ -360,8 +361,8 @@ let g:fuzzy_enumerating_limit=15
 let g:fuzzy_ignore = "*.png,*.jpg,*.gif,*.log, log/*, *.sqlite3, .git/*, .svn/*"
 " }}}
 " snipMate {{{
-let g:snips_author = 'José Alberto Suárez López'
-let g:snippets_dir = '~/.vim/snippets/snipmate-snippets/'
+" let g:snips_author = 'José Alberto Suárez López'
+" let g:snippets_dir = '~/.vim/snippets/snipmate-snippets/'
 " }}}
 " VCSCommand {{{
 let g:VCSCommandCommitOnWrite = 0
@@ -374,12 +375,13 @@ let g:DBGRlineNumbers   = 1
 let g:rails_dbext=1
 " }}}
 " neocomplcache {{{
-let g:neocomplcache_enable_at_startup = 1 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1 " Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1  " Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1    " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1             " Use smartcase.
+let g:neocomplcache_enable_camel_case_completion = 1  " Use camel case completion.
+let g:neocomplcache_enable_underbar_completion = 1    " Use underbar completion.
+let g:neocomplcache_min_syntax_length = 3             " Set minimum syntax keyword length.
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplcache_snippets_dir = '~/.vim/snippets/snipmate-snippets/'
 " }}}
 " NerdCommenter {{{
 "let NERDCreateDefaultMappings=0
