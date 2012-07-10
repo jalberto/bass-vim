@@ -381,7 +381,7 @@ let g:neocomplcache_enable_camel_case_completion = 1  " Use camel case completio
 let g:neocomplcache_enable_underbar_completion = 1    " Use underbar completion.
 let g:neocomplcache_min_syntax_length = 3             " Set minimum syntax keyword length.
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplcache_snippets_dir = '~/.vim/snippets/snipmate-snippets/'
+let g:neocomplcache_snippets_dir = '~/.vim/snippets/snippets/'
 imap <C-s>     <Plug>(neocomplcache_snippets_expand)
 smap <C-s>     <Plug>(neocomplcache_snippets_expand)
 " SuperTab like snippets behavior.
