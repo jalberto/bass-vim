@@ -382,6 +382,11 @@ let g:neocomplcache_enable_underbar_completion = 1    " Use underbar completion.
 let g:neocomplcache_min_syntax_length = 3             " Set minimum syntax keyword length.
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_snippets_dir = '~/.vim/snippets/snipmate-snippets/'
+imap <C-s>     <Plug>(neocomplcache_snippets_expand)
+smap <C-s>     <Plug>(neocomplcache_snippets_expand)
+" SuperTab like snippets behavior.
+" imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " }}}
 " NerdCommenter {{{
 "let NERDCreateDefaultMappings=0
