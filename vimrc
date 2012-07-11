@@ -202,6 +202,9 @@ endif
 au FileType python set foldmethod=indent
 " Sgml,htmls,xml y xsl folder
 au Filetype html,xml,xsl,sgml,docbook
+" Coffeescript folder
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 " }}}
 
 " Keyboard shortcuts{{{
@@ -395,6 +398,9 @@ let NERDSpaceDelims=1
 " autoclose {{{
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'"}
 let g:AutoCloseProtectedRegions = ["String", "Character"]
+" }}}
+" coffeescript {{{
+let coffee_compile_vert = 1
 " }}}
 " }}}
 
