@@ -57,4 +57,14 @@
 * ysiw<b> -> <b>h</b>
 * M-v S<p class=x>
 
+#  Fugitive
+
+* :Gdiff
+** |  2  |  1  |  3  |
+*** head, result, merge
+** diffget //[2/3]
+** diffput //1
+* :Gwrite
+** mantains the actual buffer as result
+
 /* vim: set ts=4 sw=4 tw=0 fdm=manual tw=40: */
