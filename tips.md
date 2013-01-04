@@ -48,6 +48,9 @@
 * [s    Palabra anterior mal escrita
 * z=    Lista de correciones
 
+* <leader><leader>f   se mueve por letra
+* <leader><leader>w   se mueve por palabra
+
 # Surronding
 
 * yss" -> "h w" -> cs"' -> 'h w' -> cs"<q> -> <q>h w</q>
