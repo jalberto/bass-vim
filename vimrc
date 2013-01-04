@@ -136,7 +136,7 @@ set showfulltag
 " Autocomplete {{{
 " Use the cool tab complete menu
 set wildmenu " show complete menu at bottom
-set wildmode=list:longest,full
+" set wildmode=list:longest,full
 set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 set suffixes+=.in,.a
 
@@ -377,18 +377,25 @@ let g:DBGRlineNumbers   = 1
 " Surronding {{{
 let g:rails_dbext=1
 " }}}
-" neocomplcache {{{
+" neocomplcache & neosnippets {{{
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1             " Use smartcase.
 let g:neocomplcache_enable_camel_case_completion = 1  " Use camel case completion.
 let g:neocomplcache_enable_underbar_completion = 1    " Use underbar completion.
 let g:neocomplcache_min_syntax_length = 3             " Set minimum syntax keyword length.
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplcache_snippets_dir = '~/.vim/snippets/snippets/'
-imap <C-s>     <Plug>(neocomplcache_snippets_expand)
-smap <C-s>     <Plug>(neocomplcache_snippets_expand)
+let g:neosnippet#snippets_directory='~/.vim/snippets/snippets/'
+" Plugin key-mappings.
+imap <C-s>     <Plug>(neosnippet_expand_or_jump)
+smap <C-s>     <Plug>(neosnippet_expand_or_jump)
 " SuperTab like snippets behavior.
-" imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 " }}}
 " NerdCommenter {{{
