@@ -215,12 +215,12 @@ map <silent> <C-F1> :vsplit ~/.vim/abbr<CR>
 map <silent> <F2> :NERDTreeToggle<CR>
 map <S-F2> :NeoComplCacheToggle<CR>
 
-nmap   <F3> :FufFile<CR>
+nmap   <F3> :CommandT<CR>
 " nmap <S-F3> :FufMruFile<CR>
-nmap <C-F3> :FufFileWithCurrentBufferDir<CR>
-nmap <T-F3> :FufRenewCache<CR>
+" nmap <C-F3> :FufFileWithCurrentBufferDir<CR>
+" nmap <T-F3> :FufRenewCache<CR>
 
-nmap <silent> <F4> :Tlist<CR>
+nmap <silent> <F4> :TagbarToggle<CR>
 nmap <S-F4> :!ctags --extra=+f -R *<CR><CR>   " Regenerate tags in current dir
 nmap <C-F4> :!ctags -R `bundle show rails`/../*<CR><CR> " Regenare gem tags for current dir proj
 
@@ -308,25 +308,30 @@ augroup END
 " }}}
 
 " Plugins {{{
+" tagBar {{{
+let g:tagbar_width = 30
+let g:tagbar_autofocus = 1
+let g:tagbar_compact = 1
+" }}}
 " taglist.vim {{{
-let Tlist_Use_Right_Window=1
-let Tlist_Auto_Open=0
-let Tlist_Auto_Update=1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Enable_Fold_Column=0
-let Tlist_Compact_Format=1
-let Tlist_WinWidth=20
-let Tlist_Exit_OnlyWindow=1
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Show_Menu=1
-let Tlist_Use_SingleClick = 1
-let Tlist_Ctags_Cmd="/usr/bin/ctags"
+" let Tlist_Use_Right_Window=1
+" let Tlist_Auto_Open=0
+" let Tlist_Auto_Update=1
+" let Tlist_GainFocus_On_ToggleOpen = 1
+" let Tlist_File_Fold_Auto_Close = 1
+" let Tlist_Enable_Fold_Column=0
+" let Tlist_Compact_Format=1
+" let Tlist_WinWidth=20
+" let Tlist_Exit_OnlyWindow=1
+" let Tlist_File_Fold_Auto_Close = 1
+" let Tlist_Show_Menu=1
+" let Tlist_Use_SingleClick = 1
+" let Tlist_Ctags_Cmd="/usr/bin/ctags"
 
-" Win-right/left to navigate forward/backward in the tags stack
-nnoremap <A-Left> <C-T>
-nnoremap <A-Right> <C-]>
-nnoremap <A-Up> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+" " Win-right/left to navigate forward/backward in the tags stack
+" nnoremap <A-Left> <C-T>
+" nnoremap <A-Right> <C-]>
+" nnoremap <A-Up> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " }}}
 " explorer.vim {{{
 let g:explHideFiles='^\.'
@@ -359,9 +364,9 @@ if has('cscope') && filereadable("/usr/bin/cscope")
 endif
 " }}}
 " FuzzyFinder {{{
-let g:fuzzy_ceiling=20000
-let g:fuzzy_enumerating_limit=15
-let g:fuzzy_ignore = "*.png,*.jpg,*.gif,*.log, log/*, *.sqlite3, .git/*, .svn/*"
+" let g:fuzzy_ceiling=20000
+" let g:fuzzy_enumerating_limit=15
+" let g:fuzzy_ignore = "*.png,*.jpg,*.gif,*.log, log/*, *.sqlite3, .git/*, .svn/*"
 " }}}
 " snipMate {{{
 " let g:snips_author = 'José Alberto Suárez López'
