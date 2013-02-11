@@ -118,6 +118,15 @@ set laststatus=2
 let g:Powerline_symbols = 'fancy'
 " }}}
 
+# {{{ Cursor
+" highlight Cursor guifg=black guibg=Red
+highlight iCursor guifg=black guibg=Orange
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
+# }}}
+
 " }}}
 
 " Search {{{
