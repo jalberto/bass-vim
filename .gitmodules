@@ -79,3 +79,9 @@
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar
+[submodule "bundle/vim-scroll-position.git"]
+	path = bundle/vim-scroll-position.git
+	url = git://github.com/junegunn/vim-scroll-position.git
+[submodule "bundle/interactive-replace.git"]
+	path = bundle/interactive-replace.git
+	url = git://github.com/hwrod/interactive-replace.git

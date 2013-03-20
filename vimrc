@@ -322,6 +322,9 @@ let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
 " }}}
+" scroll {{{
+let g:scroll_position_visual = 2
+" }}}
 " taglist.vim {{{
 " let Tlist_Use_Right_Window=1
 " let Tlist_Auto_Open=0
