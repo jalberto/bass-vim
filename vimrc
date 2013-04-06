@@ -224,10 +224,12 @@ map <silent> <C-F1> :vsplit ~/.vim/abbr<CR>
 map <silent> <F2> :NERDTreeToggle<CR>
 map <S-F2> :NeoComplCacheToggle<CR>
 
-nmap   <F3> :CommandT<CR>
+" nmap   <F3> :CommandT<CR>
 " nmap <S-F3> :FufMruFile<CR>
 " nmap <C-F3> :FufFileWithCurrentBufferDir<CR>
 " nmap <T-F3> :FufRenewCache<CR>
+let g:ctrlp_map = '<F3>'
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 nmap <silent> <F4> :TagbarToggle<CR>
 nmap <S-F4> :!ctags --extra=+f -R *<CR><CR>   " Regenerate tags in current dir
