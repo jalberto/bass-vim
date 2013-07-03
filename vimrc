@@ -398,6 +398,8 @@ smap <C-s>     <Plug>(neosnippet_expand_or_jump)
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" Supertab completion
+let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 
 " For snippet_complete marker.
 if has('conceal')
