@@ -82,3 +82,12 @@
 [submodule "bundle/vim-kompleter"]
 	path = bundle/vim-kompleter
 	url = https://github.com/szw/vim-kompleter.git
+[submodule "bundle/vim-rake"]
+	path = bundle/vim-rake
+	url = git://github.com/tpope/vim-rake.git
+[submodule "bundle/vim-bundler"]
+	path = bundle/vim-bundler
+	url = git://github.com/tpope/vim-bundler.git
+[submodule "bundle/git_shade"]
+	path = bundle/git_shade
+	url = git@github.com:joeytwiddle/git_shade.vim.git

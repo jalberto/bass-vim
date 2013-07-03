@@ -60,7 +60,7 @@
 * ysiw<b> -> <b>h</b>
 * M-v S<p class=x>
 
-#  Fugitive
+# Fugitive
 
 * :Gdiff
 ** |  2  |  1  |  3  |
@@ -69,5 +69,12 @@
 ** diffput //1
 * :Gwrite
 ** mantains the actual buffer as result
+
+# GitShade
+
+To on/off highlite of newest lines
+(brighter color)
+
+* GitShade
 
 /* vim: set ts=4 sw=4 tw=0 fdm=manual tw=40: */
