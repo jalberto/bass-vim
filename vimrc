@@ -109,6 +109,14 @@ else
   colorscheme solarized
 endif
 
+" OSX stuff
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set guifont=Source\ Code\ Pro:h14
+  endif
+endif
+
 " Highlight current line and col
 autocmd WinLeave * setlocal nocursorcolumn nocursorline
 autocmd WinEnter * setlocal cursorline cursorcolumn

@@ -90,4 +90,4 @@
 	url = git://github.com/tpope/vim-bundler.git
 [submodule "bundle/git_shade"]
 	path = bundle/git_shade
-	url = git@github.com:joeytwiddle/git_shade.vim.git
+	url = git://github.com/joeytwiddle/git_shade.vim.git
