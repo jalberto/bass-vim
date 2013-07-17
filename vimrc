@@ -104,7 +104,7 @@ let g:solarized_contrast="high"
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ 13
-  colorscheme solarized
+  colorscheme molokai
 else
   colorscheme solarized
 endif

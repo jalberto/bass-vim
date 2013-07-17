@@ -91,3 +91,6 @@
 [submodule "bundle/git_shade"]
 	path = bundle/git_shade
 	url = git://github.com/joeytwiddle/git_shade.vim.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
