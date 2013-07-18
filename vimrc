@@ -11,6 +11,7 @@ set mousehide
 set nobackup
 set showcmd " Show us the command we're typing
 set hidden  " Allow edit buffers to be hidden
+runtime macros/matchit.vim
 
 " Show pairs
 set showmatch
