@@ -52,6 +52,9 @@
 * <leader><leader>f   se mueve por letra
 * <leader><leader>w   se mueve por palabra
 
+* var   Select ruby block
+* var   Select inner ruby block
+
 # Surronding
 
 * yss" -> "h w" -> cs"' -> 'h w' -> cs"<q> -> <q>h w</q>
