@@ -33,6 +33,7 @@
 * rci   Indent w ruby-code
 * ml    Add modeline
 * be    Buffer Explorer
+* r     Interactive replace (after search)
 
 # Navigation
 

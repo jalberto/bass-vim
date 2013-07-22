@@ -100,3 +100,6 @@
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline.git
+[submodule "bundle/interactive-replace"]
+	path = bundle/interactive-replace
+	url = https://github.com/hwrod/interactive-replace.git
