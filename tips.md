@@ -24,6 +24,7 @@
 * T-F8  VCSCommit
 * S-F8  VCSUpdate
 * F9    Set Paste
+* F10   LoadSession
 
 # <leader> shorts (space)
 

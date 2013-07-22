@@ -268,7 +268,7 @@ function! LoadSession()
     echo "No session loaded."
   endif
 endfunction
-au VimEnter * nested :call LoadSession()
+" au VimEnter * nested :call LoadSession()
 au VimLeave * :call MakeSession()
 
 " }}}
@@ -306,6 +306,8 @@ map <T-F8> :VCSCommit<CR>
 map <S-F8> :VCSUpdate<CR>
 
 set pastetoggle=<F9>
+
+map <F10> :call LoadSession()<CR>
 
 " vinfruby
 nmap     <F12> <Plug>Ropenterm
