@@ -103,3 +103,6 @@
 [submodule "bundle/interactive-replace"]
 	path = bundle/interactive-replace
 	url = https://github.com/hwrod/interactive-replace.git
+[submodule "bundle/vim-toggle"]
+	path = bundle/vim-toggle
+	url = https://github.com/taku-o/vim-toggle.git
