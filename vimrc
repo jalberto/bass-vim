@@ -244,6 +244,8 @@ endif
 au FileType python set foldmethod=indent
 " Sgml,htmls,xml y xsl folder
 au Filetype html,xml,xsl,sgml,docbook
+" JavaScript fold
+au FileType javascript call JavaScriptFold()
 " Coffeescript folder
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
