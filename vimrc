@@ -308,21 +308,14 @@ nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
 " }}}
 
 " Align {{{
-" if exists(":Tabularize")
-  " nmap <Leader>h= :Tabularize /=<CR>
-  " vmap <Leader>h= :Tabularize /=<CR>
-  " nmap <Leader>h| :Tabularize /|<CR>
-  " vmap <Leader>h| :Tabularize /|<CR>
-  " nmap <Leader>h: :Tabularize /:\zs<CR>
-  " vmap <Leader>h: :Tabularize /:\zs<CR>
-" endif
+vnoremap <silent> <Enter> :EasyAlign<Enter>
 " }}}
 
 " move in buffers and tabs
-nmap <S-LEFT> :bN<cr>
+nmap <S-LEFT>  :bN<cr>
 nmap <S-RIGHT> :bn<cr>
 nmap <C-RIGHT> :tabnext<cr>
-nmap <C-LEFT> :tabprevious<cr>
+nmap <C-LEFT>  :tabprevious<cr>
 
 " Avoid mistakes
 nmap  :X        :x
@@ -340,10 +333,10 @@ map  <C-t> :tabnew<cr> i
 nmap <leader>rci :%!ruby-code-indenter<cr>
 
 " Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+map  <C-h>      <C-w>h
+map  <C-j>      <C-w>j
+map  <C-k>      <C-w>k
+map  <C-l>      <C-w>l
 nmap <tab><tab> <C-w>w
 " }}}
 
@@ -447,3 +440,4 @@ let coffee_compile_vert = 1
 " Modeline {{{
 " vim: set fdm=marker ts=4 sw=2 tw=78:
 " }}}
+
