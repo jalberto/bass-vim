@@ -90,8 +90,9 @@ To on/off highlite of newest lines
 
 /* vim: set ts=4 sw=4 tw=0 fdm=manual tw=40: */
 
-# Tabularize (align)
-* :Tab/=    Align on =
-* :Tab/|    Align on |
-* :Tab/:    Align on :
-* :Tab/:\zs Align on :
+# Align
+In visual mode:
+
+* Enter|  Align on 1st |
+* Enter2| Align on 2nd |
+* Enter*| Align on every |
