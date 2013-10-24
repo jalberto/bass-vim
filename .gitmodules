@@ -112,6 +112,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim
-[submodule "bundle/tabular"]
-	path = bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/vim-easy-align"]
+	path = bundle/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
