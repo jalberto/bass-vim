@@ -307,6 +307,17 @@ nmap <Leader>gg ggVG
 nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
 " }}}
 
+" Align {{{
+" if exists(":Tabularize")
+  " nmap <Leader>h= :Tabularize /=<CR>
+  " vmap <Leader>h= :Tabularize /=<CR>
+  " nmap <Leader>h| :Tabularize /|<CR>
+  " vmap <Leader>h| :Tabularize /|<CR>
+  " nmap <Leader>h: :Tabularize /:\zs<CR>
+  " vmap <Leader>h: :Tabularize /:\zs<CR>
+" endif
+" }}}
+
 " move in buffers and tabs
 nmap <S-LEFT> :bN<cr>
 nmap <S-RIGHT> :bn<cr>

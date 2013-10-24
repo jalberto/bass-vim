@@ -53,11 +53,14 @@
 * [s    Palabra anterior mal escrita
 * z=    Lista de correciones
 
-* <leader><leader>f   se mueve por letra
+* <leader><leader>f{Char}   se mueve por letra
 * <leader><leader>w   se mueve por palabra
 
 * var   Select ruby block
-* var   Select inner ruby block
+* vir   Select inner ruby block
+
+* cit Change insie tag
+* yit/dit yank/deletes
 
 # Surronding
 
@@ -86,3 +89,9 @@ To on/off highlite of newest lines
 * GitShade
 
 /* vim: set ts=4 sw=4 tw=0 fdm=manual tw=40: */
+
+# Tabularize (align)
+* :Tab/=    Align on =
+* :Tab/|    Align on |
+* :Tab/:    Align on :
+* :Tab/:\zs Align on :
