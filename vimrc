@@ -104,7 +104,7 @@ let g:solarized_visibility="low" " Visibility of special chars
 let g:solarized_contrast="high"
 
 if has("gui_running")
-  set guifont=Source\ Code\ Pro\ 13
+  set guifont=Source\ Code\ Pro\ Medium\ 13
   colorscheme molokai
 else
   colorscheme solarized
