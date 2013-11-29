@@ -438,6 +438,7 @@ let coffee_compile_vert = 1
 " }}}
 " airline {{{
 let g:airline_theme = 'airlineish'
+let g:airline_powerline_fonts = 1
 " }}}
 " }}}
 
