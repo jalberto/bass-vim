@@ -47,7 +47,7 @@ set scrolloff=3
 set sidescrolloff=2
 
 set cf                  " Enable error files & error jumping.
-set clipboard+=unnamed  " Yanks go on clipboard instead.
+set clipboard+=unnamedplus  " Yanks go on clipboard instead.
 set autowrite           " Writes on make/shell commands
 
 set visualbell           " don't beep
@@ -338,6 +338,7 @@ map  <C-j>      <C-w>j
 map  <C-k>      <C-w>k
 map  <C-l>      <C-w>l
 nmap <tab><tab> <C-w>w
+
 " }}}
 
 " Ruby - Rails {{{
