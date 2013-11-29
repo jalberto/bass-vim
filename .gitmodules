@@ -115,3 +115,6 @@
 [submodule "bundle/vim-easy-align"]
 	path = bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "bundle/vim-airlineish"]
+	path = bundle/vim-airlineish
+	url = https://github.com/paranoida/vim-airlineish.git
