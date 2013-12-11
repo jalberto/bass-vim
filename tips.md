@@ -32,7 +32,7 @@
 * dbl   Del blank lines
 * rci   Indent w ruby-code
 * ml    Add modeline
-* be    Buffer Explorer
+* be/bs/bv    Buffer Explorer
 * r     Interactive replace (after search)
 
 # Navigation

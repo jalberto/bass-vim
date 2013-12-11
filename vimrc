@@ -10,7 +10,7 @@ set modeline
 set mousehide
 set nobackup
 set showcmd " Show us the command we're typing
-set hidden  " Allow edit buffers to be hidden
+" set hidden  " Allow edit buffers to be hidden
 runtime macros/matchit.vim
 
 " Show pairs
@@ -33,10 +33,13 @@ if has("folding")
   set foldenable
   set foldmethod=syntax
 endif
+
+" if buffer is in tab use that tab
+set switchbuf=usetab,newtab
 " }}}
 
 " Misc {{{
-let loaded_minibufexplorer = 1 "dont load miniBufferExplorer
+" let loaded_minibufexplorer = 0 "dont load miniBufferExplorer
 set lazyredraw     " Speed up macros
 set winminheight=1 " 1 height windows
 set popt+=syntax:y " Syntax when printing
