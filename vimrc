@@ -266,6 +266,7 @@ map <S-F2> :NeoComplCacheToggle<CR>
 let g:ctrlp_map = '<F3>'
 let g:ctrlp_cmd = 'CtrlP'
 nmap <silent> <S-F3> :CtrlPTag<CR>
+nmap <silent> <C-F3> :CtrlPBuffer<CR>
 
 nmap <silent> <F4> :TagbarToggle<CR>
 nmap <S-F4> :!ctags --extra=+f -R *<CR><CR>   " Regenerate tags in current dir
