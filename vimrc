@@ -343,6 +343,12 @@ map  <C-k>      <C-w>k
 map  <C-l>      <C-w>l
 nmap <tab><tab> <C-w>w
 
+" Copy/Paste from clipboard
+
+vnoremap <C-c> "+y
+noremap <T-v> "+gP
+imap <T-v> "+gP
+
 " }}}
 
 " Ruby - Rails {{{
