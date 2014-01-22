@@ -121,3 +121,6 @@
 [submodule "bundle/ag"]
 	path = bundle/ag
 	url = https://github.com/rking/ag.vim.git
+[submodule "bundle/vim-skip"]
+	path = bundle/vim-skip
+	url = https://github.com/jayflo/vim-skip.git
