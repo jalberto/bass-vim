@@ -118,3 +118,6 @@
 [submodule "bundle/vim-airlineish"]
 	path = bundle/vim-airlineish
 	url = https://github.com/paranoida/vim-airlineish.git
+[submodule "bundle/ag"]
+	path = bundle/ag
+	url = https://github.com/rking/ag.vim.git
