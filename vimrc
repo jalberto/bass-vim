@@ -38,6 +38,11 @@ endif
 set switchbuf=usetab,newtab
 " }}}
 
+" ToolBar {{{
+tmenu ToolBar.reducefont Reduce font size
+amenu ToolBar.reducefont :set guifont=Source\ Code\ Pro\ Medium\ 11<CR>
+"}}}
+
 " Misc {{{
 " let loaded_minibufexplorer = 0 "dont load miniBufferExplorer
 set lazyredraw     " Speed up macros
