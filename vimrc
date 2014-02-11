@@ -455,6 +455,19 @@ let coffee_compile_vert = 1
 let g:airline_theme = 'airlineish'
 let g:airline_powerline_fonts = 1
 " }}}
+" vimpanel {{{
+cabbrev ss  VimpanelSessionMake
+cabbrev sl  VimpanelSessionLoad
+cabbrev vp  Vimpanel
+cabbrev vl  VimpanelLoad
+cabbrev vpl VimpanelToggleLeft
+cabbrev vc  VimpanelCreate
+cabbrev ve  VimpanelEdit
+cabbrev vr  VimpanelRemove
+
+g:VimpanelWinSize    20
+g:VimpanelShowHidden 1
+" }}}
 " }}}
 
 " Modeline {{{
