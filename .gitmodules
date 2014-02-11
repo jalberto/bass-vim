@@ -127,3 +127,6 @@
 [submodule "bundle/vimpanel"]
 	path = bundle/vimpanel
 	url = https://github.com/mihaifm/vimpanel.git
+[submodule "bundle/SrcExpl"]
+	path = bundle/SrcExpl
+	url = https://github.com/wesleyche/SrcExpl.git
