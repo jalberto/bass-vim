@@ -463,6 +463,9 @@ let g:airline_powerline_fonts = 1
 " vim session {{{
 let g:session_command_aliases = 1
 " }}}
+" wildfire {{{
+" }}}
+let g:wildfire_fuel_map = "<TAB>"
 " }}}
 
 " Modeline {{{
