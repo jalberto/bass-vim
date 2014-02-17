@@ -357,6 +357,8 @@ vnoremap <C-c> "+y
 noremap <T-v> "+gP
 imap <T-v> "+gP
 
+nmap <C-Enter> <C-w><C-]><C-w>T
+
 " }}}
 
 " Ruby - Rails {{{

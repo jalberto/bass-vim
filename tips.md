@@ -45,9 +45,11 @@
 * C + <-/->   Mv tabs
 * C + <hjkl>  Move
 * A + <-/->   Prev/Next tag
-* A + Up      Open tag in split win
 * C + ]       Find Tag
 * C + r       Back from tag
+* C + W}      Preview tag
+* C + Enter   Tag in new tab
+ * C+w c      close and back
 
 * ]s    Proxima palabra mal escrita
 * [s    Palabra anterior mal escrita
