@@ -374,6 +374,8 @@ augroup filetypedetect
   au! BufNewFile,BufRead *.rhtml setf eruby
 augroup END
 " }}}
+" scss to sass
+command Scss2Sass %s/\s\?{\|;\|}//g
 " }}}
 
 " Plugins {{{
