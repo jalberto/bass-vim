@@ -462,6 +462,7 @@ let g:airline_powerline_fonts = 1
 " }}}
 " vim session {{{
 let g:session_command_aliases = 1
+let g:session_autoload = 'no'
 " }}}
 " wildfire {{{
 " }}}
