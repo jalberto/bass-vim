@@ -322,7 +322,7 @@ nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
 " }}}
 
 " Align {{{
-vnoremap <silent> <Enter> :EasyAlign<Enter>
+vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
 " }}}
 
 " move in buffers and tabs
@@ -469,8 +469,8 @@ let g:session_command_aliases = 1
 let g:session_autoload = 'no'
 " }}}
 " wildfire {{{
+" let g:wildfire_fuel_map = "<TAB>"
 " }}}
-let g:wildfire_fuel_map = "<TAB>"
 " }}}
 
 " Modeline {{{
