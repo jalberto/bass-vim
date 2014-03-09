@@ -470,6 +470,11 @@ let g:session_autoload = 'no'
 " }}}
 " wildfire {{{
 " let g:wildfire_fuel_map = "<TAB>"
+let g:wildfire_objects = {
+    \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
+    \ "html,xml" : ["it", "at"],
+    \ "ruby" : ["i'", 'i"', "i)", "i]", "i}", "ip", "ir", "ar"],
+\ }
 " }}}
 " }}}
 
