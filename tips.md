@@ -50,6 +50,7 @@
 * C + W}      Preview tag
 * C + Enter   Tag in new tab
  * C+w c      close and back
+* vi)  select inside ()
 
 * ]s    Proxima palabra mal escrita
 * [s    Palabra anterior mal escrita

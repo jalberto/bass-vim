@@ -63,6 +63,8 @@ set autowrite           " Writes on make/shell commands
 
 set visualbell           " don't beep
 set noerrorbells         " don't beep
+
+set tags+=gems.tags
 " }}}
 
 " MoveTabs {{{
