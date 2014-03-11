@@ -51,13 +51,13 @@
 * C + Enter   Tag in new tab
  * C+w c      close and back
 * vi)  select inside ()
+* - move to window
+* m move to expression
 
 * ]s    Proxima palabra mal escrita
 * [s    Palabra anterior mal escrita
 * z=    Lista de correciones
 
-* <leader><leader>f{Char}   se mueve por letra
-* <leader><leader>w   se mueve por palabra
 
 * var   Select ruby block
 * vir   Select inner ruby block

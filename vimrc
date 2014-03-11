@@ -479,6 +479,13 @@ let g:wildfire_objects = {
 " Choosewin {{{
 nmap  -  <Plug>(choosewin)
 " }}}
+" Small {{{
+" map normal-mode 's' for simple search
+nmap m <Plug>(smalls)
+" if you want to use smalls in visual/operator or both mode.
+omap m <Plug>(smalls)
+xmap m <Plug>(smalls)
+" }}}
 " }}}
 
 " Modeline {{{

@@ -52,9 +52,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "bundle/vim-easymotion"]
-	path = bundle/vim-easymotion
-	url = git://github.com/Lokaltog/vim-easymotion.git
 [submodule "bundle/vim-javascript"]
 	path = bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
@@ -139,3 +136,6 @@
 [submodule "bundle/vim-choosewin"]
 	path = bundle/vim-choosewin
 	url = https://github.com/t9md/vim-choosewin.git
+[submodule "bundle/vim-smalls"]
+	path = bundle/vim-smalls
+	url = https://github.com/t9md/vim-smalls.git
