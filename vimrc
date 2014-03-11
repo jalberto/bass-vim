@@ -476,6 +476,9 @@ let g:wildfire_objects = {
     \ "ruby" : ["i'", 'i"', "i)", "i]", "i}", "ip", "ir", "ar"],
 \ }
 " }}}
+" Choosewin {{{
+nmap  -  <Plug>(choosewin)
+" }}}
 " }}}
 
 " Modeline {{{
