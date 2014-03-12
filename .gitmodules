@@ -145,9 +145,6 @@
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/tmhedberg/matchit.git
-[submodule "bundle/vim-blockle"]
-	path = bundle/vim-blockle
-	url = https://github.com/jgdavey/vim-blockle.git
 [submodule "bundle/splitjoin.vim"]
 	path = bundle/splitjoin.vim
 	url = https://github.com/AndrewRadev/splitjoin.vim.git
