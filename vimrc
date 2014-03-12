@@ -486,6 +486,10 @@ nmap m <Plug>(smalls)
 omap m <Plug>(smalls)
 xmap m <Plug>(smalls)
 " }}}
+" SplitJoin {{{
+nmap ss :SplitjoinSplit<cr>
+nmap sj :SplitjoinJoin<cr>
+" }}}
 " }}}
 
 " Modeline {{{

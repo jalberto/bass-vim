@@ -139,3 +139,15 @@
 [submodule "bundle/vim-smalls"]
 	path = bundle/vim-smalls
 	url = https://github.com/t9md/vim-smalls.git
+[submodule "bundle/vim-ruby-refactoring"]
+	path = bundle/vim-ruby-refactoring
+	url = https://github.com/ecomba/vim-ruby-refactoring.git
+[submodule "bundle/matchit"]
+	path = bundle/matchit
+	url = https://github.com/tmhedberg/matchit.git
+[submodule "bundle/vim-blockle"]
+	path = bundle/vim-blockle
+	url = https://github.com/jgdavey/vim-blockle.git
+[submodule "bundle/splitjoin.vim"]
+	path = bundle/splitjoin.vim
+	url = https://github.com/AndrewRadev/splitjoin.vim.git

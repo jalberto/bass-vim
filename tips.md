@@ -99,3 +99,12 @@ In visual mode:
 * Enter|  Align on 1st |
 * Enter2| Align on 2nd |
 * Enter*| Align on every |
+
+* ss  split a block/hash
+* sj  join a block/hash
+
+# Rails.vim
+* Emodel  Edit model
+  * S/V/T  horizontal/vertical/tab
+* Econtroller foo!  create the file
+* Rextract to partial/concern
