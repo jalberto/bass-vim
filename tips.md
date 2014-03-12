@@ -58,9 +58,9 @@
 * [s    Palabra anterior mal escrita
 * z=    Lista de correciones
 
-
 * var   Select ruby block
 * vir   Select inner ruby block
+* cir Change insie ruby block
 
 * cit Change insie tag
 * yit/dit yank/deletes
