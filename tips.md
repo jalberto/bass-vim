@@ -116,3 +116,6 @@ In visual mode:
 * <ldr>rrlv RRenameLocalVariable
 * <ldr>rriv RRenameInstanceVariable
 * <ldr>rem  RExtractMethod
+# MultiCursor
+* visual: C-n c/s
+* normall: C-n a/i/A/I
