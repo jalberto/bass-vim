@@ -91,8 +91,6 @@ To on/off highlite of newest lines
 
 * GitShade
 
-/* vim: set ts=4 sw=4 tw=0 fdm=manual tw=40: */
-
 # Align
 In visual mode:
 
@@ -108,3 +106,13 @@ In visual mode:
   * S/V/T  horizontal/vertical/tab
 * Econtroller foo!  create the file
 * Rextract to partial/concern
+
+* <ldr>rap  RAddParameter
+* <ldr>rcpc RConvertPostConditional
+* <ldr>rel  RExtractLet
+* <ldr>rec  RExtractConstant
+* <ldr>relv RExtractLocalVariable
+* <ldr>rit  RInlineTemp
+* <ldr>rrlv RRenameLocalVariable
+* <ldr>rriv RRenameInstanceVariable
+* <ldr>rem  RExtractMethod
