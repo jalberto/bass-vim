@@ -361,6 +361,9 @@ imap <T-v> "+gP
 
 nmap <C-Enter> <C-w><C-]><C-w>T
 
+" select last paste in visual mode
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 " }}}
 
 " Ruby - Rails {{{

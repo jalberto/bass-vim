@@ -65,6 +65,9 @@
 * cit Change insie tag
 * yit/dit yank/deletes
 
+* gv  Last yanked
+* gb  Last pasted
+
 # Surronding
 
 * yss" -> "h w" -> cs"' -> 'h w' -> cs"<q> -> <q>h w</q>
