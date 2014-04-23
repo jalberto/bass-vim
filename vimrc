@@ -377,6 +377,7 @@ augroup filetypedetect
   au! BufNewFile,BufRead *.erb setf eruby
   au! BufNewFile,BufRead *.html.erb setf eruby
   au! BufNewFile,BufRead *.rhtml setf eruby
+  au! BufNewFile,BufRead Vagrantfile* setf ruby
 augroup END
 " }}}
 " scss to sass

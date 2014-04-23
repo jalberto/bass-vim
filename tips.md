@@ -67,6 +67,8 @@
 
 * gv  Last yanked
 * gb  Last pasted
+* C-r0  Copy insert mode
+* C-rC-p0  Copy insert mode autoident
 
 # Surronding
 
