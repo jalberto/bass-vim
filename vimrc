@@ -64,6 +64,7 @@ Plugin 'rake.vim'
 Plugin 'ruby-matchit'
 Plugin 'bundler'
 Plugin 'rails.vim'
+Bundle 'skalnik/vim-vroom'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -388,10 +389,19 @@ nmap <Leader>sol :color solarized<CR>
 nmap <Leader>gg ggVG
 " Delete blank lines
 nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
-" }}}
-
-" Align {{{
+" Align
 vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
+" Open file
+nnoremap <Leader>o :CtrlP<CR>
+" Save file
+nnoremap <Leader>w :w<CR>
+" Copy ans paste to clipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 " }}}
 
 " move in buffers and tabs
@@ -558,6 +568,10 @@ xmap m <Plug>(smalls)
 " SplitJoin {{{
 nmap ss :SplitjoinSplit<cr>
 nmap sj :SplitjoinJoin<cr>
+" }}}
+" CtrlP {{{
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_use_caching = 0
 " }}}
 " }}}
 
