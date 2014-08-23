@@ -124,3 +124,10 @@ In visual mode:
 # MultiCursor
 * visual: C-n c/s
 * normall: C-n a/i/A/I
+
+# Commenter
+
+* gc{motion}
+* gcc         current line
+* gc/gC       (visual mode)
+* <c-_><c-_>  (insert mode)

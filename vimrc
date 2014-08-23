@@ -1,10 +1,78 @@
-" BaSS vimrc's 2012
+" BaSS vimrc's 2014
 
 " General {{{
 set nocompatible
-call pathogen#infect() " add external plugins (.vim/bundle)
-syntax on
+
+" Vundle {{{
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'genutils'
+Plugin 'L9'
+Plugin 'xolox/vim-misc'
+Plugin 'sheerun/vim-polyglot'
+
+Plugin 'molokai'
+Plugin 'Solarized'
+Plugin 'Railscasts-Theme-GUIand256color'
+Plugin 'bling/vim-airline'
+Plugin 'paranoida/vim-airlineish'
+
+Plugin 'Toggle'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'ctrlp.vim'
+Plugin 'rking/ag.vim'
+Plugin 'Source-Explorer-srcexpl.vim'
+Plugin 'hwrod/interactive-replace'
+Plugin 't9md/vim-choosewin'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'xolox/vim-session'
+Plugin 'KabbAmine/vCoolor.vim'
+
+Plugin 'gcmt/wildfire.vim'
+Plugin 'repeat.vim'
+Plugin 'abolish.vim'
+Plugin 'endwise.vim'
+Plugin 'matchit.zip'
+Plugin 'AutoClose'
+Plugin 'unimpaired.vim'
+Plugin 'SuperTab'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'tComment'
+Plugin 'splitjoin.vim'
+Plugin 'Syntastic'
+Plugin 'Tagbar'
+Plugin 'jayflo/vim-skip'
+Plugin 't9md/vim-smalls'
+Plugin 'surround.vim'
+Plugin 'textobj-user'
+
+Plugin 'fugitive.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'joeytwiddle/git_shade.vim'
+
+Plugin 'textobj-rubyblock'
+Plugin 'Haml'
+Plugin 'rake.vim'
+Plugin 'ruby-matchit'
+Plugin 'bundler'
+Plugin 'rails.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+" }}}
+
 filetype plugin indent on
+
+"call pathogen#infect() " add external plugins (.vim/bundle)
+syntax on
 set antialias
 set modeline
 set mousehide
@@ -142,11 +210,11 @@ autocmd BufEnter * setlocal cursorline cursorcolumn
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 " Show tabs and trailing whitespace visually
-if (&termencoding == "utf-8") || has("gui_running")
-  set list listchars=tab:\»\ ,trail:·,extends:…,nbsp:‗,eol:¶
-else
-  set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
-endif
+" if (&termencoding == "utf-8") || has("gui_running")
+"   set list listchars=tab:\»\ ,trail:·,extends:…,nbsp:‗,eol:¶
+" else
+"   set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
+" endif
 " }}}
 
 " Window title {{{
@@ -270,8 +338,9 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 map <silent> <S-F1> :40vsplit ~/.vim/tips.md<CR>
 map <silent> <C-F1> :vsplit ~/.vim/abbr<CR>
 
-map <silent> <F2> :NERDTreeToggle<CR>
-map <S-F2> :NeoComplCacheToggle<CR>
+map <silent>  <F2> :NERDTreeToggle<CR>
+map         <S-F2> :NeoCompleteToggle<CR>
+map         <C-F2> :GitGutterToggle<CR>
 
 let g:ctrlp_map = '<F3>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -431,13 +500,13 @@ let g:DBGRlineNumbers   = 1
 let g:rails_dbext=1
 " }}}
 " neocomplcache & neosnippets {{{
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1             " Use smartcase.
-let g:neocomplcache_enable_camel_case_completion = 1  " Use camel case completion.
-let g:neocomplcache_enable_underbar_completion = 1    " Use underbar completion.
-let g:neocomplcache_min_syntax_length = 3             " Set minimum syntax keyword length.
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neosnippet#snippets_directory='~/.vim/snippets/snippets/'
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1             " Use smartcase.
+let g:neocomplete#enable_camel_case_completion = 1  " Use camel case completion.
+let g:neocomplete#enable_underbar_completion = 1    " Use underbar completion.
+let g:neocomplete#min_syntax_length = 3             " Set minimum syntax keyword length.
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" let g:neosnippet#snppets_directory='~/.vim/snippets/snippets/'
 " Plugin key-mappings.
 imap <C-s>     <Plug>(neosnippet_expand_or_jump)
 smap <C-s>     <Plug>(neosnippet_expand_or_jump)
@@ -452,10 +521,6 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-" }}}
-" NerdCommenter {{{
-"let NERDCreateDefaultMappings=0
-let NERDSpaceDelims=1
 " }}}
 " autoclose {{{
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'"}
