@@ -2,72 +2,71 @@
 
 " General {{{
 set nocompatible
+filetype on
 
 " Vundle {{{
-filetype off
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
+"
+Plug 'genutils'
+Plug 'L9'
+Plug 'xolox/vim-misc'
+Plug 'sheerun/vim-polyglot'
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'genutils'
-Plugin 'L9'
-Plugin 'xolox/vim-misc'
-Plugin 'sheerun/vim-polyglot'
+Plug 'molokai'
+Plug 'Solarized'
+Plug 'Railscasts-Theme-GUIand256color'
+Plug 'bling/vim-airline'
+Plug 'paranoida/vim-airlineish'
 
-Plugin 'molokai'
-Plugin 'Solarized'
-Plugin 'Railscasts-Theme-GUIand256color'
-Plugin 'bling/vim-airline'
-Plugin 'paranoida/vim-airlineish'
+Plug 'Toggle'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'Source-Explorer-srcexpl.vim'
+Plug 'hwrod/interactive-replace'
+Plug 't9md/vim-choosewin'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/vim-easy-align'
+Plug 'xolox/vim-session'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'speeddating.vim'
 
-Plugin 'Toggle'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'ctrlp.vim'
-Plugin 'rking/ag.vim'
-Plugin 'Source-Explorer-srcexpl.vim'
-Plugin 'hwrod/interactive-replace'
-Plugin 't9md/vim-choosewin'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'xolox/vim-session'
-Plugin 'KabbAmine/vCoolor.vim'
+Plug 'Indent-Guides'
+Plug 'gcmt/wildfire.vim'
+Plug 'repeat.vim'
+Plug 'abolish.vim'
+Plug 'endwise.vim'
+Plug 'matchit.zip'
+Plug 'AutoClose'
+Plug 'unimpaired.vim'
+Plug 'SuperTab'
+Plug 'delimitMate.vim'
+Plug 'Shougo/neocomplete'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'tComment'
+Plug 'splitjoin.vim'
+Plug 'Syntastic'
+Plug 'Tagbar'
+Plug 'jayflo/vim-skip'
+Plug 't9md/vim-smalls'
+Plug 'surround.vim'
+Plug 'textobj-user'
+Plug 'EasyMotion'
 
-Plugin 'gcmt/wildfire.vim'
-Plugin 'repeat.vim'
-Plugin 'abolish.vim'
-Plugin 'endwise.vim'
-Plugin 'matchit.zip'
-Plugin 'AutoClose'
-Plugin 'unimpaired.vim'
-Plugin 'SuperTab'
-Plugin 'Shougo/neocomplete'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'tComment'
-Plugin 'splitjoin.vim'
-Plugin 'Syntastic'
-Plugin 'Tagbar'
-Plugin 'jayflo/vim-skip'
-Plugin 't9md/vim-smalls'
-Plugin 'surround.vim'
-Plugin 'textobj-user'
+Plug 'fugitive.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'joeytwiddle/git_shade.vim'
 
-Plugin 'fugitive.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'joeytwiddle/git_shade.vim'
+Plug 'textobj-rubyblock', {'for': 'ruby'}
+Plug 'Haml'
+Plug 'rake.vim', {'for': 'ruby'}
+Plug 'ruby-matchit', {'for': 'ruby'}
+Plug 'bundler', {'for': 'ruby'}
+Plug 'rails.vim', {'for': 'ruby'}
+Plug 'skalnik/vim-vroom'
 
-Plugin 'textobj-rubyblock'
-Plugin 'Haml'
-Plugin 'rake.vim'
-Plugin 'ruby-matchit'
-Plugin 'bundler'
-Plugin 'rails.vim'
-Bundle 'skalnik/vim-vroom'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()
 " }}}
 
 filetype plugin indent on
