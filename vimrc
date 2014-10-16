@@ -6,7 +6,6 @@ filetype on
 
 " Vundle {{{
 call plug#begin('~/.vim/plugged')
-"
 Plug 'genutils'
 Plug 'L9'
 Plug 'xolox/vim-misc'
@@ -53,6 +52,7 @@ Plug 't9md/vim-smalls'
 Plug 'surround.vim'
 Plug 'textobj-user'
 Plug 'EasyMotion'
+Plug 'gorkunov/smartpairs.vim'
 
 Plug 'fugitive.vim'
 Plug 'airblade/vim-gitgutter'
@@ -65,6 +65,7 @@ Plug 'ruby-matchit', {'for': 'ruby'}
 Plug 'bundler', {'for': 'ruby'}
 Plug 'rails.vim', {'for': 'ruby'}
 Plug 'skalnik/vim-vroom'
+Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
 
 call plug#end()
 " }}}
@@ -571,6 +572,9 @@ nmap sj :SplitjoinJoin<cr>
 " CtrlP {{{
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 let g:ctrlp_use_caching = 0
+" }}}
+" SmartGF {{{
+let g:smartgf_key = 'gm'
 " }}}
 " }}}
 
