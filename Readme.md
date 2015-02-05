@@ -15,7 +15,7 @@
 For correct tag generation in ruby use:
 
     gem install gem-ripper-tags
-    gem ripper
+    gem ripper_tags
 
 (https://github.com/lzap/gem-ripper-tags)
 
