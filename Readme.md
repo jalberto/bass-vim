@@ -17,6 +17,8 @@ For correct tag generation in ruby use:
     gem install gem-ripper-tags
     gem ripper
 
+(https://github.com/lzap/gem-ripper-tags)
+
 Or
 
     gem install gem-ctags

@@ -575,6 +575,7 @@ let g:ctrlp_use_caching = 0
 " }}}
 " SmartGF {{{
 let g:smartgf_key = 'gm'
+let g:smartgf_auto_refresh_ctags = 0
 " }}}
 " }}}
 
