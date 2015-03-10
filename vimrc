@@ -60,6 +60,7 @@ Plug 'joeytwiddle/git_shade.vim'
 
 Plug 'textobj-rubyblock', {'for': 'ruby'}
 Plug 'Haml'
+Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 Plug 'rake.vim', {'for': 'ruby'}
 Plug 'ruby-matchit', {'for': 'ruby'}
 Plug 'bundler', {'for': 'ruby'}
