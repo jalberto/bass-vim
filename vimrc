@@ -1,4 +1,4 @@
-" BaSS vimrc's 2014
+" BaSS vimrc's 2015
 
 " General {{{
 set nocompatible
@@ -14,12 +14,14 @@ Plug 'sheerun/vim-polyglot'
 Plug 'molokai'
 Plug 'Solarized'
 Plug 'Railscasts-Theme-GUIand256color'
+Plug 'nanotech/jellybeans.vim'
 Plug 'bling/vim-airline'
 Plug 'paranoida/vim-airlineish'
 
 Plug 'Toggle'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
 Plug 'rking/ag.vim'
 Plug 'Source-Explorer-srcexpl.vim'
 Plug 'hwrod/interactive-replace'
@@ -29,6 +31,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'xolox/vim-session'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'speeddating.vim'
+Plug 'henrik/vim-indexed-search'
 
 Plug 'Indent-Guides'
 Plug 'gcmt/wildfire.vim'
@@ -48,15 +51,20 @@ Plug 'splitjoin.vim'
 Plug 'Syntastic'
 Plug 'Tagbar'
 Plug 'jayflo/vim-skip'
-Plug 't9md/vim-smalls'
+" Plug 't9md/vim-smalls'
 Plug 'surround.vim'
 Plug 'textobj-user'
 Plug 'EasyMotion'
 Plug 'gorkunov/smartpairs.vim'
+Plug 'tpope/vim-ragtag'
+Plug 'gabrielelana/vim-markdown'
+Plug 'avakhov/vim-yaml'
 
 Plug 'fugitive.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'joeytwiddle/git_shade.vim'
+Plug 'gregsexton/gitv'
+Plug 'int3/vim-extradite'
 
 Plug 'textobj-rubyblock', {'for': 'ruby'}
 Plug 'Haml'
@@ -67,6 +75,10 @@ Plug 'bundler', {'for': 'ruby'}
 Plug 'rails.vim', {'for': 'ruby'}
 Plug 'skalnik/vim-vroom'
 Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
+Plug 'stefanoverna/vim-i18n', {'for': 'ruby'}
+Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
+Plug 'danchoi/ri.vim', {'for': 'ruby'}
+Plug 'jgdavey/vim-blockle', {'for': 'ruby'}
 
 call plug#end()
 " }}}
@@ -107,6 +119,9 @@ endif
 " if buffer is in tab use that tab
 set switchbuf=usetab,newtab
 
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=1200
+
 " Sessions
 set ssop-=options
 " }}}
@@ -122,10 +137,22 @@ set lazyredraw     " Speed up macros
 set winminheight=1 " 1 height windows
 set popt+=syntax:y " Syntax when printing
 
+set linespace=0                 " number of pixels between the lines
+set splitright                  " open vertical splits on the right
+set splitbelow                  " open the horizontal split below
+set wrap                        " wrap long lines
+set linebreak                   " break lines at word end
+
+" The "Press ENTER or type command to continue" prompt is jarring and usually unnecessary.
+set shortmess=atI
+
 " Try to show at least three lines and two columns of context when
 " scrolling
 set scrolloff=3
 set sidescrolloff=2
+" Improve vim's scrolling speed
+set ttyfast
+set ttyscroll=3
 
 set cf                  " Enable error files & error jumping.
 set clipboard+=unnamedplus  " Yanks go on clipboard instead.
@@ -188,9 +215,10 @@ let g:solarized_contrast="high"
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ Medium\ 13
-  colorscheme molokai
+  colorscheme jellybeans
+  " colorscheme molokai
 else
-  colorscheme solarized
+  colorscheme jellybeans
 endif
 
 " OSX stuff
@@ -323,6 +351,9 @@ if has("autocmd")
   augroup END
 endif
 
+" Autoload vimrc
+au BufWritePost .vimrc so $MYVIMRC
+
 " Python folder
 au FileType python set foldmethod=indent
 " Sgml,htmls,xml y xsl folder
@@ -332,6 +363,23 @@ au FileType javascript call JavaScriptFold()
 " Coffeescript folder
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+autocmd Filetype gitcommit setlocal spell textwidth=72
+
+" Some file types use real tabs
+au FileType {make,gitconfig} set noexpandtab sw=4
+
+" Treat JSON files like JavaScript
+au BufNewFile,BufRead *.json setf javascript
+
+" Make Python follow PEP8
+au FileType python set sts=4 ts=4 sw=4 tw=79
+
+" Make sure all markdown files have the correct filetype
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
+
+" MultiMarkdown requires 4-space tabs
+au FileType markdown set sts=4 ts=4 sw=4
 
 " }}}
 
@@ -397,6 +445,9 @@ nnoremap <Leader>o :CtrlP<CR>
 " Save file
 nnoremap <Leader>w :w<CR>
 " Copy ans paste to clipboard
+" vnoremap <C-c> "+y
+" noremap <T-v> "+gP
+" imap <T-v> "+gP
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
@@ -433,16 +484,19 @@ map  <C-k>      <C-w>k
 map  <C-l>      <C-w>l
 nmap <tab><tab> <C-w>w
 
-" Copy/Paste from clipboard
-
-vnoremap <C-c> "+y
-noremap <T-v> "+gP
-imap <T-v> "+gP
-
 nmap <C-Enter> <C-w><C-]><C-w>T
 
-" select last paste in visual mode
-nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+" Visually select the text that was last edited/pasted
+nnoremap gV `[v`]
+" selelct what you've just pasted
+nnoremap gp `[v`]
+" nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+" reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" C-c send enter in insert mode
+inoremap <C-c> <Esc>
 
 " }}}
 
@@ -453,6 +507,7 @@ augroup filetypedetect
   au! BufNewFile,BufRead *.liquid setf liquid
   au! BufNewFile,BufRead *.haml setf haml
   au! BufNewFile,BufRead *.html.haml setf haml
+  au! BufNewFile,BufRead *.hamljs setf haml
   au! BufNewFile,BufRead *.yml setf eruby
   au! BufNewFile,BufRead *.erb setf eruby
   au! BufNewFile,BufRead *.html.erb setf eruby
@@ -462,9 +517,21 @@ augroup END
 " }}}
 " scss to sass
 command Scss2Sass %s/\s\?{\|;\|}//g
+
+" Autocomplete ids and classes in CSS
+autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
+" Add the '-' as a keyword in erb files
+autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
+" Make those debugger statements painfully obvious
+au BufEnter *.rb syn match error contained "\<binding.pry\>"
+au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
 " Plugins {{{
+" fugitive {{{
+" delete hidden fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
+" }}}
 " tagBar {{{
 let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
@@ -561,10 +628,10 @@ nmap  -  <Plug>(choosewin)
 " }}}
 " Small {{{
 " map normal-mode 's' for simple search
-nmap m <Plug>(smalls)
+" map m <Plug>(smalls)
 " if you want to use smalls in visual/operator or both mode.
-omap m <Plug>(smalls)
-xmap m <Plug>(smalls)
+" omap m <Plug>(smalls)
+" xmap m <Plug>(smalls)
 " }}}
 " SplitJoin {{{
 nmap ss :SplitjoinSplit<cr>
@@ -572,11 +639,21 @@ nmap sj :SplitjoinJoin<cr>
 " }}}
 " CtrlP {{{
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|docker\|data\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
+  \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
+  \ }
 let g:ctrlp_use_caching = 0
+nnoremap <Leader>f :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>F :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " }}}
 " SmartGF {{{
 let g:smartgf_key = 'gm'
 let g:smartgf_auto_refresh_ctags = 0
+" }}}
+" Rails i18n {{{
+vmap <Leader>z :call I18nTranslateString()<CR>
 " }}}
 " }}}
 

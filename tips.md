@@ -80,17 +80,17 @@
 * M-v S<p class=x>
 
 # Fugitive
-
 * :Gdiff
 ** |  2  |  1  |  3  |
 *** head, result, merge
 ** diffget //[2/3]
 ** diffput //1
 * :Gwrite
-** mantains the actual buffer as result
+  * mantains the actual buffer as result
+
+* Extradite!
 
 # GitShade
-
 To on/off highlite of newest lines
 (brighter color)
 
@@ -121,6 +121,18 @@ In visual mode:
 * <ldr>rrlv RRenameLocalVariable
 * <ldr>rriv RRenameInstanceVariable
 * <ldr>rem  RExtractMethod
+
+* <ldr>z    I18n
+
+* rs keys to symbols
+* rt keys to strings
+* rr keys to Ruby 1.9 format
+
+* <ldr>r/R search doc ri
+* <ldr>k/K search doc ri cussor
+
+* <ldr>b   change block style
+
 # MultiCursor
 * visual: C-n c/s
 * normall: C-n a/i/A/I
