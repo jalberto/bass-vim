@@ -12,6 +12,7 @@ Plug 'xolox/vim-misc'
 Plug 'sheerun/vim-polyglot'
 
 Plug 'molokai'
+Plug 'chriskempson/base16-vim'
 Plug 'Solarized'
 Plug 'Railscasts-Theme-GUIand256color'
 Plug 'nanotech/jellybeans.vim'
@@ -32,6 +33,7 @@ Plug 'xolox/vim-session'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'speeddating.vim'
 Plug 'henrik/vim-indexed-search'
+Plug 'mhinz/vim-startify'
 
 Plug 'Indent-Guides'
 Plug 'gcmt/wildfire.vim'
@@ -47,7 +49,6 @@ Plug 'Shougo/neocomplete'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'tComment'
-Plug 'splitjoin.vim'
 Plug 'Syntastic'
 Plug 'Tagbar'
 Plug 'jayflo/vim-skip'
@@ -58,16 +59,19 @@ Plug 'EasyMotion'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'gabrielelana/vim-markdown'
-Plug 'avakhov/vim-yaml'
+Plug 'mustache/vim-mustache-handlebars'
 
 Plug 'fugitive.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'joeytwiddle/git_shade.vim'
 Plug 'gregsexton/gitv'
 Plug 'int3/vim-extradite'
+Plug 'chrisbra/vim-diff-enhanced'
 
-Plug 'textobj-rubyblock', {'for': 'ruby'}
 Plug 'Haml'
+Plug 'avakhov/vim-yaml'
+Plug 'splitjoin.vim'
+Plug 'textobj-rubyblock', {'for': 'ruby'}
 Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 Plug 'rake.vim', {'for': 'ruby'}
 Plug 'ruby-matchit', {'for': 'ruby'}
@@ -140,7 +144,7 @@ set popt+=syntax:y " Syntax when printing
 set linespace=0                 " number of pixels between the lines
 set splitright                  " open vertical splits on the right
 set splitbelow                  " open the horizontal split below
-set wrap                        " wrap long lines
+" set wrap                        " wrap long lines
 set linebreak                   " break lines at word end
 
 " The "Press ENTER or type command to continue" prompt is jarring and usually unnecessary.
@@ -215,10 +219,11 @@ let g:solarized_contrast="high"
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ Medium\ 13
-  colorscheme jellybeans
-  " colorscheme molokai
+  " colorscheme jellybeans
+  colorscheme molokai
 else
-  colorscheme jellybeans
+  colorscheme molokai
+  " colorscheme jellybeans
 endif
 
 " OSX stuff
