@@ -10,6 +10,12 @@
 
     vim +PluginUpdate +qall
 
+# Fonts
+
+Check patched fonts here:
+
+https://github.com/ryanoasis/vim-webdevicons
+
 # Misc
 
 For correct tag generation in ruby use:

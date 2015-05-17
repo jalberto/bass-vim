@@ -16,6 +16,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'Solarized'
 Plug 'Railscasts-Theme-GUIand256color'
 Plug 'nanotech/jellybeans.vim'
+Plug 'ryanoasis/vim-webdevicons'
 Plug 'bling/vim-airline'
 Plug 'paranoida/vim-airlineish'
 
@@ -23,7 +24,8 @@ Plug 'Toggle'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
+Plug 'gabesoft/vim-ags'
 Plug 'Source-Explorer-srcexpl.vim'
 Plug 'hwrod/interactive-replace'
 Plug 't9md/vim-choosewin'
@@ -218,7 +220,8 @@ let g:solarized_visibility="low" " Visibility of special chars
 let g:solarized_contrast="high"
 
 if has("gui_running")
-  set guifont=Source\ Code\ Pro\ Medium\ 13
+  " set guifont=Source\ Code\ Pro\ Medium\ 13
+  set guifont=Sauce\ Code\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ 13
   " colorscheme jellybeans
   colorscheme molokai
 else
