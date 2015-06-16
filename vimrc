@@ -16,7 +16,6 @@ Plug 'chriskempson/base16-vim'
 Plug 'Solarized'
 Plug 'Railscasts-Theme-GUIand256color'
 Plug 'nanotech/jellybeans.vim'
-Plug 'ryanoasis/vim-webdevicons'
 Plug 'bling/vim-airline'
 Plug 'paranoida/vim-airlineish'
 
@@ -35,7 +34,6 @@ Plug 'xolox/vim-session'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'speeddating.vim'
 Plug 'henrik/vim-indexed-search'
-Plug 'mhinz/vim-startify'
 
 Plug 'Indent-Guides'
 Plug 'gcmt/wildfire.vim'
@@ -221,7 +219,7 @@ let g:solarized_contrast="high"
 
 if has("gui_running")
   " set guifont=Source\ Code\ Pro\ Medium\ 13
-  set guifont=Sauce\ Code\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ 13
+  set guifont=Sauce\ Code\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ 11
   " colorscheme jellybeans
   colorscheme molokai
 else
