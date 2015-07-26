@@ -34,6 +34,13 @@ Plug 'xolox/vim-session'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'speeddating.vim'
 Plug 'henrik/vim-indexed-search'
+" Auto set paste
+Plug 'conradIrwin/vim-bracketed-paste'
+Plug '907th/vim-auto-save'
+" open file:line_number
+Plug 'bogado/file-line'
+" search occurences in visual selection
+Plug 'nelstrom/vim-visual-star-search'
 
 Plug 'Indent-Guides'
 Plug 'gcmt/wildfire.vim'
@@ -60,6 +67,7 @@ Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'gabrielelana/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'KabbAmine/zeavim.vim'
 
 Plug 'fugitive.vim'
 Plug 'airblade/vim-gitgutter'
@@ -219,7 +227,7 @@ let g:solarized_contrast="high"
 
 if has("gui_running")
   " set guifont=Source\ Code\ Pro\ Medium\ 13
-  set guifont=Sauce\ Code\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ 11
+  set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
   " colorscheme jellybeans
   colorscheme molokai
 else
@@ -534,6 +542,13 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
 " Plugins {{{
+" autosave {{{
+let g:auto_save = 1
+let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
+let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+""let g:auto_save_silent = 1  " do not display the auto-save notification
+" }}}
+
 " fugitive {{{
 " delete hidden fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -616,6 +631,11 @@ let coffee_compile_vert = 1
 " airline {{{
 let g:airline_theme = 'airlineish'
 let g:airline_powerline_fonts = 1
+" add buffer explorer with separator
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+set showtabline=0 " remove tab bar
 " }}}
 " vim session {{{
 let g:session_command_aliases = 1
