@@ -366,7 +366,7 @@ if has("autocmd")
 endif
 
 " Autoload vimrc
-au BufWritePost .vimrc so $MYVIMRC
+" au BufWritePost .vimrc so $MYVIMRC
 
 " Python folder
 au FileType python set foldmethod=indent
@@ -597,6 +597,27 @@ let g:DBGRlineNumbers   = 1
 " }}}
 " Surronding {{{
 let g:rails_dbext=1
+" }}}
+" neocomplcache & multiple cursor fix {{{
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+  if exists(':AutoSaveToggle')==2
+    exe 'AutoSaveToggle'
+  endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+  if exists(':AutoSaveToggle')==2
+    exe 'AutoSaveToggle'
+  endif
+endfunction
 " }}}
 " neocomplcache & neosnippets {{{
 let g:neocomplete#enable_at_startup = 1
