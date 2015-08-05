@@ -11,6 +11,7 @@ Plug 'L9'
 Plug 'xolox/vim-misc'
 Plug 'sheerun/vim-polyglot'
 
+Plug 'romainl/Apprentice'
 Plug 'molokai'
 Plug 'chriskempson/base16-vim'
 Plug 'Solarized'
@@ -42,13 +43,13 @@ Plug 'bogado/file-line'
 " search occurences in visual selection
 Plug 'nelstrom/vim-visual-star-search'
 
-Plug 'Indent-Guides'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'gcmt/wildfire.vim'
 Plug 'repeat.vim'
 Plug 'abolish.vim'
 Plug 'endwise.vim'
 Plug 'matchit.zip'
-Plug 'AutoClose'
+Plug 'Raimondi/delimitMate'
 Plug 'unimpaired.vim'
 Plug 'SuperTab'
 Plug 'delimitMate.vim'
@@ -228,11 +229,11 @@ let g:solarized_contrast="high"
 if has("gui_running")
   " set guifont=Source\ Code\ Pro\ Medium\ 13
   set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
-  " colorscheme jellybeans
-  colorscheme molokai
+  " colorscheme molokai
+  colorscheme apprentice
 else
-  colorscheme molokai
-  " colorscheme jellybeans
+  " colorscheme molokai
+  colorscheme apprentice
 endif
 
 " OSX stuff
@@ -342,13 +343,14 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " AutoCmd & other auto stuff {{{
 " If we're in a wide window, enable line numbers.
-if winwidth(0) > 80
-  " setlocal foldcolumn=1
-  setlocal number
-else
-  setlocal nonumber
-  " setlocal foldcolumn=0
-endif
+" if winwidth(0) > 80
+"   " setlocal foldcolumn=1
+"   setlocal number
+" else
+"   setlocal nonumber
+"   " setlocal foldcolumn=0
+" endif
+setlocal number
 
 " Auto add shebang
 if has("autocmd")
