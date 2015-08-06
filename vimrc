@@ -14,7 +14,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'romainl/Apprentice'
 Plug 'molokai'
 Plug 'chriskempson/base16-vim'
-Plug 'Solarized'
 Plug 'Railscasts-Theme-GUIand256color'
 Plug 'nanotech/jellybeans.vim'
 Plug 'bling/vim-airline'
@@ -223,17 +222,15 @@ set encoding=utf-8
 " }}}
 
 set background=dark
-let g:solarized_visibility="low" " Visibility of special chars
-let g:solarized_contrast="high"
 
 if has("gui_running")
   " set guifont=Source\ Code\ Pro\ Medium\ 13
   set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
   " colorscheme molokai
-  colorscheme apprentice
+  " colorscheme apprentice
+  colorscheme base16-default
 else
-  " colorscheme molokai
-  colorscheme apprentice
+  colorscheme base16-default
 endif
 
 " OSX stuff
@@ -449,7 +446,6 @@ vmap   <T-F12> <Plug>Revalvisual
 " change color
 nmap <Leader>rg :color relaxedgreen<CR>
 nmap <Leader>ip :color inkpot<CR>
-nmap <Leader>sol :color solarized<CR>
 " Select everything
 nmap <Leader>gg ggVG
 " Delete blank lines
@@ -652,7 +648,7 @@ let g:AutoCloseProtectedRegions = ["String", "Character"]
 let coffee_compile_vert = 1
 " }}}
 " airline {{{
-let g:airline_theme = 'airlineish'
+let g:airline_theme = 'base16'
 let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
 let g:airline#extensions#tabline#enabled = 1
