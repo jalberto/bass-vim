@@ -10,12 +10,12 @@ Plug 'genutils'
 Plug 'L9'
 Plug 'xolox/vim-misc'
 Plug 'sheerun/vim-polyglot'
+" Add repeat support to other plugins
+Plug 'tpope/vim-repeat'
 
-Plug 'romainl/Apprentice'
-Plug 'molokai'
+" Plug 'romainl/Apprentice'
+" Plug 'molokai'
 Plug 'chriskempson/base16-vim'
-Plug 'Railscasts-Theme-GUIand256color'
-Plug 'nanotech/jellybeans.vim'
 Plug 'bling/vim-airline'
 Plug 'paranoida/vim-airlineish'
 
@@ -24,15 +24,16 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 " Plug 'rking/ag.vim'
-Plug 'gabesoft/vim-ags'
-Plug 'Source-Explorer-srcexpl.vim'
-Plug 'hwrod/interactive-replace'
+Plug 'gabesoft/vim-ags', { 'on': 'Ags' }
 Plug 't9md/vim-choosewin'
+" overlay windows with - (dash)
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
 Plug 'xolox/vim-session'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'speeddating.vim'
+
+" increase/decrease dates with ctrl-a/x
+Plug 'tpope/vim-speeddating'
+" show index in search results: N of NN
 Plug 'henrik/vim-indexed-search'
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
@@ -42,25 +43,29 @@ Plug 'bogado/file-line'
 " search occurences in visual selection
 Plug 'nelstrom/vim-visual-star-search'
 
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'gcmt/wildfire.vim'
-Plug 'repeat.vim'
-Plug 'abolish.vim'
-Plug 'endwise.vim'
-Plug 'matchit.zip'
+" show verticla guides with <leader>ig
+Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
+" expand texobj
+" Plug 'gcmt/wildfire.vim'
+" abrevations on steroids
+" Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-endwise'
+" add mor selectors to %
+Plug 'vim-scripts/matchit.zip'
+" autoclsoe (,{,...
 Plug 'Raimondi/delimitMate'
-Plug 'unimpaired.vim'
-Plug 'SuperTab'
-Plug 'delimitMate.vim'
+Plug 'ervandew/supertab'
 Plug 'Shougo/neocomplete'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'tComment'
+" lint syntax
 Plug 'Syntastic'
 Plug 'Tagbar'
+" skip half each time with s or to center with gs
 Plug 'jayflo/vim-skip'
 " Plug 't9md/vim-smalls'
-Plug 'surround.vim'
+Plug 'tpope/vim-surround'
 Plug 'textobj-user'
 Plug 'EasyMotion'
 Plug 'gorkunov/smartpairs.vim'
@@ -69,35 +74,35 @@ Plug 'gabrielelana/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'KabbAmine/zeavim.vim'
 
-Plug 'fugitive.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'joeytwiddle/git_shade.vim'
-Plug 'gregsexton/gitv'
-Plug 'int3/vim-extradite'
-Plug 'chrisbra/vim-diff-enhanced'
+" highlight newst git change
+Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
 Plug 'Haml'
 Plug 'avakhov/vim-yaml'
-Plug 'splitjoin.vim'
+" spli/join blocks with gS gJ
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'textobj-rubyblock', {'for': 'ruby'}
 Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 Plug 'rake.vim', {'for': 'ruby'}
 Plug 'ruby-matchit', {'for': 'ruby'}
 Plug 'bundler', {'for': 'ruby'}
 Plug 'rails.vim', {'for': 'ruby'}
-Plug 'skalnik/vim-vroom'
+" run tests with <leader>r/R
+Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
 Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
 Plug 'stefanoverna/vim-i18n', {'for': 'ruby'}
+" convert hash keys to symbol, strings or 1.9 style with rs rt rr
 Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
 Plug 'danchoi/ri.vim', {'for': 'ruby'}
-Plug 'jgdavey/vim-blockle', {'for': 'ruby'}
 
 call plug#end()
 " }}}
 
 filetype plugin indent on
 
-"call pathogen#infect() " add external plugins (.vim/bundle)
 syntax on
 set antialias
 set modeline
@@ -134,7 +139,7 @@ set switchbuf=usetab,newtab
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=1200
 
-" Sessions
+" Sessions {{{
 set ssop-=options
 " }}}
 
@@ -540,6 +545,10 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
 " Plugins {{{
+" ident-guides {{{
+let g:indent_guides_guide_size = 1
+" }}}
+
 " autosave {{{
 let g:auto_save = 1
 let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
@@ -660,14 +669,6 @@ set showtabline=0 " remove tab bar
 let g:session_command_aliases = 1
 let g:session_autoload = 'no'
 " }}}
-" wildfire {{{
-" let g:wildfire_fuel_map = "<TAB>"
-let g:wildfire_objects = {
-    \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
-    \ "html,xml" : ["it", "at"],
-    \ "ruby" : ["i'", 'i"', "i)", "i]", "i}", "ip", "ir", "ar"],
-\ }
-" }}}
 " Choosewin {{{
 nmap  -  <Plug>(choosewin)
 " }}}
@@ -679,8 +680,8 @@ nmap  -  <Plug>(choosewin)
 " xmap m <Plug>(smalls)
 " }}}
 " SplitJoin {{{
-nmap ss :SplitjoinSplit<cr>
-nmap sj :SplitjoinJoin<cr>
+" nmap ss :SplitjoinSplit<cr>
+" nmap sj :SplitjoinJoin<cr>
 " }}}
 " CtrlP {{{
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
@@ -705,4 +706,3 @@ vmap <Leader>z :call I18nTranslateString()<CR>
 " Modeline {{{
 " vim: set fdm=marker ts=4 sw=2 tw=78:
 " }}}
-
