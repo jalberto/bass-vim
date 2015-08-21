@@ -417,7 +417,8 @@ nmap <silent> <C-F3> :CtrlPBuffer<CR>
 
 nmap <silent> <F4> :TagbarToggle<CR>
 nmap <S-F4> :!ctags --extra=+f -R *<CR><CR>   " Regenerate tags in current dir
-nmap <C-F4> :!ctags -R `bundle show rails`/../*<CR><CR> " Regenare gem tags for current dir proj
+" nmap <C-F4> :!ctags -R `bundle show rails`/../*<CR><CR> " Regenare gem tags for current dir proj
+nmap <C-F4> :!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)<CR><CR> " Regenare gem tags for current dir proj
 
 map   <F5> :set list!<CR>
 map <S-F5> :set nu!<CR>
