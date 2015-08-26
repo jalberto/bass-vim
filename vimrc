@@ -29,8 +29,8 @@ Plug 't9md/vim-choosewin'
 " overlay windows with - (dash)
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
-Plug 'xolox/vim-session'
-
+" save session :Obsess / Obsess!
+Plug 'tpope/vim-obsession'
 " increase/decrease dates with ctrl-a/x
 Plug 'tpope/vim-speeddating'
 " show index in search results: N of NN
@@ -72,6 +72,7 @@ Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'gabrielelana/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
+" search in zeal <leader>z
 Plug 'KabbAmine/zeavim.vim'
 
 Plug 'tpope/vim-fugitive'
@@ -665,10 +666,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 set showtabline=0 " remove tab bar
-" }}}
-" vim session {{{
-let g:session_command_aliases = 1
-let g:session_autoload = 'no'
+" shows obsession status
+let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'','''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
 " }}}
 " Choosewin {{{
 nmap  -  <Plug>(choosewin)
@@ -700,7 +699,7 @@ let g:smartgf_key = 'gm'
 let g:smartgf_auto_refresh_ctags = 0
 " }}}
 " Rails i18n {{{
-vmap <Leader>z :call I18nTranslateString()<CR>
+vmap <Leader>8 :call I18nTranslateString()<CR>
 " }}}
 " }}}
 
