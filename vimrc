@@ -74,6 +74,8 @@ Plug 'gabrielelana/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
 " search in zeal <leader>z
 Plug 'KabbAmine/zeavim.vim'
+" Send to terminal
+Plug 'jpalardy/vim-slime'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -514,8 +516,6 @@ nnoremap gp `[v`]
 vnoremap < <gv
 vnoremap > >gv
 
-" C-c send enter in insert mode
-inoremap <C-c> <Esc>
 
 " }}}
 
@@ -547,6 +547,10 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
 " Plugins {{{
+" slime {{{
+let g:slime_target = "tmux"
+vnoremap <Leader>t :SlimeSend<Cr>
+" }}}
 " ident-guides {{{
 let g:indent_guides_guide_size = 1
 " }}}
