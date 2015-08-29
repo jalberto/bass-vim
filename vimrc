@@ -230,8 +230,8 @@ set encoding=utf-8
 set background=dark
 
 if has("gui_running")
-  " set guifont=Source\ Code\ Pro\ Medium\ 13
-  set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
+  " set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
+  set guifont=Hack\ 12
   " colorscheme molokai
   " colorscheme apprentice
   colorscheme base16-default
