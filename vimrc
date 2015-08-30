@@ -83,11 +83,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'Haml'
 Plug 'avakhov/vim-yaml'
 " spli/join blocks with gS gJ
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'textobj-rubyblock', {'for': 'ruby'}
+" Ruby objs select: ar/ir
+Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 Plug 'rake.vim', {'for': 'ruby'}
 Plug 'ruby-matchit', {'for': 'ruby'}
@@ -284,7 +286,7 @@ let g:Powerline_symbols = 'fancy'
 
 " {{{ Cursor
 " highlight Cursor guifg=black guibg=Red
-highlight iCursor guifg=black guibg=Orange
+highlight Cursor guifg=black guibg=Orange
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
