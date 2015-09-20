@@ -37,11 +37,13 @@ Plug 'tpope/vim-speeddating'
 Plug 'henrik/vim-indexed-search'
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
-Plug '907th/vim-auto-save'
+" Plug '907th/vim-auto-save'
 " open file:line_number
 Plug 'bogado/file-line'
 " search occurences in visual selection
 Plug 'nelstrom/vim-visual-star-search'
+" Display leadk mapping with <lead>fml
+Plug 'ktonga/vim-follow-my-lead'
 
 " show verticla guides with <leader>ig
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
@@ -558,10 +560,14 @@ let g:indent_guides_guide_size = 1
 " }}}
 
 " autosave {{{
-let g:auto_save = 1
-let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
-let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+" let g:auto_save = 0
+" let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
+" let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 ""let g:auto_save_silent = 1  " do not display the auto-save notification
+" }}}
+
+" Follow my Lead {{{
+let g:fml_all_sources = 1
 " }}}
 
 " fugitive {{{
