@@ -44,6 +44,8 @@ Plug 'bogado/file-line'
 Plug 'nelstrom/vim-visual-star-search'
 " Display leadk mapping with <lead>fml
 Plug 'ktonga/vim-follow-my-lead'
+" Display undto tree with <leader>u
+Plug 'sjl/gundo.vim'
 
 " show verticla guides with <leader>ig
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
@@ -138,6 +140,7 @@ set backspace=indent,eol,start
 if has("folding")
   set foldenable
   set foldmethod=syntax
+  set foldlevelstart=9   " open most folds by default
 endif
 
 " if buffer is in tab use that tab
@@ -352,14 +355,12 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " AutoCmd & other auto stuff {{{
 " If we're in a wide window, enable line numbers.
-" if winwidth(0) > 80
-"   " setlocal foldcolumn=1
-"   setlocal number
-" else
-"   setlocal nonumber
-"   " setlocal foldcolumn=0
-" endif
-setlocal number
+if winwidth(0) > 80
+  set number
+else
+  set nonumber
+endif
+" setlocal number
 
 " Auto add shebang
 if has("autocmd")
@@ -559,6 +560,11 @@ vnoremap <Leader>t :SlimeSend<Cr>
 let g:indent_guides_guide_size = 1
 " }}}
 
+" Gundo {{{
+" toggle gundo
+nnoremap <leader>u :GundoToggle<CR>
+" }}}
+
 " autosave {{{
 " let g:auto_save = 0
 " let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
@@ -716,5 +722,5 @@ vmap <Leader>8 :call I18nTranslateString()<CR>
 " }}}
 
 " Modeline {{{
-" vim: set fdm=marker ts=4 sw=2 tw=78:
+" vim:foldmethod=marker:foldlevel=0:ts=4:sw=2:tw=78
 " }}}
