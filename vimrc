@@ -140,7 +140,7 @@ set backspace=indent,eol,start
 if has("folding")
   set foldenable
   set foldmethod=syntax
-  set foldlevelstart=9   " open most folds by default
+  set foldlevelstart=2   " open most folds by default
 endif
 
 " if buffer is in tab use that tab
@@ -290,8 +290,8 @@ let g:Powerline_symbols = 'fancy'
 " }}}
 
 " {{{ Cursor
-" highlight Cursor guifg=black guibg=Red
-highlight Cursor guifg=black guibg=Orange
+highlight Cursor guifg=black guibg=steelblue
+highlight iCursor guifg=white guibg=Orange
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
