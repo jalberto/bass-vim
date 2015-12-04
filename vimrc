@@ -21,6 +21,7 @@ Plug 'paranoida/vim-airlineish'
 
 Plug 'Toggle'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 Plug 'ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 " Plug 'rking/ag.vim'
@@ -59,9 +60,13 @@ Plug 'vim-scripts/matchit.zip'
 " autoclsoe (,{,...
 Plug 'Raimondi/delimitMate'
 Plug 'ervandew/supertab'
-Plug 'Shougo/neocomplete'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'Quramy/vison'
+Plug 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Plug 'Shougo/neocomplete'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
 Plug 'tComment'
 " lint syntax
 Plug 'Syntastic'
@@ -106,6 +111,8 @@ Plug 'stefanoverna/vim-i18n', {'for': 'ruby'}
 " convert hash keys to symbol, strings or 1.9 style with rs rt rr
 Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
 Plug 'danchoi/ri.vim', {'for': 'ruby'}
+
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 " }}}
@@ -343,6 +350,18 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " }}}
 
 " Snippets {{{
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-j>']
+let g:ycm_key_list_previous_completion = ['<C-k>']
+let g:SuperTabDefaultCompletionType = '<C-j>'
+
+" ultisnips directory
+"let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 " Append modeline after last line in buffer (<leader>ml).
 function! AppendModeline()
   let save_cursor = getpos('.')
@@ -395,6 +414,8 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " Some file types use real tabs
 au FileType {make,gitconfig} set noexpandtab sw=4
 
+" Apply schema to json
+autocmd BufRead,BufNewFile swagger.json Vison
 " Treat JSON files like JavaScript
 au BufNewFile,BufRead *.json setf javascript
 
@@ -415,7 +436,7 @@ map <silent> <S-F1> :40vsplit ~/.vim/tips.md<CR>
 map <silent> <C-F1> :vsplit ~/.vim/abbr<CR>
 
 map <silent>  <F2> :NERDTreeToggle<CR>
-map         <S-F2> :NeoCompleteToggle<CR>
+" map         <S-F2> :NeoCompleteToggle<CR>
 map         <C-F2> :GitGutterToggle<CR>
 
 let g:ctrlp_map = '<F3>'
@@ -457,6 +478,17 @@ vmap   <T-F12> <Plug>Revalvisual
 " }}}
 
 " Leader {{{
+
+" json beautifier
+nnoremap <Leader>j :%!jq '.'<CR>
+
+" quickfix list for breakpoints
+nmap <Leader>i :Ags binding.pry<CR>
+" …also, Insert Mode as bpry<space>
+iabbr bpry require'pry';binding.pry
+" add pry
+map <Leader>bp orequire'pry';binding.pry<esc>:w<cr>
+
 " change color
 nmap <Leader>rg :color relaxedgreen<CR>
 nmap <Leader>ip :color inkpot<CR>
@@ -552,6 +584,9 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
 " Plugins {{{
+" WebDevIcons {{{
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '-'
+" }}}
 " slime {{{
 let g:slime_target = "tmux"
 vnoremap <Leader>t :SlimeSend<Cr>
@@ -627,47 +662,24 @@ let g:rails_dbext=1
 " }}}
 " neocomplcache & multiple cursor fix {{{
 " Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-  if exists(':AutoSaveToggle')==2
-    exe 'AutoSaveToggle'
-  endif
-endfunction
+" function! Multiple_cursors_before()
+"   if exists(':NeoCompleteLock')==2
+"     exe 'NeoCompleteLock'
+"   endif
+"   if exists(':AutoSaveToggle')==2
+"     exe 'AutoSaveToggle'
+"   endif
+" endfunction
 
 " Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-  if exists(':AutoSaveToggle')==2
-    exe 'AutoSaveToggle'
-  endif
-endfunction
-" }}}
-" neocomplcache & neosnippets {{{
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1             " Use smartcase.
-let g:neocomplete#enable_camel_case_completion = 1  " Use camel case completion.
-let g:neocomplete#enable_underbar_completion = 1    " Use underbar completion.
-let g:neocomplete#min_syntax_length = 3             " Set minimum syntax keyword length.
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" let g:neosnippet#snppets_directory='~/.vim/snippets/snippets/'
-" Plugin key-mappings.
-imap <C-s>     <Plug>(neosnippet_expand_or_jump)
-smap <C-s>     <Plug>(neosnippet_expand_or_jump)
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" Supertab completion
-let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
+" function! Multiple_cursors_after()
+"   if exists(':NeoCompleteUnlock')==2
+"     exe 'NeoCompleteUnlock'
+"   endif
+"   if exists(':AutoSaveToggle')==2
+"     exe 'AutoSaveToggle'
+"   endif
+" endfunction
 " }}}
 " autoclose {{{
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'"}
