@@ -231,7 +231,7 @@ inoremap # X<BS>#
 
 set smarttab
 set softtabstop=2
-set tabstop=4
+set tabstop=2
 set shiftwidth=2    "num colums
 set expandtab       "use spaces
 " }}}
@@ -553,6 +553,15 @@ nnoremap gp `[v`]
 vnoremap < <gv
 vnoremap > >gv
 
+" Keep search matches in the middle of the screen
+nnoremap n nzz
+nnoremap N Nzz
+
+" resize panels
+noremap <A-up>    <C-W>+
+noremap <A-down>  <C-W>-
+noremap <A-left>  3<C-W><
+noremap <A-right> 3<C-W>>
 
 " }}}
 
@@ -736,3 +745,5 @@ vmap <Leader>8 :call I18nTranslateString()<CR>
 " Modeline {{{
 " vim:foldmethod=marker:foldlevel=0:ts=4:sw=2:tw=78
 " }}}
+" remap
+"
