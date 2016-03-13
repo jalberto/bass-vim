@@ -22,7 +22,7 @@ Plug 'paranoida/vim-airlineish'
 Plug 'Toggle'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
-Plug 'ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 " Plug 'rking/ag.vim'
 Plug 'gabesoft/vim-ags', { 'on': 'Ags' }
