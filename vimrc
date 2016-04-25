@@ -16,7 +16,9 @@ Plug 'tpope/vim-repeat'
 " Plug 'romainl/Apprentice'
 " Plug 'molokai'
 Plug 'chriskempson/base16-vim'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'paranoida/vim-airlineish'
 
 Plug 'Toggle'
@@ -85,6 +87,8 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'KabbAmine/zeavim.vim'
 " Send to terminal
 Plug 'jpalardy/vim-slime'
+" Underline word under cursor
+Plug 'itchyny/vim-cursorword'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -246,11 +250,12 @@ set encoding=utf-8
 set background=dark
 
 if has("gui_running")
+  let g:enable_bold_font = 1
   " set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
   set guifont=Hack\ 12
   " colorscheme molokai
   " colorscheme apprentice
-  colorscheme base16-default
+  colorscheme hybrid_reverse
 else
   colorscheme base16-default
 endif
@@ -698,7 +703,7 @@ let g:AutoCloseProtectedRegions = ["String", "Character"]
 let coffee_compile_vert = 1
 " }}}
 " airline {{{
-let g:airline_theme = 'base16'
+let g:airline_theme = 'hybrid'
 let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
 let g:airline#extensions#tabline#enabled = 1
