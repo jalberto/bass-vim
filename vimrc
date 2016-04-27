@@ -599,6 +599,7 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 
 " Plugins {{{
 " WebDevIcons {{{
+let g:webdevicons_enable_nerdtree = 0
 let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '-'
 " }}}
 " slime {{{
