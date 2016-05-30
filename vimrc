@@ -96,6 +96,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
+Plug 'tpope/vim-rvm', {'for': 'ruby'}
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'Haml'
 Plug 'avakhov/vim-yaml'
@@ -131,6 +132,8 @@ set nobackup
 set showcmd " Show us the command we're typing
 " set hidden  " Allow edit buffers to be hidden
 runtime macros/matchit.vim
+set backupdir=$TMPDIR//
+set directory=$TMPDIR//
 
 " Show pairs
 set showmatch
@@ -250,7 +253,7 @@ set encoding=utf-8
 set background=dark
 
 if has("gui_running")
-  let g:enable_bold_font = 1
+  " let g:enable_bold_font = 1
   " set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
   set guifont=Hack\ 12
   " colorscheme molokai
@@ -598,6 +601,15 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
 " Plugins {{{
+" Syntastic {{{
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_w = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ruby_checkers=['rubocop', 'mri']
+" }}}
+
 " WebDevIcons {{{
 let g:webdevicons_enable_nerdtree = 0
 let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '-'
