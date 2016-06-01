@@ -260,7 +260,8 @@ if has("gui_running")
   " colorscheme apprentice
   colorscheme hybrid_reverse
 else
-  colorscheme base16-default
+  colorscheme hybrid_reverse
+  " colorscheme base16-default
 endif
 
 " OSX stuff
