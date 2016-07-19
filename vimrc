@@ -104,20 +104,23 @@ Plug 'avakhov/vim-yaml'
 Plug 'AndrewRadev/splitjoin.vim'
 " Ruby objs select: ar/ir
 Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
+" Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 Plug 'rake.vim', {'for': 'ruby'}
 Plug 'ruby-matchit', {'for': 'ruby'}
 Plug 'bundler', {'for': 'ruby'}
 Plug 'rails.vim', {'for': 'ruby'}
 " run tests with <leader>r/R
-Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
+" Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
 Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
 Plug 'stefanoverna/vim-i18n', {'for': 'ruby'}
 " convert hash keys to symbol, strings or 1.9 style with rs rt rr
 Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
 Plug 'danchoi/ri.vim', {'for': 'ruby'}
+Plug 'janko-m/vim-test'
 
 Plug 'ryanoasis/vim-devicons'
+
+Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 
 call plug#end()
 " }}}
@@ -132,8 +135,8 @@ set nobackup
 set showcmd " Show us the command we're typing
 " set hidden  " Allow edit buffers to be hidden
 runtime macros/matchit.vim
-set backupdir=$TMPDIR//
-set directory=$TMPDIR//
+set backupdir=/tmp//
+set directory=/tmp//
 
 " Show pairs
 set showmatch
@@ -168,8 +171,8 @@ set ssop-=options
 " }}}
 
 " ToolBar {{{
-tmenu ToolBar.reducefont Reduce font size
-amenu ToolBar.reducefont :set guifont=Source\ Code\ Pro\ Medium\ 11<CR>
+" tmenu ToolBar.reducefont Reduce font size
+" amenu ToolBar.reducefont :set guifont=Source\ Code\ Pro\ Medium\ 11<CR>
 "}}}
 
 " Misc {{{
@@ -602,11 +605,20 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
 " Plugins {{{
+
+" Tests {{{
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+" }}}
+
 " Syntastic {{{
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_w = 1
+let g:syntastic_check_on_w = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ruby_checkers=['rubocop', 'mri']
 " }}}
