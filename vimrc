@@ -539,6 +539,7 @@ nmap  :Q        :q
 nmap  q:        :q
 nmap  :aw       :wa
 nmap  :qw       :wq
+nnoremap ; :
 
 " <CTRL>+t new tab
 imap <C-t> <esc>:tabnew<cr> a
@@ -606,6 +607,16 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 
 " Plugins {{{
 
+" VisualDrag {{{
+vmap  <expr>  <S-LEFT>   DVB_Drag('left')
+vmap  <expr>  <S-RIGHT>  DVB_Drag('right')
+vmap  <expr>  <S-DOWN>   DVB_Drag('down')
+vmap  <expr>  <S-UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
+" }}}
+
 " Tests {{{
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
@@ -627,10 +638,12 @@ let g:syntastic_ruby_checkers=['rubocop', 'mri']
 let g:webdevicons_enable_nerdtree = 0
 let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '-'
 " }}}
+
 " slime {{{
 let g:slime_target = "tmux"
 vnoremap <Leader>t :SlimeSend<Cr>
 " }}}
+
 " ident-guides {{{
 let g:indent_guides_guide_size = 1
 " }}}
