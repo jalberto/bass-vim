@@ -96,14 +96,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
-Plug 'tpope/vim-rvm', {'for': 'ruby'}
+" Plug 'tpope/vim-rvm', {'for': 'ruby'}
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 Plug 'Haml'
 Plug 'avakhov/vim-yaml'
 " spli/join blocks with gS gJ
 Plug 'AndrewRadev/splitjoin.vim'
 " Ruby objs select: ar/ir
-Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
+" Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 " Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 Plug 'rake.vim', {'for': 'ruby'}
 Plug 'ruby-matchit', {'for': 'ruby'}
@@ -258,7 +258,8 @@ set background=dark
 if has("gui_running")
   " let g:enable_bold_font = 1
   " set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
-  set guifont=Hack\ 12
+  " set guifont=Hack\ 12
+  set guifont=Knack\ Regular\ Nerd\ Font\ Mono\ 12
   " colorscheme molokai
   " colorscheme apprentice
   colorscheme hybrid_reverse
@@ -300,12 +301,6 @@ if has('title') && (has('gui_running') || &title)
   set titlestring+=%h%m%r%w             " flags
   " set titlestring+=\ -\ %{v:progname} " program name
 endif
-" }}}
-
-" StatusLine (uses powerline plugin) {{{
-set ruler " cursor position in status
-set laststatus=2
-let g:Powerline_symbols = 'fancy'
 " }}}
 
 " {{{ Cursor
@@ -742,6 +737,7 @@ let g:AutoCloseProtectedRegions = ["String", "Character"]
 let coffee_compile_vert = 1
 " }}}
 " airline {{{
+set laststatus=2
 let g:airline_theme = 'hybrid'
 let g:airline_powerline_fonts = 1
 " add buffer explorer with separator

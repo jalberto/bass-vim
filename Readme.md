@@ -1,8 +1,9 @@
-# Installing
+## Installing
 
     cd ~
     git clone git://github.com/jalberto/bass-vim.git ~/.vim
     ln -s ~/.vim/vimrc ~/.vimrc
+    ln -s ~/.vim/fonts/hack ~/.fonts/
     cd ~/.vim
     vim +PluginInstall +qall
 
