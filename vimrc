@@ -485,6 +485,8 @@ vmap   <T-F12> <Plug>Revalvisual
 " }}}
 
 " Leader {{{
+map <leader>x :NERDTreeToggle<CR>
+map <leader>h :40vsplit ~/.vim/tips.md<CR>
 
 " json beautifier
 nnoremap <Leader>j :%!jq '.'<CR>
