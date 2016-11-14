@@ -259,7 +259,7 @@ if has("gui_running")
   " let g:enable_bold_font = 1
   " set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
   " set guifont=Hack\ 12
-  set guifont=Knack\ Regular\ Nerd\ Font\ Mono\ 12
+  set guifont=Knack\ Nerd\ Font\ 12
   " colorscheme molokai
   " colorscheme apprentice
   colorscheme hybrid_reverse
