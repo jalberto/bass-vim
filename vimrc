@@ -66,9 +66,6 @@ Plug 'Quramy/vison'
 Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'Shougo/neocomplete'
-" Plug 'Shougo/neosnippet'
-" Plug 'Shougo/neosnippet-snippets'
 Plug 'tComment'
 " lint syntax
 Plug 'Syntastic'
@@ -89,6 +86,8 @@ Plug 'KabbAmine/zeavim.vim'
 Plug 'jpalardy/vim-slime'
 " Underline word under cursor
 Plug 'itchyny/vim-cursorword'
+" auto generate tags async
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -121,13 +120,15 @@ Plug 'janko-m/vim-test'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
+Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
+Plug 'tpope/vim-projectionist' " required for some navigation features
 
 call plug#end()
 " }}}
 
 filetype plugin indent on
 
-syntax on
+" syntax on
 set antialias
 set modeline
 set mousehide
@@ -153,6 +154,11 @@ set undolevels=500
 " Make backspace delete lots of things
 set backspace=indent,eol,start
 
+" no more annoying startup msg
+set shortmess=aoOtI
+" set cmdheight=2
+let g:bufferline_echo=0
+
 " Enable folds
 if has("folding")
   set foldenable
@@ -168,6 +174,13 @@ set synmaxcol=1200
 
 " Sessions {{{
 set ssop-=options
+augroup sourcesession
+  autocmd!
+  autocmd VimEnter * nested
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
+        \   source Session.vim |
+        \ endif
+augroup END
 " }}}
 
 " ToolBar {{{
@@ -186,9 +199,6 @@ set splitright                  " open vertical splits on the right
 set splitbelow                  " open the horizontal split below
 " set wrap                        " wrap long lines
 set linebreak                   " break lines at word end
-
-" The "Press ENTER or type command to continue" prompt is jarring and usually unnecessary.
-set shortmess=atI
 
 " Try to show at least three lines and two columns of context when
 " scrolling
@@ -521,13 +531,24 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" tags
+nmap <Leader>ct :TagbarToggle<cr>
 " }}}
 
 " move in buffers and tabs
 nmap <S-LEFT>  :bN<cr>
 nmap <S-RIGHT> :bn<cr>
+imap <S-LEFT>  <esc>:bN<cr>
+imap <S-RIGHT> <esc>:bn<cr>
 nmap <C-RIGHT> :tabnext<cr>
 nmap <C-LEFT>  :tabprevious<cr>
+" imap <C-RIGHT> <esc>:tabnext<cr>
+" imap <C-LEFT>  <esc>:tabprevious<cr>
+nmap <C-h>     :tabprevious<cr>
+nmap <C-l>     :tabnext<cr>
+imap <C-h>     <esc>:tabprevious<cr>
+imap <C-l>     <esc>:tabnext<cr>
 
 " Avoid mistakes
 nmap  :X        :x
@@ -542,14 +563,11 @@ nnoremap ; :
 imap <C-t> <esc>:tabnew<cr> a
 map  <C-t> :tabnew<cr> i
 
-"use \rci in normal mode to indent ruby code,should install gem kode
-nmap <leader>rci :%!ruby-code-indenter<cr>
-
 " Easy window navigation
-map  <C-h>      <C-w>h
-map  <C-j>      <C-w>j
-map  <C-k>      <C-w>k
-map  <C-l>      <C-w>l
+map  <A-h>      <C-w>h
+map  <A-j>      <C-w>j
+map  <A-k>      <C-w>k
+map  <A-l>      <C-w>l
 nmap <tab><tab> <C-w>w
 
 nmap <C-Enter> <C-w><C-]><C-w>T
