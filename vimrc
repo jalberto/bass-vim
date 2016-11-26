@@ -22,8 +22,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'paranoida/vim-airlineish'
 
 Plug 'Toggle'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
+Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 " Plug 'rking/ag.vim'
@@ -67,8 +68,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tComment'
-" lint syntax
-Plug 'Syntastic'
+Plug 'neomake/neomake' " async lint & make
 Plug 'Tagbar'
 " skip half each time with s or to center with gs
 Plug 'jayflo/vim-skip'
@@ -452,7 +452,7 @@ au FileType markdown set sts=4 ts=4 sw=4
 map <silent> <S-F1> :40vsplit ~/.vim/tips.md<CR>
 map <silent> <C-F1> :vsplit ~/.vim/abbr<CR>
 
-map <silent>  <F2> :NERDTreeToggle<CR>
+map <silent>  <F2> :NERDTreeTabsToggle<CR>
 " map         <S-F2> :NeoCompleteToggle<CR>
 map         <C-F2> :GitGutterToggle<CR>
 
@@ -495,7 +495,7 @@ vmap   <T-F12> <Plug>Revalvisual
 " }}}
 
 " Leader {{{
-map <leader>x :NERDTreeToggle<CR>
+map <leader>x :NERDTreeTabsToggle<CR>
 map <leader>h :40vsplit ~/.vim/tips.md<CR>
 
 " json beautifier
@@ -554,7 +554,7 @@ imap <C-l>     <esc>:tabnext<cr>
 nmap  :X        :x
 nmap  :W        :w
 nmap  :Q        :q
-nmap  q:        :q
+" nmap  q:        :q
 nmap  :aw       :wa
 nmap  :qw       :wq
 nnoremap ; :
@@ -622,6 +622,10 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 
 " Plugins {{{
 
+" Plugins {{{
+autocmd! BufWritePost * Neomake
+" }}}
+
 " VisualDrag {{{
 vmap  <expr>  <S-LEFT>   DVB_Drag('left')
 vmap  <expr>  <S-RIGHT>  DVB_Drag('right')
@@ -638,15 +642,6 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
-" }}}
-
-" Syntastic {{{
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_w = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_ruby_checkers=['rubocop', 'mri']
 " }}}
 
 " WebDevIcons {{{
