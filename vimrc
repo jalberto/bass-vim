@@ -28,7 +28,7 @@ Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 " Plug 'rking/ag.vim'
-Plug 'gabesoft/vim-ags', { 'on': 'Ags' }
+Plug 'wincent/ferret'
 Plug 't9md/vim-choosewin'
 " overlay windows with - (dash)
 Plug 'terryma/vim-multiple-cursors'
@@ -502,7 +502,7 @@ map <leader>h :40vsplit ~/.vim/tips.md<CR>
 nnoremap <Leader>j :%!jq '.'<CR>
 
 " quickfix list for breakpoints
-nmap <Leader>i :Ags binding.pry<CR>
+nmap <Leader>i :Ack binding.pry<CR>
 " …also, Insert Mode as bpry<space>
 iabbr bpry require'pry';binding.pry
 " add pry
