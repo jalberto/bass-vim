@@ -64,11 +64,10 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'Raimondi/delimitMate'
 Plug 'ervandew/supertab'
 Plug 'Quramy/vison'
-Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tComment'
-Plug 'neomake/neomake' " async lint & make
+Plug 'w0rp/ale' " async lint
 Plug 'Tagbar'
 " skip half each time with s or to center with gs
 Plug 'jayflo/vim-skip'
@@ -95,8 +94,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
-" Plug 'tpope/vim-rvm', {'for': 'ruby'}
-Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
+Plug 'tpope/vim-rbenv'
+Plug 'vim-ruby/vim-ruby'
 Plug 'Haml'
 Plug 'avakhov/vim-yaml'
 " spli/join blocks with gS gJ
@@ -104,9 +103,10 @@ Plug 'AndrewRadev/splitjoin.vim'
 " Ruby objs select: ar/ir
 " Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 " Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
-Plug 'rake.vim', {'for': 'ruby'}
+" Plug 'rake.vim', {'for': 'ruby'}
+Plug 'tpope/vim-rake', {'for': 'Ruby'}
 Plug 'ruby-matchit', {'for': 'ruby'}
-Plug 'bundler', {'for': 'ruby'}
+Plug 'tpope/vim-bundler', {'for': 'ruby'}
 Plug 'rails.vim', {'for': 'ruby'}
 " run tests with <leader>r/R
 " Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
@@ -122,6 +122,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 Plug 'tpope/vim-projectionist' " required for some navigation features
+
+Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 " }}}
@@ -352,18 +354,18 @@ if filereadable(expand("~/.vim/abbr"))
   source ~/.vim/abbr
 endif
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" autocmd FileType python set omnifunc=pythoncomplete#Complete
+" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 "autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
+" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" autocmd FileType c set omnifunc=ccomplete#Complete
 
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+" autocmd FileType ruby set omnifunc=rubycomplete#Complete
+" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " }}}
 
 " Snippets {{{
@@ -622,8 +624,16 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 
 " Plugins {{{
 
-" Plugins {{{
-autocmd! BufWritePost * Neomake
+" Ale lint {{{
+" autocmd! BufWritePost * Neomake
+nmap <silent> <leader>pl <Plug>(ale_previous_wrap)
+nmap <silent> <leader>nl <Plug>(ale_next_wrap)
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
 " }}}
 
 " VisualDrag {{{
@@ -761,7 +771,7 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 set showtabline=0 " remove tab bar
 " shows obsession status
-let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'','''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
+let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'','''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v ', '%{ALEGetStatusLine()}'])
 " }}}
 " Choosewin {{{
 nmap  -  <Plug>(choosewin)
