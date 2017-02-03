@@ -27,6 +27,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
+Plug 'tracyone/ctrlp-leader-guide'
 " Plug 'rking/ag.vim'
 Plug 'wincent/ferret'
 Plug 't9md/vim-choosewin'
@@ -131,7 +132,9 @@ call plug#end()
 filetype plugin indent on
 
 " syntax on
-set antialias
+if !has('nvim')
+  set antialias
+endif
 set modeline
 set mousehide
 set nobackup
@@ -208,7 +211,9 @@ set scrolloff=3
 set sidescrolloff=2
 " Improve vim's scrolling speed
 set ttyfast
-set ttyscroll=3
+if !has('nvim')
+  set ttyscroll=3
+endif
 
 set cf                  " Enable error files & error jumping.
 set clipboard+=unnamedplus  " Yanks go on clipboard instead.
@@ -566,10 +571,10 @@ imap <C-t> <esc>:tabnew<cr> a
 map  <C-t> :tabnew<cr> i
 
 " Easy window navigation
-map  <A-h>      <C-w>h
-map  <A-j>      <C-w>j
-map  <A-k>      <C-w>k
-map  <A-l>      <C-w>l
+map  <T-h>      <C-w>h
+map  <T-j>      <C-w>j
+map  <T-k>      <C-w>k
+map  <T-l>      <C-w>l
 nmap <tab><tab> <C-w>w
 
 nmap <C-Enter> <C-w><C-]><C-w>T

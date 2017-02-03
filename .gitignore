@@ -2,3 +2,5 @@ sessions/*
 .netrwhist
 *.swp
 plugged/*
+spell/*
+*.old
