@@ -5,6 +5,12 @@ set nocompatible
 filetype on
 
 " Vundle {{{
+" Helper to add conditionals for nvim
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
 call plug#begin('~/.vim/plugged')
 Plug 'genutils'
 Plug 'L9'
@@ -21,6 +27,7 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'paranoida/vim-airlineish'
 
+Plug 'mtth/scratch.vim'
 Plug 'Toggle'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
@@ -83,7 +90,9 @@ Plug 'mustache/vim-mustache-handlebars'
 " search in zeal <leader>z
 Plug 'KabbAmine/zeavim.vim'
 " Send to terminal
-Plug 'jpalardy/vim-slime'
+Plug 'jpalardy/vim-slime', Cond(!has('nvim'))
+Plug 'kassio/neoterm', Cond(has('nvim'))
+Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
 " Underline word under cursor
 Plug 'itchyny/vim-cursorword'
 " auto generate tags async
@@ -652,8 +661,8 @@ let g:DVB_TrimWS = 1
 " }}}
 
 " Tests {{{
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>T :TestNearest<CR>
+nmap <silent> <leader>Tf :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
@@ -664,9 +673,23 @@ let g:webdevicons_enable_nerdtree = 0
 let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '-'
 " }}}
 
-" slime {{{
-let g:slime_target = "tmux"
-vnoremap <Leader>t :SlimeSend<Cr>
+" slime & NeoTerm {{{
+if has('nvim')
+  let g:neoterm_position = 'horizontal'
+  nnoremap <leader>tf :TREPLSendFile<cr>
+  nnoremap <leader>t :TREPLSendLine<cr>
+  vnoremap <leader>t :TREPLSendSelection<cr>
+
+  nnoremap <silent> <leader>th :call neoterm#close()<cr>
+  nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
+  nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
+
+  command! Trc :T bin/rails c
+  command! Trn :T bin/rails notes
+else
+  let g:slime_target = "tmux"
+  vnoremap <Leader>ts :SlimeSend<Cr>
+endif
 " }}}
 
 " ident-guides {{{
