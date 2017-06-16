@@ -12,8 +12,8 @@ function! Cond(cond, ...)
 endfunction
 
 call plug#begin('~/.vim/plugged')
-Plug 'genutils'
-Plug 'L9'
+Plug 'clones/vim-genutils'
+Plug 'eparreno/vim-l9'
 Plug 'xolox/vim-misc'
 Plug 'sheerun/vim-polyglot'
 " Add repeat support to other plugins
@@ -28,7 +28,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'paranoida/vim-airlineish'
 
 Plug 'mtth/scratch.vim'
-Plug 'Toggle'
+" Plug 'Toggle'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
@@ -74,15 +74,15 @@ Plug 'ervandew/supertab'
 Plug 'Quramy/vison'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'tComment'
+Plug 'tomtom/tcomment_vim'
 Plug 'w0rp/ale' " async lint
-Plug 'Tagbar'
+Plug 'majutsushi/tagbar'
 " skip half each time with s or to center with gs
 Plug 'jayflo/vim-skip'
 " Plug 't9md/vim-smalls'
 Plug 'tpope/vim-surround'
-Plug 'textobj-user'
-Plug 'EasyMotion'
+Plug 'kana/vim-textobj-user'
+Plug 'easymotion/vim-easymotion'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'gabrielelana/vim-markdown'
@@ -93,6 +93,7 @@ Plug 'KabbAmine/zeavim.vim'
 Plug 'jpalardy/vim-slime', Cond(!has('nvim'))
 Plug 'kassio/neoterm', Cond(has('nvim'))
 Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
+Plug 'christoomey/vim-tmux-navigator'
 " Underline word under cursor
 Plug 'itchyny/vim-cursorword'
 " auto generate tags async
@@ -106,7 +107,7 @@ Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
 Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
-Plug 'Haml'
+Plug 'tpope/vim-haml'
 Plug 'avakhov/vim-yaml'
 " spli/join blocks with gS gJ
 Plug 'AndrewRadev/splitjoin.vim'
@@ -115,9 +116,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 " Plug 'rake.vim', {'for': 'ruby'}
 Plug 'tpope/vim-rake', {'for': 'Ruby'}
-Plug 'ruby-matchit', {'for': 'ruby'}
+Plug 'vim-scripts/ruby-matchit', {'for': 'ruby'}
 Plug 'tpope/vim-bundler', {'for': 'ruby'}
-Plug 'rails.vim', {'for': 'ruby'}
+Plug 'tpope/vim-rails', {'for': 'ruby'}
 " run tests with <leader>r/R
 " Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
 Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
@@ -430,7 +431,7 @@ if has("autocmd")
 endif
 
 " Autoload vimrc
-" au BufWritePost .vimrc so $MYVIMRC
+au BufWritePost .vimrc so $MYVIMRC
 
 " Python folder
 au FileType python set foldmethod=indent
@@ -561,14 +562,14 @@ nmap <C-RIGHT> :tabnext<cr>
 nmap <C-LEFT>  :tabprevious<cr>
 " imap <C-RIGHT> <esc>:tabnext<cr>
 " imap <C-LEFT>  <esc>:tabprevious<cr>
-nmap <C-h>     :tabprevious<cr>
-nmap <C-l>     :tabnext<cr>
-imap <C-h>     <esc>:tabprevious<cr>
-imap <C-l>     <esc>:tabnext<cr>
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nmap <silent> <C-h> :tabprevious<cr>
+nmap <silent> <C-l> :tabnext<cr>
+imap <silent> <C-h> <esc>:tabprevious<cr>
+imap <silent> <C-l> <esc>:tabnext<cr>
+nnoremap <a-h> <C-w>h
+nnoremap <a-j> <C-w>j
+nnoremap <a-k> <C-w>k
+nnoremap <a-l> <C-w>l
 
 " Avoid mistakes
 nmap  :X        :x
@@ -584,10 +585,10 @@ imap <C-t> <esc>:tabnew<cr> a
 map  <C-t> :tabnew<cr> i
 
 " Easy window navigation
-map  <T-h>      <C-w>h
-map  <T-j>      <C-w>j
-map  <T-k>      <C-w>k
-map  <T-l>      <C-w>l
+" map  <T-h>      <C-w>h
+" map  <T-j>      <C-w>j
+" map  <T-k>      <C-w>k
+" map  <T-l>      <C-w>l
 nmap <tab><tab> <C-w>w
 
 nmap <C-Enter> <C-w><C-]><C-w>T
@@ -642,6 +643,16 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 
 " Plugins {{{
 
+" Tmux navigator {{{
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
+" }}}
+
 " Ale lint {{{
 " autocmd! BufWritePost * Neomake
 nmap <silent> <leader>pl <Plug>(ale_previous_wrap)
@@ -655,10 +666,10 @@ let g:ale_sign_warning = '⚠'
 " }}}
 
 " VisualDrag {{{
-vmap  <expr>  <S-LEFT>   DVB_Drag('left')
-vmap  <expr>  <S-RIGHT>  DVB_Drag('right')
-vmap  <expr>  <S-DOWN>   DVB_Drag('down')
-vmap  <expr>  <S-UP>     DVB_Drag('up')
+vmap  <expr>  <C-S-LEFT>   DVB_Drag('left')
+vmap  <expr>  <C-S-RIGHT>  DVB_Drag('right')
+vmap  <expr>  <C-S-DOWN>   DVB_Drag('down')
+vmap  <expr>  <C-S-UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
