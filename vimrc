@@ -21,20 +21,22 @@ Plug 'tpope/vim-repeat'
 
 " Plug 'romainl/Apprentice'
 " Plug 'molokai'
+Plug 'robbles/logstash.vim'
+Plug 'itkq/fluentd-vim'
 Plug 'chriskempson/base16-vim'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'paranoida/vim-airlineish'
 
-Plug 'mtth/scratch.vim'
+" Plug 'mtth/scratch.vim'
 " Plug 'Toggle'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-Plug 'tracyone/ctrlp-leader-guide'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'tacahiroy/ctrlp-funky'
+" Plug 'tracyone/ctrlp-leader-guide'
 " Plug 'rking/ag.vim'
 Plug 'wincent/ferret'
 Plug 't9md/vim-choosewin'
@@ -58,6 +60,7 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'ktonga/vim-follow-my-lead'
 " Display undto tree with <leader>u
 Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-markdown'
 
 " show verticla guides with <leader>ig
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
@@ -85,7 +88,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'easymotion/vim-easymotion'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
-Plug 'gabrielelana/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
 " search in zeal <leader>z
 Plug 'KabbAmine/zeavim.vim'
@@ -104,6 +106,7 @@ Plug 'airblade/vim-gitgutter'
 " highlight newst git change
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+Plug 'rhysd/committia.vim'
 
 Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
@@ -115,7 +118,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
 " Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
 " Plug 'rake.vim', {'for': 'ruby'}
-Plug 'tpope/vim-rake', {'for': 'Ruby'}
+Plug 'tpope/vim-rake', {'for': 'ruby'}
 Plug 'vim-scripts/ruby-matchit', {'for': 'ruby'}
 Plug 'tpope/vim-bundler', {'for': 'ruby'}
 Plug 'tpope/vim-rails', {'for': 'ruby'}
@@ -133,13 +136,23 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 Plug 'tpope/vim-projectionist' " required for some navigation features
+Plug 'slime-lang/vim-slime-syntax', {'for': 'slime'}
 
 Plug 'Valloric/YouCompleteMe'
+
+Plug 'vimwiki/vimwiki', {'branch': 'dev'}
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
+" Pomodoro
+" Plug 'l04m33/vim-skuld'
 
 call plug#end()
 " }}}
 
-filetype plugin indent on
+" filetype plugin indent on
 
 " syntax on
 if !has('nvim')
@@ -232,7 +245,7 @@ set autowrite           " Writes on make/shell commands
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 
-set tags+=gems.tags
+" set tags+=gems.tags
 " }}}
 
 " MoveTabs {{{
@@ -315,9 +328,9 @@ highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 " Show tabs and trailing whitespace visually
 " if (&termencoding == "utf-8") || has("gui_running")
-"   set list listchars=tab:\»\ ,trail:·,extends:…,nbsp:‗,eol:¶
+  set list listchars=tab:⭾\ ,trail:␠,extends:…,nbsp:⎵,eol:⏎
 " else
-"   set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
+  " set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
 " endif
 " }}}
 
@@ -438,7 +451,10 @@ au FileType python set foldmethod=indent
 " Sgml,htmls,xml y xsl folder
 au Filetype html,xml,xsl,sgml,docbook
 " JavaScript fold
-au FileType javascript call JavaScriptFold()
+" au FileType javascript call JavaScriptFold()
+autocmd FileType javascript setlocal foldmethod=syntax
+autocmd FileType javascript setlocal foldlevelstart=1
+autocmd FileType javascript syntax region foldBraces
 " Coffeescript folder
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
@@ -461,6 +477,7 @@ au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
 
 " MultiMarkdown requires 4-space tabs
 au FileType markdown set sts=4 ts=4 sw=4
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql']
 
 " }}}
 
@@ -473,10 +490,10 @@ map <silent>  <F2> :NERDTreeTabsToggle<CR>
 " map         <S-F2> :NeoCompleteToggle<CR>
 map         <C-F2> :GitGutterToggle<CR>
 
-let g:ctrlp_map = '<F3>'
-let g:ctrlp_cmd = 'CtrlP'
-nmap <silent> <S-F3> :CtrlPTag<CR>
-nmap <silent> <C-F3> :CtrlPBuffer<CR>
+" let g:ctrlp_map = '<F3>'
+" let g:ctrlp_cmd = 'CtrlP'
+" nmap <silent> <S-F3> :CtrlPTag<CR>
+" nmap <silent> <C-F3> :CtrlPBuffer<CR>
 
 nmap <silent> <F4> :TagbarToggle<CR>
 nmap <S-F4> :!ctags --extra=+f -R *<CR><CR>   " Regenerate tags in current dir
@@ -534,8 +551,6 @@ nmap <Leader>gg ggVG
 nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
 " Align
 vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
-" Open file
-nnoremap <Leader>o :CtrlP<CR>
 " Save file
 nnoremap <Leader>w :w<CR>
 " Copy ans paste to clipboard
@@ -643,6 +658,25 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 
 " Plugins {{{
 
+" Guten tag {{{
+let g:gutentags_ctags_exclude = ["node_modules", "assets", "_build", "build", "vendor", "private", "priv"]
+let g:gutentags_cache_dir = "/tmp"
+" }}}
+
+" fzf {{{
+" let g:rg_command = '
+"   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+"   \ -g "*.{js,json,md,html,hs,rb,conf,ex}"
+"   \ -g "!{.git,node_modules,vendor}/*" '
+"
+" command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+
+nnoremap <Leader>o :Files<CR>
+" }}}
+
+" vimwiki {{{
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" }}}
 " Tmux navigator {{{
 let g:tmux_navigator_no_mappings = 1
 
@@ -696,6 +730,7 @@ if has('nvim')
   tnoremap <A-k> <C-\><C-n><C-w>k
   tnoremap <A-l> <C-\><C-n><C-w>l
 
+  let g:neoterm_autoscroll = '1'
   let g:neoterm_size = 10
   let g:neoterm_position = 'horizontal'
   nnoremap <leader>tf :TREPLSendFile<cr>
@@ -708,6 +743,9 @@ if has('nvim')
 
   command! Trc :T bin/rails c
   command! Trn :T bin/rails notes
+  " command! -nargs=+ TT Topen | T
+  " command! TT Topen | T
+  nnoremap <silent> ¬ :Ttoggle<cr>
 else
   let g:slime_target = "tmux"
   vnoremap <Leader>ts :SlimeSend<Cr>
