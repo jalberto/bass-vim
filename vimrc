@@ -167,6 +167,9 @@ runtime macros/matchit.vim
 set backupdir=/tmp//
 set directory=/tmp//
 
+" TRy to autoreload files on external changes
+autocmd FocusGained * silent! checktime
+
 " Show pairs
 set showmatch
 set mat=5
