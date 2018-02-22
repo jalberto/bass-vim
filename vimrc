@@ -24,10 +24,6 @@ Plug 'tpope/vim-repeat'
 Plug 'robbles/logstash.vim'
 Plug 'itkq/fluentd-vim'
 Plug 'chriskempson/base16-vim'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'paranoida/vim-airlineish'
 
 " Plug 'mtth/scratch.vim'
 " Plug 'Toggle'
@@ -149,6 +145,9 @@ Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
 " Pomodoro
 " Plug 'l04m33/vim-skuld'
 
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 " }}}
 
@@ -302,7 +301,7 @@ if has("gui_running")
   " let g:enable_bold_font = 1
   " set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
   " set guifont=Hack\ 12
-  set guifont=Knack\ Nerd\ Font\ 12
+  set guifont=Hack\ 12
   " colorscheme molokai
   " colorscheme apprentice
   colorscheme hybrid_reverse
@@ -854,15 +853,15 @@ let coffee_compile_vert = 1
 " }}}
 " airline {{{
 set laststatus=2
-let g:airline_theme = 'hybrid'
-let g:airline_powerline_fonts = 1
+let g:airline_theme = 'distinguished'
+" let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 set showtabline=0 " remove tab bar
 " shows obsession status
-let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''$'','''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v ', '%{ALEGetStatusLine()}'])
+" let g:airline_section_b = airline#section#create(['%{ALEGetStatusLine()}', '%{ObsessionStatus(''$'','''')}', 'hunks', 'branch'])
 " }}}
 " Choosewin {{{
 nmap  -  <Plug>(choosewin)
