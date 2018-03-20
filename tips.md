@@ -1,76 +1,77 @@
-#  F-Keys
+# Commands
 
-* S-F1  Tips
-* C-F1  Abbr
-* F2    NERDTreeToggle
-* S-F2  NeoComplCacheToggle
-* F3    FufFile
-* C-F3  FufFileWithCurrentBufferDir
-* T-F3  FufRenewCache
-* F4    Tlist
-* S-F4  Reg. tags in current dir
-* C-F4  Reg. gem tags in current dir proj
-* F5    List hidden chars
-* S-F5  Number list
-* C-F5  Set cursorline cursorcolumn
-* T-F5  Disable parenthesis hilite
-* F6    Set hlsearch
-* C-F6  File Enc utf-8
-* S-F6  File Enc iso8859-15
-* F7    Set spell
-* S-F7  Spelllang es
-* C-F7  Spelllang en
-* F8    VCSStatus
-* T-F8  VCSCommit
-* S-F8  VCSUpdate
-* F9    Set Paste
-* F10   LoadSession
+* <ldr>dbl  Del blank lines
+* <ldr>rci  Indent w ruby-code
+* <ldr>ml   Add modeline
 
-# <leader> shorts (space)
+# Select
 
-* gg    Select all
-* dbl   Del blank lines
-* rci   Indent w ruby-code
-* ml    Add modeline
-* be/bs/bv    Buffer Explorer
-* r     Interactive replace (after search)
+* <ldr>gg  Select all
+* vi)      select inside ()
 
-# Navigation
+## TextObjs 
 
-* %           Go to pair
-* gg/G        File Start/End
-* w/b         Next/Prev word
-* C-w + gf    Go to file
+* var  Select ruby block
+* vir  Select inner ruby block
+* cir  Change insie ruby block
+
+* cit     Change inside tag
+* yit/dit yank/deletes inside tag
+
+# Toggles
+
+* <ldr>n  Line number
+* <ldr>nn Relative Line number
+
+# Movement/Navigation
+
+* %         Go to pair
+* gg/G      File Start/End
+* gv        Last yanked
+* gb        Last pasted
+* w/b       Next/Prev word
+* C-w + gf  Go to file
+
 * S + <-/->   Mv buffers
 * C + <-/->   Mv tabs
 * C + <hjkl>  Move
-* A + <-/->   Prev/Next tag
-* C + ]       Find Tag
-* C + r       Back from tag
-* C + W}      Preview tag
-* C + Enter   Tag in new tab
- * C+w c      close and back
-* vi)  select inside ()
-* - move to window
-* m move to expression
+* -           Move to window (choosewin)
 
-* ]s    Proxima palabra mal escrita
-* [s    Palabra anterior mal escrita
-* z=    Lista de correciones
+* C + ]      Find Tag
+* C + r      Back from tag
+* C + W}     Preview tag
+* C + Enter  Tag in new tab
+ * C + w c   close and back
 
-* var   Select ruby block
-* vir   Select inner ruby block
-* cir Change insie ruby block
+* ]s  Proxima palabra mal escrita
+* [s  Palabra anterior mal escrita
+* z=  Lista de correciones
 
-* cit Change insie tag
-* yit/dit yank/deletes
+# Copy/Paste
 
-* gv  Last yanked
-* gb  Last pasted
 * C-r0  Copy insert mode
 * C-rC-p0  Copy insert mode autoident
 
-# Surronding
+## Marks
+a-z for local, A-Z global
+
+* mx  Toggle mark x
+* dmx Remove mark
+
+(Signature plugin)
+
+* m,      Place next mark
+* m.      Toggle next mark
+* ]`      Next mark
+* [`      Prev mark
+* m/      Display marks
+* m[0-9]  Toggle marker
+* m?      Display markers
+* ]-      Next marker (same type)
+* [-      Prev marker
+
+# Plugins
+## Surronding
 
 * yss" -> "h w" -> cs"' -> 'h w' -> cs"<q> -> <q>h w</q>
 * ds" (quitar delimitadores)
@@ -79,7 +80,21 @@
 * ysiw<b> -> <b>h</b>
 * M-v S<p class=x>
 
-# Fugitive
+## Terminal
+
+* <ldr>tf  Send file content to REPL
+* <ldr>t   Send line or visual selection
+
+* ¬        Toggle terminal
+* <ldr>th  Hide terminal
+* <ldr>tl  Clean terminal
+* <ldr>tc  Close terminal
+
+* :Trc  Rails console
+* :Trn  Rails notes
+
+## Fugitive
+
 * :Gdiff
 ** |  2  |  1  |  3  |
 *** head, result, merge
@@ -90,13 +105,13 @@
 
 * Extradite!
 
-# GitShade
+## GitShade
 To on/off highlite of newest lines
 (brighter color)
 
 * GitShade
 
-# Align
+## Align
 In visual mode:
 
 * Enter|  Align on 1st |
@@ -106,7 +121,7 @@ In visual mode:
 * ss  split a block/hash
 * sj  join a block/hash
 
-# Rails.vim
+## Rails.vim
 * Emodel  Edit model
   * S/V/T  horizontal/vertical/tab
 * Econtroller foo!  create the file
@@ -133,11 +148,11 @@ In visual mode:
 
 * <ldr>b   change block style
 
-# MultiCursor
+## MultiCursor
 * visual: C-n c/s
 * normall: C-n a/i/A/I
 
-# Commenter
+## Commenter
 
 * gc{motion}
 * gcc         current line

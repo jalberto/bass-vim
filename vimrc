@@ -30,14 +30,12 @@ Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'tacahiroy/ctrlp-funky'
-" Plug 'tracyone/ctrlp-leader-guide'
-" Plug 'rking/ag.vim'
 Plug 'wincent/ferret'
-Plug 't9md/vim-choosewin'
 " overlay windows with - (dash)
+Plug 't9md/vim-choosewin'
+" ctrl+n for multi cursor
 Plug 'terryma/vim-multiple-cursors'
+" <ldr><CR> for auto align
 Plug 'junegunn/vim-easy-align'
 " save session :Obsess / Obsess!
 Plug 'tpope/vim-obsession'
@@ -65,9 +63,9 @@ Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
 " abrevations on steroids
 " Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
-" add mor selectors to %
+" add more selectors to %
 Plug 'vim-scripts/matchit.zip'
-" autoclsoe (,{,...
+" autoclose (,{,...
 Plug 'Raimondi/delimitMate'
 Plug 'ervandew/supertab'
 Plug 'Quramy/vison'
@@ -81,7 +79,6 @@ Plug 'jayflo/vim-skip'
 " Plug 't9md/vim-smalls'
 Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user'
-Plug 'easymotion/vim-easymotion'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'mustache/vim-mustache-handlebars'
@@ -96,12 +93,15 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/vim-cursorword'
 " auto generate tags async
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'rhysd/clever-f.vim'
+Plug 'kshenoy/vim-signature'
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " highlight newst git change
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+" git config --global core.editor "$(which nvim)"
 Plug 'rhysd/committia.vim'
 
 Plug 'tpope/vim-rbenv'
@@ -127,7 +127,7 @@ Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
 Plug 'danchoi/ri.vim', {'for': 'ruby'}
 Plug 'janko-m/vim-test'
 
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
@@ -422,13 +422,6 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " }}}
 
 " AutoCmd & other auto stuff {{{
-" If we're in a wide window, enable line numbers.
-if winwidth(0) > 80
-  set number
-else
-  set nonumber
-endif
-" setlocal number
 
 " Auto add shebang
 if has("autocmd")
@@ -445,7 +438,7 @@ if has("autocmd")
   augroup END
 endif
 
-" Autoload vimrc
+" Auto reload vimrc
 au BufWritePost .vimrc so $MYVIMRC
 
 " Python folder
@@ -520,19 +513,14 @@ map <T-F8> :VCSCommit<CR>
 map <S-F8> :VCSUpdate<CR>
 
 set pastetoggle=<F9>
-
-" vinfruby
-nmap     <F12> <Plug>Ropenterm
-nmap   <S-F12> <Plug>Revalfile
-nmap   <C-F12> <Plug>Revaldef
-vmap   <T-F12> <Plug>Revalvisual
-"nmap   <C-F12>   <Plug>Revalline
-"nmap   <Leader>rc   <Plug>Revalclass
 " }}}
 
 " Leader {{{
 map <leader>x :NERDTreeTabsToggle<CR>
 map <leader>h :40vsplit ~/.vim/tips.md<CR>
+
+map <leader>n :set number!<CR>
+map <leader>nn :set relativenumber!<CR>
 
 " json beautifier
 nnoremap <Leader>j :%!jq '.'<CR>
@@ -544,9 +532,6 @@ iabbr bpry require'pry';binding.pry
 " add pry
 map <Leader>bp orequire'pry';binding.pry<esc>:w<cr>
 
-" change color
-nmap <Leader>rg :color relaxedgreen<CR>
-nmap <Leader>ip :color inkpot<CR>
 " Select everything
 nmap <Leader>gg ggVG
 " Delete blank lines
@@ -660,6 +645,10 @@ au BufEnter *.rb syn match error contained "\<debugger\>"
 
 " Plugins {{{
 
+" clever-f {{{
+let g:clever_f_smart_case = 1
+" }}]
+
 " Guten tag {{{
 let g:gutentags_ctags_exclude = ["node_modules", "assets", "_build", "build", "vendor", "private", "priv"]
 let g:gutentags_cache_dir = "/tmp"
@@ -734,7 +723,6 @@ if has('nvim')
 
   let g:neoterm_autoscroll = '1'
   let g:neoterm_size = 10
-  let g:neoterm_position = 'horizontal'
   nnoremap <leader>tf :TREPLSendFile<cr>
   nnoremap <leader>t :TREPLSendLine<cr>
   vnoremap <leader>t :TREPLSendSelection<cr>
@@ -745,8 +733,6 @@ if has('nvim')
 
   command! Trc :T bin/rails c
   command! Trn :T bin/rails notes
-  " command! -nargs=+ TT Topen | T
-  " command! TT Topen | T
   nnoremap <silent> ¬ :Ttoggle<cr>
 else
   let g:slime_target = "tmux"
@@ -878,15 +864,15 @@ nmap  -  <Plug>(choosewin)
 " nmap sj :SplitjoinJoin<cr>
 " }}}
 " CtrlP {{{
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|docker\|data\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
-  \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
-  \ }
-let g:ctrlp_use_caching = 0
-nnoremap <Leader>f :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>F :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|docker\|data\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
+"   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
+"   \ }
+" let g:ctrlp_use_caching = 0
+" nnoremap <Leader>f :CtrlPFunky<Cr>
+" " narrow the list down with a word under cursor
+" nnoremap <Leader>F :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " }}}
 " SmartGF {{{
 let g:smartgf_key = 'gm'
