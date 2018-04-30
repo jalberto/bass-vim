@@ -107,7 +107,9 @@ Plug 'rhysd/committia.vim'
 Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-haml'
-Plug 'avakhov/vim-yaml'
+" Plug 'avakhov/vim-yaml'
+Plug 'towolf/vim-helm'
+Plug 'christianrondeau/vim-base64'
 " spli/join blocks with gS gJ
 Plug 'AndrewRadev/splitjoin.vim'
 " Ruby objs select: ar/ir
@@ -146,6 +148,7 @@ Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
 " Plug 'l04m33/vim-skuld'
 
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'fenetikm/falcon'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
@@ -166,7 +169,7 @@ runtime macros/matchit.vim
 set backupdir=/tmp//
 set directory=/tmp//
 
-" TRy to autoreload files on external changes
+" Try to autoreload files on external changes
 autocmd FocusGained * silent! checktime
 
 " Show pairs
@@ -189,12 +192,48 @@ set shortmess=aoOtI
 " set cmdheight=2
 let g:bufferline_echo=0
 
-" Enable folds
+" {{{ Folding & syntax
 if has("folding")
   set foldenable
   set foldmethod=syntax
   set foldlevelstart=2   " open most folds by default
 endif
+
+" Sgml,htmls,xml y xsl folder
+au Filetype html,xml,xsl,sgml,docbook
+
+" Yaml and company
+autocmd FileType yaml setlocal foldmethod=indent
+autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl set ft=helm
+autocmd FileType helm setlocal foldmethod=indent
+
+" JavaScript fold
+autocmd FileType javascript setlocal foldmethod=syntax
+autocmd FileType javascript setlocal foldlevelstart=1
+autocmd FileType javascript syntax region foldBraces
+" Apply schema to json
+autocmd BufRead,BufNewFile swagger.json Vison
+" Treat JSON files like JavaScript
+au BufNewFile,BufRead *.json setf javascript
+" Coffeescript folder
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+" Some file types use real tabs
+au FileType {make,gitconfig} set noexpandtab sw=4
+
+" Make Python follow PEP8
+au FileType python set foldmethod=indent
+au FileType python set sts=4 ts=4 sw=4 tw=79
+
+" Make sure all markdown files have the correct filetype
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
+" MultiMarkdown requires 4-space tabs
+au FileType markdown set sts=4 ts=4 sw=4
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql']
+
+autocmd Filetype gitcommit setlocal spell textwidth=72
+" "}}}
 
 " if buffer is in tab use that tab
 set switchbuf=usetab,newtab
@@ -213,11 +252,6 @@ augroup sourcesession
 augroup END
 " }}}
 
-" ToolBar {{{
-" tmenu ToolBar.reducefont Reduce font size
-" amenu ToolBar.reducefont :set guifont=Source\ Code\ Pro\ Medium\ 11<CR>
-"}}}
-
 " Misc {{{
 " let loaded_minibufexplorer = 0 "dont load miniBufferExplorer
 set lazyredraw     " Speed up macros
@@ -227,11 +261,10 @@ set popt+=syntax:y " Syntax when printing
 set linespace=0                 " number of pixels between the lines
 set splitright                  " open vertical splits on the right
 set splitbelow                  " open the horizontal split below
-" set wrap                        " wrap long lines
+" set wrap                      " wrap long lines
 set linebreak                   " break lines at word end
 
-" Try to show at least three lines and two columns of context when
-" scrolling
+" Try to show at least three lines and two columns of context when scrolling
 set scrolloff=3
 set sidescrolloff=2
 " Improve vim's scrolling speed
@@ -297,32 +330,44 @@ set encoding=utf-8
 
 set background=dark
 
+" Terminal true colour support
+if has("nvim") || has("termguicolors")
+  set termguicolors
+endif
+
 if has("gui_running")
-  " let g:enable_bold_font = 1
-  " set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
-  " set guifont=Hack\ 12
+  let g:enable_bold_font = 1
   set guifont=Hack\ 12
-  " colorscheme molokai
-  " colorscheme apprentice
-  colorscheme hybrid_reverse
+  colorscheme falcon
 else
-  colorscheme hybrid_reverse
-  " colorscheme base16-default
+  colorscheme falcon
 endif
 
-" OSX stuff
-if has("unix")
-  let s:uname = system("uname")
-  if s:uname == "Darwin\n"
-    set guifont=Source\ Code\ Pro:h14
-  endif
-endif
+"{{{ OSX stuff
+" if has("unix")
+"   let s:uname = system("uname")
+"   if s:uname == "Darwin\n"
+"     set guifont=Source\ Code\ Pro:h14
+"   endif
+" endif
+" }}}
 
-" Highlight current line and col
-autocmd WinLeave * setlocal nocursorcolumn nocursorline
-autocmd WinEnter * setlocal cursorline cursorcolumn
-autocmd BufLeave * setlocal nocursorcolumn nocursorline
-autocmd BufEnter * setlocal cursorline cursorcolumn
+" {{{ Highlight current line and col
+hi CursorLine cterm=NONE gui=NONE guibg=black ctermbg=232
+hi CursorLineNr cterm=NONE gui=NONE guifg=orange guibg=black ctermbg=black
+hi CursorColumn cterm=NONE gui=NONE guibg=black ctermbg=232
+" autocmd WinLeave * setlocal nocursorcolumn nocursorline
+" autocmd WinEnter * setlocal cursorline
+" autocmd BufLeave * setlocal nocursorcolumn nocursorline
+" autocmd BufEnter * setlocal cursorline
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
+  au InsertEnter * setlocal cursorline nocursorcolumn
+  au InsertLeave * setlocal cursorline cursorcolumn
+  au WinLeave,BufLeave * setlocal nocursorline nocursorcolumn
+augroup END
+" }}]
 
 " Special chars {{{
 " highlight Problematic whitespaces
@@ -441,39 +486,6 @@ endif
 " Auto reload vimrc
 au BufWritePost .vimrc so $MYVIMRC
 
-" Python folder
-au FileType python set foldmethod=indent
-" Sgml,htmls,xml y xsl folder
-au Filetype html,xml,xsl,sgml,docbook
-" JavaScript fold
-" au FileType javascript call JavaScriptFold()
-autocmd FileType javascript setlocal foldmethod=syntax
-autocmd FileType javascript setlocal foldlevelstart=1
-autocmd FileType javascript syntax region foldBraces
-" Coffeescript folder
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-
-autocmd Filetype gitcommit setlocal spell textwidth=72
-
-" Some file types use real tabs
-au FileType {make,gitconfig} set noexpandtab sw=4
-
-" Apply schema to json
-autocmd BufRead,BufNewFile swagger.json Vison
-" Treat JSON files like JavaScript
-au BufNewFile,BufRead *.json setf javascript
-
-" Make Python follow PEP8
-au FileType python set sts=4 ts=4 sw=4 tw=79
-
-" Make sure all markdown files have the correct filetype
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
-
-" MultiMarkdown requires 4-space tabs
-au FileType markdown set sts=4 ts=4 sw=4
-let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql']
-
 " }}}
 
 " Keyboard shortcuts{{{
@@ -497,7 +509,6 @@ nmap <C-F4> :!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle 
 
 map   <F5> :set list!<CR>
 map <S-F5> :set nu!<CR>
-map <C-F5> :set cursorline! cursorcolumn!<CR>
 map <T-F5> :NoMatchParen<CR>    " disable parenthesis hilite
 
 map <silent> <F6> :set hlsearch!<CR>
@@ -522,11 +533,14 @@ map <leader>h :40vsplit ~/.vim/tips.md<CR>
 map <leader>n :set number!<CR>
 map <leader>nn :set relativenumber!<CR>
 
+map <Leader>c :set cursorline!<CR>
+map <Leader>cc :set cursorline! cursorcolumn!<CR>
+
 " json beautifier
 nnoremap <Leader>j :%!jq '.'<CR>
 
 " quickfix list for breakpoints
-nmap <Leader>i :Ack binding.pry<CR>
+nmap <Leader>bl :Ack binding.pry<CR>
 " …also, Insert Mode as bpry<space>
 iabbr bpry require'pry';binding.pry
 " add pry
@@ -556,10 +570,10 @@ nmap <Leader>ct :TagbarToggle<cr>
 " }}}
 
 " move in buffers and tabs
-nmap <S-LEFT>  :bN<cr>
-nmap <S-RIGHT> :bn<cr>
-imap <S-LEFT>  <esc>:bN<cr>
-imap <S-RIGHT> <esc>:bn<cr>
+" nmap <S-LEFT>  :bN<cr>
+" nmap <S-RIGHT> :bn<cr>
+" imap <S-LEFT>  <esc>:bN<cr>
+" imap <S-RIGHT> <esc>:bn<cr>
 nmap <C-RIGHT> :tabnext<cr>
 nmap <C-LEFT>  :tabprevious<cr>
 " imap <C-RIGHT> <esc>:tabnext<cr>
@@ -572,6 +586,8 @@ nnoremap <a-h> <C-w>h
 nnoremap <a-j> <C-w>j
 nnoremap <a-k> <C-w>k
 nnoremap <a-l> <C-w>l
+nmap <silent> <S-h> :bN<cr>
+nmap <silent> <S-l> :bn<cr>
 
 " Avoid mistakes
 nmap  :X        :x
@@ -643,7 +659,17 @@ au BufEnter *.rb syn match error contained "\<binding.pry\>"
 au BufEnter *.rb syn match error contained "\<debugger\>"
 " }}}
 
+" {{{ Docker stuff
+autocmd BufNewFile,BufRead Dockerfile.* set ft=dockerfile
+autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
+" }}}
+
 " Plugins {{{
+
+" base64 {{{
+vmap <Leader>e64 <leader>btoa
+vmap <Leader>d64 <leader>atob
+" }}}
 
 " clever-f {{{
 let g:clever_f_smart_case = 1
@@ -690,12 +716,12 @@ let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
 " }}}
 
-" VisualDrag {{{
-vmap  <expr>  <C-S-LEFT>   DVB_Drag('left')
-vmap  <expr>  <C-S-RIGHT>  DVB_Drag('right')
-vmap  <expr>  <C-S-DOWN>   DVB_Drag('down')
-vmap  <expr>  <C-S-UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
+" Visual Drag (move selected chunk) {{{
+vmap  <expr>  <LEFT> DVB_Drag('left')
+vmap  <expr>  <RIGHT> DVB_Drag('right')
+vmap  <expr>  <DOWN> DVB_Drag('down')
+vmap  <expr>  <UP> DVB_Drag('up')
+vmap  <expr>  D       DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 " }}}

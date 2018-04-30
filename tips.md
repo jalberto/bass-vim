@@ -22,6 +22,8 @@
 
 * <ldr>n  Line number
 * <ldr>nn Relative Line number
+* <ldr>c  Cursor lines
+* <ldr>ct Tag sidebar
 
 # Movement/Navigation
 
@@ -32,9 +34,9 @@
 * w/b       Next/Prev word
 * C-w + gf  Go to file
 
-* S + <-/->   Mv buffers
-* C + <-/->   Mv tabs
-* C + <hjkl>  Move
+* S + h/l     Mv Buffers
+* C + h/l     Mv Tabs
+* A + <hjkl>  Move Panel
 * -           Move to window (choosewin)
 
 * C + ]      Find Tag
@@ -71,6 +73,9 @@ a-z for local, A-Z global
 * [-      Prev marker
 
 # Plugins
+## Visual Drag
+Use visual selection and then cursors
+
 ## Surronding
 
 * yss" -> "h w" -> cs"' -> 'h w' -> cs"<q> -> <q>h w</q>
