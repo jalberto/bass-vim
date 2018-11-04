@@ -4,6 +4,11 @@
 set nocompatible
 filetype on
 
+if has('nvim')
+  set runtimepath^=~/.vim runtimepath+=~/.vim/after
+  let &packpath = &runtimepath
+endif
+
 " Vundle {{{
 " Helper to add conditionals for nvim
 function! Cond(cond, ...)
@@ -16,8 +21,11 @@ Plug 'clones/vim-genutils'
 Plug 'eparreno/vim-l9'
 Plug 'xolox/vim-misc'
 Plug 'sheerun/vim-polyglot'
+Plug 'dNitro/vim-pug-complete', {'for': 'pug'}
 " Add repeat support to other plugins
 Plug 'tpope/vim-repeat'
+" Try to detect correct identation
+Plug 'tpope/vim-sleuth'
 
 " Plug 'romainl/Apprentice'
 " Plug 'molokai'
@@ -97,12 +105,13 @@ Plug 'rhysd/clever-f.vim'
 Plug 'kshenoy/vim-signature'
 
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 " highlight newst git change
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 " git config --global core.editor "$(which nvim)"
 Plug 'rhysd/committia.vim'
+Plug 'whiteinge/diffconflicts'
 
 Plug 'tpope/vim-rbenv'
 Plug 'vim-ruby/vim-ruby'
@@ -134,13 +143,12 @@ Plug 'janko-m/vim-test'
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 Plug 'tpope/vim-projectionist' " required for some navigation features
-Plug 'slime-lang/vim-slime-syntax', {'for': 'slime'}
 
 Plug 'Valloric/YouCompleteMe'
 
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
@@ -210,7 +218,7 @@ autocmd FileType helm setlocal foldmethod=indent
 " JavaScript fold
 autocmd FileType javascript setlocal foldmethod=syntax
 autocmd FileType javascript setlocal foldlevelstart=1
-autocmd FileType javascript syntax region foldBraces
+" autocmd FileType javascript syntax region foldBraces
 " Apply schema to json
 autocmd BufRead,BufNewFile swagger.json Vison
 " Treat JSON files like JavaScript
@@ -328,20 +336,32 @@ scriptencoding utf-8
 set encoding=utf-8
 " }}}
 
-set background=dark
-
 " Terminal true colour support
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+" if exists('$TMUX')
+"   let &t_8f = "<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
+" endif
 if has("nvim") || has("termguicolors")
+  " clean BCE in tmux for propper colours
+  " set t_ut=
   set termguicolors
 endif
 
+set background=dark
+let g:enable_bold_font = 1
+let g:falcon_background = 1
+let g:falcon_inactive = 0
 if has("gui_running")
-  let g:enable_bold_font = 1
   set guifont=Hack\ 12
   colorscheme falcon
 else
   colorscheme falcon
 endif
+" fix falcon bg colour
+" hi Normal guifg=#d4d4d9 ctermfg=188 guibg=#0b0b1a ctermbg=NONE gui=NONE cterm=NONE
 
 "{{{ OSX stuff
 " if has("unix")
@@ -495,7 +515,6 @@ map <silent> <C-F1> :vsplit ~/.vim/abbr<CR>
 
 map <silent>  <F2> :NERDTreeTabsToggle<CR>
 " map         <S-F2> :NeoCompleteToggle<CR>
-map         <C-F2> :GitGutterToggle<CR>
 
 " let g:ctrlp_map = '<F3>'
 " let g:ctrlp_cmd = 'CtrlP'
@@ -533,7 +552,7 @@ map <leader>h :40vsplit ~/.vim/tips.md<CR>
 map <leader>n :set number!<CR>
 map <leader>nn :set relativenumber!<CR>
 
-map <Leader>c :set cursorline!<CR>
+map <Leader>cl :set cursorline!<CR>
 map <Leader>cc :set cursorline! cursorcolumn!<CR>
 
 " json beautifier
@@ -550,6 +569,8 @@ map <Leader>bp orequire'pry';binding.pry<esc>:w<cr>
 nmap <Leader>gg ggVG
 " Delete blank lines
 nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
+" Delete trailing spaces
+nmap <Leader>dts :%s/\s\+$//e<CR>
 " Align
 vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
 " Save file
@@ -688,7 +709,7 @@ let g:gutentags_cache_dir = "/tmp"
 "
 " command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
-nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>o :GFiles<CR>
 " }}}
 
 " vimwiki {{{
@@ -714,6 +735,12 @@ let g:ale_lint_on_enter = 0
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_fixers = {
+\   'elixir': ['mix_format'],
+\}
+let g:ale_fix_on_save = 1
 " }}}
 
 " Visual Drag (move selected chunk) {{{
@@ -749,6 +776,9 @@ if has('nvim')
 
   let g:neoterm_autoscroll = '1'
   let g:neoterm_size = 10
+  let g:neoterm_autoinsert = 1
+  let g:neoterm_default_mod = 'belowright'
+
   nnoremap <leader>tf :TREPLSendFile<cr>
   nnoremap <leader>t :TREPLSendLine<cr>
   vnoremap <leader>t :TREPLSendSelection<cr>
