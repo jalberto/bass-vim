@@ -22,6 +22,10 @@ Plug 'eparreno/vim-l9'
 Plug 'xolox/vim-misc'
 Plug 'sheerun/vim-polyglot'
 Plug 'dNitro/vim-pug-complete', {'for': 'pug'}
+Plug 'Valloric/YouCompleteMe'
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+
 " Add repeat support to other plugins
 Plug 'tpope/vim-repeat'
 " Try to detect correct identation
@@ -143,8 +147,6 @@ Plug 'janko-m/vim-test'
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 Plug 'tpope/vim-projectionist' " required for some navigation features
-
-Plug 'Valloric/YouCompleteMe'
 
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
@@ -273,8 +275,8 @@ set splitbelow                  " open the horizontal split below
 set linebreak                   " break lines at word end
 
 " Try to show at least three lines and two columns of context when scrolling
-set scrolloff=3
-set sidescrolloff=2
+set scrolloff=5
+set sidescrolloff=3
 " Improve vim's scrolling speed
 set ttyfast
 if !has('nvim')
@@ -292,24 +294,24 @@ set noerrorbells         " don't beep
 " }}}
 
 " MoveTabs {{{
-function TabLeft()
-   let tab_number = tabpagenr() - 1
-   if tab_number == 0
-      execute "tabm" tabpagenr('$') - 1
-   else
-      execute "tabm" tab_number - 1
-   endif
-endfunction
-
-function TabRight()
-   let tab_number = tabpagenr() - 1
-   let last_tab_number = tabpagenr('$') - 1
-   if tab_number == last_tab_number
-      execute "tabm" 0
-   else
-      execute "tabm" tab_number + 1
-   endif
-endfunction
+" function TabLeft()
+"    let tab_number = tabpagenr() - 1
+"    if tab_number == 0
+"       execute "tabm" tabpagenr('$') - 1
+"    else
+"       execute "tabm" tab_number - 1
+"    endif
+" endfunction
+"
+" function TabRight()
+"    let tab_number = tabpagenr() - 1
+"    let last_tab_number = tabpagenr('$') - 1
+"    if tab_number == last_tab_number
+"       execute "tabm" 0
+"    else
+"       execute "tabm" tab_number + 1
+"    endif
+" endfunction
 
 map <silent><C-S-Right> :execute TabRight()<CR>
 map <silent><C-S-Left> :execute TabLeft()<CR>
@@ -504,7 +506,7 @@ if has("autocmd")
 endif
 
 " Auto reload vimrc
-au BufWritePost .vimrc so $MYVIMRC
+" au BufWritePost .vimrc so $MYVIMRC
 
 " }}}
 
@@ -702,14 +704,30 @@ let g:gutentags_cache_dir = "/tmp"
 " }}}
 
 " fzf {{{
-" let g:rg_command = '
-"   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-"   \ -g "*.{js,json,md,html,hs,rb,conf,ex}"
-"   \ -g "!{.git,node_modules,vendor}/*" '
-"
-" command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
-nnoremap <Leader>o :GFiles<CR>
+function! s:getVisualSelection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+
+    if len(lines) == 0
+        return ""
+    endif
+
+    let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+
+    return join(lines, "\n")
+endfunction
+
+set grepprg=rg\ --vimgrep
+let g:fzf_buffers_jump = 1
+
+nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>O :History<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <silent><leader>W :Rg <C-R><C-W><CR>
+vnoremap <silent><leader>W <Esc>:Rg <C-R>=<SID>getVisualSelection()<CR><CR>
 " }}}
 
 " vimwiki {{{
@@ -759,6 +777,12 @@ nmap <silent> <leader>Tf :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+" }}}
+
+" NerdTree {{{
+let g:NERDTreeAutoDeleteBuffer = 1
+" let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeCascadeOpenSingleChildDir = 1
 " }}}
 
 " WebDevIcons {{{
