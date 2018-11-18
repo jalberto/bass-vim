@@ -704,30 +704,51 @@ let g:gutentags_cache_dir = "/tmp"
 " }}}
 
 " fzf {{{
+" ripgrep
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --smart-case --glob "!**/{.git,node_modules,vendor,priv,deps,_build}/*"'
+  set grepprg=rg\ --vimgrep
+
+  " command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build}/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+"   :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Rg! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build}/*" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+endif
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 function! s:getVisualSelection()
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
+  let [line_start, column_start] = getpos("'<")[1:2]
+  let [line_end, column_end] = getpos("'>")[1:2]
+  let lines = getline(line_start, line_end)
 
-    if len(lines) == 0
-        return ""
-    endif
+  if len(lines) == 0
+      return ""
+  endif
 
-    let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
+  let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
+  let lines[0] = lines[0][column_start - 1:]
 
-    return join(lines, "\n")
+  return join(lines, "\n")
 endfunction
 
-set grepprg=rg\ --vimgrep
 let g:fzf_buffers_jump = 1
 
+" nnoremap <silent> <leader>e :call Fzf_dev()<CR>
 nnoremap <Leader>o :Files<CR>
 nnoremap <Leader>O :History<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <silent><leader>W :Rg <C-R><C-W><CR>
-vnoremap <silent><leader>W <Esc>:Rg <C-R>=<SID>getVisualSelection()<CR><CR>
+nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
+vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
 " }}}
 
 " vimwiki {{{
