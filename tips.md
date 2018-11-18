@@ -98,6 +98,12 @@ Use visual selection and then cursors
 * :Trc  Rails console
 * :Trn  Rails notes
 
+## FZF
+
+* History
+* BCommits
+* Marks
+
 ## Fugitive
 
 * :Gdiff

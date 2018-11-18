@@ -313,8 +313,8 @@ set noerrorbells         " don't beep
 "    endif
 " endfunction
 
-map <silent><C-S-Right> :execute TabRight()<CR>
-map <silent><C-S-Left> :execute TabLeft()<CR>
+" map <silent><C-S-Right> :execute TabRight()<CR>
+" map <silent><C-S-Left> :execute TabLeft()<CR>
 " }}}
 
 " spaces, tabs, indent {{{
@@ -943,12 +943,17 @@ let coffee_compile_vert = 1
 " }}}
 " airline {{{
 set laststatus=2
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#extensions#tabline#show_close_button = 0
 let g:airline_theme = 'distinguished'
 " let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 set showtabline=0 " remove tab bar
 " shows obsession status
 " let g:airline_section_b = airline#section#create(['%{ALEGetStatusLine()}', '%{ObsessionStatus(''$'','''')}', 'hunks', 'branch'])
