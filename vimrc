@@ -699,7 +699,7 @@ let g:clever_f_smart_case = 1
 " }}]
 
 " Guten tag {{{
-let g:gutentags_ctags_exclude = ["node_modules", "assets", "_build", "build", "vendor", "private", "priv"]
+let g:gutentags_ctags_exclude = ["node_modules", "assets", "_build", "build", "vendor", "private", "priv", "logs", ".git"]
 let g:gutentags_cache_dir = "/tmp"
 " }}}
 
@@ -872,6 +872,23 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records',
+        \ 't:tests'
+    \ ]
+\ }
 " }}}
 " explorer.vim {{{
 let g:explHideFiles='^\.'
@@ -971,17 +988,6 @@ nmap  -  <Plug>(choosewin)
 " SplitJoin {{{
 " nmap ss :SplitjoinSplit<cr>
 " nmap sj :SplitjoinJoin<cr>
-" }}}
-" CtrlP {{{
-" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|docker\|data\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
-"   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
-"   \ }
-" let g:ctrlp_use_caching = 0
-" nnoremap <Leader>f :CtrlPFunky<Cr>
-" " narrow the list down with a word under cursor
-" nnoremap <Leader>F :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " }}}
 " SmartGF {{{
 let g:smartgf_key = 'gm'
