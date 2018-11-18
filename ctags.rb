@@ -1,3 +1,0 @@
--languages=ruby
---exclude=.git
---exclude=log
