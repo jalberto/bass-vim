@@ -64,7 +64,7 @@ Plug 'bogado/file-line'
 Plug 'nelstrom/vim-visual-star-search'
 " Display leadk mapping with <lead>fml
 Plug 'ktonga/vim-follow-my-lead'
-" Display undto tree with <leader>u
+" Display undo tree with <leader>u
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-markdown'
 
@@ -94,8 +94,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'mustache/vim-mustache-handlebars'
-" search in zeal <leader>z
-Plug 'KabbAmine/zeavim.vim'
 " Send to terminal
 Plug 'jpalardy/vim-slime', Cond(!has('nvim'))
 Plug 'kassio/neoterm', Cond(has('nvim'))
@@ -230,7 +228,7 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 " Some file types use real tabs
-au FileType {make,gitconfig} set noexpandtab sw=4
+" au FileType {make,gitconfig} set noexpandtab sw=4
 
 " Make Python follow PEP8
 au FileType python set foldmethod=indent
@@ -240,7 +238,7 @@ au FileType python set sts=4 ts=4 sw=4 tw=79
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
 " MultiMarkdown requires 4-space tabs
 au FileType markdown set sts=4 ts=4 sw=4
-let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql']
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql', 'elixir']
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 " "}}}
@@ -275,7 +273,7 @@ set splitbelow                  " open the horizontal split below
 set linebreak                   " break lines at word end
 
 " Try to show at least three lines and two columns of context when scrolling
-set scrolloff=5
+set scrolloff=99
 set sidescrolloff=3
 " Improve vim's scrolling speed
 set ttyfast
@@ -375,20 +373,16 @@ endif
 " }}}
 
 " {{{ Highlight current line and col
-hi CursorLine cterm=NONE gui=NONE guibg=black ctermbg=232
-hi CursorLineNr cterm=NONE gui=NONE guifg=orange guibg=black ctermbg=black
-hi CursorColumn cterm=NONE gui=NONE guibg=black ctermbg=232
-" autocmd WinLeave * setlocal nocursorcolumn nocursorline
-" autocmd WinEnter * setlocal cursorline
-" autocmd BufLeave * setlocal nocursorcolumn nocursorline
-" autocmd BufEnter * setlocal cursorline
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
-  au InsertEnter * setlocal cursorline nocursorcolumn
-  au InsertLeave * setlocal cursorline cursorcolumn
-  au WinLeave,BufLeave * setlocal nocursorline nocursorcolumn
-augroup END
+" hi CursorLine cterm=NONE gui=NONE guibg=black ctermbg=232
+" hi CursorLineNr cterm=NONE gui=NONE guifg=orange guibg=black ctermbg=black
+" hi CursorColumn cterm=NONE gui=NONE guibg=black ctermbg=232
+" augroup CursorLine
+"   au!
+"   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
+"   au InsertEnter * setlocal cursorline nocursorcolumn
+"   au InsertLeave * setlocal cursorline cursorcolumn
+"   au WinLeave,BufLeave * setlocal nocursorline nocursorcolumn
+" augroup END
 " }}]
 
 " Special chars {{{
@@ -551,17 +545,16 @@ set pastetoggle=<F9>
 map <leader>x :NERDTreeTabsToggle<CR>
 map <leader>h :40vsplit ~/.vim/tips.md<CR>
 
-map <leader>n :set number!<CR>
-map <leader>nn :set relativenumber!<CR>
+map <silent> <leader>n :set number! relativenumber!<CR>
 
 map <Leader>cl :set cursorline!<CR>
-map <Leader>cc :set cursorline! cursorcolumn!<CR>
+map <Leader>cc :set cursorcolumn!<CR>
 
 " json beautifier
 nnoremap <Leader>j :%!jq '.'<CR>
 
 " quickfix list for breakpoints
-nmap <Leader>bl :Ack binding.pry<CR>
+nmap <Leader>bl :Rg binding.pry<CR>
 " …also, Insert Mode as bpry<space>
 iabbr bpry require'pry';binding.pry
 " add pry
@@ -632,7 +625,7 @@ map  <C-t> :tabnew<cr> i
 " map  <T-l>      <C-w>l
 nmap <tab><tab> <C-w>w
 
-nmap <C-Enter> <C-w><C-]><C-w>T
+" nmap <C-Enter> <C-w><C-]><C-w>T
 
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
@@ -687,6 +680,14 @@ autocmd BufNewFile,BufRead Dockerfile.* set ft=dockerfile
 autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
 " }}}
 
+" {{{ Linenumbering stuff
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+augroup END
+" }}}
+
 " Plugins {{{
 
 " base64 {{{
@@ -708,8 +709,6 @@ let g:gutentags_cache_dir = "/tmp"
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --smart-case --glob "!**/{.git,node_modules,vendor,priv,deps,_build}/*"'
   set grepprg=rg\ --vimgrep
-
-  " command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build}/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 "   :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
 "   :Rg! - Start fzf in fullscreen and display the preview window above
@@ -746,10 +745,15 @@ endfunction
 
 let g:fzf_buffers_jump = 1
 
-" nnoremap <silent> <leader>e :call Fzf_dev()<CR>
-nnoremap <Leader>o :Files<CR>
-nnoremap <Leader>O :History<CR>
-nnoremap <Leader>b :Buffers<CR>
+nnoremap <silent><Leader>f :Files<CR>
+nnoremap <silent><Leader>o :Files<CR>
+nnoremap <silent><Leader>l :BLines<CR>
+nnoremap <silent><Leader>t :BTags<CR>
+nnoremap <silent><Leader>T :Tags<CR>
+nnoremap <silent><Leader>? :History<CR>
+nnoremap <silent><Leader><space> :Buffers<CR>
+nnoremap <silent><Leader>A :Windows<CR>
+nnoremap <silent><Leader>s :Rg<CR>
 nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
 vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
 " }}}
