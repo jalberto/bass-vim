@@ -749,11 +749,11 @@ nnoremap <silent><Leader>f :Files<CR>
 nnoremap <silent><Leader>o :Files<CR>
 nnoremap <silent><Leader>l :BLines<CR>
 nnoremap <silent><Leader>t :BTags<CR>
-nnoremap <silent><Leader>T :Tags<CR>
+nnoremap <silent><Leader>tt :Tags<CR>
 nnoremap <silent><Leader>? :History<CR>
 nnoremap <silent><Leader><space> :Buffers<CR>
-nnoremap <silent><Leader>A :Windows<CR>
-nnoremap <silent><Leader>s :Rg<CR>
+nnoremap <silent><Leader>a :Windows<CR>
+nnoremap <silent><Leader>s :Rg 
 nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
 vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
 " }}}
@@ -802,9 +802,9 @@ let g:DVB_TrimWS = 1
 " Tests {{{
 nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>Tf :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+nmap <silent> <leader>Ta :TestSuite<CR>
+nmap <silent> <leader>Tl :TestLast<CR>
+nmap <silent> <leader>Tg :TestVisit<CR>
 " }}}
 
 " NerdTree {{{
@@ -832,7 +832,7 @@ if has('nvim')
   let g:neoterm_default_mod = 'belowright'
 
   nnoremap <leader>tf :TREPLSendFile<cr>
-  nnoremap <leader>t :TREPLSendLine<cr>
+  nnoremap <leader>tl :TREPLSendLine<cr>
   vnoremap <leader>t :TREPLSendSelection<cr>
 
   nnoremap <silent> <leader>th :call neoterm#close()<cr>
