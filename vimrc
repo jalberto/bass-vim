@@ -9,159 +9,6 @@ if has('nvim')
   let &packpath = &runtimepath
 endif
 
-" Vundle {{{
-" Helper to add conditionals for nvim
-function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
-
-call plug#begin('~/.vim/plugged')
-Plug 'clones/vim-genutils'
-Plug 'eparreno/vim-l9'
-Plug 'xolox/vim-misc'
-Plug 'sheerun/vim-polyglot'
-Plug 'dNitro/vim-pug-complete', {'for': 'pug'}
-Plug 'Valloric/YouCompleteMe'
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
-
-" Add repeat support to other plugins
-Plug 'tpope/vim-repeat'
-" Try to detect correct identation
-Plug 'tpope/vim-sleuth'
-
-" Plug 'romainl/Apprentice'
-" Plug 'molokai'
-Plug 'robbles/logstash.vim'
-Plug 'itkq/fluentd-vim'
-Plug 'chriskempson/base16-vim'
-
-" Plug 'mtth/scratch.vim'
-" Plug 'Toggle'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
-Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-Plug 'wincent/ferret'
-" overlay windows with - (dash)
-Plug 't9md/vim-choosewin'
-" ctrl+n for multi cursor
-Plug 'terryma/vim-multiple-cursors'
-" <ldr><CR> for auto align
-Plug 'junegunn/vim-easy-align'
-" save session :Obsess / Obsess!
-Plug 'tpope/vim-obsession'
-" increase/decrease dates with ctrl-a/x
-Plug 'tpope/vim-speeddating'
-" show index in search results: N of NN
-Plug 'henrik/vim-indexed-search'
-" Auto set paste
-Plug 'conradIrwin/vim-bracketed-paste'
-" Plug '907th/vim-auto-save'
-" open file:line_number
-Plug 'bogado/file-line'
-" search occurences in visual selection
-Plug 'nelstrom/vim-visual-star-search'
-" Display leadk mapping with <lead>fml
-Plug 'ktonga/vim-follow-my-lead'
-" Display undo tree with <leader>u
-Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-markdown'
-
-" show verticla guides with <leader>ig
-Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
-" expand texobj
-" Plug 'gcmt/wildfire.vim'
-" abrevations on steroids
-" Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-endwise'
-" add more selectors to %
-Plug 'vim-scripts/matchit.zip'
-" autoclose (,{,...
-Plug 'Raimondi/delimitMate'
-Plug 'ervandew/supertab'
-Plug 'Quramy/vison'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'tomtom/tcomment_vim'
-Plug 'w0rp/ale' " async lint
-Plug 'majutsushi/tagbar'
-" skip half each time with s or to center with gs
-Plug 'jayflo/vim-skip'
-" Plug 't9md/vim-smalls'
-Plug 'tpope/vim-surround'
-Plug 'kana/vim-textobj-user'
-Plug 'gorkunov/smartpairs.vim'
-Plug 'tpope/vim-ragtag'
-Plug 'mustache/vim-mustache-handlebars'
-" Send to terminal
-Plug 'jpalardy/vim-slime', Cond(!has('nvim'))
-Plug 'kassio/neoterm', Cond(has('nvim'))
-Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
-Plug 'christoomey/vim-tmux-navigator'
-" Underline word under cursor
-Plug 'itchyny/vim-cursorword'
-" auto generate tags async
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'rhysd/clever-f.vim'
-Plug 'kshenoy/vim-signature'
-
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
-" highlight newst git change
-Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
-Plug 'gregsexton/gitv', { 'on': 'Gitv' }
-" git config --global core.editor "$(which nvim)"
-Plug 'rhysd/committia.vim'
-Plug 'whiteinge/diffconflicts'
-
-Plug 'tpope/vim-rbenv'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-haml'
-" Plug 'avakhov/vim-yaml'
-Plug 'towolf/vim-helm'
-Plug 'christianrondeau/vim-base64'
-" spli/join blocks with gS gJ
-Plug 'AndrewRadev/splitjoin.vim'
-" Ruby objs select: ar/ir
-" Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-" Plug 'sunaku/vim-ruby-minitest', {'for': 'ruby'}
-" Plug 'rake.vim', {'for': 'ruby'}
-Plug 'tpope/vim-rake', {'for': 'ruby'}
-Plug 'vim-scripts/ruby-matchit', {'for': 'ruby'}
-Plug 'tpope/vim-bundler', {'for': 'ruby'}
-Plug 'tpope/vim-rails', {'for': 'ruby'}
-" run tests with <leader>r/R
-" Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
-Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
-Plug 'stefanoverna/vim-i18n', {'for': 'ruby'}
-" convert hash keys to symbol, strings or 1.9 style with rs rt rr
-Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
-Plug 'danchoi/ri.vim', {'for': 'ruby'}
-Plug 'janko-m/vim-test'
-
-" Plug 'ryanoasis/vim-devicons'
-
-Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
-Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
-Plug 'tpope/vim-projectionist' " required for some navigation features
-
-Plug 'vimwiki/vimwiki', {'branch': 'dev'}
-
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
-" Pomodoro
-" Plug 'l04m33/vim-skuld'
-
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'fenetikm/falcon'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-call plug#end()
-" }}}
-
 " filetype plugin indent on
 
 " syntax on
@@ -183,9 +30,6 @@ autocmd FocusGained * silent! checktime
 " Show pairs
 set showmatch
 set mat=5
-
-" set leader to space
-let mapleader = " "
 
 " Enable a nice big viminfo file
 set viminfo='1000,f1,:1000,/1000
@@ -248,6 +92,287 @@ set switchbuf=usetab,newtab
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=1200
+" }}}
+
+" Vundle {{{
+" Helper to add conditionals for nvim
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
+call plug#begin('~/.vim/plugged')
+Plug 'clones/vim-genutils'
+Plug 'eparreno/vim-l9'
+Plug 'xolox/vim-misc'
+" Add repeat support to other plugins
+Plug 'tpope/vim-repeat'
+" Try to detect correct identation
+Plug 'tpope/vim-sleuth'
+
+Plug 'sheerun/vim-polyglot'
+Plug 'robbles/logstash.vim'
+Plug 'itkq/fluentd-vim'
+Plug 'dNitro/vim-pug-complete', {'for': 'pug'}
+Plug 'tpope/vim-markdown', {'for': 'markdown'}
+Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
+Plug 'towolf/vim-helm', {'for': 'yaml'}
+" Json completion with schemas (:Vison)
+Plug 'Quramy/vison', {'for': 'json'}
+" Plug 'mustache/vim-mustache-handlebars'
+Plug 'w0rp/ale' " async lint
+
+" spli/join blocks with gS gJ
+Plug 'AndrewRadev/splitjoin.vim'
+
+" show index in search results: N of NN
+Plug 'henrik/vim-indexed-search'
+" search occurences in visual selection
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'Valloric/YouCompleteMe'
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+
+" Auto set paste
+Plug 'conradIrwin/vim-bracketed-paste'
+" open file:line_number
+Plug 'bogado/file-line'
+
+" Colors / Themes
+Plug 'chriskempson/base16-vim'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'fenetikm/falcon'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" show vertical guides with <leader>ig
+Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
+Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+Plug 'qpkorr/vim-renamer'
+" overlay windows with - (dash)
+Plug 't9md/vim-choosewin'
+" zoom in/out <C-w>m
+Plug 'dhruvasagar/vim-zoom'
+
+" save session :Obsess / Obsess!
+Plug 'tpope/vim-obsession'
+
+" <ldr><CR> for auto align
+Plug 'junegunn/vim-easy-align'
+" ctrl+n for multi cursor
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'tpope/vim-endwise'
+" add more selectors to %
+Plug 'vim-scripts/matchit.zip'
+" autoclose (,{,...
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-surround'
+Plug 'kana/vim-textobj-user'
+Plug 'gorkunov/smartpairs.vim'
+Plug 'tpope/vim-ragtag'
+" Underline word under cursor
+Plug 'itchyny/vim-cursorword'
+
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'tomtom/tcomment_vim'
+Plug 'majutsushi/tagbar'
+" Plug 't9md/vim-smalls'
+
+" Send to terminal
+Plug 'jpalardy/vim-slime', Cond(!has('nvim'))
+Plug 'kassio/neoterm', Cond(has('nvim'))
+Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
+Plug 'christoomey/vim-tmux-navigator'
+
+" auto generate tags async
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'rhysd/clever-f.vim'
+Plug 'kshenoy/vim-signature'
+
+Plug 'sjl/gundo.vim' " Display undo tree with <leader>u
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+" highlight newst git change
+Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+" git config --global core.editor "$(which nvim)"
+Plug 'rhysd/committia.vim'
+Plug 'whiteinge/diffconflicts'
+Plug 'ruanyl/vim-gh-line'
+
+" encode using b64
+Plug 'christianrondeau/vim-base64'
+" increase/decrease dates with ctrl-a/x
+Plug 'tpope/vim-speeddating'
+" skip half each time with s or to center with gs
+Plug 'jayflo/vim-skip'
+
+" Ruby
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
+" Ruby objs select: ar/ir
+" Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
+" Plug 'tpope/vim-rake', {'for': 'ruby'}
+" Plug 'tpope/vim-bundler', {'for': 'ruby'}
+Plug 'vim-scripts/ruby-matchit', {'for': 'ruby'}
+Plug 'tpope/vim-rails', {'for': 'ruby'}
+Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
+Plug 'stefanoverna/vim-i18n', {'for': 'ruby'}
+" convert hash keys to symbol, strings or 1.9 style with rs rt rr
+Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
+Plug 'danchoi/ri.vim', {'for': 'ruby'}
+
+" Elixir
+Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
+Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
+
+Plug 'tpope/vim-projectionist' " required for some navigation features
+Plug 'janko-m/vim-test'
+Plug 'vimwiki/vimwiki', {'branch': 'dev'}
+
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Pomodoro
+" Plug 'l04m33/vim-skuld'
+
+" Display leadk mapping with <lead>fml
+Plug 'ktonga/vim-follow-my-lead'
+
+call plug#end()
+" }}}
+
+" Keyboard shortcuts{{{
+
+" Leader {{{
+let mapleader = " "
+
+
+" Align
+vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
+
+" Rails i18n
+vmap <Leader>8 :call I18nTranslateString()<CR>
+
+map <Leader>cl :set cursorline!<CR>
+map <Leader>cc :set cursorcolumn!<CR>
+
+nmap <Leader>ct :TagbarToggle<cr>
+
+" Delete blank lines
+nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
+" Delete trailing spaces
+nmap <Leader>dts :%s/\s\+$//e<CR>
+
+" base64
+vmap <Leader>d64 <leader>atob
+vmap <Leader>e64 <leader>btoa
+
+" Select everything
+nmap <Leader>gg ggVG
+
+map <leader>h :40vsplit ~/.vim/tips.md<CR>
+
+" json beautifier
+nnoremap <Leader>j :%!jq '.'<CR>
+
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+map <silent> <leader>n :set number! relativenumber!<CR>
+
+" NeoTerm
+nnoremap <leader>tf :TREPLSendFile<cr>
+nnoremap <leader>tl :TREPLSendLine<cr>
+vnoremap <leader>t :TREPLSendSelection<cr>
+nnoremap <silent> <leader>th :call neoterm#close()<cr>
+nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
+nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
+
+map <leader>x :NERDTreeTabsToggle<CR>
+
+" Copy paste to clipboard
+" vnoremap <C-c> "+y
+" noremap <T-v> "+gP
+" imap <T-v> "+gP
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+" FZF
+nnoremap <silent><Leader>f :Files<CR>
+nnoremap <silent><Leader>o :Files<CR>
+nnoremap <silent><Leader>l :BLines<CR>
+nnoremap <silent><Leader>t :BTags<CR>
+nnoremap <silent><Leader>tt :Tags<CR>
+nnoremap <silent><Leader>? :History<CR>
+nnoremap <silent><Leader><space> :Buffers<CR>
+nnoremap <silent><Leader>a :Windows<CR>
+nnoremap <silent><Leader>s :Rg
+nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
+vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
+" }}}
+
+" move in buffers and tabs
+" nmap <S-LEFT>  :bN<cr>
+" nmap <S-RIGHT> :bn<cr>
+" imap <S-LEFT>  <esc>:bN<cr>
+" imap <S-RIGHT> <esc>:bn<cr>
+nmap <C-RIGHT> :tabnext<cr>
+nmap <C-LEFT>  :tabprevious<cr>
+" imap <C-RIGHT> <esc>:tabnext<cr>
+" imap <C-LEFT>  <esc>:tabprevious<cr>
+nmap <silent> <C-h> :tabprevious<cr>
+nmap <silent> <C-l> :tabnext<cr>
+imap <silent> <C-h> <esc>:tabprevious<cr>
+imap <silent> <C-l> <esc>:tabnext<cr>
+nnoremap <a-h> <C-w>h
+nnoremap <a-j> <C-w>j
+nnoremap <a-k> <C-w>k
+nnoremap <a-l> <C-w>l
+nmap <silent> <S-h> :bN<cr>
+nmap <silent> <S-l> :bn<cr>
+
+" Avoid mistakes
+nmap  :X        :x
+nmap  :W        :w
+nmap  :Q        :q
+" nmap  q:        :q
+nmap  :aw       :wa
+nmap  :qw       :wq
+nnoremap ; :
+
+" <CTRL>+t new tab
+imap <C-t> <esc>:tabnew<cr> a
+map  <C-t> :tabnew<cr> i
+
+nmap <tab><tab> <C-w>w
+
+" Visually select the text that was last edited/pasted
+nnoremap gV `[v`]
+" selelct what you've just pasted
+nnoremap gp `[v`]
+" nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+" reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" Keep search matches in the middle of the screen
+nnoremap n nzz
+nnoremap N Nzz
+
+" resize panels
+noremap <A-up>    <C-W>+
+noremap <A-down>  <C-W>-
+noremap <A-left>  3<C-W><
+noremap <A-right> 3<C-W>>
+" }}}
 
 " Sessions {{{
 set ssop-=options
@@ -360,16 +485,16 @@ if has("gui_running")
 else
   colorscheme falcon
 endif
+
 " fix falcon bg colour
 " hi Normal guifg=#d4d4d9 ctermfg=188 guibg=#0b0b1a ctermbg=NONE gui=NONE cterm=NONE
 
-"{{{ OSX stuff
-" if has("unix")
-"   let s:uname = system("uname")
-"   if s:uname == "Darwin\n"
-"     set guifont=Source\ Code\ Pro:h14
-"   endif
-" endif
+" {{{ Linenumbering stuff
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+augroup END
 " }}}
 
 " {{{ Highlight current line and col
@@ -390,11 +515,11 @@ endif
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 " Show tabs and trailing whitespace visually
-" if (&termencoding == "utf-8") || has("gui_running")
+if (&termencoding == "utf-8")
   set list listchars=tab:⭾\ ,trail:␠,extends:…,nbsp:⎵,eol:⏎
-" else
-  " set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
-" endif
+else
+  set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
+endif
 " }}}
 
 " Window title {{{
@@ -416,6 +541,7 @@ set guicursor+=i:blinkwait10
 " }}}
 
 " }}}
+" }}}
 
 " Search {{{
 set incsearch " live search
@@ -428,6 +554,28 @@ set smartcase "only ignores case when minus words
 
 " Show full tags when doing search completion
 set showfulltag
+" }}}
+
+" AutoCmd & other auto stuff {{{
+
+" Auto add shebang
+if has("autocmd")
+  augroup content
+    autocmd!
+
+    autocmd BufNewFile *.rb 0put ='# vim: set sw=2 sts=2 tw=80 :' |
+          \ 0put ='#!/usr/bin/ruby' | set sw=2 sts=2 tw=80 |
+          \ norm G
+
+    autocmd BufNewFile *.sh 0put ='# vim: set sw=2 sts=2 tw=80 :' |
+          \ 0put ='#!/bin/bash' | set sw=2 sts=2 tw=80 |
+          \ norm G
+  augroup END
+endif
+
+" Auto reload vimrc
+" au BufWritePost .vimrc so $MYVIMRC
+
 " }}}
 
 " Autocomplete {{{
@@ -479,176 +627,13 @@ function! AppendModeline()
   $put =substitute(&commentstring,\"%s\",append,\"\")
   call setpos('.', save_cursor)
 endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-" }}}
-
-" AutoCmd & other auto stuff {{{
-
-" Auto add shebang
-if has("autocmd")
-  augroup content
-    autocmd!
-
-    autocmd BufNewFile *.rb 0put ='# vim: set sw=2 sts=2 tw=80 :' |
-          \ 0put ='#!/usr/bin/ruby' | set sw=2 sts=2 tw=80 |
-          \ norm G
-
-    autocmd BufNewFile *.sh 0put ='# vim: set sw=2 sts=2 tw=80 :' |
-          \ 0put ='#!/bin/bash' | set sw=2 sts=2 tw=80 |
-          \ norm G
-  augroup END
-endif
-
-" Auto reload vimrc
-" au BufWritePost .vimrc so $MYVIMRC
-
-" }}}
-
-" Keyboard shortcuts{{{
-" F-Keys {{{
-map <silent> <S-F1> :40vsplit ~/.vim/tips.md<CR>
-map <silent> <C-F1> :vsplit ~/.vim/abbr<CR>
-
-map <silent>  <F2> :NERDTreeTabsToggle<CR>
-" map         <S-F2> :NeoCompleteToggle<CR>
-
-" let g:ctrlp_map = '<F3>'
-" let g:ctrlp_cmd = 'CtrlP'
-" nmap <silent> <S-F3> :CtrlPTag<CR>
-" nmap <silent> <C-F3> :CtrlPBuffer<CR>
-
-nmap <silent> <F4> :TagbarToggle<CR>
-nmap <S-F4> :!ctags --extra=+f -R *<CR><CR>   " Regenerate tags in current dir
-" nmap <C-F4> :!ctags -R `bundle show rails`/../*<CR><CR> " Regenare gem tags for current dir proj
-nmap <C-F4> :!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)<CR><CR> " Regenare gem tags for current dir proj
-
-map   <F5> :set list!<CR>
-map <S-F5> :set nu!<CR>
-map <T-F5> :NoMatchParen<CR>    " disable parenthesis hilite
-
-map <silent> <F6> :set hlsearch!<CR>
-map <C-F6> :set fenc=utf-8<CR>
-map <S-F6> :set fenc=iso8859-15<CR>
-
-map   <F7> :set spell!<CR>
-map <S-F7> :setlocal spell spelllang=es<CR>
-map <C-F7> :setlocal spell spelllang=en<CR>
-
-map   <F8> :VCSStatus<CR>
-map <T-F8> :VCSCommit<CR>
-map <S-F8> :VCSUpdate<CR>
-
-set pastetoggle=<F9>
-" }}}
-
-" Leader {{{
-map <leader>x :NERDTreeTabsToggle<CR>
-map <leader>h :40vsplit ~/.vim/tips.md<CR>
-
-map <silent> <leader>n :set number! relativenumber!<CR>
-
-map <Leader>cl :set cursorline!<CR>
-map <Leader>cc :set cursorcolumn!<CR>
-
-" json beautifier
-nnoremap <Leader>j :%!jq '.'<CR>
-
-" quickfix list for breakpoints
-nmap <Leader>bl :Rg binding.pry<CR>
-" …also, Insert Mode as bpry<space>
-iabbr bpry require'pry';binding.pry
-" add pry
-map <Leader>bp orequire'pry';binding.pry<esc>:w<cr>
-
-" Select everything
-nmap <Leader>gg ggVG
-" Delete blank lines
-nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
-" Delete trailing spaces
-nmap <Leader>dts :%s/\s\+$//e<CR>
-" Align
-vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
-" Save file
-nnoremap <Leader>w :w<CR>
-" Copy ans paste to clipboard
-" vnoremap <C-c> "+y
-" noremap <T-v> "+gP
-" imap <T-v> "+gP
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
-
-" tags
-nmap <Leader>ct :TagbarToggle<cr>
-" }}}
-
-" move in buffers and tabs
-" nmap <S-LEFT>  :bN<cr>
-" nmap <S-RIGHT> :bn<cr>
-" imap <S-LEFT>  <esc>:bN<cr>
-" imap <S-RIGHT> <esc>:bn<cr>
-nmap <C-RIGHT> :tabnext<cr>
-nmap <C-LEFT>  :tabprevious<cr>
-" imap <C-RIGHT> <esc>:tabnext<cr>
-" imap <C-LEFT>  <esc>:tabprevious<cr>
-nmap <silent> <C-h> :tabprevious<cr>
-nmap <silent> <C-l> :tabnext<cr>
-imap <silent> <C-h> <esc>:tabprevious<cr>
-imap <silent> <C-l> <esc>:tabnext<cr>
-nnoremap <a-h> <C-w>h
-nnoremap <a-j> <C-w>j
-nnoremap <a-k> <C-w>k
-nnoremap <a-l> <C-w>l
-nmap <silent> <S-h> :bN<cr>
-nmap <silent> <S-l> :bn<cr>
-
-" Avoid mistakes
-nmap  :X        :x
-nmap  :W        :w
-nmap  :Q        :q
-" nmap  q:        :q
-nmap  :aw       :wa
-nmap  :qw       :wq
-nnoremap ; :
-
-" <CTRL>+t new tab
-imap <C-t> <esc>:tabnew<cr> a
-map  <C-t> :tabnew<cr> i
-
-" Easy window navigation
-" map  <T-h>      <C-w>h
-" map  <T-j>      <C-w>j
-" map  <T-k>      <C-w>k
-" map  <T-l>      <C-w>l
-nmap <tab><tab> <C-w>w
-
-" nmap <C-Enter> <C-w><C-]><C-w>T
-
-" Visually select the text that was last edited/pasted
-nnoremap gV `[v`]
-" selelct what you've just pasted
-nnoremap gp `[v`]
-" nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
-" reselect visual block after indent/outdent
-vnoremap < <gv
-vnoremap > >gv
-
-" Keep search matches in the middle of the screen
-nnoremap n nzz
-nnoremap N Nzz
-
-" resize panels
-noremap <A-up>    <C-W>+
-noremap <A-down>  <C-W>-
-noremap <A-left>  3<C-W><
-noremap <A-right> 3<C-W>>
-
 " }}}
 
 " Ruby - Rails {{{
+" Insert Mode as bpry<space>
+iabbr bpry require'pry';binding.pry
+iabbr froz # frozen_string_literal: true
+
 " Set FileType {{{
 augroup filetypedetect
   au! BufNewFile,BufRead *.ch setf cheat
@@ -680,24 +665,11 @@ autocmd BufNewFile,BufRead Dockerfile.* set ft=dockerfile
 autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
 " }}}
 
-" {{{ Linenumbering stuff
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-augroup END
-" }}}
-
 " Plugins {{{
-
-" base64 {{{
-vmap <Leader>e64 <leader>btoa
-vmap <Leader>d64 <leader>atob
-" }}}
 
 " clever-f {{{
 let g:clever_f_smart_case = 1
-" }}]
+" }}}
 
 " Guten tag {{{
 let g:gutentags_ctags_exclude = ["node_modules", "assets", "_build", "build", "vendor", "private", "priv", "logs", ".git"]
@@ -707,14 +679,14 @@ let g:gutentags_cache_dir = "/tmp"
 " fzf {{{
 " ripgrep
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --smart-case --glob "!**/{.git,node_modules,vendor,priv,deps,_build}/*"'
+  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --smart-case --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp}/*"'
   set grepprg=rg\ --vimgrep
 
 "   :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
 "   :Rg! - Start fzf in fullscreen and display the preview window above
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build}/*" '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp}/*" '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -744,23 +716,12 @@ function! s:getVisualSelection()
 endfunction
 
 let g:fzf_buffers_jump = 1
-
-nnoremap <silent><Leader>f :Files<CR>
-nnoremap <silent><Leader>o :Files<CR>
-nnoremap <silent><Leader>l :BLines<CR>
-nnoremap <silent><Leader>t :BTags<CR>
-nnoremap <silent><Leader>tt :Tags<CR>
-nnoremap <silent><Leader>? :History<CR>
-nnoremap <silent><Leader><space> :Buffers<CR>
-nnoremap <silent><Leader>a :Windows<CR>
-nnoremap <silent><Leader>s :Rg 
-nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
-vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
 " }}}
 
 " vimwiki {{{
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 " }}}
+
 " Tmux navigator {{{
 let g:tmux_navigator_no_mappings = 1
 
@@ -784,9 +745,11 @@ let g:ale_sign_warning = '⚠'
 let g:airline#extensions#ale#enabled = 1
 
 let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'elixir': ['mix_format'],
+\   'ruby': ['rufo'],
 \}
-let g:ale_fix_on_save = 1
+au FileType elixir let b:ale_fix_on_save = 1
 " }}}
 
 " Visual Drag (move selected chunk) {{{
@@ -813,11 +776,6 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeCascadeOpenSingleChildDir = 1
 " }}}
 
-" WebDevIcons {{{
-let g:webdevicons_enable_nerdtree = 0
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '-'
-" }}}
-
 " slime & NeoTerm {{{
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -830,14 +788,6 @@ if has('nvim')
   let g:neoterm_size = 10
   let g:neoterm_autoinsert = 1
   let g:neoterm_default_mod = 'belowright'
-
-  nnoremap <leader>tf :TREPLSendFile<cr>
-  nnoremap <leader>tl :TREPLSendLine<cr>
-  vnoremap <leader>t :TREPLSendSelection<cr>
-
-  nnoremap <silent> <leader>th :call neoterm#close()<cr>
-  nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
-  nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
   command! Trc :T bin/rails c
   command! Trn :T bin/rails notes
@@ -872,6 +822,13 @@ let g:fml_all_sources = 1
 " delete hidden fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 " }}}
+
+" vim-gh-line {{{
+let g:gh_gitlab_domain = "gl.vizlegal.io"
+" let g:gh_open_command = 'xdg-open '
+let g:gh_open_command = 'fn() { echo "$@" | xclip -selection clipboard; }; fn '
+" }}}
+
 " tagBar {{{
 let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
@@ -894,14 +851,17 @@ let g:tagbar_type_elixir = {
     \ ]
 \ }
 " }}}
+
 " explorer.vim {{{
 let g:explHideFiles='^\.'
 " }}}
+
 " :TOhtml {{{
 let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
 " }}}
+
 " cscope {{{
 if has('cscope') && filereadable("/usr/bin/cscope")
   set csto=0
@@ -924,16 +884,20 @@ if has('cscope') && filereadable("/usr/bin/cscope")
   nmap <C-j><C-j>i :scscope find i ^<C-R>=expand("<cword>")<CR><CR>
 endif
 " }}}
+
 " VCSCommand {{{
 let g:VCSCommandCommitOnWrite = 0
 " }}}
+
 " Debugger {{{
 let g:DBGRconsoleHeight = 7
 let g:DBGRlineNumbers   = 1
 " }}}
+
 " Surronding {{{
 let g:rails_dbext=1
 " }}}
+
 " neocomplcache & multiple cursor fix {{{
 " Called once right before you start selecting multiple cursors
 " function! Multiple_cursors_before()
@@ -955,13 +919,16 @@ let g:rails_dbext=1
 "   endif
 " endfunction
 " }}}
+
 " autoclose {{{
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'"}
 let g:AutoCloseProtectedRegions = ["String", "Character"]
 " }}}
+
 " coffeescript {{{
 let coffee_compile_vert = 1
 " }}}
+
 " airline {{{
 set laststatus=2
 let g:airline#extensions#branch#enabled = 1
@@ -979,9 +946,11 @@ set showtabline=0 " remove tab bar
 " shows obsession status
 " let g:airline_section_b = airline#section#create(['%{ALEGetStatusLine()}', '%{ObsessionStatus(''$'','''')}', 'hunks', 'branch'])
 " }}}
+
 " Choosewin {{{
 nmap  -  <Plug>(choosewin)
 " }}}
+
 " Small {{{
 " map normal-mode 's' for simple search
 " map m <Plug>(smalls)
@@ -997,13 +966,4 @@ nmap  -  <Plug>(choosewin)
 let g:smartgf_key = 'gm'
 let g:smartgf_auto_refresh_ctags = 0
 " }}}
-" Rails i18n {{{
-vmap <Leader>8 :call I18nTranslateString()<CR>
 " }}}
-" }}}
-
-" Modeline {{{
-" vim:foldmethod=marker:foldlevel=0:ts=4:sw=2:tw=78
-" }}}
-" remap
-"
