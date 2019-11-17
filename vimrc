@@ -41,7 +41,7 @@ set backspace=indent,eol,start
 
 " no more annoying startup msg
 set shortmess=aoOtI
-" set cmdheight=2
+set cmdheight=2
 let g:bufferline_echo=0
 
 " {{{ Folding & syntax
@@ -82,7 +82,7 @@ au FileType python set sts=4 ts=4 sw=4 tw=79
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
 " MultiMarkdown requires 4-space tabs
 au FileType markdown set sts=4 ts=4 sw=4
-let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql', 'elixir']
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql', 'elixir']
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 " "}}}
@@ -129,9 +129,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'henrik/vim-indexed-search'
 " search occurences in visual selection
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'Valloric/YouCompleteMe'
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'Valloric/YouCompleteMe'
 
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
@@ -574,7 +573,7 @@ if has("autocmd")
 endif
 
 " Auto reload vimrc
-" au BufWritePost .vimrc so $MYVIMRC
+au BufWritePost .vimrc so $MYVIMRC
 
 " }}}
 
@@ -592,27 +591,9 @@ set whichwrap+=<,>,[,]
 if filereadable(expand("~/.vim/abbr"))
   source ~/.vim/abbr
 endif
-
-" autocmd FileType python set omnifunc=pythoncomplete#Complete
-" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-" autocmd FileType c set omnifunc=ccomplete#Complete
-
-" autocmd FileType ruby set omnifunc=rubycomplete#Complete
-" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " }}}
 
 " Snippets {{{
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-j>']
-let g:ycm_key_list_previous_completion = ['<C-k>']
-let g:SuperTabDefaultCompletionType = '<C-j>'
 
 " ultisnips directory
 "let g:UltiSnipsSnippetDirectories=["UltiSnips"]
@@ -666,6 +647,61 @@ autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
 " }}}
 
 " Plugins {{{
+
+" COC {{{
+set updatetime=300
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" " Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" }}}
 
 " clever-f {{{
 let g:clever_f_smart_case = 1
@@ -753,11 +789,11 @@ au FileType elixir let b:ale_fix_on_save = 1
 " }}}
 
 " Visual Drag (move selected chunk) {{{
-vmap  <expr>  <LEFT> DVB_Drag('left')
-vmap  <expr>  <RIGHT> DVB_Drag('right')
-vmap  <expr>  <DOWN> DVB_Drag('down')
-vmap  <expr>  <UP> DVB_Drag('up')
-vmap  <expr>  D       DVB_Duplicate()
+" vmap  <expr>  <LEFT> DVB_Drag('left')
+" vmap  <expr>  <RIGHT> DVB_Drag('right')
+" vmap  <expr>  <DOWN> DVB_Drag('down')
+" vmap  <expr>  <UP> DVB_Drag('up')
+" vmap  <expr>  D       DVB_Duplicate()
 " Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 " }}}
@@ -896,28 +932,6 @@ let g:DBGRlineNumbers   = 1
 
 " Surronding {{{
 let g:rails_dbext=1
-" }}}
-
-" neocomplcache & multiple cursor fix {{{
-" Called once right before you start selecting multiple cursors
-" function! Multiple_cursors_before()
-"   if exists(':NeoCompleteLock')==2
-"     exe 'NeoCompleteLock'
-"   endif
-"   if exists(':AutoSaveToggle')==2
-"     exe 'AutoSaveToggle'
-"   endif
-" endfunction
-
-" Called once only when the multiple selection is canceled (default <Esc>)
-" function! Multiple_cursors_after()
-"   if exists(':NeoCompleteUnlock')==2
-"     exe 'NeoCompleteUnlock'
-"   endif
-"   if exists(':AutoSaveToggle')==2
-"     exe 'AutoSaveToggle'
-"   endif
-" endfunction
 " }}}
 
 " autoclose {{{
