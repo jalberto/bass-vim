@@ -179,7 +179,8 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tomtom/tcomment_vim'
-Plug 'majutsushi/tagbar'
+" Plug 'liuchengxu/vista.vim'
+" Plug 'majutsushi/tagbar'
 " Plug 't9md/vim-smalls'
 
 " Send to terminal
@@ -866,26 +867,26 @@ let g:gh_open_command = 'fn() { echo "$@" | xclip -selection clipboard; }; fn '
 " }}}
 
 " tagBar {{{
-let g:tagbar_width = 30
-let g:tagbar_autofocus = 1
-let g:tagbar_compact = 1
-let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records',
-        \ 't:tests'
-    \ ]
-\ }
+" let g:tagbar_width = 30
+" let g:tagbar_autofocus = 1
+" let g:tagbar_compact = 1
+" let g:tagbar_type_elixir = {
+"     \ 'ctagstype' : 'elixir',
+"     \ 'kinds' : [
+"         \ 'f:functions',
+"         \ 'functions:functions',
+"         \ 'c:callbacks',
+"         \ 'd:delegates',
+"         \ 'e:exceptions',
+"         \ 'i:implementations',
+"         \ 'a:macros',
+"         \ 'o:operators',
+"         \ 'm:modules',
+"         \ 'p:protocols',
+"         \ 'r:records',
+"         \ 't:tests'
+"     \ ]
+" \ }
 " }}}
 
 " explorer.vim {{{
