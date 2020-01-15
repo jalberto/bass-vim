@@ -73,8 +73,12 @@ a-z for local, A-Z global
 * [-      Prev marker
 
 # Plugins
-## Visual Drag
-Use visual selection and then cursors
+
+## Emmet (html/css)
+ 
+* trigger `,,`
+* 'div>p#foo$*3>a'
+* ie: https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL
 
 ## Surronding
 

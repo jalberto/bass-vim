@@ -230,6 +230,9 @@ Plug 'danchoi/ri.vim', {'for': 'ruby'}
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 
+" HTML/CSS/JS
+Plug 'mattn/emmet-vim'
+
 Plug 'tpope/vim-projectionist' " required for some navigation features
 Plug 'janko-m/vim-test'
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
@@ -240,8 +243,8 @@ Plug 'junegunn/fzf.vim'
 " Pomodoro
 " Plug 'l04m33/vim-skuld'
 
-" Display leadk mapping with <lead>fml
-Plug 'ktonga/vim-follow-my-lead'
+" Display lead mapping with <lead>fml
+" Plug 'ktonga/vim-follow-my-lead'
 
 call plug#end()
 " }}}
@@ -292,7 +295,7 @@ nnoremap <silent> <leader>th :call neoterm#close()<cr>
 nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
 nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
-map <leader>x :NERDTreeTabsToggle<CR>
+map <silent> <leader>x :NERDTreeTabsToggle<CR>
 
 " Copy paste to clipboard
 " vnoremap <C-c> "+y
@@ -648,6 +651,13 @@ autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
 " }}}
 
 " Plugins {{{
+
+" emmet {{{
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+let g:user_emmet_leader_key=','
+" }}}
 
 " COC {{{
 set updatetime=300
