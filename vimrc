@@ -204,6 +204,7 @@ Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'rhysd/committia.vim'
 Plug 'whiteinge/diffconflicts'
 Plug 'ruanyl/vim-gh-line'
+Plug 'rhysd/git-messenger.vim'
 
 " encode using b64
 Plug 'christianrondeau/vim-base64'
