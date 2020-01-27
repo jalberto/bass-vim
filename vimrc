@@ -129,8 +129,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'henrik/vim-indexed-search'
 " search occurences in visual selection
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'Valloric/YouCompleteMe'
 
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
@@ -163,11 +161,11 @@ Plug 'junegunn/vim-easy-align'
 " ctrl+n for multi cursor
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-endwise'
 " add more selectors to %
 Plug 'vim-scripts/matchit.zip'
 " autoclose (,{,...
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user'
 Plug 'gorkunov/smartpairs.vim'
@@ -175,8 +173,8 @@ Plug 'tpope/vim-ragtag'
 " Underline word under cursor
 Plug 'itchyny/vim-cursorword'
 
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
+" Plug 'ervandew/supertab'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tomtom/tcomment_vim'
 " Plug 'liuchengxu/vista.vim'
@@ -240,6 +238,8 @@ Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Pomodoro
 " Plug 'l04m33/vim-skuld'
@@ -602,7 +602,7 @@ endif
 
 " ultisnips directory
 "let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
@@ -661,25 +661,50 @@ let g:user_emmet_leader_key=','
 " }}}
 
 " COC {{{
+let g:coc_global_extensions = [
+            \'coc-solargraph',
+            \'coc-elixir',
+            \'coc-json',
+            \'coc-css',
+            \'coc-html',
+            \'coc-yaml',
+            \'coc-xml',
+            \'coc-syntax',
+            \'coc-emmet',
+            \'coc-tsserver',
+            \'coc-snippets',
+            \]
+
 set updatetime=300
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" " Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" Navigate snippet placeholders using tab
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use enter to accept snippet expansion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -796,6 +821,11 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'elixir': ['mix_format'],
 \   'ruby': ['rufo'],
+\   'css' : ['prettier'],
+\   'html' : ['prettier'],
+\   'markdown' : ['prettier'],
+\   'yaml': ['prettier'],
+\   'json': ['prettier'],
 \}
 au FileType elixir let b:ale_fix_on_save = 1
 " }}}
