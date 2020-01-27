@@ -321,6 +321,27 @@ nnoremap <silent><Leader>a :Windows<CR>
 nnoremap <silent><Leader>s :Rg
 nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
 vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
+
+" tabs manipulation
+function! Rotate() " switch between horizontal and vertical split mode for open splits
+    " save the original position, jump to the first window
+    let initial = winnr()
+    exe 1 . "wincmd w"
+
+    wincmd l
+    if winnr() != 1
+        " succeeded moving to the right window
+        wincmd J                " make it the bot window
+    else
+        " cannot move to the right, so we are at the top
+        wincmd H                " make it the left window
+    endif
+
+    " restore cursor to the initial window
+    exe initial . "wincmd w"
+endfunction
+
+nnoremap <leader>r :call Rotate()<CR>
 " }}}
 
 " move in buffers and tabs
