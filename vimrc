@@ -118,9 +118,7 @@ Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'tpope/vim-liquid'
 Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
 Plug 'towolf/vim-helm', {'for': 'yaml'}
-" Json completion with schemas (:Vison)
-" Plug 'Quramy/vison', {'for': 'json'}
-" Plug 'mustache/vim-mustache-handlebars'
+
 Plug 'w0rp/ale' " async lint
 
 " spli/join blocks with gS gJ
@@ -137,8 +135,8 @@ Plug 'conradIrwin/vim-bracketed-paste'
 Plug 'bogado/file-line'
 
 " Colors / Themes
-Plug 'chriskempson/base16-vim'
-Plug 'kristijanhusak/vim-hybrid-material'
+" Plug 'chriskempson/base16-vim'
+" Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'fenetikm/falcon'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -1044,7 +1042,8 @@ set laststatus=2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline_theme = 'distinguished'
+" let g:airline_theme = 'distinguished'
+let g:airline_theme = 'falcon'
 " let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
 let g:airline#extensions#tabline#enabled = 1
