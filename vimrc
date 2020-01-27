@@ -115,10 +115,11 @@ Plug 'robbles/logstash.vim'
 Plug 'itkq/fluentd-vim'
 Plug 'dNitro/vim-pug-complete', {'for': 'pug'}
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
+Plug 'tpope/vim-liquid'
 Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
 Plug 'towolf/vim-helm', {'for': 'yaml'}
 " Json completion with schemas (:Vison)
-Plug 'Quramy/vison', {'for': 'json'}
+" Plug 'Quramy/vison', {'for': 'json'}
 " Plug 'mustache/vim-mustache-handlebars'
 Plug 'w0rp/ale' " async lint
 
@@ -904,7 +905,12 @@ let g:NERDTreeCascadeOpenSingleChildDir = 1
 
 " slime & NeoTerm {{{
 if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
+  " special ESC behaviour
+  " au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  " au FileType fzf tunmap <buffer> <Esc>
+  tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+
+  " tnoremap <Esc> <C-\><C-n>
   tnoremap <A-h> <C-\><C-n><C-w>h
   tnoremap <A-j> <C-\><C-n><C-w>j
   tnoremap <A-k> <C-\><C-n><C-w>k
