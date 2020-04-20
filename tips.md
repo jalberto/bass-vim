@@ -8,8 +8,13 @@
 
 * <ldr>gg  Select all
 * vi)      select inside ()
+* vaw - Visually select Around Word
+* da” - Delete Around double quotes
+* di] - Delete Inside square brackets
+* ci{ - Change Inside curly braces
+* dap - Delete Around Paragraph
 
-## TextObjs 
+## TextObjs
 
 * var  Select ruby block
 * vir  Select inner ruby block
@@ -48,6 +53,17 @@
 * ]s  Proxima palabra mal escrita
 * [s  Palabra anterior mal escrita
 * z=  Lista de correciones
+
+# COC
+
+Apply Code Actions
+
+* <leader>a     for the current selected range
+* <leader>aw    for the current word
+* <leader>aas   for the current sentence
+* <leader>aap   for the current paragraph
+
+* <leader>rn    rename
 
 # Copy/Paste
 

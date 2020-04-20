@@ -161,10 +161,9 @@ Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 
 " Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
 " add more selectors to %
 Plug 'vim-scripts/matchit.zip'
-" autoclose (,{,...
-" Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user'
 Plug 'gorkunov/smartpairs.vim'
@@ -316,10 +315,14 @@ nnoremap <silent><Leader>t :BTags<CR>
 nnoremap <silent><Leader>tt :Tags<CR>
 nnoremap <silent><Leader>? :History<CR>
 nnoremap <silent><Leader><space> :Buffers<CR>
-nnoremap <silent><Leader>a :Windows<CR>
+nnoremap <silent><Leader>w :Windows<CR>
 nnoremap <silent><Leader>s :Rg
 nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
 vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
+
+" Fugitive
+cnoreabbrev Gws Gstatus
+cnoreabbrev Gca Gcommit -a
 
 " tabs manipulation
 function! Rotate() " switch between horizontal and vertical split mode for open splits
@@ -675,7 +678,7 @@ autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
 
 " emmet {{{
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,liquid EmmetInstall
 
 let g:user_emmet_leader_key=','
 " }}}
@@ -693,6 +696,11 @@ let g:coc_global_extensions = [
             \'coc-emmet',
             \'coc-tsserver',
             \'coc-snippets',
+            \'coc-spell-checker',
+            \'coc-pairs',
+            \'coc-actions',
+            \'coc-vetur',
+            \'coc-markdownlint'
             \]
 
 set updatetime=300
@@ -758,6 +766,13 @@ command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 " }}}
 
 " clever-f {{{
@@ -945,7 +960,7 @@ nnoremap <leader>u :GundoToggle<CR>
 " }}}
 
 " Follow my Lead {{{
-let g:fml_all_sources = 1
+" let g:fml_all_sources = 1
 " }}}
 
 " fugitive {{{
