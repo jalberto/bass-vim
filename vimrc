@@ -158,7 +158,6 @@ Plug 'tpope/vim-obsession'
 " <ldr><CR> for auto align
 Plug 'junegunn/vim-easy-align'
 " ctrl+n for multi cursor
-" Plug 'terryma/vim-multiple-cursors'
 Plug 'mg979/vim-visual-multi'
 
 " Plug 'tpope/vim-endwise'
@@ -170,7 +169,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
 " Underline word under cursor
-Plug 'itchyny/vim-cursorword'
+" Plug 'itchyny/vim-cursorword'
 
 " Plug 'ervandew/supertab'
 " Plug 'SirVer/ultisnips'
@@ -970,9 +969,9 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " }}}
 
 " vim-gh-line {{{
-let g:gh_gitlab_domain = "gl.vizlegal.io"
+" let g:gh_gitlab_domain = "gitlab.com"
 " let g:gh_open_command = 'xdg-open '
-let g:gh_open_command = 'fn() { echo "$@" | xclip -selection clipboard; }; fn '
+" let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 " }}}
 
 " tagBar {{{
