@@ -787,14 +787,14 @@ let g:gutentags_cache_dir = "/tmp"
 " fzf {{{
 " ripgrep
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --smart-case --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp}/*"'
+  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --smart-case --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*"'
   set grepprg=rg\ --vimgrep
 
 "   :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
 "   :Rg! - Start fzf in fullscreen and display the preview window above
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp}/*" '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
