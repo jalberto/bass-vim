@@ -513,9 +513,6 @@ else
   colorscheme falcon
 endif
 
-" fix falcon bg colour
-" hi Normal guifg=#d4d4d9 ctermfg=188 guibg=#0b0b1a ctermbg=NONE gui=NONE cterm=NONE
-
 " {{{ Linenumbering stuff
 augroup numbertoggle
   autocmd!
@@ -524,25 +521,12 @@ augroup numbertoggle
 augroup END
 " }}}
 
-" {{{ Highlight current line and col
-" hi CursorLine cterm=NONE gui=NONE guibg=black ctermbg=232
-" hi CursorLineNr cterm=NONE gui=NONE guifg=orange guibg=black ctermbg=black
-" hi CursorColumn cterm=NONE gui=NONE guibg=black ctermbg=232
-" augroup CursorLine
-"   au!
-"   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
-"   au InsertEnter * setlocal cursorline nocursorcolumn
-"   au InsertLeave * setlocal cursorline cursorcolumn
-"   au WinLeave,BufLeave * setlocal nocursorline nocursorcolumn
-" augroup END
-" }}]
-
 " Special chars {{{
 " highlight Problematic whitespaces
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 " Show tabs and trailing whitespace visually
-if (&termencoding == "utf-8")
+if has("multi_byte")
   set list listchars=tab:⭾\ ,trail:␠,extends:…,nbsp:⎵,eol:⏎
 else
   set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
@@ -559,12 +543,12 @@ endif
 " }}}
 
 " {{{ Cursor
-highlight Cursor guifg=black guibg=steelblue
-highlight iCursor guifg=white guibg=Orange
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
+" highlight Cursor guifg=black guibg=steelblue
+" highlight iCursor guifg=white guibg=Orange
+" set guicursor=n-v-c:block-Cursor
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10
 " }}}
 
 " }}}
@@ -624,8 +608,6 @@ endif
 " Snippets {{{
 
 " ultisnips directory
-"let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-" let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
