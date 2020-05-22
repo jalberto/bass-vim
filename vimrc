@@ -110,6 +110,7 @@ Plug 'tpope/vim-repeat'
 " Try to detect correct identation
 Plug 'tpope/vim-sleuth'
 
+Plug 'amadeus/vim-mjml', {'for': 'mjml'}
 Plug 'sheerun/vim-polyglot'
 Plug 'robbles/logstash.vim'
 Plug 'itkq/fluentd-vim'
@@ -131,12 +132,9 @@ Plug 'nelstrom/vim-visual-star-search'
 
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
-" open file:line_number
-Plug 'bogado/file-line'
 
 " Colors / Themes
 " Plug 'chriskempson/base16-vim'
-" Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'fenetikm/falcon'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -186,13 +184,13 @@ Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
 Plug 'christoomey/vim-tmux-navigator'
 
 " auto generate tags async
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'rhysd/clever-f.vim'
 Plug 'kshenoy/vim-signature'
 
 Plug 'sjl/gundo.vim' " Display undo tree with <leader>u
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify' " visualize marks
 " highlight newst git change
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
@@ -224,14 +222,14 @@ Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
 Plug 'danchoi/ri.vim', {'for': 'ruby'}
 
 " Elixir
-Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
-Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
+" Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
+" Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
 
 " HTML/CSS/JS
 Plug 'mattn/emmet-vim'
 
-Plug 'tpope/vim-projectionist' " required for some navigation features
-Plug 'janko-m/vim-test'
+" Plug 'tpope/vim-projectionist' " required for some navigation features
+" Plug 'janko-m/vim-test'
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -932,6 +930,7 @@ let g:indent_guides_guide_size = 1
 " Gundo {{{
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
+let g:gundo_prefer_python3 = 1
 " }}}
 
 " autosave {{{
@@ -1039,7 +1038,6 @@ set laststatus=2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#show_close_button = 0
-" let g:airline_theme = 'distinguished'
 let g:airline_theme = 'falcon'
 " let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
@@ -1048,9 +1046,8 @@ let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_buffers = 0
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline_symbols_ascii = 1
 set showtabline=0 " remove tab bar
-" shows obsession status
-" let g:airline_section_b = airline#section#create(['%{ALEGetStatusLine()}', '%{ObsessionStatus(''$'','''')}', 'hunks', 'branch'])
 " }}}
 
 " Choosewin {{{

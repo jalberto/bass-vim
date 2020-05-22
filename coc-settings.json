@@ -1,0 +1,20 @@
+{
+  "coc.preferences.colorSupport": true,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.timeout": 2000,
+  "suggest.detailField": "abbr",
+  "suggest.snippetIndicator": "~",
+  "diagnostic.displayByAle": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.signOffset": 999999,
+  "suggest.noselect": false,
+  "html.filetypes": [ "html", "handlebars", "liquid" ],
+  "markdownlint.config": {
+    "default": true,
+    "line_length": false
+  },
+  "cSpell.language": "en",
+  "cSpell.userWords": [
+    "Vizlegal"
+  ]
+}
