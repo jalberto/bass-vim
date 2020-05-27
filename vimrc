@@ -48,7 +48,7 @@ let g:bufferline_echo=0
 if has("folding")
   set foldenable
   set foldmethod=syntax
-  set foldlevelstart=2   " open most folds by default
+  set foldlevelstart=1   " open most folds by default
 endif
 
 " Sgml,htmls,xml y xsl folder
@@ -64,12 +64,9 @@ autocmd FileType javascript setlocal foldmethod=syntax
 autocmd FileType javascript setlocal foldlevelstart=1
 " autocmd FileType javascript syntax region foldBraces
 " Apply schema to json
-autocmd BufRead,BufNewFile swagger.json Vison
+" autocmd BufRead,BufNewFile swagger.json Vison
 " Treat JSON files like JavaScript
 au BufNewFile,BufRead *.json setf javascript
-" Coffeescript folder
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
 " Some file types use real tabs
 " au FileType {make,gitconfig} set noexpandtab sw=4
@@ -419,8 +416,10 @@ set popt+=syntax:y " Syntax when printing
 set linespace=0                 " number of pixels between the lines
 set splitright                  " open vertical splits on the right
 set splitbelow                  " open the horizontal split below
-" set wrap                      " wrap long lines
+set wrap                        " wrap long lines
 set linebreak                   " break lines at word end
+set sidescroll=5
+set listchars+=precedes:<,extends:>
 
 " Try to show at least three lines and two columns of context when scrolling
 set scrolloff=99
@@ -505,13 +504,18 @@ let g:enable_bold_font = 1
 let g:falcon_background = 1
 let g:falcon_inactive = 0
 if has("gui_running")
-  set guifont=Hack\ 12
+  set guifont=JetBrains\ Mono\ Regular\ 14
   colorscheme falcon
 else
   colorscheme falcon
 endif
 
+" Cursorline color
+highlight CursorLine ctermbg=black cterm=bold guibg=black gui=bold
+
+
 " {{{ Linenumbering stuff
+" when numbering is on, toggle relative to active buffer
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu | endif
@@ -540,9 +544,17 @@ if has('title') && (has('gui_running') || &title)
 endif
 " }}}
 
+" Auto highlite current panel {{{
+augroup ActiveHighlight
+  autocmd!
+  autocmd WinEnter * set cul
+  autocmd WinLeave * set nocul
+augroup END
+" }}}
+
 " {{{ Cursor
-" highlight Cursor guifg=black guibg=steelblue
-" highlight iCursor guifg=white guibg=Orange
+" highlight Cursor guifg=red guibg=green
+" highlight iCursor guifg=green guibg=red
 " set guicursor=n-v-c:block-Cursor
 " set guicursor+=i:ver100-iCursor
 " set guicursor+=n-v-c:blinkon0
@@ -637,6 +649,7 @@ augroup filetypedetect
   au! BufNewFile,BufRead Vagrantfile* setf ruby
 augroup END
 " }}}
+
 " scss to sass
 command Scss2Sass %s/\s\?{\|;\|}//g
 
@@ -659,7 +672,6 @@ autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
 " emmet {{{
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,liquid EmmetInstall
-
 let g:user_emmet_leader_key=','
 " }}}
 
@@ -1039,13 +1051,13 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline_theme = 'falcon'
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_buffers = 0
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 " let g:airline_symbols_ascii = 1
 set showtabline=0 " remove tab bar
 " }}}
