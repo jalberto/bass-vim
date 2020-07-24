@@ -116,6 +116,8 @@ Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'tpope/vim-liquid'
 Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
 Plug 'towolf/vim-helm', {'for': 'yaml'}
+Plug 'ap/vim-css-color'
+Plug 'danilamihailov/beacon.nvim'
 
 Plug 'w0rp/ale' " async lint
 
@@ -131,7 +133,9 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'conradIrwin/vim-bracketed-paste'
 
 " Colors / Themes
-" Plug 'chriskempson/base16-vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
+Plug 'chuling/equinusocio-material.vim'
 Plug 'fenetikm/falcon'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -503,6 +507,8 @@ set background=dark
 let g:enable_bold_font = 1
 let g:falcon_background = 1
 let g:falcon_inactive = 0
+let g:equinusocio_material_style = 'pure'
+" let g:equinusocio_material_less = 50
 if has("gui_running")
   set guifont=JetBrains\ Mono\ Regular\ 14
   colorscheme falcon
