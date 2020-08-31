@@ -1,4 +1,4 @@
-# Commands
+# Commande
 
 * <ldr>dbl  Del blank lines
 * <ldr>rci  Indent w ruby-code

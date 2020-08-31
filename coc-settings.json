@@ -9,6 +9,8 @@
   "diagnostic.signOffset": 999999,
   "suggest.noselect": false,
   "html.filetypes": [ "html", "handlebars", "liquid" ],
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
   "markdownlint.config": {
     "default": true,
     "line_length": false

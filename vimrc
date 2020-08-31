@@ -107,6 +107,9 @@ Plug 'tpope/vim-repeat'
 " Try to detect correct identation
 Plug 'tpope/vim-sleuth'
 
+" Create Scratch buffer with `:Scratch` or `gs` `gS`
+Plug 'mtth/scratch.vim'
+
 Plug 'amadeus/vim-mjml', {'for': 'mjml'}
 Plug 'sheerun/vim-polyglot'
 Plug 'robbles/logstash.vim'
@@ -146,8 +149,6 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug 'qpkorr/vim-renamer'
-" overlay windows with - (dash)
-Plug 't9md/vim-choosewin'
 " zoom in/out <C-w>m
 Plug 'dhruvasagar/vim-zoom'
 
@@ -206,7 +207,7 @@ Plug 'christianrondeau/vim-base64'
 " increase/decrease dates with ctrl-a/x
 Plug 'tpope/vim-speeddating'
 " skip half each time with s or to center with gs
-Plug 'jayflo/vim-skip'
+" Plug 'jayflo/vim-skip'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -230,13 +231,15 @@ Plug 'danchoi/ri.vim', {'for': 'ruby'}
 Plug 'mattn/emmet-vim'
 
 " Plug 'tpope/vim-projectionist' " required for some navigation features
-" Plug 'janko-m/vim-test'
+Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] }
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
+Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
 
 " Pomodoro
 " Plug 'l04m33/vim-skuld'
@@ -260,9 +263,7 @@ vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
 vmap <Leader>8 :call I18nTranslateString()<CR>
 
 map <Leader>cl :set cursorline!<CR>
-map <Leader>cc :set cursorcolumn!<CR>
-
-nmap <Leader>ct :TagbarToggle<cr>
+map <Leader>cL :set cursorcolumn!<CR>
 
 " Delete blank lines
 nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
@@ -373,6 +374,8 @@ nmap  :Q        :q
 nmap  :aw       :wa
 nmap  :qw       :wq
 nnoremap ; :
+" write with sudo
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " <CTRL>+t new tab
 imap <C-t> <esc>:tabnew<cr> a
@@ -382,7 +385,7 @@ nmap <tab><tab> <C-w>w
 
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
-" selelct what you've just pasted
+" select what you've just pasted
 nnoremap gp `[v`]
 " nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 " reselect visual block after indent/outdent
@@ -423,7 +426,6 @@ set splitbelow                  " open the horizontal split below
 set wrap                        " wrap long lines
 set linebreak                   " break lines at word end
 set sidescroll=5
-set listchars+=precedes:<,extends:>
 
 " Try to show at least three lines and two columns of context when scrolling
 set scrolloff=99
@@ -535,9 +537,9 @@ highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 " Show tabs and trailing whitespace visually
 if has("multi_byte")
-  set list listchars=tab:⭾\ ,trail:␠,extends:…,nbsp:⎵,eol:⏎
+  set list listchars=precedes:<,tab:⭾\ ,trail:␠,extends:…,nbsp:⎵,eol:⏎
 else
-  set list listchars=tab:>-,trail:.,extends:>,nbsp:_,eol:$
+  set list listchars=precedes:<,tab:>-,trail:.,extends:>,nbsp:_,eol:$
 endif
 " }}}
 
@@ -675,6 +677,10 @@ autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
 
 " Plugins {{{
 
+" Scratch {{{
+let g:scratch_persistence_file = "~/.scratch.vim"
+" }}}
+
 " emmet {{{
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,liquid EmmetInstall
@@ -741,6 +747,11 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <leader>ol :<C-u>CocFzfList outline<CR>
+nnoremap <silent> <leader>cd  :<C-u>CocFzfList diagnostics --current<CR>
+nnoremap <silent> <leader>cc  :<C-u>CocFzfList commands<CR>
+nnoremap <silent> <leader>cs  :<C-u>CocFzfList symbols<CR>
+nnoremap <silent> <leader>cl  :<C-u>CocFzfList location<CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -870,24 +881,26 @@ nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
 nmap <silent> <leader>pl <Plug>(ale_previous_wrap)
 nmap <silent> <leader>nl <Plug>(ale_next_wrap)
 let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = '⨉'
+let g:ale_sign_error = '☢'
 let g:ale_sign_warning = '⚠'
 let g:airline#extensions#ale#enabled = 1
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'elixir': ['mix_format'],
-\   'ruby': ['rufo'],
+\   'ruby': ['rubocop'],
 \   'css' : ['prettier'],
 \   'html' : ['prettier'],
 \   'markdown' : ['prettier'],
 \   'yaml': ['prettier'],
-\   'json': ['prettier'],
+\   'json': ['prettier', 'eslint'],
+\   'javascript': ['prettier', 'eslint'],
 \}
-au FileType elixir let b:ale_fix_on_save = 1
+" au FileType elixir let b:ale_fix_on_save = 1
 " }}}
 
 " Visual Drag (move selected chunk) {{{
@@ -901,6 +914,7 @@ let g:DVB_TrimWS = 1
 " }}}
 
 " Tests {{{
+let test#strategy = "neoterm"
 nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>Tf :TestFile<CR>
 nmap <silent> <leader>Ta :TestSuite<CR>
@@ -969,8 +983,9 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " vim-gh-line {{{
 " let g:gh_gitlab_domain = "gitlab.com"
-" let g:gh_open_command = 'xdg-open '
-" let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+let g:gh_open_command = 'fn() { echo "$@" | wl-copy; }; fn '
+let g:gh_line_map_default = 0
+let g:gh_line_map = '<leader>gh'
 " }}}
 
 " tagBar {{{
@@ -1066,10 +1081,6 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 " let g:airline_symbols_ascii = 1
 set showtabline=0 " remove tab bar
-" }}}
-
-" Choosewin {{{
-nmap  -  <Plug>(choosewin)
 " }}}
 
 " Small {{{
