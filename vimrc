@@ -1,17 +1,31 @@
 " BaSS vimrc's 2015
+" vim: fdm=marker fdl=0
 
 " General {{{
-set nocompatible
 filetype on
 
+scriptencoding utf-8
+set encoding=utf-8
+
+" Set paths
 if has('nvim')
   set runtimepath^=~/.vim runtimepath+=~/.vim/after
-  let &packpath = &runtimepath
+  let &packpath=&runtimepath
 endif
+set backupdir=/tmp//
+set directory=/tmp//
 
-" filetype plugin indent on
+set autoindent
+filetype plugin indent on
+set copyindent " copy the previous indentation on autoindenting
+set shiftround " When shifting lines, round the indentation to the nearest multiple of “shiftwidth.”
 
-" syntax on
+set smarttab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2 " num colums
+set expandtab    " use spaces
+
 if !has('nvim')
   set antialias
 endif
@@ -19,10 +33,6 @@ set modeline
 set mousehide
 set nobackup
 set showcmd " Show us the command we're typing
-" set hidden  " Allow edit buffers to be hidden
-runtime macros/matchit.vim
-set backupdir=/tmp//
-set directory=/tmp//
 
 " Try to autoreload files on external changes
 autocmd FocusGained * silent! checktime
@@ -44,51 +54,25 @@ set shortmess=aoOtI
 set cmdheight=2
 let g:bufferline_echo=0
 
-" {{{ Folding & syntax
+" if buffer is in tab use that tab
+set switchbuf=usetab,newtab
+"
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=1000
+
 if has("folding")
   set foldenable
   set foldmethod=syntax
   set foldlevelstart=1   " open most folds by default
 endif
+" }}}
 
-" Sgml,htmls,xml y xsl folder
-au Filetype html,xml,xsl,sgml,docbook
-
-" Yaml and company
-autocmd FileType yaml setlocal foldmethod=indent
-autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl set ft=helm
-autocmd FileType helm setlocal foldmethod=indent
-
-" JavaScript fold
-autocmd FileType javascript setlocal foldmethod=syntax
-autocmd FileType javascript setlocal foldlevelstart=1
-" autocmd FileType javascript syntax region foldBraces
-" Apply schema to json
-" autocmd BufRead,BufNewFile swagger.json Vison
-" Treat JSON files like JavaScript
-au BufNewFile,BufRead *.json setf javascript
-
-" Some file types use real tabs
-" au FileType {make,gitconfig} set noexpandtab sw=4
-
-" Make Python follow PEP8
-au FileType python set foldmethod=indent
-au FileType python set sts=4 ts=4 sw=4 tw=79
-
-" Make sure all markdown files have the correct filetype
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
-" MultiMarkdown requires 4-space tabs
-au FileType markdown set sts=4 ts=4 sw=4
-let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'sql', 'elixir']
-
-autocmd Filetype gitcommit setlocal spell textwidth=72
-" "}}}
-
-" if buffer is in tab use that tab
-set switchbuf=usetab,newtab
-
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=1200
+" Custom file types {{{
+augroup filetypedetect
+  autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl setf helm
+  autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
+  " autocmd BufNewFile,BufRead *.json setf javascript
+augroup END
 " }}}
 
 " Vundle {{{
@@ -171,13 +155,8 @@ Plug 'tpope/vim-ragtag'
 " Underline word under cursor
 " Plug 'itchyny/vim-cursorword'
 
-" Plug 'ervandew/supertab'
-" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tomtom/tcomment_vim'
-" Plug 'liuchengxu/vista.vim'
-" Plug 'majutsushi/tagbar'
-" Plug 't9md/vim-smalls'
 
 " Send to terminal
 Plug 'jpalardy/vim-slime', Cond(!has('nvim'))
@@ -186,7 +165,6 @@ Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
 Plug 'christoomey/vim-tmux-navigator'
 
 " auto generate tags async
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'rhysd/clever-f.vim'
 Plug 'kshenoy/vim-signature'
 
@@ -206,15 +184,9 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'christianrondeau/vim-base64'
 " increase/decrease dates with ctrl-a/x
 Plug 'tpope/vim-speeddating'
-" skip half each time with s or to center with gs
-" Plug 'jayflo/vim-skip'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-" Ruby objs select: ar/ir
-" Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}
-" Plug 'tpope/vim-rake', {'for': 'ruby'}
-" Plug 'tpope/vim-bundler', {'for': 'ruby'}
 Plug 'vim-scripts/ruby-matchit', {'for': 'ruby'}
 Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
@@ -240,29 +212,93 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
 Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
-
-" Pomodoro
-" Plug 'l04m33/vim-skuld'
-
-" Display lead mapping with <lead>fml
-" Plug 'ktonga/vim-follow-my-lead'
-
 call plug#end()
 " }}}
 
-" Keyboard shortcuts{{{
+" Functions {{{
+" switch between horizontal and vertical split mode for open splits {{{
+function! Rotate()
+    " save the original position, jump to the first window
+    let initial = winnr()
+    exe 1 . "wincmd w"
 
+    wincmd l
+    if winnr() != 1
+        " succeeded moving to the right window
+        wincmd J                " make it the bot window
+    else
+        " cannot move to the right, so we are at the top
+        wincmd H                " make it the left window
+    endif
+
+    " restore cursor to the initial window
+    exe initial . "wincmd w"
+endfunction
+" }}}
+
+" Append modeline after last line in buffer (<leader>ml) {{{
+function! AppendModeline()
+  let save_cursor = getpos('.')
+  let append = ' vim: set ts='.&tabstop.' sw='.&shiftwidth.' tw='.&textwidth.' fdm='.&foldmethod.':'
+  $put =substitute(&commentstring,\"%s\",append,\"\")
+  call setpos('.', save_cursor)
+endfunction
+" }}}
+" }}}
+
+" Auto commands {{{
+" Sessions {{{
+set ssop-=options
+augroup sourcesession
+  autocmd!
+  autocmd VimEnter * nested
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
+        \   source Session.vim |
+        \ endif
+augroup END
+" }}}
+
+" when numbering is on, toggle relative to active buffer {{{
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+augroup END
+" }}}
+
+" Auto highlite current panel {{{
+augroup ActiveHighlight
+  autocmd!
+  autocmd WinEnter * set cul
+  autocmd WinLeave * set nocul
+augroup END
+" }}}
+
+" Auto add shebang {{{
+if has("autocmd")
+  augroup content
+    autocmd!
+
+    autocmd BufNewFile *.rb 0put ='# vim: set sw=2 sts=2 tw=80 :' |
+          \ 0put ='#!/usr/bin/ruby' | set sw=2 sts=2 tw=80 |
+          \ norm G
+
+    autocmd BufNewFile *.sh 0put ='# vim: set sw=2 sts=2 tw=80 :' |
+          \ 0put ='#!/bin/bash' | set sw=2 sts=2 tw=80 |
+          \ norm G
+  augroup END
+endif
+" }}}
+
+" Auto reload vimrc
+au BufWritePost .vimrc so $MYVIMRC
+" }}}
+
+" Keyboard shortcuts {{{
 " Leader {{{
 let mapleader = " "
 
-
-" Align
-vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
-
-" Rails i18n
-vmap <Leader>8 :call I18nTranslateString()<CR>
-
-map <Leader>cl :set cursorline!<CR>
+" map <Leader>cl :set cursorline!<CR>
 map <Leader>cL :set cursorcolumn!<CR>
 
 " Delete blank lines
@@ -286,6 +322,24 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 map <silent> <leader>n :set number! relativenumber!<CR>
 
+" Copy paste to clipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+nnoremap <leader>r :call Rotate()<CR>
+
+" Rails i18n
+" vmap <Leader>8 :call I18nTranslateString()<CR>
+" }}}
+
+" Plugins {{{
+" Align
+vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
+
 " NeoTerm
 nnoremap <leader>tf :TREPLSendFile<cr>
 nnoremap <leader>tl :TREPLSendLine<cr>
@@ -295,17 +349,6 @@ nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
 nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
 map <silent> <leader>x :NERDTreeTabsToggle<CR>
-
-" Copy paste to clipboard
-" vnoremap <C-c> "+y
-" noremap <T-v> "+gP
-" imap <T-v> "+gP
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
 
 " FZF
 nnoremap <silent><Leader>f :Files<CR>
@@ -323,38 +366,11 @@ vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
 " Fugitive
 cnoreabbrev Gws Gstatus
 cnoreabbrev Gca Gcommit -a
-
-" tabs manipulation
-function! Rotate() " switch between horizontal and vertical split mode for open splits
-    " save the original position, jump to the first window
-    let initial = winnr()
-    exe 1 . "wincmd w"
-
-    wincmd l
-    if winnr() != 1
-        " succeeded moving to the right window
-        wincmd J                " make it the bot window
-    else
-        " cannot move to the right, so we are at the top
-        wincmd H                " make it the left window
-    endif
-
-    " restore cursor to the initial window
-    exe initial . "wincmd w"
-endfunction
-
-nnoremap <leader>r :call Rotate()<CR>
 " }}}
 
 " move in buffers and tabs
-" nmap <S-LEFT>  :bN<cr>
-" nmap <S-RIGHT> :bn<cr>
-" imap <S-LEFT>  <esc>:bN<cr>
-" imap <S-RIGHT> <esc>:bn<cr>
 nmap <C-RIGHT> :tabnext<cr>
 nmap <C-LEFT>  :tabprevious<cr>
-" imap <C-RIGHT> <esc>:tabnext<cr>
-" imap <C-LEFT>  <esc>:tabprevious<cr>
 nmap <silent> <C-h> :tabprevious<cr>
 nmap <silent> <C-l> :tabnext<cr>
 imap <silent> <C-h> <esc>:tabprevious<cr>
@@ -370,14 +386,13 @@ nmap <silent> <S-l> :bn<cr>
 nmap  :X        :x
 nmap  :W        :w
 nmap  :Q        :q
-" nmap  q:        :q
 nmap  :aw       :wa
 nmap  :qw       :wq
 nnoremap ; :
+
 " write with sudo
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-" <CTRL>+t new tab
 imap <C-t> <esc>:tabnew<cr> a
 map  <C-t> :tabnew<cr> i
 
@@ -403,94 +418,68 @@ noremap <A-left>  3<C-W><
 noremap <A-right> 3<C-W>>
 " }}}
 
-" Sessions {{{
-set ssop-=options
-augroup sourcesession
-  autocmd!
-  autocmd VimEnter * nested
-        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
-        \   source Session.vim |
-        \ endif
-augroup END
-" }}}
-
 " Misc {{{
-" let loaded_minibufexplorer = 0 "dont load miniBufferExplorer
 set lazyredraw     " Speed up macros
 set winminheight=1 " 1 height windows
 set popt+=syntax:y " Syntax when printing
 
-set linespace=0                 " number of pixels between the lines
-set splitright                  " open vertical splits on the right
-set splitbelow                  " open the horizontal split below
-set wrap                        " wrap long lines
-set linebreak                   " break lines at word end
+set linespace=0 " number of pixels between the lines
+set splitright  " open vertical splits on the right
+set splitbelow  " open the horizontal split below
+set wrap        " wrap long lines
+set linebreak   " break lines at word end
 set sidescroll=5
 
 " Try to show at least three lines and two columns of context when scrolling
 set scrolloff=99
 set sidescrolloff=3
+
 " Improve vim's scrolling speed
 set ttyfast
 if !has('nvim')
   set ttyscroll=3
 endif
 
-set cf                  " Enable error files & error jumping.
-set clipboard+=unnamedplus  " Yanks go on clipboard instead.
-set autowrite           " Writes on make/shell commands
+set cf        " Enable error files & error jumping.
 
-set visualbell           " don't beep
-set noerrorbells         " don't beep
+set autoread " Automatically re-read files if unmodified inside Vim.
+set autowrite " Writes on make/shell commands
 
-" set tags+=gems.tags
+set clipboard+=unnamedplus " Yanks go on clipboard instead.
+
+set visualbell   " don't beep
+set noerrorbells " don't beep
+
+" Search {{{
+set incsearch " live search
+set hlsearch  " highlight search
+
+" Selective case insensitivity
+set ignorecase
+set infercase
+set smartcase "only ignores case when minus words
+
+" Show full tags when doing search completion
+set showfulltag
 " }}}
+" Autocomplete {{{
+" Use the cool tab complete menu
+set wildmenu " show complete menu at bottom
+" set wildmode=list:longest,full
+set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
+set suffixes+=.in,.a
 
-" MoveTabs {{{
-" function TabLeft()
-"    let tab_number = tabpagenr() - 1
-"    if tab_number == 0
-"       execute "tabm" tabpagenr('$') - 1
-"    else
-"       execute "tabm" tab_number - 1
-"    endif
-" endfunction
-"
-" function TabRight()
-"    let tab_number = tabpagenr() - 1
-"    let last_tab_number = tabpagenr('$') - 1
-"    if tab_number == last_tab_number
-"       execute "tabm" 0
-"    else
-"       execute "tabm" tab_number + 1
-"    endif
-" endfunction
+" Wrap on these
+set whichwrap+=<,>,[,]
 
-" map <silent><C-S-Right> :execute TabRight()<CR>
-" map <silent><C-S-Left> :execute TabLeft()<CR>
+" load abbr if exist
+if filereadable(expand("~/.vim/abbr"))
+  source ~/.vim/abbr
+endif
 " }}}
-
-" spaces, tabs, indent {{{
-" Do clever indent things. Don't make a # force column zero.
-set autoindent
-set copyindent    " copy the previous indentation on autoindenting
-set smartindent
-inoremap # X<BS>#
-
-set smarttab
-set softtabstop=2
-set tabstop=2
-set shiftwidth=2    "num colums
-set expandtab       "use spaces
 " }}}
 
 " Fonts, Colors, Theming {{{
-
-" Encoding {{{
-scriptencoding utf-8
-set encoding=utf-8
-" }}}
-
 " Terminal true colour support
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
@@ -506,11 +495,13 @@ if has("nvim") || has("termguicolors")
 endif
 
 set background=dark
-let g:enable_bold_font = 1
-let g:falcon_background = 1
-let g:falcon_inactive = 0
-let g:equinusocio_material_style = 'pure'
-" let g:equinusocio_material_less = 50
+let g:enable_bold_font=1
+
+let g:falcon_background=1
+let g:falcon_inactive=0
+let g:equinusocio_material_style='pure'
+" let g:equinusocio_material_less=50
+
 if has("gui_running")
   set guifont=JetBrains\ Mono\ Regular\ 14
   colorscheme falcon
@@ -520,16 +511,6 @@ endif
 
 " Cursorline color
 highlight CursorLine ctermbg=black cterm=bold guibg=black gui=bold
-
-
-" {{{ Linenumbering stuff
-" when numbering is on, toggle relative to active buffer
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-augroup END
-" }}}
 
 " Special chars {{{
 " highlight Problematic whitespaces
@@ -551,144 +532,17 @@ if has('title') && (has('gui_running') || &title)
   " set titlestring+=\ -\ %{v:progname} " program name
 endif
 " }}}
-
-" Auto highlite current panel {{{
-augroup ActiveHighlight
-  autocmd!
-  autocmd WinEnter * set cul
-  autocmd WinLeave * set nocul
-augroup END
 " }}}
 
-" {{{ Cursor
-" highlight Cursor guifg=red guibg=green
-" highlight iCursor guifg=green guibg=red
-" set guicursor=n-v-c:block-Cursor
-" set guicursor+=i:ver100-iCursor
-" set guicursor+=n-v-c:blinkon0
-" set guicursor+=i:blinkwait10
-" }}}
-
-" }}}
-" }}}
-
-" Search {{{
-set incsearch " live search
-set hlsearch  " highlight search
-
-" Selective case insensitivity
-set ignorecase
-set infercase
-set smartcase "only ignores case when minus words
-
-" Show full tags when doing search completion
-set showfulltag
-" }}}
-
-" AutoCmd & other auto stuff {{{
-
-" Auto add shebang
-if has("autocmd")
-  augroup content
-    autocmd!
-
-    autocmd BufNewFile *.rb 0put ='# vim: set sw=2 sts=2 tw=80 :' |
-          \ 0put ='#!/usr/bin/ruby' | set sw=2 sts=2 tw=80 |
-          \ norm G
-
-    autocmd BufNewFile *.sh 0put ='# vim: set sw=2 sts=2 tw=80 :' |
-          \ 0put ='#!/bin/bash' | set sw=2 sts=2 tw=80 |
-          \ norm G
-  augroup END
-endif
-
-" Auto reload vimrc
-au BufWritePost .vimrc so $MYVIMRC
-
-" }}}
-
-" Autocomplete {{{
-" Use the cool tab complete menu
-set wildmenu " show complete menu at bottom
-" set wildmode=list:longest,full
-set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-set suffixes+=.in,.a
-
-" Wrap on these
-set whichwrap+=<,>,[,]
-
-" load abbr if exist
-if filereadable(expand("~/.vim/abbr"))
-  source ~/.vim/abbr
-endif
-" }}}
-
-" Snippets {{{
-
-" ultisnips directory
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" Append modeline after last line in buffer (<leader>ml).
-function! AppendModeline()
-  let save_cursor = getpos('.')
-  let append = ' vim: set ts='.&tabstop.' sw='.&shiftwidth.' tw='.&textwidth.' fdm='.&foldmethod.':'
-  $put =substitute(&commentstring,\"%s\",append,\"\")
-  call setpos('.', save_cursor)
-endfunction
-" }}}
-
-" Ruby - Rails {{{
-" Insert Mode as bpry<space>
-iabbr bpry require'pry';binding.pry
-iabbr froz # frozen_string_literal: true
-
-" Set FileType {{{
-augroup filetypedetect
-  au! BufNewFile,BufRead *.ch setf cheat
-  au! BufNewFile,BufRead *.liquid setf liquid
-  au! BufNewFile,BufRead *.haml setf haml
-  au! BufNewFile,BufRead *.html.haml setf haml
-  au! BufNewFile,BufRead *.hamljs setf haml
-  au! BufNewFile,BufRead *.yml setf eruby
-  au! BufNewFile,BufRead *.erb setf eruby
-  au! BufNewFile,BufRead *.html.erb setf eruby
-  au! BufNewFile,BufRead *.rhtml setf eruby
-  au! BufNewFile,BufRead Vagrantfile* setf ruby
-augroup END
-" }}}
-
-" scss to sass
-command Scss2Sass %s/\s\?{\|;\|}//g
-
-" Autocomplete ids and classes in CSS
-autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
-" Add the '-' as a keyword in erb files
-autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
-" Make those debugger statements painfully obvious
-au BufEnter *.rb syn match error contained "\<binding.pry\>"
-au BufEnter *.rb syn match error contained "\<debugger\>"
-" }}}
-
-" {{{ Docker stuff
-autocmd BufNewFile,BufRead Dockerfile.* set ft=dockerfile
-autocmd BufNewFile,BufRead docker-compose.* set ft=yaml
-" }}}
-
-" Plugins {{{
-
-" Scratch {{{
-let g:scratch_persistence_file = "~/.scratch.vim"
-" }}}
-
+" Plugins config {{{
 " emmet {{{
-let g:user_emmet_install_global = 0
+let g:user_emmet_install_global=0
 autocmd FileType html,css,liquid EmmetInstall
 let g:user_emmet_leader_key=','
 " }}}
 
 " COC {{{
-let g:coc_global_extensions = [
+let g:coc_global_extensions=[
             \'coc-solargraph',
             \'coc-elixir',
             \'coc-json',
@@ -718,8 +572,8 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Navigate snippet placeholders using tab
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
+let g:coc_snippet_next='<Tab>'
+let g:coc_snippet_prev='<S-Tab>'
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -785,12 +639,7 @@ nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<C
 " }}}
 
 " clever-f {{{
-let g:clever_f_smart_case = 1
-" }}}
-
-" Guten tag {{{
-let g:gutentags_ctags_exclude = ["node_modules", "assets", "_build", "build", "vendor", "private", "priv", "logs", ".git"]
-let g:gutentags_cache_dir = "/tmp"
+let g:clever_f_smart_case=1
 " }}}
 
 " fzf {{{
@@ -903,16 +752,6 @@ let g:ale_fixers = {
 " au FileType elixir let b:ale_fix_on_save = 1
 " }}}
 
-" Visual Drag (move selected chunk) {{{
-" vmap  <expr>  <LEFT> DVB_Drag('left')
-" vmap  <expr>  <RIGHT> DVB_Drag('right')
-" vmap  <expr>  <DOWN> DVB_Drag('down')
-" vmap  <expr>  <UP> DVB_Drag('up')
-" vmap  <expr>  D       DVB_Duplicate()
-" Remove any introduced trailing whitespace after moving...
-let g:DVB_TrimWS = 1
-" }}}
-
 " Tests {{{
 let test#strategy = "neoterm"
 nmap <silent> <leader>T :TestNearest<CR>
@@ -965,17 +804,6 @@ nnoremap <leader>u :GundoToggle<CR>
 let g:gundo_prefer_python3 = 1
 " }}}
 
-" autosave {{{
-" let g:auto_save = 0
-" let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
-" let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
-""let g:auto_save_silent = 1  " do not display the auto-save notification
-" }}}
-
-" Follow my Lead {{{
-" let g:fml_all_sources = 1
-" }}}
-
 " fugitive {{{
 " delete hidden fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -988,82 +816,10 @@ let g:gh_line_map_default = 0
 let g:gh_line_map = '<leader>gh'
 " }}}
 
-" tagBar {{{
-" let g:tagbar_width = 30
-" let g:tagbar_autofocus = 1
-" let g:tagbar_compact = 1
-" let g:tagbar_type_elixir = {
-"     \ 'ctagstype' : 'elixir',
-"     \ 'kinds' : [
-"         \ 'f:functions',
-"         \ 'functions:functions',
-"         \ 'c:callbacks',
-"         \ 'd:delegates',
-"         \ 'e:exceptions',
-"         \ 'i:implementations',
-"         \ 'a:macros',
-"         \ 'o:operators',
-"         \ 'm:modules',
-"         \ 'p:protocols',
-"         \ 'r:records',
-"         \ 't:tests'
-"     \ ]
-" \ }
-" }}}
-
-" explorer.vim {{{
-let g:explHideFiles='^\.'
-" }}}
-
 " :TOhtml {{{
 let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
-" }}}
-
-" cscope {{{
-if has('cscope') && filereadable("/usr/bin/cscope")
-  set csto=0
-  set cscopetag
-  set nocsverb
-  if filereadable("cscope.out")
-    cs add cscope.out
-  endif
-  set csverb
-
-  let x = "sgctefd"
-  while x != ""
-    let y = strpart(x, 0, 1) | let x = strpart(x, 1)
-    exec "nmap <C-j>" . y . " :cscope find " . y .
-          \ " <C-R>=expand(\"\<cword\>\")<CR><CR>"
-    exec "nmap <C-j><C-j>" . y . " :scscope find " . y .
-          \ " <C-R>=expand(\"\<cword\>\")<CR><CR>"
-  endwhile
-  nmap <C-j>i      :cscope find i ^<C-R>=expand("<cword>")<CR><CR>
-  nmap <C-j><C-j>i :scscope find i ^<C-R>=expand("<cword>")<CR><CR>
-endif
-" }}}
-
-" VCSCommand {{{
-let g:VCSCommandCommitOnWrite = 0
-" }}}
-
-" Debugger {{{
-let g:DBGRconsoleHeight = 7
-let g:DBGRlineNumbers   = 1
-" }}}
-
-" Surronding {{{
-let g:rails_dbext=1
-" }}}
-
-" autoclose {{{
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'"}
-let g:AutoCloseProtectedRegions = ["String", "Character"]
-" }}}
-
-" coffeescript {{{
-let coffee_compile_vert = 1
 " }}}
 
 " airline {{{
@@ -1083,17 +839,6 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 set showtabline=0 " remove tab bar
 " }}}
 
-" Small {{{
-" map normal-mode 's' for simple search
-" map m <Plug>(smalls)
-" if you want to use smalls in visual/operator or both mode.
-" omap m <Plug>(smalls)
-" xmap m <Plug>(smalls)
-" }}}
-" SplitJoin {{{
-" nmap ss :SplitjoinSplit<cr>
-" nmap sj :SplitjoinJoin<cr>
-" }}}
 " SmartGF {{{
 let g:smartgf_key = 'gm'
 let g:smartgf_auto_refresh_ctags = 0
