@@ -1,4 +1,4 @@
-setlocal foldmethod = indent
+setlocal foldmethod=indent
 
 " scss to sass
-command Scss2Sass %s/\s\?{\|;\|}//g
+command! Scss2Sass %s/\s\?{\|;\|}//g

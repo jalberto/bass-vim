@@ -91,9 +91,6 @@ Plug 'tpope/vim-repeat'
 " Try to detect correct identation
 Plug 'tpope/vim-sleuth'
 
-" Create Scratch buffer with `:Scratch` or `gs` `gS`
-Plug 'mtth/scratch.vim'
-
 Plug 'amadeus/vim-mjml', {'for': 'mjml'}
 Plug 'sheerun/vim-polyglot'
 Plug 'robbles/logstash.vim'
@@ -240,8 +237,24 @@ endfunction
 function! AppendModeline()
   let save_cursor = getpos('.')
   let append = ' vim: set ts='.&tabstop.' sw='.&shiftwidth.' tw='.&textwidth.' fdm='.&foldmethod.':'
-  $put =substitute(&commentstring,\"%s\",append,\"\")
+  $put = substitute(&commentstring,\"%s\",append,\"\")
   call setpos('.', save_cursor)
+endfunction
+" }}}
+
+" Creare/read scratch file {{{
+augroup autowritescratchfile
+  autocmd!
+
+  autocmd BufRead,BufNewFile Scratch.vim setf markdown
+  autocmd CursorHold,CursorHoldI Scratch.vim update
+
+  " let ml = ' vim: set ft=markdown'
+  " autocmd BufNewFile Scratch.vim $put = substitute(&commentstring,\"%s\",ml,\"\") | startinsert | norm ggO
+augroup END
+
+function! ReadScratchFile()
+  topleft 10split +startinsert Scratch.vim
 endfunction
 " }}}
 " }}}
@@ -411,6 +424,8 @@ vnoremap > >gv
 nnoremap n nzz
 nnoremap N Nzz
 
+nnoremap gs :call ReadScratchFile()<CR>
+
 " resize panels
 noremap <A-up>    <C-W>+
 noremap <A-down>  <C-W>-
@@ -491,6 +506,8 @@ endif
 if has("nvim") || has("termguicolors")
   " clean BCE in tmux for propper colours
   " set t_ut=
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 

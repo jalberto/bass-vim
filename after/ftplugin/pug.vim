@@ -1,1 +1,1 @@
-setlocal foldmethod = indent
+setlocal foldmethod=indent
