@@ -112,6 +112,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'henrik/vim-indexed-search'
 " search occurences in visual selection
 Plug 'nelstrom/vim-visual-star-search'
+" expand visual/obj selection with +/-
+Plug 'terryma/vim-expand-region'
 
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
@@ -167,6 +169,7 @@ Plug 'kshenoy/vim-signature'
 
 Plug 'sjl/gundo.vim' " Display undo tree with <leader>u
 Plug 'tpope/vim-fugitive'
+Plug 'sodapopcan/vim-twiggy' " Manage branches
 Plug 'mhinz/vim-signify' " visualize marks
 " highlight newst git change
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
