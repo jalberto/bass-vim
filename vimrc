@@ -206,7 +206,8 @@ Plug 'mattn/emmet-vim'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] }
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -260,6 +261,22 @@ function! ReadScratchFile()
   topleft 10split +startinsert Scratch.vim
 endfunction
 " }}}
+
+" Get visual selection (used in fzf)
+function! s:getVisualSelection()
+  let [line_start, column_start] = getpos("'<")[1:2]
+  let [line_end, column_end] = getpos("'>")[1:2]
+  let lines = getline(line_start, line_end)
+
+  if len(lines) == 0
+      return ""
+  endif
+
+  let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
+  let lines[0] = lines[0][column_start - 1:]
+
+  return join(lines, "\n")
+endfunction
 " }}}
 
 " Auto commands {{{
@@ -663,72 +680,45 @@ let g:clever_f_smart_case=1
 " }}}
 
 " fzf {{{
-" ripgrep
+
+" this is in zshrc
+" if executable('fd')
+"   let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude "**/{.git,node_modules,vendor,deps,_build,tmp}/*"'
+" endif
+
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --smart-case --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*"'
   set grepprg=rg\ --vimgrep
+"
+  " :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview('down:40%')
+    \           : fzf#vim#with_preview('down:40%:hidden', '?'),
+    \   <bang>0)
 
-"   :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Rg! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,priv,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+  " :RG reset ripgrep each time to research
+  function! RipgrepFzf(query, fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" -- %s || true'
+    let initial_command = printf(command_fmt, shellescape(a:query))
+    let reload_command = printf(command_fmt, '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+  endfunction
 
+  command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 endif
 
-" Likewise, Files command with preview window
+" Files command with preview window
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0 ? fzf#vim#with_preview('down:40%')
+  \           : fzf#vim#with_preview('down:40%:hidden', '?'),
   \   <bang>0)
 
-function! s:getVisualSelection()
-  let [line_start, column_start] = getpos("'<")[1:2]
-  let [line_end, column_end] = getpos("'>")[1:2]
-  let lines = getline(line_start, line_end)
+let $FZF_DEFAULT_OPTS="--reverse" " top to bottom
 
-  if len(lines) == 0
-      return ""
-  endif
-
-  let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
-  let lines[0] = lines[0][column_start - 1:]
-
-  return join(lines, "\n")
-endfunction
-
-let g:fzf_buffers_jump = 1
-
-" floating fzf window with borders
-function! CreateCenteredFloatingWindow()
-    let width = min([&columns - 4, max([80, &columns - 20])])
-    let height = min([&lines - 4, max([20, &lines - 10])])
-    let top = ((&lines - height) / 2) - 1
-    let left = (&columns - width) / 2
-    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
-
-    let top = "╭" . repeat("─", width - 2) . "╮"
-    let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
-    let lines = [top] + repeat([mid], height - 2) + [bot]
-    let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-    call nvim_open_win(s:buf, v:true, opts)
-    set winhl=Normal:Floating
-    let opts.row += 1
-    let opts.height -= 2
-    let opts.col += 2
-    let opts.width -= 4
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-    au BufWipeout <buffer> exe 'bw '.s:buf
-endfunction
-
-let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
-let $FZF_DEFAULT_OPTS="--reverse " " top to bottom
+let g:fzf_buffers_jump = 1 " jump to the existing window if possible
 " }}}
 
 " vimwiki {{{
