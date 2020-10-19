@@ -211,6 +211,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
 Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
 call plug#end()
@@ -697,7 +698,7 @@ if executable('rg')
     \           : fzf#vim#with_preview('down:40%:hidden', '?'),
     \   <bang>0)
 
-  " :RG reset ripgrep each time to research
+  " :RG reset ripgrep each time to re-search
   function! RipgrepFzf(query, fullscreen)
     let command_fmt = 'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" -- %s || true'
     let initial_command = printf(command_fmt, shellescape(a:query))
