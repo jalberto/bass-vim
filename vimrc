@@ -207,12 +207,12 @@ Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSu
 Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
-Plug 'antoinemadec/coc-fzf'
+" Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
 call plug#end()
 " }}}
@@ -384,7 +384,7 @@ nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
 map <silent> <leader>x :NERDTreeTabsToggle<CR>
 
-" FZF
+if has_key(plugs, 'fzf.vim')
 nnoremap <silent><Leader>f :Files<CR>
 nnoremap <silent><Leader>o :Files<CR>
 nnoremap <silent><Leader>l :BLines<CR>
@@ -396,6 +396,27 @@ nnoremap <silent><Leader>w :Windows<CR>
 nnoremap <silent><Leader>s :Rg
 nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
 vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
+
+nnoremap <silent> <leader>ol :<C-u>CocFzfList outline<CR>
+nnoremap <silent> <leader>cd :<C-u>CocFzfList diagnostics --current<CR>
+nnoremap <silent> <leader>cc :<C-u>CocFzfList commands<CR>
+nnoremap <silent> <leader>cs :<C-u>CocFzfList symbols<CR>
+nnoremap <silent> <leader>cl :<C-u>CocFzfList location<CR>
+endif
+
+if has_key(plugs, 'vim-clap')
+nnoremap <silent><Leader>f :Clap gfiles<CR>
+nnoremap <silent><Leader>o :Clap files<CR>
+nnoremap <silent><Leader>l :Clap blines<CR>
+" nnoremap <silent><Leader>t :BTags<CR>
+" nnoremap <silent><Leader>tt :Tags<CR>
+nnoremap <silent><Leader>? :Clap history<CR>
+nnoremap <silent><Leader><space> :Clap buffers<CR>
+nnoremap <silent><Leader>w :Clap windows<CR>
+nnoremap <silent><Leader>s :Clap grep
+nnoremap <silent><leader>W :Clap grep ++query=<cword>
+vnoremap <silent><leader>w :Clap grep ++query=@visual
+endif
 
 " Fugitive
 cnoreabbrev Gws Gstatus
@@ -639,11 +660,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> <leader>ol :<C-u>CocFzfList outline<CR>
-nnoremap <silent> <leader>cd  :<C-u>CocFzfList diagnostics --current<CR>
-nnoremap <silent> <leader>cc  :<C-u>CocFzfList commands<CR>
-nnoremap <silent> <leader>cs  :<C-u>CocFzfList symbols<CR>
-nnoremap <silent> <leader>cl  :<C-u>CocFzfList location<CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -687,39 +703,43 @@ let g:clever_f_smart_case=1
 "   let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude "**/{.git,node_modules,vendor,deps,_build,tmp}/*"'
 " endif
 
-if executable('rg')
-  set grepprg=rg\ --vimgrep
+" if executable('rg')
+"   set grepprg=rg\ --vimgrep
+" "
+"   " :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
+"   command! -bang -nargs=* Rg
+"     \ call fzf#vim#grep(
+"     \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" '.shellescape(<q-args>), 1,
+"     \   <bang>0 ? fzf#vim#with_preview('down:40%')
+"     \           : fzf#vim#with_preview('down:40%:hidden', '?'),
+"     \   <bang>0)
 "
-  " :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
-  command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" '.shellescape(<q-args>), 1,
-    \   <bang>0 ? fzf#vim#with_preview('down:40%')
-    \           : fzf#vim#with_preview('down:40%:hidden', '?'),
-    \   <bang>0)
+"   " :RG reset ripgrep each time to re-search
+"   function! RipgrepFzf(query, fullscreen)
+"     let command_fmt = 'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" -- %s || true'
+"     let initial_command = printf(command_fmt, shellescape(a:query))
+"     let reload_command = printf(command_fmt, '{q}')
+"     let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+"     call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+"   endfunction
+"
+"   command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+" endif
+"
+" " Files command with preview window
+" command! -bang -nargs=? -complete=dir Files
+"   \ call fzf#vim#files(<q-args>,
+"   \   <bang>0 ? fzf#vim#with_preview('down:40%')
+"   \           : fzf#vim#with_preview('down:40%:hidden', '?'),
+"   \   <bang>0)
+"
+" let $FZF_DEFAULT_OPTS="--reverse" " top to bottom
+"
+" let g:fzf_buffers_jump = 1 " jump to the existing window if possible
+" }}}
 
-  " :RG reset ripgrep each time to re-search
-  function! RipgrepFzf(query, fullscreen)
-    let command_fmt = 'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" -- %s || true'
-    let initial_command = printf(command_fmt, shellescape(a:query))
-    let reload_command = printf(command_fmt, '{q}')
-    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-  endfunction
-
-  command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-endif
-
-" Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>,
-  \   <bang>0 ? fzf#vim#with_preview('down:40%')
-  \           : fzf#vim#with_preview('down:40%:hidden', '?'),
-  \   <bang>0)
-
-let $FZF_DEFAULT_OPTS="--reverse" " top to bottom
-
-let g:fzf_buffers_jump = 1 " jump to the existing window if possible
+" clap {{{
+let g:clap_layout = { 'relative': 'editor' }
 " }}}
 
 " vimwiki {{{
