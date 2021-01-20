@@ -123,14 +123,15 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
 Plug 'chuling/equinusocio-material.vim'
 Plug 'fenetikm/falcon'
+Plug 'kyazdani42/blue-moon'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " show vertical guides with <leader>ig
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeTabsToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeTabsToggle' }
-Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+" Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug 'qpkorr/vim-renamer'
 " zoom in/out <C-w>m
 Plug 'dhruvasagar/vim-zoom'
@@ -382,7 +383,7 @@ nnoremap <silent> <leader>th :call neoterm#close()<cr>
 nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
 nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
-map <silent> <leader>x :NERDTreeTabsToggle<CR>
+map <silent> <leader>x :NERDTreeToggle<CR>
 
 if has_key(plugs, 'fzf.vim')
 nnoremap <silent><Leader>f :Files<CR>
@@ -796,6 +797,10 @@ nmap <silent> <leader>Tg :TestVisit<CR>
 let g:NERDTreeAutoDeleteBuffer = 1
 " let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeCascadeOpenSingleChildDir = 1
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
 " }}}
 
 " slime & NeoTerm {{{
