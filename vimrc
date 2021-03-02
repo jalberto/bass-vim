@@ -75,6 +75,9 @@ augroup filetypedetect
 augroup END
 " }}}
 
+" need ot be set before plugins load
+let g:ale_disable_lsp = 1
+
 " Vundle {{{
 " Helper to add conditionals for nvim
 function! Cond(cond, ...)
@@ -93,6 +96,7 @@ Plug 'tpope/vim-sleuth'
 
 Plug 'amadeus/vim-mjml', {'for': 'mjml'}
 Plug 'sheerun/vim-polyglot'
+Plug 'elixir-editors/vim-elixir', {'for': 'elixir'} " polyglot seems to be using an old version
 Plug 'robbles/logstash.vim'
 Plug 'itkq/fluentd-vim'
 Plug 'dNitro/vim-pug-complete', {'for': 'pug'}
@@ -100,7 +104,7 @@ Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'tpope/vim-liquid'
 Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
 Plug 'towolf/vim-helm', {'for': 'yaml'}
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'danilamihailov/beacon.nvim'
 
 Plug 'w0rp/ale' " async lint
@@ -119,16 +123,18 @@ Plug 'terryma/vim-expand-region'
 Plug 'conradIrwin/vim-bracketed-paste'
 
 " Colors / Themes
-Plug 'arcticicestudio/nord-vim'
+" Plug 'cocopon/iceberg.vim'
 Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
-Plug 'chuling/equinusocio-material.vim'
+" Plug 'chuling/equinusocio-material.vim'
+Plug 'Luxed/ayu-vim'
 Plug 'fenetikm/falcon'
-Plug 'kyazdani42/blue-moon'
+Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " show vertical guides with <leader>ig
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
 
+Plug 'liuchengxu/vista.vim' " panel with outline
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 " Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
@@ -138,6 +144,7 @@ Plug 'dhruvasagar/vim-zoom'
 
 " save session :Obsess / Obsess!
 Plug 'tpope/vim-obsession'
+" Plug 'rmagatti/auto-session'
 
 " <ldr><CR> for auto align
 Plug 'junegunn/vim-easy-align'
@@ -164,10 +171,10 @@ Plug 'kassio/neoterm', Cond(has('nvim'))
 Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
 Plug 'christoomey/vim-tmux-navigator'
 
-" auto generate tags async
-Plug 'rhysd/clever-f.vim'
-Plug 'kshenoy/vim-signature'
+Plug 'rhysd/clever-f.vim' " Extended f, F, t and T
+Plug 'kshenoy/vim-signature' " toggle/display/navigate makrs
 
+Plug 'machakann/vim-highlightedyank'
 Plug 'sjl/gundo.vim' " Display undo tree with <leader>u
 Plug 'tpope/vim-fugitive'
 Plug 'sodapopcan/vim-twiggy' " Manage branches
@@ -385,38 +392,41 @@ nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
 map <silent> <leader>x :NERDTreeToggle<CR>
 
-if has_key(plugs, 'fzf.vim')
-nnoremap <silent><Leader>f :Files<CR>
-nnoremap <silent><Leader>o :Files<CR>
-nnoremap <silent><Leader>l :BLines<CR>
-nnoremap <silent><Leader>t :BTags<CR>
-nnoremap <silent><Leader>tt :Tags<CR>
-nnoremap <silent><Leader>? :History<CR>
-nnoremap <silent><Leader><space> :Buffers<CR>
-nnoremap <silent><Leader>w :Windows<CR>
-nnoremap <silent><Leader>s :Rg
-nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
-vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
-
-nnoremap <silent> <leader>ol :<C-u>CocFzfList outline<CR>
-nnoremap <silent> <leader>cd :<C-u>CocFzfList diagnostics --current<CR>
-nnoremap <silent> <leader>cc :<C-u>CocFzfList commands<CR>
-nnoremap <silent> <leader>cs :<C-u>CocFzfList symbols<CR>
-nnoremap <silent> <leader>cl :<C-u>CocFzfList location<CR>
-endif
+" if has_key(plugs, 'fzf.vim')
+" nnoremap <silent><Leader>f :Files<CR>
+" nnoremap <silent><Leader>o :Files<CR>
+" nnoremap <silent><Leader>l :BLines<CR>
+" nnoremap <silent><Leader>t :BTags<CR>
+" nnoremap <silent><Leader>tt :Tags<CR>
+" nnoremap <silent><Leader>? :History<CR>
+" nnoremap <silent><Leader><space> :Buffers<CR>
+" nnoremap <silent><Leader>w :Windows<CR>
+" nnoremap <silent><Leader>s :Rg
+" nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
+" vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
+"
+" nnoremap <silent> <leader>ol :<C-u>CocFzfList outline<CR>
+" nnoremap <silent> <leader>cd :<C-u>CocFzfList diagnostics --current<CR>
+" nnoremap <silent> <leader>cc :<C-u>CocFzfList commands<CR>
+" nnoremap <silent> <leader>cs :<C-u>CocFzfList symbols<CR>
+" nnoremap <silent> <leader>cl :<C-u>CocFzfList location<CR>
+" endif
 
 if has_key(plugs, 'vim-clap')
+nnoremap <silent><Leader>g :Clap gfiles<CR>
 nnoremap <silent><Leader>f :Clap gfiles<CR>
 nnoremap <silent><Leader>o :Clap files<CR>
 nnoremap <silent><Leader>l :Clap blines<CR>
-" nnoremap <silent><Leader>t :BTags<CR>
+nnoremap <silent><Leader>e :Clap filer<CR>
+nnoremap <silent><Leader>p :Clap providers<CR>
+nnoremap <silent><Leader>t :Clap tags<CR>
 " nnoremap <silent><Leader>tt :Tags<CR>
 nnoremap <silent><Leader>? :Clap history<CR>
 nnoremap <silent><Leader><space> :Clap buffers<CR>
 nnoremap <silent><Leader>w :Clap windows<CR>
-nnoremap <silent><Leader>s :Clap grep
+nnoremap <silent><Leader>s :Clap grep<CR>
 nnoremap <silent><leader>W :Clap grep ++query=<cword>
-vnoremap <silent><leader>w :Clap grep ++query=@visual
+vnoremap <silent><leader>v :Clap grep ++query=@visual
 endif
 
 " Fugitive
@@ -563,7 +573,7 @@ let g:equinusocio_material_style='pure'
 " let g:equinusocio_material_less=50
 
 if has("gui_running")
-  set guifont=JetBrains\ Mono\ Regular\ 14
+  set guifont=JetBrains\ Mono\ Variable\ 14
   colorscheme falcon
 else
   colorscheme falcon
@@ -597,7 +607,7 @@ endif
 " Plugins config {{{
 " emmet {{{
 let g:user_emmet_install_global=0
-autocmd FileType html,css,liquid EmmetInstall
+autocmd FileType html,css,liquid,eelixir EmmetInstall
 let g:user_emmet_leader_key=','
 " }}}
 
@@ -648,9 +658,10 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
-
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" help LS to find root dir
+autocmd FileType elixir let b:coc_root_patterns = ['mix.exs']
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -661,6 +672,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Apply AutoFix to problem on the current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -741,6 +755,17 @@ let g:clever_f_smart_case=1
 
 " clap {{{
 let g:clap_layout = { 'relative': 'editor' }
+let g:clap_preview_direction = 'UD'
+" }}}
+
+" vista {{{
+" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_icon_indent = ["▸ ", ""]
+" let g:vista_icon_indent = ["A ", "B "]
+" let g:vista_fold_toggle_icons = ["C ", "D "]
+let g:vista#renderer#enable_icon = 0
+let g:vista_default_executive = 'coc'
+let g:vista_echo_cursor_strategy = 'floating_win'
 " }}}
 
 " vimwiki {{{
@@ -765,10 +790,16 @@ let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '☢'
 let g:ale_sign_warning = '⚠'
 let g:airline#extensions#ale#enabled = 1
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+let g:ale_list_window_size = 5
+" let g:ale_echo_msg_format = '[%severity%][%linter%] %code%'
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -871,6 +902,7 @@ let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#nvimlsp#enabled = 0
 " let g:airline_symbols_ascii = 1
 set showtabline=0 " remove tab bar
 " }}}
