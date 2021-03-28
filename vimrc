@@ -126,7 +126,7 @@ Plug 'conradIrwin/vim-bracketed-paste'
 " Plug 'cocopon/iceberg.vim'
 Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
 " Plug 'chuling/equinusocio-material.vim'
-Plug 'Luxed/ayu-vim'
+" Plug 'Luxed/ayu-vim'
 Plug 'fenetikm/falcon'
 Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'bling/vim-airline'
@@ -155,7 +155,10 @@ Plug 'mg979/vim-visual-multi'
 Plug 'jiangmiao/auto-pairs'
 " add more selectors to %
 Plug 'vim-scripts/matchit.zip'
-Plug 'tpope/vim-surround'
+
+" manipulate surround-ings (sa/sdb/srb)
+Plug 'machakann/vim-sandwich'
+" Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-user'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-ragtag'
@@ -425,8 +428,8 @@ nnoremap <silent><Leader>? :Clap history<CR>
 nnoremap <silent><Leader><space> :Clap buffers<CR>
 nnoremap <silent><Leader>w :Clap windows<CR>
 nnoremap <silent><Leader>s :Clap grep<CR>
-nnoremap <silent><leader>W :Clap grep ++query=<cword>
-vnoremap <silent><leader>v :Clap grep ++query=@visual
+nnoremap <silent><leader>W :Clap grep ++query=<cword><CR>
+vnoremap <silent><leader>v :Clap grep ++query=@visual<CR>
 endif
 
 " Fugitive
@@ -569,6 +572,7 @@ let g:enable_bold_font=1
 
 let g:falcon_background=1
 let g:falcon_inactive=0
+
 let g:equinusocio_material_style='pure'
 " let g:equinusocio_material_less=50
 
@@ -581,6 +585,7 @@ endif
 
 " Cursorline color
 highlight CursorLine ctermbg=black cterm=bold guibg=black gui=bold
+highlight CocCodeLens guifg=#57575e gui=italic
 
 " Special chars {{{
 " highlight Problematic whitespaces
@@ -894,7 +899,7 @@ set laststatus=2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline_theme = 'falcon'
+let g:airline_theme = 'falconcus'
 let g:airline_powerline_fonts = 1
 " add buffer explorer with separator
 let g:airline#extensions#tabline#enabled = 1

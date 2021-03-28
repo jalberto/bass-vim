@@ -96,14 +96,11 @@ a-z for local, A-Z global
 * 'div>p#foo$*3>a'
 * ie: https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL
 
-## Surronding
+## Surrond / Sandwich
 
-* yss" -> "h w" -> cs"' -> 'h w' -> cs"<q> -> <q>h w</q>
-* ds" (quitar delimitadores)
-* ysiw> -> <h>
-* yss> -> <h w>
-* ysiw<b> -> <b>h</b>
-* M-v S<p class=x>
+* saiw( makes foo to (foo)
+* sdb or sd( makes (foo) to foo
+* srb" or sr(" makes (foo) to "foo"
 
 ## Terminal
 
