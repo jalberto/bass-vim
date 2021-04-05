@@ -65,6 +65,8 @@ if has("folding")
   set foldmethod=syntax
   set foldlevelstart=1   " open most folds by default
 endif
+
+set number relativenumber
 " }}}
 
 " Custom file types {{{
@@ -115,9 +117,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 " show index in search results: N of NN
 Plug 'henrik/vim-indexed-search'
 " search occurences in visual selection
-Plug 'nelstrom/vim-visual-star-search'
+" Plug 'nelstrom/vim-visual-star-search'
 " expand visual/obj selection with +/-
-Plug 'terryma/vim-expand-region'
+" Plug 'terryma/vim-expand-region'
 
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
@@ -135,8 +137,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
 
 Plug 'liuchengxu/vista.vim' " panel with outline
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+" Plug 'scrooloose/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 " Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
 Plug 'qpkorr/vim-renamer'
 " zoom in/out <C-w>m
@@ -221,6 +223,7 @@ Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'voldikss/vim-floaterm'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
@@ -393,7 +396,9 @@ nnoremap <silent> <leader>th :call neoterm#close()<cr>
 nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
 nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
-map <silent> <leader>x :NERDTreeToggle<CR>
+" map <silent> <leader>x :NERDTreeToggle<CR>
+command! Broot FloatermNew --width=0.8 --height=0.8 broot
+map <silent> <leader>x :Broot<CR>
 
 " if has_key(plugs, 'fzf.vim')
 " nnoremap <silent><Leader>f :Files<CR>
@@ -830,13 +835,13 @@ nmap <silent> <leader>Tg :TestVisit<CR>
 " }}}
 
 " NerdTree {{{
-let g:NERDTreeAutoDeleteBuffer = 1
+" let g:NERDTreeAutoDeleteBuffer = 1
 " let g:NERDTreeShowBookmarks = 1
-let g:NERDTreeCascadeOpenSingleChildDir = 1
+" let g:NERDTreeCascadeOpenSingleChildDir = 1
 
 " Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
+" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    " \ quit | endif
 " }}}
 
 " slime & NeoTerm {{{
