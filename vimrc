@@ -123,6 +123,7 @@ Plug 'henrik/vim-indexed-search'
 
 " Auto set paste
 Plug 'conradIrwin/vim-bracketed-paste'
+Plug 'junegunn/vim-peekaboo'
 
 " Colors / Themes
 " Plug 'cocopon/iceberg.vim'
@@ -222,8 +223,10 @@ Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
+" Plug 'sayanarijit/xplr.vim'
+Plug 'mcchrish/nnn.vim'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-Plug 'voldikss/vim-floaterm'
+" Plug 'voldikss/vim-floaterm'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
@@ -380,6 +383,11 @@ vmap <Leader>P "+P
 
 nnoremap <leader>r :call Rotate()<CR>
 
+" map <silent> <leader>x :NERDTreeToggle<CR>
+" command! Broot FloatermNew --width=0.8 --height=0.8 broot
+" command! Nnn FloatermNew --width=0.8 --height=0.8 nnn
+map <silent> <leader>x :NnnPicker<CR>
+
 " Rails i18n
 " vmap <Leader>8 :call I18nTranslateString()<CR>
 " }}}
@@ -395,10 +403,6 @@ vnoremap <leader>t :TREPLSendSelection<cr>
 nnoremap <silent> <leader>th :call neoterm#close()<cr>
 nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
 nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
-
-" map <silent> <leader>x :NERDTreeToggle<CR>
-command! Broot FloatermNew --width=0.8 --height=0.8 broot
-map <silent> <leader>x :Broot<CR>
 
 " if has_key(plugs, 'fzf.vim')
 " nnoremap <silent><Leader>f :Files<CR>
@@ -615,6 +619,15 @@ endif
 " }}}
 
 " Plugins config {{{
+
+" NNN {{{
+let g:nnn#layout = { 'window': { 'width': 0.8, 'height': 0.6, 'highlight': 'Debug' } }
+let g:nnn#action = {
+      \ '<c-t>': 'tab split',
+      \ '<c-x>': 'split',
+      \ '<c-v>': 'vsplit' }
+" }}}
+
 " emmet {{{
 let g:user_emmet_install_global=0
 autocmd FileType html,css,liquid,eelixir EmmetInstall
