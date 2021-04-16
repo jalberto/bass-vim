@@ -8,7 +8,7 @@
   "diagnostic.displayByAle": true,
   "diagnostic.refreshOnInsertMode": true,
   "suggest.noselect": false,
-  "html.filetypes": [ "html", "handlebars", "liquid" ],
+  "html.filetypes": [ "html", "handlebars", "liquid", "pug" ],
   "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
