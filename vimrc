@@ -149,6 +149,9 @@ Plug 'dhruvasagar/vim-zoom'
 Plug 'tpope/vim-obsession'
 " Plug 'rmagatti/auto-session'
 
+" Quickfix improvementss
+Plug 'romainl/vim-qf'
+
 " <ldr><CR> for auto align
 Plug 'junegunn/vim-easy-align'
 " ctrl+n for multi cursor
@@ -187,7 +190,8 @@ Plug 'sodapopcan/vim-twiggy' " Manage branches
 Plug 'mhinz/vim-signify' " visualize marks
 " highlight newst git change
 Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
-Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+Plug 'junegunn/gv.vim' " git commits
+" Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 " git config --global core.editor "$(which nvim)"
 Plug 'rhysd/committia.vim'
 Plug 'whiteinge/diffconflicts'
@@ -619,6 +623,13 @@ endif
 " }}}
 
 " Plugins config {{{
+
+" QF {{{
+" nmap ç <Plug>(qf_qf_switch)
+" nmap <F5> <Plug>(qf_qf_toggle_stay)
+nmap <leader>q <Plug>(qf_qf_toggle)
+let g:qf_mapping_ack_style = 1
+" }}}
 
 " NNN {{{
 let g:nnn#layout = { 'window': { 'width': 0.8, 'height': 0.6, 'highlight': 'Debug' } }
