@@ -222,7 +222,7 @@ Plug 'mattn/emmet-vim'
 
 " Plug 'tpope/vim-projectionist' " required for some navigation features
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] }
-Plug 'vimwiki/vimwiki', {'branch': 'dev'}
+" Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -632,6 +632,7 @@ let g:qf_mapping_ack_style = 1
 " }}}
 
 " NNN {{{
+let g:nnn#session = 'local'
 let g:nnn#layout = { 'window': { 'width': 0.8, 'height': 0.6, 'highlight': 'Debug' } }
 let g:nnn#action = {
       \ '<c-t>': 'tab split',
