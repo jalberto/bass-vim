@@ -624,6 +624,10 @@ endif
 
 " Plugins config {{{
 
+" Plugins vim-markdown {{{
+let g:markdown_fenced_languages = ['html', 'shell', 'ruby', 'vim', 'js']
+" }}}
+
 " QF {{{
 " nmap ç <Plug>(qf_qf_switch)
 " nmap <F5> <Plug>(qf_qf_toggle_stay)
