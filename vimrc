@@ -88,6 +88,7 @@ function! Cond(cond, ...)
 endfunction
 
 call plug#begin('~/.vim/plugged')
+Plug 'nvim-lua/plenary.nvim'
 Plug 'clones/vim-genutils'
 Plug 'eparreno/vim-l9'
 Plug 'xolox/vim-misc'
@@ -185,18 +186,19 @@ Plug 'kshenoy/vim-signature' " toggle/display/navigate makrs
 
 Plug 'machakann/vim-highlightedyank'
 Plug 'sjl/gundo.vim' " Display undo tree with <leader>u
-Plug 'tpope/vim-fugitive'
-Plug 'sodapopcan/vim-twiggy' " Manage branches
-Plug 'mhinz/vim-signify' " visualize marks
+" Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
+" Plug 'sodapopcan/vim-twiggy' " Manage branches
+" Plug 'mhinz/vim-signify' " visualize git marks
 " highlight newst git change
-Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
-Plug 'junegunn/gv.vim' " git commits
+" Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
+" Plug 'junegunn/gv.vim' " git commits
 " Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 " git config --global core.editor "$(which nvim)"
 Plug 'rhysd/committia.vim'
 Plug 'whiteinge/diffconflicts'
 Plug 'ruanyl/vim-gh-line'
-Plug 'rhysd/git-messenger.vim'
+" Plug 'rhysd/git-messenger.vim'
 
 " encode using b64
 Plug 'christianrondeau/vim-base64'
@@ -397,6 +399,7 @@ map <silent> <leader>x :NnnPicker<CR>
 " }}}
 
 " Plugins {{{
+
 " Align
 vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
 
@@ -446,8 +449,8 @@ vnoremap <silent><leader>v :Clap grep ++query=@visual<CR>
 endif
 
 " Fugitive
-cnoreabbrev Gws Gstatus
-cnoreabbrev Gca Gcommit -a
+" cnoreabbrev Gws Gstatus
+" cnoreabbrev Gca Gcommit -a
 " }}}
 
 " move in buffers and tabs
@@ -912,7 +915,7 @@ let g:gundo_prefer_python3 = 1
 
 " fugitive {{{
 " delete hidden fugitive buffers
-autocmd BufReadPost fugitive://* set bufhidden=delete
+" autocmd BufReadPost fugitive://* set bufhidden=delete
 " }}}
 
 " vim-gh-line {{{
@@ -951,3 +954,5 @@ let g:smartgf_key = 'gm'
 let g:smartgf_auto_refresh_ctags = 0
 " }}}
 " }}}
+
+lua require('config')
