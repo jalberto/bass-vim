@@ -72,6 +72,18 @@ return require('packer').startup({ function(use)
 
   use 'kyazdani42/nvim-tree.lua'
 
+  -- Telescope, install: fd-find bat ripgrep
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  }
+
+  use {
+    'sudormrfbin/cheatsheet.nvim',
+    requires = { {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},
+    }
+  }
+
   use 'honza/vim-snippets'
 
   -- Git stuff

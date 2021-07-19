@@ -98,7 +98,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rhysd/clever-f.vim' " Extended f, F, t and T
 Plug 'kshenoy/vim-signature' " toggle/display/navigate makrs
 
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
@@ -293,22 +293,31 @@ nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 " nnoremap <silent> <leader>cl :<C-u>CocFzfList location<CR>
 " endif
 
-if has_key(plugs, 'vim-clap')
-nnoremap <silent><Leader>g :Clap gfiles<CR>
-nnoremap <silent><Leader>f :Clap gfiles<CR>
-nnoremap <silent><Leader>o :Clap files<CR>
-nnoremap <silent><Leader>l :Clap blines<CR>
-nnoremap <silent><Leader>e :Clap filer<CR>
-nnoremap <silent><Leader>p :Clap providers<CR>
-nnoremap <silent><Leader>t :Clap tags<CR>
-" nnoremap <silent><Leader>tt :Tags<CR>
-nnoremap <silent><Leader>? :Clap history<CR>
-nnoremap <silent><Leader><space> :Clap buffers<CR>
-nnoremap <silent><Leader>w :Clap windows<CR>
-nnoremap <silent><Leader>s :Clap grep<CR>
-nnoremap <silent><leader>W :Clap grep ++query=<cword><CR>
-vnoremap <silent><leader>v :Clap grep ++query=@visual<CR>
-endif
+" if has_key(plugs, 'vim-clap')
+" nnoremap <silent><Leader>g :Clap gfiles<CR>
+" nnoremap <silent><Leader>f :Clap gfiles<CR>
+" nnoremap <silent><Leader>o :Clap files<CR>
+" nnoremap <silent><Leader>l :Clap blines<CR>
+" nnoremap <silent><Leader>e :Clap filer<CR>
+" nnoremap <silent><Leader>p :Clap providers<CR>
+" nnoremap <silent><Leader>t :Clap tags<CR>
+" " nnoremap <silent><Leader>tt :Tags<CR>
+" nnoremap <silent><Leader>? :Clap history<CR>
+" nnoremap <silent><Leader><space> :Clap buffers<CR>
+" nnoremap <silent><Leader>w :Clap windows<CR>
+" nnoremap <silent><Leader>s :Clap grep<CR>
+" nnoremap <silent><leader>W :Clap grep ++query=<cword><CR>
+" vnoremap <silent><leader>v :Clap grep ++query=@visual<CR>
+" endif
+
+" Telescope
+nnoremap <leader>ff <cmd>Telescope find_files theme=get_dropdown<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
+nnoremap <leader>fb <cmd>Telescope buffers theme=get_dropdown<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags theme=get_dropdown<cr>
+nnoremap <leader>fm <cmd>Telescope marks theme=get_dropdown<cr>
+nnoremap <leader>fr <cmd>Telescope registers theme=get_dropdown<cr>
+nnoremap <leader>fc <cmd>Telescope commands theme=get_dropdown<cr>
 
 " Fugitive
 " cnoreabbrev Gws Gstatus
@@ -658,8 +667,8 @@ let g:clever_f_smart_case=1
 " }}}
 
 " clap {{{
-let g:clap_layout = { 'relative': 'editor' }
-let g:clap_preview_direction = 'UD'
+" let g:clap_layout = { 'relative': 'editor' }
+" let g:clap_preview_direction = 'UD'
 " }}}
 
 " vista {{{
