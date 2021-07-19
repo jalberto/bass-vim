@@ -80,6 +80,10 @@ augroup END
 " need ot be set before plugins load
 let g:ale_disable_lsp = 1
 
+" Plugins {{{
+lua require('plugins')
+" }}}
+
 " Vundle {{{
 " Helper to add conditionals for nvim
 function! Cond(cond, ...)
@@ -88,154 +92,15 @@ function! Cond(cond, ...)
 endfunction
 
 call plug#begin('~/.vim/plugged')
-Plug 'nvim-lua/plenary.nvim'
-Plug 'clones/vim-genutils'
-Plug 'eparreno/vim-l9'
-Plug 'xolox/vim-misc'
-" Add repeat support to other plugins
-Plug 'tpope/vim-repeat'
-" Try to detect correct identation
-Plug 'tpope/vim-sleuth'
-
-Plug 'amadeus/vim-mjml', {'for': 'mjml'}
-Plug 'sheerun/vim-polyglot'
-Plug 'elixir-editors/vim-elixir', {'for': 'elixir'} " polyglot seems to be using an old version
-Plug 'robbles/logstash.vim'
-Plug 'itkq/fluentd-vim'
-Plug 'dNitro/vim-pug-complete', {'for': 'pug'}
-Plug 'tpope/vim-markdown', {'for': 'markdown'}
-Plug 'tpope/vim-liquid'
-Plug 'andrewstuart/vim-kubernetes', {'for': 'yaml'}
-Plug 'towolf/vim-helm', {'for': 'yaml'}
-" Plug 'ap/vim-css-color', {'for': 'css'}
-Plug 'danilamihailov/beacon.nvim'
-
-Plug 'w0rp/ale' " async lint
-
-" spli/join blocks with gS gJ
-Plug 'AndrewRadev/splitjoin.vim'
-
-" show index in search results: N of NN
-Plug 'henrik/vim-indexed-search'
-" search occurences in visual selection
-" Plug 'nelstrom/vim-visual-star-search'
-" expand visual/obj selection with +/-
-" Plug 'terryma/vim-expand-region'
-
-" Auto set paste
-Plug 'conradIrwin/vim-bracketed-paste'
-Plug 'junegunn/vim-peekaboo'
-
-" Colors / Themes
-" Plug 'cocopon/iceberg.vim'
-Plug 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
-" Plug 'chuling/equinusocio-material.vim'
-" Plug 'Luxed/ayu-vim'
-Plug 'fenetikm/falcon'
-Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" show vertical guides with <leader>ig
-Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
-
-Plug 'liuchengxu/vista.vim' " panel with outline
-" Plug 'scrooloose/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
-" Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
-Plug 'qpkorr/vim-renamer'
-" zoom in/out <C-w>m
-Plug 'dhruvasagar/vim-zoom'
-
-" save session :Obsess / Obsess!
-Plug 'tpope/vim-obsession'
-" Plug 'rmagatti/auto-session'
-
-" Quickfix improvementss
-Plug 'romainl/vim-qf'
-
-" <ldr><CR> for auto align
-Plug 'junegunn/vim-easy-align'
-" ctrl+n for multi cursor
-Plug 'mg979/vim-visual-multi'
-
-" Plug 'tpope/vim-endwise'
-Plug 'jiangmiao/auto-pairs'
-" add more selectors to %
-Plug 'vim-scripts/matchit.zip'
-
-" manipulate surround-ings (sa/sdb/srb)
-Plug 'machakann/vim-sandwich'
-" Plug 'tpope/vim-surround'
-Plug 'kana/vim-textobj-user'
-Plug 'gorkunov/smartpairs.vim'
-Plug 'tpope/vim-ragtag'
-" Underline word under cursor
-" Plug 'itchyny/vim-cursorword'
-
-Plug 'honza/vim-snippets'
-Plug 'tomtom/tcomment_vim'
-
-" Send to terminal
-Plug 'jpalardy/vim-slime', Cond(!has('nvim'))
-Plug 'kassio/neoterm', Cond(has('nvim'))
-Plug 'roxma/vim-tmux-clipboard', Cond(has('nvim'))
-Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'rhysd/clever-f.vim' " Extended f, F, t and T
 Plug 'kshenoy/vim-signature' " toggle/display/navigate makrs
 
-Plug 'machakann/vim-highlightedyank'
-Plug 'sjl/gundo.vim' " Display undo tree with <leader>u
-" Plug 'tpope/vim-fugitive'
-Plug 'lewis6991/gitsigns.nvim'
-" Plug 'sodapopcan/vim-twiggy' " Manage branches
-" Plug 'mhinz/vim-signify' " visualize git marks
-" highlight newst git change
-" Plug 'joeytwiddle/git_shade.vim', { 'on': 'GitShade' }
-" Plug 'junegunn/gv.vim' " git commits
-" Plug 'gregsexton/gitv', { 'on': 'Gitv' }
-" git config --global core.editor "$(which nvim)"
-Plug 'rhysd/committia.vim'
-Plug 'whiteinge/diffconflicts'
-Plug 'ruanyl/vim-gh-line'
-" Plug 'rhysd/git-messenger.vim'
-
-" encode using b64
-Plug 'christianrondeau/vim-base64'
-" increase/decrease dates with ctrl-a/x
-Plug 'tpope/vim-speeddating'
-
-" Ruby
-Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-Plug 'vim-scripts/ruby-matchit', {'for': 'ruby'}
-Plug 'tpope/vim-rails', {'for': 'ruby'}
-Plug 'gorkunov/smartgf.vim', {'for': 'ruby'}
-Plug 'stefanoverna/vim-i18n', {'for': 'ruby'}
-" convert hash keys to symbol, strings or 1.9 style with rs rt rr
-Plug 'rorymckinley/vim-rubyhash', {'for': 'ruby'}
-Plug 'danchoi/ri.vim', {'for': 'ruby'}
-
-" Elixir
-" Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
-" Plug 'c-brenn/phoenix.vim', {'for': 'elixir'}
-
-" HTML/CSS/JS
-Plug 'mattn/emmet-vim'
-
-" Plug 'tpope/vim-projectionist' " required for some navigation features
-Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'] }
-" Plug 'vimwiki/vimwiki', {'branch': 'dev'}
-
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
-" Plug 'sayanarijit/xplr.vim'
-Plug 'mcchrish/nnn.vim'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-" Plug 'voldikss/vim-floaterm'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
 call plug#end()
 " }}}
@@ -389,10 +254,7 @@ vmap <Leader>P "+P
 
 nnoremap <leader>r :call Rotate()<CR>
 
-" map <silent> <leader>x :NERDTreeToggle<CR>
-" command! Broot FloatermNew --width=0.8 --height=0.8 broot
-" command! Nnn FloatermNew --width=0.8 --height=0.8 nnn
-map <silent> <leader>x :NnnPicker<CR>
+nnoremap <silent> <leader>x :NvimTreeToggle<CR>
 
 " Rails i18n
 " vmap <Leader>8 :call I18nTranslateString()<CR>
@@ -603,6 +465,9 @@ endif
 highlight CursorLine ctermbg=black cterm=bold guibg=black gui=bold
 highlight CocCodeLens guifg=#57575e gui=italic
 
+" HL on yanks
+au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+
 " Special chars {{{
 " highlight Problematic whitespaces
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
@@ -638,13 +503,10 @@ nmap <leader>q <Plug>(qf_qf_toggle)
 let g:qf_mapping_ack_style = 1
 " }}}
 
-" NNN {{{
-let g:nnn#session = 'local'
-let g:nnn#layout = { 'window': { 'width': 0.8, 'height': 0.6, 'highlight': 'Debug' } }
-let g:nnn#action = {
-      \ '<c-t>': 'tab split',
-      \ '<c-x>': 'split',
-      \ '<c-v>': 'vsplit' }
+" nvimtree {{{
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_highlight_opened_files = 1
 " }}}
 
 " emmet {{{
@@ -805,9 +667,9 @@ let g:clap_preview_direction = 'UD'
 " let g:vista_icon_indent = ["▸ ", ""]
 " let g:vista_icon_indent = ["A ", "B "]
 " let g:vista_fold_toggle_icons = ["C ", "D "]
-let g:vista#renderer#enable_icon = 0
-let g:vista_default_executive = 'coc'
-let g:vista_echo_cursor_strategy = 'floating_win'
+" let g:vista#renderer#enable_icon = 0
+" let g:vista_default_executive = 'coc'
+" let g:vista_echo_cursor_strategy = 'floating_win'
 " }}}
 
 " vimwiki {{{
