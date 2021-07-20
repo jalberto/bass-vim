@@ -42,8 +42,7 @@ return require('packer').startup({ function(use)
     config = function() require('colorizer').setup() end
   }
 
-  use 'jiangmiao/auto-pairs'
-  use 'vim-scripts/matchit.zip' -- add more selectors to %
+  use 'andymass/vim-matchup' -- add more selectors to %
   use 'kana/vim-textobj-user'
   use 'gorkunov/smartpairs.vim'
   use 'tpope/vim-ragtag' -- xml & firends tags helpers
@@ -55,7 +54,8 @@ return require('packer').startup({ function(use)
   use 'henrik/vim-indexed-search' -- show index in search results: N of NN
   use 'conradIrwin/vim-bracketed-paste' -- Auto set paste
   use 'dhruvasagar/vim-zoom' -- zoom in/out <C-w>m
-  use 'romainl/vim-qf' -- Quickfix improvementss
+  -- use 'romainl/vim-qf'
+  use "kevinhwang91/nvim-bqf" -- Quickfix improvementss
   use 'junegunn/vim-easy-align' -- <ldr><CR> for auto align
   use 'mg979/vim-visual-multi' -- ctrl+n for multi cursor
   use 'machakann/vim-sandwich' -- manipulate surround-ings (sa/sdb/srb)
@@ -75,7 +75,8 @@ return require('packer').startup({ function(use)
   -- Telescope, install: fd-find bat ripgrep
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+    config = [[require('config.telescope')]]
   }
 
   use {
@@ -98,7 +99,6 @@ return require('packer').startup({ function(use)
 
   -- Ruby stuff
   use {'vim-ruby/vim-ruby', ft = 'ruby'}
-  use {'vim-scripts/ruby-matchit', ft = 'ruby'}
   use {'tpope/vim-rails', ft = 'ruby'}
   use {'gorkunov/smartgf.vim', ft = 'ruby'}
   use {'stefanoverna/vim-i18n', ft = 'ruby'}

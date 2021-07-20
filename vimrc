@@ -292,9 +292,10 @@ nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 " endif
 
 " Telescope
-nnoremap <leader>ff <cmd>Telescope find_files theme=get_dropdown<cr>
+nnoremap <leader><leader> <cmd>Telescope find_files theme=get_dropdown<cr>
+nnoremap <leader>ff <cmd>Telescope git_files theme=get_dropdown<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
-nnoremap <leader><leader> <cmd>Telescope buffers theme=get_dropdown<cr>
+nnoremap <leader>fb <cmd>Telescope buffers theme=get_dropdown<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags theme=get_dropdown<cr>
 nnoremap <leader>fm <cmd>Telescope marks theme=get_dropdown<cr>
 nnoremap <leader>fr <cmd>Telescope registers theme=get_dropdown<cr>

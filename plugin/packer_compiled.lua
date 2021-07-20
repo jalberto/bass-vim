@@ -79,10 +79,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/ale"
   },
-  ["auto-pairs"] = {
-    loaded = true,
-    path = "/home/ja/.local/share/nvim/site/pack/packer/start/auto-pairs"
-  },
   ["beacon.nvim"] = {
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/beacon.nvim"
@@ -132,13 +128,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/logstash.vim"
   },
-  ["matchit.zip"] = {
-    loaded = true,
-    path = "/home/ja/.local/share/nvim/site/pack/packer/start/matchit.zip"
-  },
   neoterm = {
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/neoterm"
+  },
+  ["nvim-bqf"] = {
+    loaded = true,
+    path = "/home/ja/.local/share/nvim/site/pack/packer/start/nvim-bqf"
   },
   ["nvim-colorizer.lua"] = {
     config = { "\27LJ\2\0027\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14colorizer\frequire\0" },
@@ -172,11 +168,6 @@ _G.packer_plugins = {
     needs_bufread = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/ri.vim"
   },
-  ["ruby-matchit"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/ja/.local/share/nvim/site/pack/packer/opt/ruby-matchit"
-  },
   ["smartgf.vim"] = {
     loaded = false,
     needs_bufread = false,
@@ -195,6 +186,7 @@ _G.packer_plugins = {
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/tcomment_vim"
   },
   ["telescope.nvim"] = {
+    config = { "require('config.telescope')" },
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
@@ -259,6 +251,10 @@ _G.packer_plugins = {
     needs_bufread = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-markdown"
   },
+  ["vim-matchup"] = {
+    loaded = true,
+    path = "/home/ja/.local/share/nvim/site/pack/packer/start/vim-matchup"
+  },
   ["vim-misc"] = {
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/vim-misc"
@@ -280,10 +276,6 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-pug-complete"
-  },
-  ["vim-qf"] = {
-    loaded = true,
-    path = "/home/ja/.local/share/nvim/site/pack/packer/start/vim-qf"
   },
   ["vim-ragtag"] = {
     loaded = true,
@@ -361,6 +353,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\0026\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require('config.telescope')
+time([[Config for telescope.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
@@ -388,16 +384,19 @@ time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-markdown'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType yaml ++once lua require("packer.load")({'vim-helm', 'vim-kubernetes'}, { ft = "yaml" }, _G.packer_plugins)]]
 vim.cmd [[au FileType pug ++once lua require("packer.load")({'vim-pug-complete'}, { ft = "pug" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascript ++once lua require("packer.load")({'nvim-colorizer.lua'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'nvim-colorizer.lua'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType css ++once lua require("packer.load")({'nvim-colorizer.lua'}, { ft = "css" }, _G.packer_plugins)]]
 vim.cmd [[au FileType vim ++once lua require("packer.load")({'nvim-colorizer.lua'}, { ft = "vim" }, _G.packer_plugins)]]
-vim.cmd [[au FileType html ++once lua require("packer.load")({'nvim-colorizer.lua'}, { ft = "html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'nvim-colorizer.lua'}, { ft = "javascript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType mjml ++once lua require("packer.load")({'vim-mjml'}, { ft = "mjml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-rubyhash', 'ri.vim', 'vim-rails', 'smartgf.vim', 'vim-i18n', 'vim-ruby', 'ruby-matchit'}, { ft = "ruby" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ruby ++once lua require("packer.load")({'smartgf.vim', 'vim-rails', 'vim-rubyhash', 'vim-ruby', 'vim-i18n', 'ri.vim'}, { ft = "ruby" }, _G.packer_plugins)]]
 vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-elixir', 'alchemist.vim', 'phoenix.vim'}, { ft = "elixir" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-mjml/ftdetect/mjml.vim]], true)
+vim.cmd [[source /home/ja/.local/share/nvim/site/pack/packer/opt/vim-mjml/ftdetect/mjml.vim]]
+time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-mjml/ftdetect/mjml.vim]], false)
 time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], true)
 vim.cmd [[source /home/ja/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]]
 time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], false)
@@ -407,9 +406,6 @@ time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/
 time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], true)
 vim.cmd [[source /home/ja/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]]
 time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-helm/ftdetect/helm.vim]], false)
-time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-mjml/ftdetect/mjml.vim]], true)
-vim.cmd [[source /home/ja/.local/share/nvim/site/pack/packer/opt/vim-mjml/ftdetect/mjml.vim]]
-time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-mjml/ftdetect/mjml.vim]], false)
 time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-kubernetes/ftdetect/kubeconf.vim]], true)
 vim.cmd [[source /home/ja/.local/share/nvim/site/pack/packer/opt/vim-kubernetes/ftdetect/kubeconf.vim]]
 time([[Sourcing ftdetect script at: /home/ja/.local/share/nvim/site/pack/packer/opt/vim-kubernetes/ftdetect/kubeconf.vim]], false)
