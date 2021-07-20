@@ -95,9 +95,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'rhysd/clever-f.vim' " Extended f, F, t and T
-Plug 'kshenoy/vim-signature' " toggle/display/navigate makrs
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
 call plug#end()
