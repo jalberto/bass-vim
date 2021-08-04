@@ -78,7 +78,7 @@ augroup END
 " }}}
 
 " need ot be set before plugins load
-let g:ale_disable_lsp = 1
+" let g:ale_disable_lsp = 1
 
 " Plugins {{{
 lua require('plugins')
@@ -92,11 +92,11 @@ function! Cond(cond, ...)
 endfunction
 
 call plug#begin('~/.vim/plugged')
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'bling/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
 call plug#end()
 " }}}
 
@@ -298,6 +298,14 @@ nnoremap <leader>fm <cmd>Telescope marks theme=get_dropdown<cr>
 nnoremap <leader>fr <cmd>Telescope registers theme=get_dropdown<cr>
 nnoremap <leader>fc <cmd>Telescope commands theme=get_dropdown<cr>
 
+" Nvim LSP + compe
+set completeopt=menuone,noselect
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
 " Fugitive
 " cnoreabbrev Gws Gstatus
 " cnoreabbrev Gca Gcommit -a
@@ -451,7 +459,7 @@ endif
 
 " Cursorline color
 highlight CursorLine ctermbg=black cterm=bold guibg=black gui=bold
-highlight CocCodeLens guifg=#57575e gui=italic
+" highlight CocCodeLens guifg=#57575e gui=italic
 
 " HL on yanks
 au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
@@ -504,99 +512,99 @@ let g:user_emmet_leader_key=','
 " }}}
 
 " COC {{{
-let g:coc_global_extensions=[
-            \'coc-solargraph',
-            \'coc-elixir',
-            \'coc-json',
-            \'coc-css',
-            \'coc-html',
-            \'coc-yaml',
-            \'coc-xml',
-            \'coc-syntax',
-            \'coc-emmet',
-            \'coc-tsserver',
-            \'coc-snippets',
-            \'coc-spell-checker',
-            \'coc-pairs',
-            \'coc-actions',
-            \'coc-vetur',
-            \'coc-markdownlint'
-            \]
-
-set updatetime=300
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" Navigate snippet placeholders using tab
-let g:coc_snippet_next='<Tab>'
-let g:coc_snippet_prev='<S-Tab>'
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use enter to accept snippet expansion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" help LS to find root dir
-autocmd FileType elixir let b:coc_root_patterns = ['mix.exs']
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Apply AutoFix to problem on the current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Remap for do codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+" let g:coc_global_extensions=[
+"             \'coc-solargraph',
+"             \'coc-elixir',
+"             \'coc-json',
+"             \'coc-css',
+"             \'coc-html',
+"             \'coc-yaml',
+"             \'coc-xml',
+"             \'coc-syntax',
+"             \'coc-emmet',
+"             \'coc-tsserver',
+"             \'coc-snippets',
+"             \'coc-spell-checker',
+"             \'coc-pairs',
+"             \'coc-actions',
+"             \'coc-vetur',
+"             \'coc-markdownlint'
+"             \]
+"
+" set updatetime=300
+"
+" " Use tab for trigger completion with characters ahead and navigate.
+" " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+" " Navigate snippet placeholders using tab
+" let g:coc_snippet_next='<Tab>'
+" let g:coc_snippet_prev='<S-Tab>'
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+"
+" " Use enter to accept snippet expansion
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+"
+" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+"
+" " help LS to find root dir
+" autocmd FileType elixir let b:coc_root_patterns = ['mix.exs']
+"
+" " Use `[g` and `]g` to navigate diagnostics
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"
+" " Remap keys for gotos
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+"
+" " Apply AutoFix to problem on the current line
+" nmap <leader>qf  <Plug>(coc-fix-current)
+"
+" " Use K to show documentation in preview window
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+"
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
+"
+" " Highlight symbol under cursor on CursorHold
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+"
+" " Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
+"
+" " Use `:Format` to format current buffer
+" command! -nargs=0 Format :call CocAction('format')
+"
+" " Use `:Fold` to fold current buffer
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"
+" " Remap for do codeAction of selected region
+" function! s:cocActionsOpenFromSelected(type) abort
+"   execute 'CocCommand actions.open ' . a:type
+" endfunction
+" xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+" nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 " }}}
 
 " clever-f {{{
@@ -671,39 +679,39 @@ nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
 
 " Ale lint {{{
 " autocmd! BufWritePost * Neomake
-nmap <silent> <leader>pl <Plug>(ale_previous_wrap)
-nmap <silent> <leader>nl <Plug>(ale_next_wrap)
-let g:ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_insert_leave = 1
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '☢'
-let g:ale_sign_warning = '⚠'
-let g:airline#extensions#ale#enabled = 1
-" let g:ale_set_loclist = 0
-" let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
-let g:ale_list_window_size = 5
-" let g:ale_echo_msg_format = '[%severity%][%linter%] %code%'
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'elixir': ['mix_format'],
-\   'ruby': ['rubocop'],
-\   'css' : ['prettier'],
-\   'html' : ['prettier'],
-\   'markdown' : ['prettier'],
-\   'yaml': ['prettier'],
-\   'json': ['prettier', 'eslint'],
-\   'javascript': ['prettier', 'eslint'],
-\}
+" nmap <silent> <leader>pl <Plug>(ale_previous_wrap)
+" nmap <silent> <leader>nl <Plug>(ale_next_wrap)
+" let g:ale_lint_on_save = 1
+" let g:ale_fix_on_save = 1
+" let g:ale_lint_on_text_changed = 0
+" let g:ale_lint_on_enter = 1
+" let g:ale_lint_on_insert_leave = 1
+" let g:ale_sign_column_always = 1
+" let g:ale_sign_error = '☢'
+" let g:ale_sign_warning = '⚠'
+" let g:airline#extensions#ale#enabled = 1
+" " let g:ale_set_loclist = 0
+" " let g:ale_set_quickfix = 1
+" let g:ale_open_list = 1
+" let g:ale_list_window_size = 5
+" " let g:ale_echo_msg_format = '[%severity%][%linter%] %code%'
+"
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \   'elixir': ['mix_format'],
+" \   'ruby': ['rubocop'],
+" \   'css' : ['prettier'],
+" \   'html' : ['prettier'],
+" \   'markdown' : ['prettier'],
+" \   'yaml': ['prettier'],
+" \   'json': ['prettier', 'eslint'],
+" \   'javascript': ['prettier', 'eslint'],
+" \}
 " au FileType elixir let b:ale_fix_on_save = 1
 " }}}
 
 " Tests {{{
-let test#strategy = "neoterm"
+" let test#strategy = "neoterm"
 nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>Tf :TestFile<CR>
 nmap <silent> <leader>Ta :TestSuite<CR>
@@ -726,7 +734,7 @@ if has('nvim')
   " special ESC behaviour
   " au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
   " au FileType fzf tunmap <buffer> <Esc>
-  tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+  " tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
   " tnoremap <Esc> <C-\><C-n>
   tnoremap <A-h> <C-\><C-n><C-w>h
@@ -777,21 +785,21 @@ let use_xhtml=1
 " }}}
 
 " airline {{{
-set laststatus=2
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline_theme = 'falconcus'
-let g:airline_powerline_fonts = 1
-" add buffer explorer with separator
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#nvimlsp#enabled = 0
-" let g:airline_symbols_ascii = 1
-set showtabline=0 " remove tab bar
+"set laststatus=2
+"let g:airline#extensions#branch#enabled = 1
+"let g:airline#extensions#hunks#non_zero_only = 1
+"let g:airline#extensions#tabline#show_close_button = 0
+"let g:airline_theme = 'falconcus'
+"let g:airline_powerline_fonts = 1
+"" add buffer explorer with separator
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#show_splits = 0
+"let g:airline#extensions#tabline#show_buffers = 0
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline#extensions#nvimlsp#enabled = 0
+"" let g:airline_symbols_ascii = 1
+"set showtabline=0 " remove tab bar
 " }}}
 
 " SmartGF {{{

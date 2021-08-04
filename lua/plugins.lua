@@ -44,22 +44,47 @@ return require('packer').startup({ function(use)
 
   use 'andymass/vim-matchup' -- add more selectors to %
   use 'kana/vim-textobj-user'
-  use 'gorkunov/smartpairs.vim'
+  -- use 'gorkunov/smartpairs.vim'
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require('nvim-autopairs').setup() end
+  }
   use 'tpope/vim-ragtag' -- xml & firends tags helpers
   use 'rhysd/clever-f.vim' -- Extended f, F, t and T
 
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup{}
+    end
+  }
+  use {
+    "terrortylor/nvim-comment",
+    config = function()
+      require("nvim_comment").setup{}
+    end
+  }
   use "lukas-reineke/indent-blankline.nvim"
-  use 'danilamihailov/beacon.nvim' -- display flash on cursor jumps
+  -- use 'danilamihailov/beacon.nvim'
+  use {
+    'edluffy/specs.nvim',
+    config = function()
+      require("specs").setup{
+        show_jumps  = true,
+        min_jump = 5
+      }
+    end
+  } -- display flash on cursor jumps
   use 'AndrewRadev/splitjoin.vim' -- sinle/multiline format with gS gJ
   use 'henrik/vim-indexed-search' -- show index in search results: N of NN
   use 'conradIrwin/vim-bracketed-paste' -- Auto set paste
   use 'dhruvasagar/vim-zoom' -- zoom in/out <C-w>m
-  -- use 'romainl/vim-qf'
   use "kevinhwang91/nvim-bqf" -- Quickfix improvementss
   use 'junegunn/vim-easy-align' -- <ldr><CR> for auto align
   use 'mg979/vim-visual-multi' -- ctrl+n for multi cursor
   use 'machakann/vim-sandwich' -- manipulate surround-ings (sa/sdb/srb)
-  use 'tomtom/tcomment_vim'
+
   use 'junegunn/vim-peekaboo' -- see registers
   use 'kshenoy/vim-signature' -- toggle/display/navigate makrs
   use 'sjl/gundo.vim' -- Display undo tree with <leader>u
@@ -71,6 +96,31 @@ return require('packer').startup({ function(use)
   use 'christoomey/vim-tmux-navigator'
 
   use 'kyazdani42/nvim-tree.lua'
+  -- use {
+  --   'tamton-aquib/staline.nvim',
+  --   config = function() require('staline').setup() end
+  -- }
+  use {
+    'famiu/feline.nvim',
+    config = function()
+      require('feline').setup{
+        preset = 'noicon'
+      }
+    end
+  }
+  -- use {
+  --   'akinsho/nvim-bufferline.lua',
+  --   requires = 'kyazdani42/nvim-web-devicons',
+  --   config = function()
+  --     require('bufferline').setup{
+  --       options = {
+  --         show_buffer_close_icons = false,
+  --         show_close_icons = false,
+  --         diagnostics = "nvim_lsp"
+  --       }
+  --     }
+  --   end
+  -- }
 
   -- Telescope, install: fd-find bat ripgrep
   use {
@@ -84,8 +134,6 @@ return require('packer').startup({ function(use)
     requires = { {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},
     }
   }
-
-  use 'honza/vim-snippets'
 
   -- Git stuff
   use 'rhysd/committia.vim'
@@ -114,9 +162,40 @@ return require('packer').startup({ function(use)
 
   -- Linters
   use { 'janko-m/vim-test', opt = true, cmd = {'TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'} }
-  use 'w0rp/ale'
+  -- use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
+  -- use 'w0rp/ale'
+  use { 'mfussenegger/nvim-lint' }
 
-  use 'tpope/vim-obsession' -- save session :Obsess / Obsess!
+  -- LSP
+  use {
+    "neovim/nvim-lspconfig",
+    config = [[require('config.nvim-lspconfig')]],
+  }
+  use 'kabouzeid/nvim-lspinstall'
+  use 'hrsh7th/nvim-compe'
+  -- use 'L3MON4D3/LuaSnip'
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        mode = "lsp_document_diagnostics",
+        auto_open = true,
+        auto_close = true,
+        auto_fold = false
+      }
+    end
+  }
+  use 'kosayoda/nvim-lightbulb'
+  use 'simrat39/symbols-outline.nvim'
+
+  -- use 'tpope/vim-obsession' -- save session :Obsess / Obsess!
+  use {
+    'rmagatti/auto-session',
+    config = function()
+      require("auto-session").setup { }
+    end
+  }
 
 end,
 
