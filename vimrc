@@ -297,6 +297,9 @@ nnoremap <leader>fh <cmd>Telescope help_tags theme=get_dropdown<cr>
 nnoremap <leader>fm <cmd>Telescope marks theme=get_dropdown<cr>
 nnoremap <leader>fr <cmd>Telescope registers theme=get_dropdown<cr>
 nnoremap <leader>fc <cmd>Telescope commands theme=get_dropdown<cr>
+nnoremap <leader>ca <cmd>Telescope lsp_code_actions theme=get_dropdown<cr>
+nnoremap <leader>cr <cmd>Telescope lsp_references theme=get_dropdown<cr>
+nnoremap <leader>cs <cmd>Telescope lsp_document_symbols theme=get_dropdown<cr>
 
 " Nvim LSP + compe
 set completeopt=menuone,noselect

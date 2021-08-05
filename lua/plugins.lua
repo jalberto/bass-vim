@@ -164,7 +164,8 @@ return require('packer').startup({ function(use)
   use { 'janko-m/vim-test', opt = true, cmd = {'TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'} }
   -- use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
   -- use 'w0rp/ale'
-  use { 'mfussenegger/nvim-lint' }
+  -- use { 'mfussenegger/nvim-lint' }
+  use({ "jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"} })
 
   -- LSP
   use {

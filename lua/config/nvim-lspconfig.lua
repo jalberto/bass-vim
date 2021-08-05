@@ -110,14 +110,27 @@ _G.s_tab_complete = function()
 end
 
 -- Lint / format
-require('lint').linters_by_ft = {
-  ruby = {'ruby'},
-  markdown = {'vale', 'markdownlint'},
-  javascript = {'eslint'},
-  html = {'tidy'},
-  xml = {'tidy'}
-}
-vim.cmd [[autocmd BufWritePost * lua require('lint').try_lint()]]
+-- require('lint').linters_by_ft = {
+--   ruby = {'ruby'},
+--   markdown = {'vale', 'markdownlint'},
+--   javascript = {'eslint'},
+--   html = {'tidy'},
+--   xml = {'tidy'}
+-- }
+-- vim.cmd [[autocmd BufWritePost * lua require('lint').try_lint()]]
+require("null-ls").config({
+    sources = {
+      require("null-ls").builtins.formatting.prettier,
+      require("null-ls").builtins.formatting.eslint_d,
+      require("null-ls").builtins.formatting.mix,
+      require("null-ls").builtins.diagnostics.write_good,
+      require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
+      require("null-ls").builtins.code_actions.gitsigns,
+    }
+})
+-- require("lspconfig")["null-ls"].setup({
+--     on_attach = my_custom_on_attach
+-- })
 
 -- LightBulb
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
