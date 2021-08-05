@@ -128,9 +128,13 @@ require("null-ls").config({
       require("null-ls").builtins.code_actions.gitsigns,
     }
 })
--- require("lspconfig")["null-ls"].setup({
---     on_attach = my_custom_on_attach
--- })
+require("lspconfig")["null-ls"].setup({
+    on_attach = function(client)
+    if client.resolved_capabilities.document_formatting then
+        vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+    end
+  end
+})
 
 -- LightBulb
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
