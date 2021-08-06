@@ -21,7 +21,7 @@ vim.lsp.diagnostic.set_virtual_text = set_virtual_text_custom
 -- https://github.com/kabouzeid/nvim-lspinstall#bundled-installers
 local function setup_servers()
   -- Install missing servers
-  local required_servers = { "lua", "elixir", "ruby", "html", "css", "dockerfile", "graphql", "json", "lua", "vue", "yaml" }
+  local required_servers = { "elixir", "ruby", "html", "css", "dockerfile", "graphql", "json", "lua", "vue", "yaml" }
   local installed_servers = require'lspinstall'.installed_servers()
   for _, server in pairs(required_servers) do
     if not vim.tbl_contains(installed_servers, server) then
@@ -109,6 +109,24 @@ _G.s_tab_complete = function()
   end
 end
 
+-- Icons to use
+vim.fn.sign_define(
+  "LspDiagnosticsSignError",
+  { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
+)
+vim.fn.sign_define(
+  "LspDiagnosticsSignWarning",
+  { texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning" }
+)
+vim.fn.sign_define(
+  "LspDiagnosticsSignHint",
+  { texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint" }
+)
+vim.fn.sign_define(
+  "LspDiagnosticsSignInformation",
+  { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" }
+)
+
 -- Lint / format
 -- require('lint').linters_by_ft = {
 --   ruby = {'ruby'},
@@ -119,17 +137,18 @@ end
 -- }
 -- vim.cmd [[autocmd BufWritePost * lua require('lint').try_lint()]]
 require("null-ls").config({
-    sources = {
-      require("null-ls").builtins.formatting.prettier,
-      require("null-ls").builtins.formatting.eslint_d,
-      require("null-ls").builtins.formatting.mix,
-      require("null-ls").builtins.diagnostics.write_good,
-      require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
-      require("null-ls").builtins.code_actions.gitsigns,
-    }
+  debug = false,
+  sources = {
+    require("null-ls").builtins.formatting.prettier,
+    require("null-ls").builtins.formatting.eslint_d,
+    require("null-ls").builtins.formatting.mix,
+    require("null-ls").builtins.diagnostics.write_good,
+    require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
+    require("null-ls").builtins.code_actions.gitsigns,
+  }
 })
 require("lspconfig")["null-ls"].setup({
-    on_attach = function(client)
+  on_attach = function(client)
     if client.resolved_capabilities.document_formatting then
         vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
     end

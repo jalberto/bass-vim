@@ -104,7 +104,14 @@ return require('packer').startup({ function(use)
     'famiu/feline.nvim',
     config = function()
       require('feline').setup{
-        preset = 'noicon'
+        -- preset = 'noicon'
+      }
+    end
+  }
+  use {'seblj/nvim-tabline',
+    config = function()
+      require('tabline').setup{
+        close_icon = ''
       }
     end
   }
@@ -183,6 +190,7 @@ return require('packer').startup({ function(use)
         mode = "lsp_document_diagnostics",
         auto_open = true,
         auto_close = true,
+        use_lsp_diagnostic_signs = true,
         auto_fold = false
       }
     end

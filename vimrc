@@ -448,7 +448,7 @@ endif
 set background=dark
 let g:enable_bold_font=1
 
-let g:falcon_background=1
+let g:falcon_background=0
 let g:falcon_inactive=0
 
 let g:equinusocio_material_style='pure'
