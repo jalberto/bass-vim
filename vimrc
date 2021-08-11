@@ -777,9 +777,9 @@ let g:gundo_prefer_python3 = 1
 
 " vim-gh-line {{{
 " let g:gh_gitlab_domain = "gitlab.com"
-let g:gh_open_command = 'fn() { echo "$@" | wl-copy; }; fn '
-let g:gh_line_map_default = 0
-let g:gh_line_map = '<leader>gh'
+" let g:gh_open_command = 'fn() { echo "$@" | wl-copy; }; fn '
+" let g:gh_line_map_default = 0
+" let g:gh_line_map = '<leader>gh'
 " }}}
 
 " :TOhtml {{{

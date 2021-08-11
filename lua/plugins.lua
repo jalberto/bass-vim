@@ -65,8 +65,15 @@ return require('packer').startup({ function(use)
       require("nvim_comment").setup{}
     end
   }
-  use "lukas-reineke/indent-blankline.nvim"
-  -- use 'danilamihailov/beacon.nvim'
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("indent_blankline").setup{
+        buftype_exclude = {"terminal", "TelescopePrompt", "man", "nofile"},
+        filetype_exclude = {""}
+      }
+    end
+  }
   use {
     'edluffy/specs.nvim',
     config = function()
@@ -145,7 +152,11 @@ return require('packer').startup({ function(use)
   -- Git stuff
   use 'rhysd/committia.vim'
   use 'whiteinge/diffconflicts'
-  use 'ruanyl/vim-gh-line'
+  use {
+    'ruifm/gitlinker.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function() require('gitlinker').setup() end
+  } -- <leader>gy to copy git link
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
@@ -198,7 +209,7 @@ return require('packer').startup({ function(use)
   use 'kosayoda/nvim-lightbulb'
   use 'simrat39/symbols-outline.nvim'
 
-  -- use 'tpope/vim-obsession' -- save session :Obsess / Obsess!
+  -- use 'tpmpe/vim-obsession' -- save session :Obsess / Obsess!
   use {
     'rmagatti/auto-session',
     config = function()
