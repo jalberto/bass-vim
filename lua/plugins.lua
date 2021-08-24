@@ -182,7 +182,6 @@ return require('packer').startup({ function(use)
   use { 'janko-m/vim-test', opt = true, cmd = {'TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'} }
   -- use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
   -- use 'w0rp/ale'
-  -- use { 'mfussenegger/nvim-lint' }
   use({ "jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"} })
 
   -- LSP
@@ -209,7 +208,6 @@ return require('packer').startup({ function(use)
   use 'kosayoda/nvim-lightbulb'
   use 'simrat39/symbols-outline.nvim'
 
-  -- use 'tpmpe/vim-obsession' -- save session :Obsess / Obsess!
   use {
     'rmagatti/auto-session',
     config = function()
