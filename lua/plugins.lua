@@ -26,11 +26,16 @@ return require('packer').startup({ function(use)
   use 'lighthaus-theme/vim-lighthaus'
 
   -- Syntax & other helpers for specific files
+
+  -- Elixir
+  use { 'elixir-editors/vim-elixir' }
+  use { 'slashmili/alchemist.vim', ft = 'elixir' }
+  use { 'c-brenn/phoenix.vim', ft = 'elixir' }
+
   -- use 'sheerun/vim-polyglot'
   use { 'amadeus/vim-mjml', ft = {'mjml'} }
-  use { 'elixir-editors/vim-elixir', ft = {'elixir'} }
   use { 'dNitro/vim-pug-complete', ft = {'pug'} }
-  use { 'tpope/vim-markdown', ft = {'markdown'} }
+  use { 'tpope/vim-markdown' }
   use { 'andrewstuart/vim-kubernetes', ft = {'yaml'} }
   use { 'towolf/vim-helm', ft = {'yaml'} }
   use 'robbles/logstash.vim'
@@ -170,10 +175,6 @@ return require('packer').startup({ function(use)
   use {'stefanoverna/vim-i18n', ft = 'ruby'}
   use {'rorymckinley/vim-rubyhash', ft = 'ruby'} -- convert hash keys to symbol, strings or 1.9 style with rs rt rr
   use {'danchoi/ri.vim', ft = 'ruby'}
-
-  -- Elixir
-  use { 'slashmili/alchemist.vim', ft = 'elixir' }
-  use { 'c-brenn/phoenix.vim', ft = 'elixir' }
 
   -- HTML/CSS/JS
   use 'mattn/emmet-vim'

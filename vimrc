@@ -493,7 +493,7 @@ endif
 " Plugins config {{{
 
 " Plugins vim-markdown {{{
-let g:markdown_fenced_languages = ['html', 'shell', 'ruby', 'vim', 'js']
+let g:markdown_fenced_languages = ['html', 'shell', 'ruby', 'vim', 'js', 'elixir']
 " }}}
 
 " QF {{{
