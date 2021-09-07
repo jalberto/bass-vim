@@ -249,7 +249,7 @@ vmap <Leader>P "+P
 
 nnoremap <leader>r :call Rotate()<CR>
 
-nnoremap <silent> <leader>x :NvimTreeToggle<CR>
+nnoremap <silent> <leader>e :NvimTreeToggle<CR>
 
 " Rails i18n
 " vmap <Leader>8 :call I18nTranslateString()<CR>

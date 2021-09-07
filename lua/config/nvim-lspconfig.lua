@@ -126,6 +126,12 @@ vim.fn.sign_define(
   "LspDiagnosticsSignInformation",
   { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" }
 )
+-- Autopair + compe
+require('nvim-autopairs.completion.compe').setup({
+  map_cr = true,
+  map_complete = true,
+  auto_select = false
+})
 
 -- Lint / format
 -- require('lint').linters_by_ft = {
@@ -142,6 +148,7 @@ require("null-ls").config({
     require("null-ls").builtins.formatting.prettier,
     require("null-ls").builtins.formatting.eslint_d,
     require("null-ls").builtins.formatting.mix,
+    require("null-ls").builtins.diagnostics.codespell,
     require("null-ls").builtins.diagnostics.write_good,
     require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
     require("null-ls").builtins.code_actions.gitsigns,
@@ -169,7 +176,7 @@ vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
 
 -- Trouble list
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
   {silent = true, noremap = true}
 )
 vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",

@@ -245,7 +245,7 @@ _G.packer_plugins = {
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/todo-comments.nvim"
   },
   ["trouble.nvim"] = {
-    config = { "\27LJ\2\2–\1\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\5\29use_lsp_diagnostic_signs\2\14auto_open\2\tmode\29lsp_document_diagnostics\14auto_fold\1\15auto_close\2\nsetup\ftrouble\frequire\0" },
+    config = { "\27LJ\2\2¥\1\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\6\29use_lsp_diagnostic_signs\2\rposition\nright\14auto_open\2\tmode\29lsp_document_diagnostics\14auto_fold\1\15auto_close\2\nsetup\ftrouble\frequire\0" },
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/trouble.nvim"
   },
@@ -444,7 +444,7 @@ try_loadstring("\27LJ\2\2>\0\0\2\0\3\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0004\1\0\0B
 time([[Config for auto-session]], false)
 -- Config for: trouble.nvim
 time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\2–\1\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\5\29use_lsp_diagnostic_signs\2\14auto_open\2\tmode\29lsp_document_diagnostics\14auto_fold\1\15auto_close\2\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+try_loadstring("\27LJ\2\2¥\1\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\6\29use_lsp_diagnostic_signs\2\rposition\nright\14auto_open\2\tmode\29lsp_document_diagnostics\14auto_fold\1\15auto_close\2\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
 time([[Config for trouble.nvim]], false)
 
 -- Command lazy-loads

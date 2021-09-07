@@ -19,7 +19,7 @@ return require('packer').startup({ function(use)
   use 'xolox/vim-misc'
   use 'tpope/vim-repeat' -- Add repeat support to other plugins
 
-  use 'tpope/vim-sleuth' -- Try to detect correct identation
+  use 'tpope/vim-sleuth' -- Try to detect correct indentation
 
   -- Themes
   use 'fenetikm/falcon'
@@ -50,11 +50,12 @@ return require('packer').startup({ function(use)
   use 'andymass/vim-matchup' -- add more selectors to %
   use 'kana/vim-textobj-user'
   -- use 'gorkunov/smartpairs.vim'
+  -- use 'tpope/vim-endwise'
   use {
     'windwp/nvim-autopairs',
     config = function() require('nvim-autopairs').setup() end
   }
-  use 'tpope/vim-ragtag' -- xml & firends tags helpers
+  use 'tpope/vim-ragtag' -- xml & friends tags helpers
   use 'rhysd/clever-f.vim' -- Extended f, F, t and T
 
   use {
@@ -98,7 +99,7 @@ return require('packer').startup({ function(use)
   use 'machakann/vim-sandwich' -- manipulate surround-ings (sa/sdb/srb)
 
   use 'junegunn/vim-peekaboo' -- see registers
-  use 'kshenoy/vim-signature' -- toggle/display/navigate makrs
+  use 'kshenoy/vim-signature' -- toggle/display/navigate marks
   use 'sjl/gundo.vim' -- Display undo tree with <leader>u
   use 'tpope/vim-speeddating' -- increase/decrease dates with ctrl-a/x
   use 'christianrondeau/vim-base64' -- encode using b64
@@ -198,6 +199,7 @@ return require('packer').startup({ function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup {
+        position = "right",
         mode = "lsp_document_diagnostics",
         auto_open = true,
         auto_close = true,
