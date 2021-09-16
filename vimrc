@@ -23,7 +23,7 @@ set shiftround " When shifting lines, round the indentation to the nearest multi
 set smarttab
 set tabstop=2
 set softtabstop=2
-set shiftwidth=2 " num colums
+set shiftwidth=2 " num columns
 set expandtab    " use spaces
 
 if !has('nvim')
@@ -67,17 +67,21 @@ if has("folding")
 endif
 
 set number relativenumber
+
+" Auto-sessiosn recommendations
+set sessionoptions+=options,resize,winpos,terminal
 " }}}
 
 " Custom file types {{{
 augroup filetypedetect
   autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl setf helm
+  autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
   autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
   " autocmd BufNewFile,BufRead *.json setf javascript
 augroup END
 " }}}
 
-" need ot be set before plugins load
+" need to be set before plugins load
 " let g:ale_disable_lsp = 1
 
 " Plugins {{{
@@ -165,14 +169,14 @@ endfunction
 
 " Auto commands {{{
 " Sessions {{{
-set ssop-=options
-augroup sourcesession
-  autocmd!
-  autocmd VimEnter * nested
-        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
-        \   source Session.vim |
-        \ endif
-augroup END
+" set ssop-=options
+" augroup sourcesession
+"   autocmd!
+"   autocmd VimEnter * nested
+"         \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
+"         \   source Session.vim |
+"         \ endif
+" augroup END
 " }}}
 
 " when numbering is on, toggle relative to active buffer {{{
@@ -438,7 +442,7 @@ endif
 "   let &t_8b = "<Esc>[48;2;%lu;%lu;%lum"
 " endif
 if has("nvim") || has("termguicolors")
-  " clean BCE in tmux for propper colours
+  " clean BCE in tmux for proper colours
   " set t_ut=
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
@@ -506,7 +510,10 @@ let g:qf_mapping_ack_style = 1
 " nvimtree {{{
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_git_hl = 1
+let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_highlight_opened_files = 1
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+let g:nvim_tree_tab_open = 1
 " }}}
 
 " emmet {{{
