@@ -109,7 +109,17 @@ return require('packer').startup({ function(use)
   use 'roxma/vim-tmux-clipboard'
   use 'christoomey/vim-tmux-navigator'
 
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require'nvim-tree'.setup {
+        auto_close = true,
+        open_on_tab = true
+      }
+    end
+}
+
   -- use {
   --   'tamton-aquib/staline.nvim',
   --   config = function() require('staline').setup() end
