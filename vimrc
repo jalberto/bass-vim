@@ -69,7 +69,8 @@ endif
 set number relativenumber
 
 " Auto-sessiosn recommendations
-set sessionoptions+=options,resize,winpos,terminal
+" set sessionoptions+=options,resize,winpos,terminal
+set sessionoptions+=options,winpos,tabpages
 " }}}
 
 " Custom file types {{{
@@ -463,6 +464,7 @@ if has("gui_running")
   colorscheme falcon
 else
   colorscheme falcon
+  " colorscheme enfocado
 endif
 
 " Cursorline color

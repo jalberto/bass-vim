@@ -24,6 +24,7 @@ return require('packer').startup({ function(use)
   -- Themes
   use 'fenetikm/falcon'
   use 'lighthaus-theme/vim-lighthaus'
+  use 'wuelnerdotexe/vim-enfocado'
 
   -- Syntax & other helpers for specific files
 
@@ -201,7 +202,7 @@ return require('packer').startup({ function(use)
       require("trouble").setup {
         position = "right",
         mode = "lsp_document_diagnostics",
-        auto_open = true,
+        auto_open = false,
         auto_close = true,
         use_lsp_diagnostic_signs = true,
         auto_fold = false
