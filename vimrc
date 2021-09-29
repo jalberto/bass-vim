@@ -70,7 +70,7 @@ set number relativenumber
 
 " Auto-sessiosn recommendations
 " set sessionoptions+=options,resize,winpos,terminal
-set sessionoptions+=options,winpos,tabpages
+" set sessionoptions+=options,winpos,tabpages
 " }}}
 
 " Custom file types {{{
@@ -495,7 +495,7 @@ if has('title') && (has('gui_running') || &title)
 endif
 " }}}
 
-set signcolumn=auto:2-5
+set signcolumn=yes
 
 " }}}
 
