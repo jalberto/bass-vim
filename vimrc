@@ -494,6 +494,9 @@ if has('title') && (has('gui_running') || &title)
   " set titlestring+=\ -\ %{v:progname} " program name
 endif
 " }}}
+
+set signcolumn=auto:2-5
+
 " }}}
 
 " Plugins config {{{
