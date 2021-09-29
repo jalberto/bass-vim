@@ -495,7 +495,7 @@ if has('title') && (has('gui_running') || &title)
 endif
 " }}}
 
-set signcolumn=yes
+set signcolumn=yes:1
 
 " }}}
 
