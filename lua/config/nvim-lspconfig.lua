@@ -143,7 +143,7 @@ require('nvim-autopairs.completion.compe').setup({
 -- }
 -- vim.cmd [[autocmd BufWritePost * lua require('lint').try_lint()]]
 require("null-ls").config({
-  debug = false,
+  debug = true,
   sources = {
     require("null-ls").builtins.formatting.prettier,
     require("null-ls").builtins.formatting.eslint_d,
@@ -151,15 +151,18 @@ require("null-ls").config({
     require("null-ls").builtins.diagnostics.codespell,
     require("null-ls").builtins.diagnostics.write_good,
     require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
+    require("null-ls").builtins.diagnostics.stylelint,
+    require("null-ls").builtins.diagnostics.standardrb,
     require("null-ls").builtins.code_actions.gitsigns,
   }
 })
 require("lspconfig")["null-ls"].setup({
-  on_attach = function(client)
-    if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
-    end
-  end
+  -- Auto format on write
+  -- on_attach = function(client)
+  --   if client.resolved_capabilities.document_formatting then
+  --       vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+  --   end
+  -- end
 })
 
 -- LSP Config
@@ -190,9 +193,9 @@ vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
 
 -- Trouble list
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-  {silent = true, noremap = true}
-)
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
+-- vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+--   {silent = true, noremap = true}
+-- )
+-- vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",
+--   {silent = true, noremap = true}
+-- )

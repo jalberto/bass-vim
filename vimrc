@@ -70,7 +70,7 @@ set number relativenumber
 
 " Auto-sessiosn recommendations
 " set sessionoptions+=options,resize,winpos,terminal
-" set sessionoptions+=options,winpos,tabpages
+set sessionoptions+=resize,winpos,terminal
 " }}}
 
 " Custom file types {{{
@@ -306,6 +306,7 @@ nnoremap <leader>ca <cmd>Telescope lsp_code_actions theme=get_dropdown<cr>
 nnoremap <leader>cr <cmd>Telescope lsp_references theme=get_dropdown<cr>
 nnoremap <leader>cs <cmd>Telescope lsp_document_symbols theme=get_dropdown<cr>
 nnoremap <leader>cf <cmd>lua vim.lsp.buf.formatting()<cr>
+nnoremap <leader>ct <cmd>TroubleToggle<cr>
 
 " Nvim LSP + compe
 set completeopt=menuone,noselect
