@@ -254,7 +254,7 @@ vmap <Leader>P "+P
 
 nnoremap <leader>r :call Rotate()<CR>
 
-nnoremap <silent> <leader>e :NvimTreeToggle<CR>
+nnoremap <silent> <leader>f :NvimTreeToggle<CR>
 
 " Rails i18n
 " vmap <Leader>8 :call I18nTranslateString()<CR>
@@ -305,13 +305,15 @@ nnoremap <leader>fc <cmd>Telescope commands theme=get_dropdown<cr>
 nnoremap <leader>ca <cmd>Telescope lsp_code_actions theme=get_dropdown<cr>
 nnoremap <leader>cr <cmd>Telescope lsp_references theme=get_dropdown<cr>
 nnoremap <leader>cs <cmd>Telescope lsp_document_symbols theme=get_dropdown<cr>
-nnoremap <leader>cf <cmd>lua vim.lsp.buf.formatting()<cr>
-nnoremap <leader>ct <cmd>TroubleToggle<cr>
+
+ " LSP
+" nnoremap <leader>cf <cmd>lua vim.lsp.buf.formatting()<cr>
+" nnoremap <leader>ct <cmd>TroubleToggle<cr>
 
 " Nvim LSP + compe
-set completeopt=menuone,noselect
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+" set completeopt=menuone,noselect
+" inoremap <silent><expr> <C-Space> compe#complete()
+" inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
@@ -732,16 +734,6 @@ nmap <silent> <leader>Tf :TestFile<CR>
 nmap <silent> <leader>Ta :TestSuite<CR>
 nmap <silent> <leader>Tl :TestLast<CR>
 nmap <silent> <leader>Tg :TestVisit<CR>
-" }}}
-
-" NerdTree {{{
-" let g:NERDTreeAutoDeleteBuffer = 1
-" let g:NERDTreeShowBookmarks = 1
-" let g:NERDTreeCascadeOpenSingleChildDir = 1
-
-" Exit Vim if NERDTree is the only window left.
-" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    " \ quit | endif
 " }}}
 
 " slime & NeoTerm {{{

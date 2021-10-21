@@ -73,6 +73,7 @@ _G.packer_plugins = {
     after_files = { "/home/ja/.local/share/nvim/site/pack/packer/opt/alchemist.vim/after/plugin/alchemist.vim" },
     loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/alchemist.vim"
   },
   ["auto-session"] = {
@@ -157,6 +158,7 @@ _G.packer_plugins = {
     config = { "\27LJ\2\0027\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14colorizer\frequire\0" },
     loaded = false,
     needs_bufread = false,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/nvim-colorizer.lua"
   },
   ["nvim-comment"] = {
@@ -202,6 +204,7 @@ _G.packer_plugins = {
   ["phoenix.vim"] = {
     loaded = false,
     needs_bufread = false,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/phoenix.vim"
   },
   ["plenary.nvim"] = {
@@ -215,11 +218,13 @@ _G.packer_plugins = {
   ["ri.vim"] = {
     loaded = false,
     needs_bufread = false,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/ri.vim"
   },
   ["smartgf.vim"] = {
     loaded = false,
     needs_bufread = false,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/smartgf.vim"
   },
   ["specs.nvim"] = {
@@ -277,11 +282,13 @@ _G.packer_plugins = {
   ["vim-helm"] = {
     loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-helm"
   },
   ["vim-i18n"] = {
     loaded = false,
     needs_bufread = false,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-i18n"
   },
   ["vim-indexed-search"] = {
@@ -291,6 +298,7 @@ _G.packer_plugins = {
   ["vim-kubernetes"] = {
     loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-kubernetes"
   },
   ["vim-l9"] = {
@@ -320,6 +328,7 @@ _G.packer_plugins = {
   ["vim-mjml"] = {
     loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-mjml"
   },
   ["vim-peekaboo"] = {
@@ -329,6 +338,7 @@ _G.packer_plugins = {
   ["vim-pug-complete"] = {
     loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-pug-complete"
   },
   ["vim-ragtag"] = {
@@ -338,6 +348,7 @@ _G.packer_plugins = {
   ["vim-rails"] = {
     loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-rails"
   },
   ["vim-repeat"] = {
@@ -347,11 +358,13 @@ _G.packer_plugins = {
   ["vim-ruby"] = {
     loaded = false,
     needs_bufread = true,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-ruby"
   },
   ["vim-rubyhash"] = {
     loaded = false,
     needs_bufread = false,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-rubyhash"
   },
   ["vim-sandwich"] = {
@@ -374,6 +387,7 @@ _G.packer_plugins = {
     commands = { "TestFile", "TestLast", "TestNearest", "TestSuite", "TestVisit" },
     loaded = false,
     needs_bufread = false,
+    only_cond = false,
     path = "/home/ja/.local/share/nvim/site/pack/packer/opt/vim-test"
   },
   ["vim-textobj-user"] = {
