@@ -184,12 +184,13 @@ require("null-ls").config({
   sources = {
     require("null-ls").builtins.formatting.prettier,
     require("null-ls").builtins.formatting.eslint_d,
-    require("null-ls").builtins.formatting.mix,
+    -- require("null-ls").builtins.formatting.mix,
     require("null-ls").builtins.diagnostics.codespell,
     require("null-ls").builtins.diagnostics.write_good,
     require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
     require("null-ls").builtins.diagnostics.stylelint,
     require("null-ls").builtins.diagnostics.standardrb,
+    require("null-ls").builtins.diagnostics.credo,
     require("null-ls").builtins.code_actions.gitsigns,
   }
 })
@@ -209,6 +210,12 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   signs = true,
   underline = false,
   update_in_insert = false,
+  -- float = {
+  --   show_header = true,
+  --   source = 'if_many',
+  --   border = 'rounded',
+  --   focusable = false
+  -- }
 })
 
 -- You will likely want to reduce updatetime which affects CursorHold

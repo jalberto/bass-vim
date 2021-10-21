@@ -91,18 +91,18 @@ lua require('plugins')
 
 " Vundle {{{
 " Helper to add conditionals for nvim
-function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
-
-call plug#begin('~/.vim/plugged')
-"Plug 'bling/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
-call plug#end()
+" function! Cond(cond, ...)
+"   let opts = get(a:000, 0, {})
+"   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+" endfunction
+" 
+" call plug#begin('~/.vim/plugged')
+" "Plug 'bling/vim-airline'
+" "Plug 'vim-airline/vim-airline-themes'
+" 
+" " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" " Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
+" call plug#end()
 " }}}
 
 " Functions {{{
@@ -254,7 +254,7 @@ vmap <Leader>P "+P
 
 nnoremap <leader>r :call Rotate()<CR>
 
-nnoremap <silent> <leader>f :NvimTreeToggle<CR>
+nnoremap <silent> <leader>x :NvimTreeToggle<CR>
 
 " Rails i18n
 " vmap <Leader>8 :call I18nTranslateString()<CR>
