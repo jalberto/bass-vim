@@ -462,16 +462,13 @@ let g:falcon_inactive=0
 let g:equinusocio_material_style='pure'
 " let g:equinusocio_material_less=50
 
+colorscheme falcon
 if has("gui_running")
   set guifont=JetBrains\ Mono\ Variable\ 14
-  colorscheme falcon
-else
-  colorscheme falcon
-  " colorscheme enfocado
 endif
 
 " Cursorline color
-highlight CursorLine ctermbg=black cterm=bold guibg=black gui=bold
+" highlight CursorLine guibg=#28282d
 " highlight CocCodeLens guifg=#57575e gui=italic
 
 " HL on yanks
@@ -499,7 +496,6 @@ endif
 " }}}
 
 set signcolumn=yes:1
-
 " }}}
 
 " Plugins config {{{
@@ -511,8 +507,8 @@ let g:markdown_fenced_languages = ['html', 'shell', 'ruby', 'vim', 'js', 'elixir
 " QF {{{
 " nmap ç <Plug>(qf_qf_switch)
 " nmap <F5> <Plug>(qf_qf_toggle_stay)
-nmap <leader>q <Plug>(qf_qf_toggle)
-let g:qf_mapping_ack_style = 1
+" nmap <leader>q <Plug>(qf_qf_toggle)
+" let g:qf_mapping_ack_style = 1
 " }}}
 
 " nvimtree {{{
@@ -528,156 +524,8 @@ autocmd FileType html,css,liquid,eelixir EmmetInstall
 let g:user_emmet_leader_key=','
 " }}}
 
-" COC {{{
-" let g:coc_global_extensions=[
-"             \'coc-solargraph',
-"             \'coc-elixir',
-"             \'coc-json',
-"             \'coc-css',
-"             \'coc-html',
-"             \'coc-yaml',
-"             \'coc-xml',
-"             \'coc-syntax',
-"             \'coc-emmet',
-"             \'coc-tsserver',
-"             \'coc-snippets',
-"             \'coc-spell-checker',
-"             \'coc-pairs',
-"             \'coc-actions',
-"             \'coc-vetur',
-"             \'coc-markdownlint'
-"             \]
-"
-" set updatetime=300
-"
-" " Use tab for trigger completion with characters ahead and navigate.
-" " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-" " Navigate snippet placeholders using tab
-" let g:coc_snippet_next='<Tab>'
-" let g:coc_snippet_prev='<S-Tab>'
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-"
-" " Use enter to accept snippet expansion
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-"
-" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-"
-" " help LS to find root dir
-" autocmd FileType elixir let b:coc_root_patterns = ['mix.exs']
-"
-" " Use `[g` and `]g` to navigate diagnostics
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
-"
-" " Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-"
-" " Apply AutoFix to problem on the current line
-" nmap <leader>qf  <Plug>(coc-fix-current)
-"
-" " Use K to show documentation in preview window
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-"
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-"
-" " Highlight symbol under cursor on CursorHold
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-"
-" " Remap for rename current word
-" nmap <leader>rn <Plug>(coc-rename)
-"
-" " Use `:Format` to format current buffer
-" command! -nargs=0 Format :call CocAction('format')
-"
-" " Use `:Fold` to fold current buffer
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-"
-" " Remap for do codeAction of selected region
-" function! s:cocActionsOpenFromSelected(type) abort
-"   execute 'CocCommand actions.open ' . a:type
-" endfunction
-" xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-" nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-" }}}
-
 " clever-f {{{
 let g:clever_f_smart_case=1
-" }}}
-
-" fzf {{{
-
-" this is in zshrc
-" if executable('fd')
-"   let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude "**/{.git,node_modules,vendor,deps,_build,tmp}/*"'
-" endif
-
-" if executable('rg')
-"   set grepprg=rg\ --vimgrep
-" "
-"   " :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
-"   command! -bang -nargs=* Rg
-"     \ call fzf#vim#grep(
-"     \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" '.shellescape(<q-args>), 1,
-"     \   <bang>0 ? fzf#vim#with_preview('down:40%')
-"     \           : fzf#vim#with_preview('down:40%:hidden', '?'),
-"     \   <bang>0)
-"
-"   " :RG reset ripgrep each time to re-search
-"   function! RipgrepFzf(query, fullscreen)
-"     let command_fmt = 'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case --hidden --follow --glob "!**/{.git,node_modules,vendor,deps,_build,tmp,.hex,.elixir_ls,.npm,.mix}/*" -- %s || true'
-"     let initial_command = printf(command_fmt, shellescape(a:query))
-"     let reload_command = printf(command_fmt, '{q}')
-"     let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-"     call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-"   endfunction
-"
-"   command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-" endif
-"
-" " Files command with preview window
-" command! -bang -nargs=? -complete=dir Files
-"   \ call fzf#vim#files(<q-args>,
-"   \   <bang>0 ? fzf#vim#with_preview('down:40%')
-"   \           : fzf#vim#with_preview('down:40%:hidden', '?'),
-"   \   <bang>0)
-"
-" let $FZF_DEFAULT_OPTS="--reverse" " top to bottom
-"
-" let g:fzf_buffers_jump = 1 " jump to the existing window if possible
-" }}}
-
-" vista {{{
-" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-" let g:vista_icon_indent = ["▸ ", ""]
-" let g:vista_icon_indent = ["A ", "B "]
-" let g:vista_fold_toggle_icons = ["C ", "D "]
-" let g:vista#renderer#enable_icon = 0
-" let g:vista_default_executive = 'coc'
-" let g:vista_echo_cursor_strategy = 'floating_win'
 " }}}
 
 " vimwiki {{{
@@ -692,39 +540,6 @@ nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
-" }}}
-
-" Ale lint {{{
-" autocmd! BufWritePost * Neomake
-" nmap <silent> <leader>pl <Plug>(ale_previous_wrap)
-" nmap <silent> <leader>nl <Plug>(ale_next_wrap)
-" let g:ale_lint_on_save = 1
-" let g:ale_fix_on_save = 1
-" let g:ale_lint_on_text_changed = 0
-" let g:ale_lint_on_enter = 1
-" let g:ale_lint_on_insert_leave = 1
-" let g:ale_sign_column_always = 1
-" let g:ale_sign_error = '☢'
-" let g:ale_sign_warning = '⚠'
-" let g:airline#extensions#ale#enabled = 1
-" " let g:ale_set_loclist = 0
-" " let g:ale_set_quickfix = 1
-" let g:ale_open_list = 1
-" let g:ale_list_window_size = 5
-" " let g:ale_echo_msg_format = '[%severity%][%linter%] %code%'
-"
-" let g:ale_fixers = {
-" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-" \   'elixir': ['mix_format'],
-" \   'ruby': ['rubocop'],
-" \   'css' : ['prettier'],
-" \   'html' : ['prettier'],
-" \   'markdown' : ['prettier'],
-" \   'yaml': ['prettier'],
-" \   'json': ['prettier', 'eslint'],
-" \   'javascript': ['prettier', 'eslint'],
-" \}
-" au FileType elixir let b:ale_fix_on_save = 1
 " }}}
 
 " Tests {{{
@@ -773,40 +588,10 @@ nnoremap <leader>u :GundoToggle<CR>
 let g:gundo_prefer_python3 = 1
 " }}}
 
-" fugitive {{{
-" delete hidden fugitive buffers
-" autocmd BufReadPost fugitive://* set bufhidden=delete
-" }}}
-
-" vim-gh-line {{{
-" let g:gh_gitlab_domain = "gitlab.com"
-" let g:gh_open_command = 'fn() { echo "$@" | wl-copy; }; fn '
-" let g:gh_line_map_default = 0
-" let g:gh_line_map = '<leader>gh'
-" }}}
-
 " :TOhtml {{{
 let html_number_lines=1
 let html_use_css=1
 let use_xhtml=1
-" }}}
-
-" airline {{{
-"set laststatus=2
-"let g:airline#extensions#branch#enabled = 1
-"let g:airline#extensions#hunks#non_zero_only = 1
-"let g:airline#extensions#tabline#show_close_button = 0
-"let g:airline_theme = 'falconcus'
-"let g:airline_powerline_fonts = 1
-"" add buffer explorer with separator
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#show_splits = 0
-"let g:airline#extensions#tabline#show_buffers = 0
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline#extensions#nvimlsp#enabled = 0
-"" let g:airline_symbols_ascii = 1
-"set showtabline=0 " remove tab bar
 " }}}
 
 " SmartGF {{{

@@ -66,6 +66,7 @@ local function setup_servers()
     buf_set_keymap('n', '<space>ct', '<cmd>TroubleToggle<CR>', opts)
   end
 
+  -- required for nmv-cmp
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
@@ -87,7 +88,7 @@ require'lspinstall'.post_install_hook = function ()
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
--- Compe setup
+-- Cmp setup
 vim.o.completeopt = "menu,menuone,noselect"
 
 local has_words_before = function()
@@ -97,11 +98,15 @@ end
 
 local cmp = require'cmp'
 local luasnip = require'luasnip'
+local lspkind = require('lspkind')
 cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
+  },
+  formatting = {
+    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
   },
   mapping = {
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -176,22 +181,7 @@ vim.fn.sign_define(
   "LspDiagnosticsSignInformation",
   { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" }
 )
--- Autopair + compe
--- require('nvim-autopairs.completion.compe').setup({
---   map_cr = true,
---   map_complete = true,
---   auto_select = false
--- })
 
--- Lint / format
--- require('lint').linters_by_ft = {
---   ruby = {'ruby'},
---   markdown = {'vale', 'markdownlint'},
---   javascript = {'eslint'},
---   html = {'tidy'},
---   xml = {'tidy'}
--- }
--- vim.cmd [[autocmd BufWritePost * lua require('lint').try_lint()]]
 require("null-ls").config({
   debug = true,
   sources = {
@@ -207,6 +197,7 @@ require("null-ls").config({
     require("null-ls").builtins.code_actions.gitsigns,
   }
 })
+
 require("lspconfig")["null-ls"].setup({
   -- Auto format on write
   -- on_attach = function(client)

@@ -50,8 +50,6 @@ return require('packer').startup({ function(use)
 
   use 'andymass/vim-matchup' -- add more selectors to %
   use 'kana/vim-textobj-user'
-  -- use 'gorkunov/smartpairs.vim'
-  -- use 'tpope/vim-endwise'
   use {
     'windwp/nvim-autopairs',
     config = function() require('nvim-autopairs').setup() end
@@ -118,12 +116,8 @@ return require('packer').startup({ function(use)
         open_on_tab = true
       }
     end
-}
+  }
 
-  -- use {
-  --   'tamton-aquib/staline.nvim',
-  --   config = function() require('staline').setup() end
-  -- }
   use {
     'famiu/feline.nvim',
     config = function()
@@ -132,26 +126,14 @@ return require('packer').startup({ function(use)
       }
     end
   }
-  use {'seblj/nvim-tabline',
+  use {
+    'seblj/nvim-tabline',
     config = function()
       require('tabline').setup{
         close_icon = ''
       }
     end
   }
-  -- use {
-  --   'akinsho/nvim-bufferline.lua',
-  --   requires = 'kyazdani42/nvim-web-devicons',
-  --   config = function()
-  --     require('bufferline').setup{
-  --       options = {
-  --         show_buffer_close_icons = false,
-  --         show_close_icons = false,
-  --         diagnostics = "nvim_lsp"
-  --       }
-  --     }
-  --   end
-  -- }
 
   -- Telescope, install: fd-find bat ripgrep
   use {
@@ -193,8 +175,6 @@ return require('packer').startup({ function(use)
 
   -- Linters
   use { 'janko-m/vim-test', opt = true, cmd = {'TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'} }
-  -- use { "rcarriga/vim-ultest", requires = {"vim-test/vim-test"}, run = ":UpdateRemotePlugins" }
-  -- use 'w0rp/ale'
 
   -- LSP
   use({ "jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"} })
@@ -210,8 +190,8 @@ return require('packer').startup({ function(use)
   use 'hrsh7th/nvim-cmp'
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
+  use 'onsails/lspkind-nvim'
 
-  -- use 'L3MON4D3/LuaSnip'
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
