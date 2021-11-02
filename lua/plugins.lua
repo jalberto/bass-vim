@@ -113,7 +113,11 @@ return require('packer').startup({ function(use)
     config = function()
       require'nvim-tree'.setup {
         auto_close = true,
-        open_on_tab = true
+        open_on_tab = true,
+        filters = {
+          dotfiles = false,
+          custom = {'.git', 'node_modules', '.cache'}
+        },
       }
     end
   }

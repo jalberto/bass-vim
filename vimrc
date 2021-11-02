@@ -468,8 +468,7 @@ if has("gui_running")
 endif
 
 " Cursorline color
-" highlight CursorLine guibg=#28282d
-" highlight CocCodeLens guifg=#57575e gui=italic
+highlight CursorLine guibg=#28282d
 
 " HL on yanks
 au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
@@ -515,7 +514,6 @@ let g:markdown_fenced_languages = ['html', 'shell', 'ruby', 'vim', 'js', 'elixir
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 " }}}
 
 " emmet {{{

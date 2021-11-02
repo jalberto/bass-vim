@@ -217,7 +217,7 @@ _G.packer_plugins = {
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/nvim-tabline"
   },
   ["nvim-tree.lua"] = {
-    config = { "\27LJ\2\2W\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\2\15auto_close\2\16open_on_tab\2\nsetup\14nvim-tree\frequire\0" },
+    config = { "\27LJ\2\2 \1\0\0\4\0\b\0\v6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0005\2\4\0005\3\5\0=\3\6\2=\2\a\1B\0\2\1K\0\1\0\ffilters\vcustom\1\4\0\0\t.git\17node_modules\v.cache\1\0\1\rdotfiles\1\1\0\2\15auto_close\2\16open_on_tab\2\nsetup\14nvim-tree\frequire\0" },
     loaded = true,
     path = "/home/ja/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
@@ -479,7 +479,7 @@ try_loadstring("\27LJ\2\0028\0\0\2\0\3\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0004\1\0\
 time([[Config for feline.nvim]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\2W\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\2\15auto_close\2\16open_on_tab\2\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
+try_loadstring("\27LJ\2\2 \1\0\0\4\0\b\0\v6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0005\2\4\0005\3\5\0=\3\6\2=\2\a\1B\0\2\1K\0\1\0\ffilters\vcustom\1\4\0\0\t.git\17node_modules\v.cache\1\0\1\rdotfiles\1\1\0\2\15auto_close\2\16open_on_tab\2\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
 time([[Config for nvim-tree.lua]], false)
 -- Config for: specs.nvim
 time([[Config for specs.nvim]], true)
