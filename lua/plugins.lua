@@ -55,7 +55,8 @@ return require('packer').startup({ function(use)
     config = function() require('nvim-autopairs').setup() end
   }
   use 'tpope/vim-ragtag' -- xml & friends tags helpers
-  use 'rhysd/clever-f.vim' -- Extended f, F, t and T
+  -- use 'rhysd/clever-f.vim' -- Extended f, F, t and T
+  use 'ggandor/lightspeed.nvim'
 
   use {
     "folke/todo-comments.nvim",
@@ -74,8 +75,8 @@ return require('packer').startup({ function(use)
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require("indent_blankline").setup{
-        buftype_exclude = {"terminal", "TelescopePrompt", "man", "nofile"},
-        filetype_exclude = {""}
+        buftype_exclude = {"terminal", "TelescopePrompt", "man", "nofile", "NvimTree"},
+        filetype_exclude = {"help", "packer", "NvimTree"}
       }
     end
   }
@@ -97,7 +98,7 @@ return require('packer').startup({ function(use)
   use 'mg979/vim-visual-multi' -- ctrl+n for multi cursor
   use 'machakann/vim-sandwich' -- manipulate surround-ings (sa/sdb/srb)
 
-  use 'junegunn/vim-peekaboo' -- see registers
+  -- use 'junegunn/vim-peekaboo' -- see registers
   use 'kshenoy/vim-signature' -- toggle/display/navigate marks
   use 'sjl/gundo.vim' -- Display undo tree with <leader>u
   use 'tpope/vim-speeddating' -- increase/decrease dates with ctrl-a/x
