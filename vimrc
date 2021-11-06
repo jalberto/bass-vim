@@ -50,7 +50,7 @@ set undolevels=500
 set backspace=indent,eol,start
 
 " no more annoying startup msg
-set shortmess=aoOtI
+set shortmess=aI
 set cmdheight=2
 let g:bufferline_echo=0
 
@@ -261,6 +261,11 @@ nnoremap <silent> <leader>x :NvimTreeToggle<CR>
 " }}}
 
 " Plugins {{{
+
+" Illuminate
+let g:Illuminate_delay = 1250
+let g:Illuminate_ftblacklist = ['help', 'packer', 'NvimTree']
+hi link illuminatedWord Visual
 
 " Align
 vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>

@@ -1,3 +1,10 @@
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
 -- Autoinstall packer
 local execute = vim.api.nvim_command
 local fn = vim.fn
@@ -89,8 +96,8 @@ return require('packer').startup({ function(use)
       }
     end
   } -- display flash on cursor jumps
+  use 'RRethy/vim-illuminate' -- higlite word under cursor
   use 'AndrewRadev/splitjoin.vim' -- sinle/multiline format with gS gJ
-  use 'henrik/vim-indexed-search' -- show index in search results: N of NN
   use 'conradIrwin/vim-bracketed-paste' -- Auto set paste
   use 'dhruvasagar/vim-zoom' -- zoom in/out <C-w>m
   use "kevinhwang91/nvim-bqf" -- Quickfix improvementss

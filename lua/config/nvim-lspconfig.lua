@@ -64,6 +64,8 @@ local function setup_servers()
     -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', '<space>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     buf_set_keymap('n', '<space>ct', '<cmd>TroubleToggle<CR>', opts)
+
+    require 'illuminate'.on_attach(client)
   end
 
   -- required for nmv-cmp
