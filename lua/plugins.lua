@@ -156,8 +156,10 @@ return require('packer').startup({ function(use)
   }
 
   -- Telescope, install: fd-find bat ripgrep
+  -- using latest commit for nvim 0.5
   use {
     'nvim-telescope/telescope.nvim',
+    commit = "80cdb00",
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
     config = [[require('config.telescope')]]
   }
