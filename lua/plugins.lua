@@ -62,7 +62,6 @@ return require('packer').startup({ function(use)
     config = function() require('nvim-autopairs').setup() end
   }
   use 'tpope/vim-ragtag' -- xml & friends tags helpers
-  -- use 'rhysd/clever-f.vim' -- Extended f, F, t and T
   use 'ggandor/lightspeed.nvim'
 
   use {
@@ -111,7 +110,16 @@ return require('packer').startup({ function(use)
   use 'tpope/vim-speeddating' -- increase/decrease dates with ctrl-a/x
   use 'christianrondeau/vim-base64' -- encode using b64
 
-  use 'kassio/neoterm'
+  -- use 'kassio/neoterm'
+  use {
+    "akinsho/toggleterm.nvim",
+    config = function ()
+      require("toggleterm").setup{
+        size = 10,
+        open_mapping = [[<c-\>]]
+      }
+    end
+  }
   use 'roxma/vim-tmux-clipboard'
   use 'christoomey/vim-tmux-navigator'
 

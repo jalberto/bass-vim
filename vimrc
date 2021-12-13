@@ -70,7 +70,7 @@ set number relativenumber
 
 " Auto-sessiosn recommendations
 " set sessionoptions+=options,resize,winpos,terminal
-set sessionoptions+=resize,winpos,terminal
+" set sessionoptions+=resize,winpos,terminal
 " }}}
 
 " Custom file types {{{
@@ -82,27 +82,8 @@ augroup filetypedetect
 augroup END
 " }}}
 
-" need to be set before plugins load
-" let g:ale_disable_lsp = 1
-
 " Plugins {{{
 lua require('plugins')
-" }}}
-
-" Vundle {{{
-" Helper to add conditionals for nvim
-" function! Cond(cond, ...)
-"   let opts = get(a:000, 0, {})
-"   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-" endfunction
-" 
-" call plug#begin('~/.vim/plugged')
-" "Plug 'bling/vim-airline'
-" "Plug 'vim-airline/vim-airline-themes'
-" 
-" " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" " Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack', 'for': 'elixir'}
-" call plug#end()
 " }}}
 
 " Functions {{{
@@ -166,18 +147,6 @@ endfunction
 " 
 "   return join(lines, "\n")
 " endfunction
-" }}}
-
-" Auto commands {{{
-" Sessions {{{
-" set ssop-=options
-" augroup sourcesession
-"   autocmd!
-"   autocmd VimEnter * nested
-"         \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
-"         \   source Session.vim |
-"         \ endif
-" augroup END
 " }}}
 
 " when numbering is on, toggle relative to active buffer {{{
@@ -256,10 +225,6 @@ nnoremap <leader>r :call Rotate()<CR>
 
 nnoremap <silent> <leader>x :NvimTreeToggle<CR>
 
-" Rails i18n
-" vmap <Leader>8 :call I18nTranslateString()<CR>
-" }}}
-
 " Plugins {{{
 
 " Illuminate
@@ -269,14 +234,6 @@ hi link illuminatedWord Visual
 
 " Align
 vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
-
-" NeoTerm
-nnoremap <leader>tf :TREPLSendFile<cr>
-nnoremap <leader>tl :TREPLSendLine<cr>
-vnoremap <leader>t :TREPLSendSelection<cr>
-nnoremap <silent> <leader>th :call neoterm#close()<cr>
-nnoremap <silent> <leader>tl :call neoterm#clear()<cr>
-nnoremap <silent> <leader>tc :call neoterm#kill()<cr>
 
 " if has_key(plugs, 'fzf.vim')
 " nnoremap <silent><Leader>f :Files<CR>
@@ -546,7 +503,6 @@ nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
 " }}}
 
 " Tests {{{
-" let test#strategy = "neoterm"
 nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>Tf :TestFile<CR>
 nmap <silent> <leader>Ta :TestSuite<CR>
@@ -567,14 +523,7 @@ if has('nvim')
   tnoremap <A-k> <C-\><C-n><C-w>k
   tnoremap <A-l> <C-\><C-n><C-w>l
 
-  let g:neoterm_autoscroll = '1'
-  let g:neoterm_size = 10
-  let g:neoterm_autoinsert = 1
-  let g:neoterm_default_mod = 'belowright'
-
-  command! Trc :T bin/rails c
-  command! Trn :T bin/rails notes
-  nnoremap <silent> ¬ :Ttoggle<cr>
+  nnoremap <silent> ¬ :ToggleTerm<cr>
 else
   let g:slime_target = "tmux"
   vnoremap <Leader>ts :SlimeSend<Cr>
