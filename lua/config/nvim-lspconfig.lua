@@ -18,24 +18,23 @@ end
 vim.lsp.diagnostic.set_virtual_text = set_virtual_text_custom
 
 -- LspInstall config
--- https://github.com/kabouzeid/nvim-lspinstall#bundled-installers
+-- https://github.com/williamboman/nvim-lsp-installer/wiki/Advanced-Configuration#automatically-install-lsp-servers
 local function setup_servers()
-  local nvim_lsp = require('lspconfig')
+  local lsp_installer = require "nvim-lsp-installer"
+  local servers = { "elixirls", "solargraph", "html", "cssls", "dockerls", "graphql", "jsonls", "sumneko_lua", "vuels", "yamlls", "diagnosticls", "emmet_ls", "quick_lint_js" }
 
-  -- Install missing servers
-  local required_servers = { "elixir", "ruby", "html", "css", "dockerfile", "graphql", "json", "lua", "vue", "yaml" }
-  local installed_servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(required_servers) do
-    if not vim.tbl_contains(installed_servers, server) then
-      require'lspinstall'.install_server(server)
+  for _, name in pairs(servers) do
+    local server_is_found, server = lsp_installer.get_server(name)
+    if server_is_found then
+      if not server:is_installed() then
+        print("Installing " .. name)
+        server:install()
+      end
     end
   end
 
-  require'lspinstall'.setup()
-
-  -- Use an on_attach function to only map the following keys
-  -- after the language server attaches to the current buffer
-  local on_attach = function(client, bufnr)
+  local function on_attach(client, bufnr)
+    -- Set up buffer-local keymaps (vim.api.nvim_buf_set_keymap()), etc.
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -68,27 +67,38 @@ local function setup_servers()
     require 'illuminate'.on_attach(client)
   end
 
-  -- required for nmv-cmp
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    nvim_lsp[server].setup{
-      capabilities = capabilities,
+  lsp_installer.on_server_ready(function(server)
+    -- required for nmv-cmp
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    -- Specify the default options which we'll use to setup all servers
+    local default_opts = {
       on_attach = on_attach,
+      capabilities = capabilities,
       flags = {
         debounce_text_changes = 200,
       }
     }
-  end
+
+    -- Now we'll create a server_opts table where we'll specify our custom LSP server configuration
+    local server_opts = {
+      -- Provide settings that should only apply to the "eslintls" server
+      -- ["eslintls"] = function()
+      --   default_opts.settings = {
+      --     format = {
+      --       enable = true,
+      --     },
+      --   }
+      -- end,
+    }
+
+    -- Use the server's custom settings, if they exist, otherwise default to the default options
+    local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
+    server:setup(server_options)
+  end)
 end
 
 setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
 
 -- Cmp setup
 vim.o.completeopt = "menu,menuone,noselect"
@@ -184,30 +194,30 @@ vim.fn.sign_define(
   { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" }
 )
 
-require("null-ls").config({
-  debug = true,
-  sources = {
-    require("null-ls").builtins.formatting.prettier,
-    require("null-ls").builtins.formatting.eslint_d,
-    -- require("null-ls").builtins.formatting.mix,
-    require("null-ls").builtins.diagnostics.codespell,
-    require("null-ls").builtins.diagnostics.write_good,
-    require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
-    require("null-ls").builtins.diagnostics.stylelint,
-    require("null-ls").builtins.diagnostics.standardrb,
-    require("null-ls").builtins.diagnostics.credo,
-    require("null-ls").builtins.code_actions.gitsigns,
-  }
-})
-
-require("lspconfig")["null-ls"].setup({
-  -- Auto format on write
-  -- on_attach = function(client)
-  --   if client.resolved_capabilities.document_formatting then
-  --       vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
-  --   end
-  -- end
-})
+-- require("null-ls").config({
+--   debug = true,
+--   sources = {
+--     require("null-ls").builtins.formatting.prettier,
+--     require("null-ls").builtins.formatting.eslint_d,
+--     -- require("null-ls").builtins.formatting.mix,
+--     require("null-ls").builtins.diagnostics.codespell,
+--     require("null-ls").builtins.diagnostics.write_good,
+--     require("null-ls").builtins.diagnostics.eslint.with({command = "eslint_d"}),
+--     require("null-ls").builtins.diagnostics.stylelint,
+--     require("null-ls").builtins.diagnostics.standardrb,
+--     require("null-ls").builtins.diagnostics.credo,
+--     require("null-ls").builtins.code_actions.gitsigns,
+--   }
+-- })
+--
+-- require("lspconfig")["null-ls"].setup({
+--   -- Auto format on write
+--   -- on_attach = function(client)
+--   --   if client.resolved_capabilities.document_formatting then
+--   --       vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+--   --   end
+--   -- end
+-- })
 
 -- LSP Config
 -- Defaults diagnostics display
@@ -237,10 +247,6 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_
 -- vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 -- vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
---This line is important for auto-import
-vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
-vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
 
 -- Trouble list
 -- vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>",

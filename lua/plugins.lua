@@ -1,4 +1,7 @@
 vim.cmd([[
+  let g:gitblame_enabled = 0
+  let g:gitblame_date_format = '%r'
+
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
@@ -72,9 +75,9 @@ return require('packer').startup({ function(use)
     end
   }
   use {
-    "terrortylor/nvim-comment",
+    'numToStr/Comment.nvim',
     config = function()
-      require("nvim_comment").setup{}
+      require('Comment').setup()
     end
   }
   use {
@@ -156,10 +159,8 @@ return require('packer').startup({ function(use)
   }
 
   -- Telescope, install: fd-find bat ripgrep
-  -- using latest commit for nvim 0.5
   use {
     'nvim-telescope/telescope.nvim',
-    commit = "80cdb00",
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
     config = [[require('config.telescope')]]
   }
@@ -171,6 +172,7 @@ return require('packer').startup({ function(use)
   }
 
   -- Git stuff
+  use 'f-person/git-blame.nvim'
   use 'rhysd/committia.vim'
   use 'whiteinge/diffconflicts'
   use {
@@ -199,11 +201,12 @@ return require('packer').startup({ function(use)
   use { 'janko-m/vim-test', opt = true, cmd = {'TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'} }
 
   -- LSP
-  use({ "jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"} })
   use {
     "neovim/nvim-lspconfig",
     config = [[require('config.nvim-lspconfig')]],
   }
+  use {'williamboman/nvim-lsp-installer'}
+  -- use({ "jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"} })
   use 'kabouzeid/nvim-lspinstall'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -220,10 +223,10 @@ return require('packer').startup({ function(use)
     config = function()
       require("trouble").setup {
         position = "right",
-        mode = "lsp_document_diagnostics",
+        mode = "document_diagnostics",
         auto_open = false,
         auto_close = true,
-        use_lsp_diagnostic_signs = true,
+        use_diagnostic_signs = true,
         auto_fold = false
       }
     end
