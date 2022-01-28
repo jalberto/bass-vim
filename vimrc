@@ -256,17 +256,17 @@ vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
 " endif
 
 " Telescope
-nnoremap <leader><leader> <cmd>Telescope find_files theme=get_dropdown<cr>
-nnoremap <leader>ff <cmd>Telescope git_files theme=get_dropdown<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep theme=get_dropdown<cr>
-nnoremap <leader>fb <cmd>Telescope buffers theme=get_dropdown<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags theme=get_dropdown<cr>
-nnoremap <leader>fm <cmd>Telescope marks theme=get_dropdown<cr>
-nnoremap <leader>fr <cmd>Telescope registers theme=get_dropdown<cr>
-nnoremap <leader>fc <cmd>Telescope commands theme=get_dropdown<cr>
-nnoremap <leader>ca <cmd>Telescope lsp_code_actions theme=get_dropdown<cr>
-nnoremap <leader>cr <cmd>Telescope lsp_references theme=get_dropdown<cr>
-nnoremap <leader>cs <cmd>Telescope lsp_document_symbols theme=get_dropdown<cr>
+nnoremap <leader><leader> <cmd>Telescope git_files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fm <cmd>Telescope marks<cr>
+nnoremap <leader>fr <cmd>Telescope registers<cr>
+nnoremap <leader>fc <cmd>Telescope commands<cr>
+nnoremap <leader>ca <cmd>Telescope lsp_code_actions theme=cursor<cr>
+nnoremap <leader>cr <cmd>Telescope lsp_references<cr>
+nnoremap <leader>cs <cmd>Telescope lsp_document_symbols<cr>
 
  " LSP
 " nnoremap <leader>cf <cmd>lua vim.lsp.buf.formatting()<cr>
