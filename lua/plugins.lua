@@ -84,6 +84,8 @@ return require('packer').startup({ function(use)
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require("indent_blankline").setup{
+        -- show_current_context = true,
+        -- show_current_context_start = true,
         buftype_exclude = {"terminal", "TelescopePrompt", "man", "nofile", "NvimTree"},
         filetype_exclude = {"help", "packer", "NvimTree"}
       }
@@ -237,7 +239,9 @@ return require('packer').startup({ function(use)
   use {
     'rmagatti/auto-session',
     config = function()
-      require("auto-session").setup { }
+      require("auto-session").setup {
+        auto_session_suppress_dirs = {'~/', '~/Projects'}
+      }
     end
   }
 
