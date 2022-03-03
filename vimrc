@@ -474,7 +474,6 @@ let g:markdown_fenced_languages = ['html', 'shell', 'ruby', 'vim', 'js', 'elixir
 
 " nvimtree {{{
 let g:nvim_tree_git_hl = 1
-let g:nvim_tree_quit_on_open = 1
 let g:nvim_tree_highlight_opened_files = 1
 " }}}
 
