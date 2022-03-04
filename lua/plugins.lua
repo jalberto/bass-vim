@@ -209,8 +209,14 @@ return require('packer').startup({ function(use)
     config = [[require('config.nvim-lspconfig')]],
   }
   use {'williamboman/nvim-lsp-installer'}
+  -- use {
+  --   'lukas-reineke/lsp-format.nvim',
+  --   config = function()
+  --     require("lsp-format").setup {}
+  --   end
+  -- }
   -- use({ "jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"} })
-  use 'kabouzeid/nvim-lspinstall'
+  -- use 'kabouzeid/nvim-lspinstall'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
