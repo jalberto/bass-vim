@@ -177,7 +177,7 @@ return require('packer').startup({ function(use)
   -- Git stuff
   use 'f-person/git-blame.nvim'
   use 'rhysd/committia.vim'
-  use 'whiteinge/diffconflicts'
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   use {
     'ruifm/gitlinker.nvim',
     requires = 'nvim-lua/plenary.nvim',

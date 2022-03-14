@@ -21,7 +21,7 @@ vim.lsp.diagnostic.set_virtual_text = set_virtual_text_custom
 -- https://github.com/williamboman/nvim-lsp-installer/wiki/Advanced-Configuration#automatically-install-lsp-servers
 local function setup_servers()
   local lsp_installer = require "nvim-lsp-installer"
-  local servers = { "elixirls", "solargraph", "html", "cssls", "dockerls", "graphql", "jsonls", "sumneko_lua", "vuels", "yamlls", "diagnosticls", "emmet_ls", "quick_lint_js" }
+  local servers = { "elixirls", "solargraph", "html", "cssls", "dockerls", "graphql", "jsonls", "sumneko_lua", "vuels", "yamlls", "diagnosticls", "emmet_ls", "quick_lint_js", "tsserver" }
 
   for _, name in pairs(servers) do
     local server_is_found, server = lsp_installer.get_server(name)
