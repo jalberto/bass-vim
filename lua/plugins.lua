@@ -77,6 +77,7 @@ return require('packer').startup({ function(use)
   }
   use {
     'numToStr/Comment.nvim',
+    tag = 'v0.6',
     config = function()
       require('Comment').setup()
     end
