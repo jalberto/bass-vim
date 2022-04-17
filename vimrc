@@ -78,6 +78,7 @@ augroup filetypedetect
   autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl setf helm
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
   autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
+  autocmd BufRead,BufNewFile Dockerfile.* setf dockerfile
   " autocmd BufNewFile,BufRead *.json setf javascript
 augroup END
 " }}}

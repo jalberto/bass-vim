@@ -34,7 +34,6 @@ return require('packer').startup({ function(use)
   -- Themes
   use 'fenetikm/falcon'
   use 'lighthaus-theme/vim-lighthaus'
-  use 'wuelnerdotexe/vim-enfocado'
 
   -- Syntax & other helpers for specific files
 
@@ -66,6 +65,8 @@ return require('packer').startup({ function(use)
   }
   use 'tpope/vim-ragtag' -- xml & friends tags helpers
   use 'ggandor/lightspeed.nvim'
+  -- use { 'ggandor/leap.nvim' }
+
 
   use {
     "folke/todo-comments.nvim",
@@ -133,7 +134,6 @@ return require('packer').startup({ function(use)
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require'nvim-tree'.setup {
-        auto_close = true,
         open_on_tab = true,
         filters = {
           dotfiles = false,

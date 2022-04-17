@@ -1,7 +1,7 @@
 # Commande
 
 * <ldr>dbl  Del blank lines
-* <ldr>rci  Indent w ruby-code
+* <ldr>rci  Indensecretst w ruby-code
 * <ldr>ml   Add modeline
 
 # Select
