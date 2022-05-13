@@ -191,7 +191,7 @@ au BufWritePost .vimrc so $MYVIMRC
 let mapleader = " "
 
 " map <Leader>cl :set cursorline!<CR>
-map <Leader>cL :set cursorcolumn!<CR>
+" map <Leader>cL :set cursorcolumn!<CR>
 
 " Delete blank lines
 nmap <Leader>dbl :g/^$/d<CR>:nohls<CR>
@@ -426,12 +426,14 @@ let g:equinusocio_material_style='pure'
 " let g:equinusocio_material_less=50
 
 colorscheme falcon
+
 if has("gui_running")
   set guifont=JetBrains\ Mono\ Variable\ 14
 endif
 
 " Cursorline color
 highlight CursorLine guibg=#28282d
+highlight link GitSignsCurrentLineBlame Comment
 
 " HL on yanks
 au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
@@ -480,7 +482,7 @@ let g:nvim_tree_highlight_opened_files = 1
 
 " emmet {{{
 let g:user_emmet_install_global=0
-autocmd FileType html,css,liquid,eelixir EmmetInstall
+autocmd FileType html,css,liquid,eelixir,heex EmmetInstall
 let g:user_emmet_leader_key=','
 " }}}
 

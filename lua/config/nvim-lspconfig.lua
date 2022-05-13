@@ -92,6 +92,12 @@ local function setup_servers()
       --     },
       --   }
       -- end,
+      ["emmet_ls"] = function()
+        default_opts.settings = { filetypes = { "html","heex","css" }, }
+      end,
+      ["html"] = function()
+        default_opts.settings = { filetypes = { "html","heex" }, }
+      end,
     }
 
     -- Use the server's custom settings, if they exist, otherwise default to the default options

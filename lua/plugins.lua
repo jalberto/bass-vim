@@ -1,12 +1,12 @@
-vim.cmd([[
-  let g:gitblame_enabled = 0
-  let g:gitblame_date_format = '%r'
-
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+-- vim.cmd([[
+--   let g:gitblame_enabled = 0
+--   let g:gitblame_date_format = '%r'
+--
+--   " augroup packer_user_config
+--   "   autocmd!
+--   "   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+--   " augroup end
+-- ]])
 
 -- Autoinstall packer
 local execute = vim.api.nvim_command
@@ -19,7 +19,19 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute 'packadd packer.nvim'
 end
 
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "plugins.lua",
+  command = "source <afile> | PackerCompile",
+})
+
+require('packer').init({display = {auto_clean = false}})
+
 return require('packer').startup({ function(use)
+
+  -- Load lua path
+  local lua_path = function(name)
+    return string.format("require'plugins.%s'", name)
+  end
 
   use 'wbthomason/packer.nvim'
 
@@ -31,9 +43,28 @@ return require('packer').startup({ function(use)
 
   use 'tpope/vim-sleuth' -- Try to detect correct indentation
 
+  -- Treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function() require('nvim-treesitter.configs').setup({
+      ensure_installed = {"elixir", "ruby", "javascript", "heex", "eex", "lua", "css", "vue", "json", "html", "vim", "scss"}
+    }) end
+  }
+  use { 'p00f/nvim-ts-rainbow',
+    config = function() require("nvim-treesitter.configs").setup({
+      rainbow = {
+        enable = true,
+        extended_mode = true,
+      }
+    }) end
+  }
+
   -- Themes
   use 'fenetikm/falcon'
   use 'lighthaus-theme/vim-lighthaus'
+  use 'Domeee/mosel.nvim'
+  use 'rmehri01/onenord.nvim'
 
   -- Syntax & other helpers for specific files
 
@@ -65,8 +96,6 @@ return require('packer').startup({ function(use)
   }
   use 'tpope/vim-ragtag' -- xml & friends tags helpers
   use 'ggandor/lightspeed.nvim'
-  -- use { 'ggandor/leap.nvim' }
-
 
   use {
     "folke/todo-comments.nvim",
@@ -77,7 +106,7 @@ return require('packer').startup({ function(use)
   }
   use {
     'numToStr/Comment.nvim',
-    tag = 'v0.6',
+    -- tag = 'v0.6',
     config = function()
       require('Comment').setup()
     end
@@ -86,8 +115,8 @@ return require('packer').startup({ function(use)
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require("indent_blankline").setup{
-        -- show_current_context = true,
-        -- show_current_context_start = true,
+        show_current_context = true,
+        show_current_context_start = true,
         buftype_exclude = {"terminal", "TelescopePrompt", "man", "nofile", "NvimTree"},
         filetype_exclude = {"help", "packer", "NvimTree"}
       }
@@ -144,6 +173,7 @@ return require('packer').startup({ function(use)
     end
   }
 
+  -- use { 'famiu/feline.nvim', config = lua_path"feline" }
   use {
     'famiu/feline.nvim',
     config = function()
@@ -164,6 +194,7 @@ return require('packer').startup({ function(use)
   -- Telescope, install: fd-find bat ripgrep
   use {
     'nvim-telescope/telescope.nvim',
+    -- tag = 'nvim-0.6',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
     config = [[require('config.telescope')]]
   }
@@ -176,7 +207,6 @@ return require('packer').startup({ function(use)
   }
 
   -- Git stuff
-  use 'f-person/git-blame.nvim'
   use 'rhysd/committia.vim'
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   use {
@@ -187,7 +217,11 @@ return require('packer').startup({ function(use)
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = function() require('gitsigns').setup() end
+    config = function() require('gitsigns').setup({
+      watch_gitdir = { interval = 2000 },
+      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+      current_line_blame_opts = {delay = 2000}
+    }) end
   }
 
   -- Ruby stuff
