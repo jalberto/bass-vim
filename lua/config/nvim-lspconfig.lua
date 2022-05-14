@@ -20,18 +20,12 @@ vim.lsp.diagnostic.set_virtual_text = set_virtual_text_custom
 -- LspInstall config
 -- https://github.com/williamboman/nvim-lsp-installer/wiki/Advanced-Configuration#automatically-install-lsp-servers
 local function setup_servers()
-  local lsp_installer = require "nvim-lsp-installer"
+  require("nvim-lsp-installer").setup {
+    automatic_installation = true,
+  }
+  local lspconfig = require("lspconfig")
+  -- local lsp_installer = require "nvim-lsp-installer"
   local servers = { "elixirls", "solargraph", "html", "cssls", "dockerls", "graphql", "jsonls", "sumneko_lua", "vuels", "yamlls", "diagnosticls", "emmet_ls", "quick_lint_js", "tsserver" }
-
-  for _, name in pairs(servers) do
-    local server_is_found, server = lsp_installer.get_server(name)
-    if server_is_found then
-      if not server:is_installed() then
-        print("Installing " .. name)
-        server:install()
-      end
-    end
-  end
 
   local function on_attach(client, bufnr)
     require 'illuminate'.on_attach(client)
@@ -67,10 +61,9 @@ local function setup_servers()
     buf_set_keymap('n', '<space>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     buf_set_keymap('n', '<space>ct', '<cmd>TroubleToggle<CR>', opts)
   end
-  -- require "lspconfig".elixirls.setup { on_attach = on_attach }
 
-  lsp_installer.on_server_ready(function(server)
-    -- required for nmv-cmp
+  for _, server in ipairs(servers) do
+  -- required for nmv-cmp
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     -- Specify the default options which we'll use to setup all servers
@@ -81,29 +74,23 @@ local function setup_servers()
         debounce_text_changes = 200,
       }
     }
-
     -- Now we'll create a server_opts table where we'll specify our custom LSP server configuration
     local server_opts = {
-      -- Provide settings that should only apply to the "eslintls" server
-      -- ["eslintls"] = function()
-      --   default_opts.settings = {
-      --     format = {
-      --       enable = true,
-      --     },
-      --   }
-      -- end,
       ["emmet_ls"] = function()
-        default_opts.settings = { filetypes = { "html","heex","css" }, }
+        default_opts.filetypes = { "html","heex","css" }
       end,
       ["html"] = function()
-        default_opts.settings = { filetypes = { "html","heex" }, }
+        default_opts.filetypes = { "html","heex" }
+      end,
+      ["elixirls"] = function()
+        default_opts.cmd = { "/home/ja/Projects/elixir-ls/language_server.sh" }
       end,
     }
 
     -- Use the server's custom settings, if they exist, otherwise default to the default options
-    local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
-    server:setup(server_options)
-  end)
+    local server_options = server_opts[server] and server_opts[server]() or default_opts
+    lspconfig[server].setup(server_options)
+  end
 end
 
 setup_servers()

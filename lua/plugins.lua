@@ -48,7 +48,10 @@ return require('packer').startup({ function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function() require('nvim-treesitter.configs').setup({
-      ensure_installed = {"elixir", "ruby", "javascript", "heex", "eex", "lua", "css", "vue", "json", "html", "vim", "scss"}
+      ensure_installed = {"elixir", "ruby", "javascript", "heex", "eex", "lua", "css", "vue", "json", "html", "vim", "scss"},
+      highlight = {
+        enable = true,
+      }
     }) end
   }
   use { 'p00f/nvim-ts-rainbow',
@@ -243,7 +246,10 @@ return require('packer').startup({ function(use)
     "neovim/nvim-lspconfig",
     config = [[require('config.nvim-lspconfig')]],
   }
-  use {'williamboman/nvim-lsp-installer'}
+  use {
+    'williamboman/nvim-lsp-installer',
+    requires = { "neovim/nvim-lspconfig" },
+  }
   -- use {
   --   'lukas-reineke/lsp-format.nvim',
   --   config = function()
