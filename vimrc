@@ -71,6 +71,7 @@ set number relativenumber
 " Auto-sessiosn recommendations
 " set sessionoptions+=options,resize,winpos,terminal
 " set sessionoptions+=resize,winpos,terminal
+set sessionoptions+=winpos,terminal,folds
 " }}}
 
 " Custom file types {{{
@@ -265,7 +266,8 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fm <cmd>Telescope marks<cr>
 nnoremap <leader>fr <cmd>Telescope registers<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
-nnoremap <leader>ca <cmd>Telescope lsp_code_actions theme=cursor<cr>
+nnoremap <leader>ca <Cmd>lua vim.lsp.buf.code_action()<CR>
+xnoremap <leader>ca <Cmd>lua vim.lsp.buf.range_code_action()<CR>
 nnoremap <leader>cr <cmd>Telescope lsp_references<cr>
 nnoremap <leader>cs <cmd>Telescope lsp_document_symbols<cr>
 
@@ -419,11 +421,8 @@ endif
 set background=dark
 let g:enable_bold_font=1
 
-let g:falcon_background=0
-let g:falcon_inactive=0
-
-let g:equinusocio_material_style='pure'
-" let g:equinusocio_material_less=50
+let g:falcon_background=1
+let g:falcon_inactive=1
 
 colorscheme falcon
 
@@ -465,7 +464,8 @@ set signcolumn=yes:1
 " Plugins config {{{
 
 " Plugins vim-markdown {{{
-let g:markdown_fenced_languages = ['html', 'shell', 'ruby', 'vim', 'js', 'elixir']
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toc_autofit = 1
 " }}}
 
 " QF {{{
@@ -491,7 +491,7 @@ let g:clever_f_smart_case=1
 " }}}
 
 " vimwiki {{{
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 " }}}
 
 " Tmux navigator {{{

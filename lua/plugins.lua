@@ -48,10 +48,8 @@ return require('packer').startup({ function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function() require('nvim-treesitter.configs').setup({
-      ensure_installed = {"elixir", "ruby", "javascript", "heex", "eex", "lua", "css", "vue", "json", "html", "vim", "scss"},
-      highlight = {
-        enable = true,
-      }
+      ensure_installed = {"elixir", "ruby", "javascript", "heex", "eex", "lua", "css", "vue", "json", "html", "vim", "scss", "yaml", "regex", "dockerfile", "surface"},
+      highlight = { enable = true }
     }) end
   }
   use { 'p00f/nvim-ts-rainbow',
@@ -79,7 +77,7 @@ return require('packer').startup({ function(use)
   -- use 'sheerun/vim-polyglot'
   use { 'amadeus/vim-mjml', ft = {'mjml'} }
   use { 'dNitro/vim-pug-complete', ft = {'pug'} }
-  use { 'tpope/vim-markdown' }
+  use { 'ixru/nvim-markdown' }
   use { 'andrewstuart/vim-kubernetes', ft = {'yaml'} }
   use { 'towolf/vim-helm', ft = {'yaml'} }
   use 'robbles/logstash.vim'
@@ -87,7 +85,7 @@ return require('packer').startup({ function(use)
   use 'tpope/vim-liquid'
   use {
     'norcalli/nvim-colorizer.lua',
-    opt = true, ft = {'css', 'html', 'javascript', 'vim'},
+    opt = true, ft = {'css', 'html', 'javascript', 'vim', 'scss'},
     config = function() require('colorizer').setup() end
   }
 
@@ -202,7 +200,8 @@ return require('packer').startup({ function(use)
     config = [[require('config.telescope')]]
   }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
+  use {'stevearc/dressing.nvim'} -- UI improvements
+  use {'nvim-telescope/telescope-ui-select.nvim' }
   use {
     'sudormrfbin/cheatsheet.nvim',
     requires = { {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},
@@ -288,6 +287,7 @@ return require('packer').startup({ function(use)
     'rmagatti/auto-session',
     config = function()
       require("auto-session").setup {
+        log_level = 'error',
         auto_session_suppress_dirs = {'~/', '~/Projects'}
       }
     end

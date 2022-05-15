@@ -10,16 +10,16 @@ local dropdown_theme = require("telescope.themes").get_dropdown {
     height = 20,
   },
   file_sorter = require("telescope.sorters").get_fuzzy_file,
-  borderchars = {
-    results = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
-    prompt = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
-  },
+  -- borderchars = {
+  --   results = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
+  --   prompt = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
+  -- },
 }
 
 require('telescope').setup{
   defaults = require('telescope.themes').get_dropdown {
     set_env = { ["COLORTERM"] = "truecolor" },
-    color_devicons = false,
+    color_devicons = true,
     winblend = 5;
     width = 0.8;
     show_line = false;
@@ -38,7 +38,7 @@ require('telescope').setup{
     initial_mode = "insert",
     selection_strategy = "reset",
     file_sorter = require("telescope.sorters").get_fuzzy_file,
-    file_ignore_patterns = { "node_modules", "*.git/*", "*/tmp/*" },
+    file_ignore_patterns = { "node_modules", "*.git/*", "*/tmp/*", ".cache"},
     -- use_less = true,
     -- layout_config = {
     --   vertical = {
@@ -69,3 +69,4 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzf')
+require("telescope").load_extension("ui-select")
