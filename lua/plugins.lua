@@ -60,6 +60,15 @@ return require('packer').startup({ function(use)
       }
     }) end
   }
+  use {
+    "SmiteshP/nvim-gps",
+    requires = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require('nvim-gps').setup{
+        -- preset = 'noicon'
+      }
+    end
+  }
 
   -- Themes
   use 'fenetikm/falcon'
@@ -174,15 +183,18 @@ return require('packer').startup({ function(use)
     end
   }
 
-  -- use { 'famiu/feline.nvim', config = lua_path"feline" }
   use {
     'famiu/feline.nvim',
-    config = function()
-      require('feline').setup{
-        -- preset = 'noicon'
-      }
-    end
+    config = lua_path"feline"
   }
+  -- use {
+  --   'famiu/feline.nvim',
+  --   config = function()
+  --     require('feline').setup{
+  --       -- preset = 'noicon'
+  --     }
+  --   end
+  -- }
   use {
     'seblj/nvim-tabline',
     config = function()
@@ -202,6 +214,13 @@ return require('packer').startup({ function(use)
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {'stevearc/dressing.nvim'} -- UI improvements
   use {'nvim-telescope/telescope-ui-select.nvim' }
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    requires = {"tami5/sqlite.lua"}
+  }
   use {
     'sudormrfbin/cheatsheet.nvim',
     requires = { {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},

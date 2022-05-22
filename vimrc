@@ -258,6 +258,7 @@ vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
 " endif
 
 " Telescope
+" nnoremap <leader><leader> <cmd>Telescope frecency<cr>
 nnoremap <leader><leader> <cmd>Telescope git_files<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
