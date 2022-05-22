@@ -14,19 +14,19 @@ local components = {
 }
 
 local colors = {
-  bg = '#282828',
-  black = '#282828',
-  yellow = '#d8a657',
-  cyan = '#89b482',
-  oceanblue = '#45707a',
-  green = '#a9b665',
-  orange = '#e78a4e',
-  violet = '#d3869b',
-  magenta = '#c14a4a',
-  white = '#a89984',
-  fg = '#a89984',
-  skyblue = '#7daea3',
-  red = '#ea6962',
+  bg = '#151521',
+  black = '#151521',
+  yellow = '#ffc552',
+  cyan = '#bfdaff',
+  oceanblue = '##99a4bc',
+  green = '#718e3f',
+  orange = '#ff761a',
+  violet = '#9f97cc',
+  magenta = '#635196',
+  white = '#ddcfbf',
+  fg = '#ddcfbf',
+  skyblue = '#747e8c',
+  red = '#ff2600',
 }
 
 local vi_mode_colors = {
@@ -49,9 +49,9 @@ local vi_mode_colors = {
 }
 
 local vi_mode_text = {
-  NORMAL = '<|',
-  OP = '<|',
-  INSERT = '|>',
+  NORMAL = 'N',
+  OP = 'OP',
+  INSERT = 'I',
   VISUAL = '<>',
   LINES = '<>',
   BLOCK = '<>',
@@ -60,11 +60,11 @@ local vi_mode_text = {
   ENTER = '<>',
   MORE = '<>',
   SELECT = '<>',
-  COMMAND = '<|',
-  SHELL = '<|',
-  TERM = '<|',
+  COMMAND = 'CMD',
+  SHELL = 'SH',
+  TERM = 'T',
   NONE = '<>',
-  CONFIRM = '|>'
+  CONFIRM = '?'
 }
 
 local buffer_not_empty = function()
@@ -184,15 +184,6 @@ components.active[1][5] = {
 
 -- MID
 
--- gitBranch
--- components.active[2][1] = {
---   provider = 'git_branch',
---   hl = {
---     fg = 'yellow',
---     bg = 'bg',
---     style = 'bold'
---   }
--- }
 -- diffAdd
 -- components.active[2][2] = {
 --   provider = 'git_diff_added',
@@ -269,15 +260,50 @@ components.active[1][5] = {
 --   },
 --   right_sep = ' '
 -- }
--- gitBranch
+-- diffRemove
 components.active[3][1] = {
-  provider = 'git_branch',
+  provider = 'git_diff_removed',
   hl = {
-    fg = 'yellow',
+    fg = 'red',
     bg = 'bg',
     style = 'bold'
   },
-  right_sep = ' '
+}
+-- diagnosticErrors
+components.active[3][2] = {
+  provider = 'diagnostic_errors',
+  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR) end,
+  hl = {
+    fg = 'red',
+    style = 'bold'
+  }
+}
+-- diagnosticWarn
+components.active[3][3] = {
+  provider = 'diagnostic_warnings',
+  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.WARN) end,
+  hl = {
+    fg = 'yellow',
+    style = 'bold'
+  }
+}
+-- diagnosticHint
+components.active[3][4] = {
+  provider = 'diagnostic_hints',
+  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.HINT) end,
+  hl = {
+    fg = 'cyan',
+    style = 'bold'
+  }
+}
+-- diagnosticInfo
+components.active[3][5] = {
+  provider = 'diagnostic_info',
+  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.INFO) end,
+  hl = {
+    fg = 'skyblue',
+    style = 'bold'
+  }
 }
 -- fileType
 -- components.active[3][2] = {
@@ -299,7 +325,7 @@ components.active[3][1] = {
 --   right_sep = ' '
 -- }
 -- fileSize
-components.active[3][2] = {
+components.active[3][6] = {
   provider = 'file_size',
   enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
   hl = {
@@ -307,6 +333,7 @@ components.active[3][2] = {
     bg = 'bg',
     style = 'bold'
   },
+  left_sep = ' ',
   right_sep = ' '
 }
 -- -- fileFormat
@@ -342,7 +369,7 @@ components.active[3][2] = {
 --   right_sep = ' '
 -- }
 -- lineInfo
-components.active[3][3] = {
+components.active[3][7] = {
   provider = 'position',
   hl = {
     fg = 'white',
@@ -352,7 +379,7 @@ components.active[3][3] = {
   right_sep = ' '
 }
 -- linePercent
-components.active[3][4] = {
+components.active[3][8] = {
   provider = 'line_percentage',
   hl = {
     fg = 'white',
@@ -360,6 +387,15 @@ components.active[3][4] = {
     style = 'bold'
   },
   right_sep = ' '
+}
+-- gitBranch
+components.active[3][9] = {
+  provider = 'git_branch',
+  hl = {
+    fg = 'yellow',
+    bg = 'bg',
+    style = 'bold'
+  }
 }
 -- scrollBar
 -- components.active[3][6] = {
@@ -369,51 +405,6 @@ components.active[3][4] = {
 --     bg = 'bg',
 --   },
 -- }
--- diffRemove
-components.active[3][5] = {
-  provider = 'git_diff_removed',
-  hl = {
-    fg = 'red',
-    bg = 'bg',
-    style = 'bold'
-  },
-}
--- diagnosticErrors
-components.active[3][6] = {
-  provider = 'diagnostic_errors',
-  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR) end,
-  hl = {
-    fg = 'red',
-    style = 'bold'
-  }
-}
--- diagnosticWarn
-components.active[3][7] = {
-  provider = 'diagnostic_warnings',
-  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.WARN) end,
-  hl = {
-    fg = 'yellow',
-    style = 'bold'
-  }
-}
--- diagnosticHint
-components.active[3][8] = {
-  provider = 'diagnostic_hints',
-  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.HINT) end,
-  hl = {
-    fg = 'cyan',
-    style = 'bold'
-  }
-}
--- diagnosticInfo
-components.active[3][9] = {
-  provider = 'diagnostic_info',
-  enabled = function() return lsp.diagnostics_exist(vim.diagnostic.severity.INFO) end,
-  hl = {
-    fg = 'skyblue',
-    style = 'bold'
-  }
-}
 
 -- INACTIVE
 
