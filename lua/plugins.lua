@@ -49,7 +49,8 @@ return require('packer').startup({ function(use)
     run = ':TSUpdate',
     config = function() require('nvim-treesitter.configs').setup({
       ensure_installed = {"elixir", "ruby", "javascript", "heex", "eex", "lua", "css", "vue", "json", "html", "vim", "scss", "yaml", "regex", "dockerfile", "surface"},
-      highlight = { enable = true }
+      highlight = { enable = true },
+      context_commentstring = { enable = true },
     }) end
   }
   use { 'p00f/nvim-ts-rainbow',
@@ -69,6 +70,11 @@ return require('packer').startup({ function(use)
       }
     end
   }
+  use { "JoosepAlviste/nvim-ts-context-commentstring", }
+  use {
+    "ziontee113/syntax-tree-surfer",
+    requires = "nvim-treesitter/nvim-treesitter",
+  }
 
   -- Themes
   use 'fenetikm/falcon'
@@ -85,13 +91,13 @@ return require('packer').startup({ function(use)
 
   -- use 'sheerun/vim-polyglot'
   use { 'amadeus/vim-mjml', ft = {'mjml'} }
-  use { 'dNitro/vim-pug-complete', ft = {'pug'} }
+  -- use { 'dNitro/vim-pug-complete', ft = {'pug'} }
   use { 'ixru/nvim-markdown' }
   use { 'andrewstuart/vim-kubernetes', ft = {'yaml'} }
   use { 'towolf/vim-helm', ft = {'yaml'} }
-  use 'robbles/logstash.vim'
-  use 'itkq/fluentd-vim'
-  use 'tpope/vim-liquid'
+  -- use 'robbles/logstash.vim'
+  -- use 'itkq/fluentd-vim'
+  -- use 'tpope/vim-liquid'
   use {
     'norcalli/nvim-colorizer.lua',
     opt = true, ft = {'css', 'html', 'javascript', 'vim', 'scss'},
@@ -280,6 +286,7 @@ return require('packer').startup({ function(use)
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
+  use 'ray-x/cmp-treesitter'
   use 'hrsh7th/nvim-cmp'
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
