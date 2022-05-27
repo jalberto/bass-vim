@@ -75,6 +75,14 @@ return require('packer').startup({ function(use)
     "ziontee113/syntax-tree-surfer",
     requires = "nvim-treesitter/nvim-treesitter",
   }
+  -- Lua
+  use {
+    "folke/twilight.nvim",
+    config = function()
+      require("twilight").setup {
+      }
+    end
+  }
 
   -- Themes
   use 'fenetikm/falcon'

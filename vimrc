@@ -240,26 +240,6 @@ hi link illuminatedWord Visual
 " Align
 vnoremap <silent> <Leader><Enter> :EasyAlign<Enter>
 
-" if has_key(plugs, 'fzf.vim')
-" nnoremap <silent><Leader>f :Files<CR>
-" nnoremap <silent><Leader>o :Files<CR>
-" nnoremap <silent><Leader>l :BLines<CR>
-" nnoremap <silent><Leader>t :BTags<CR>
-" nnoremap <silent><Leader>tt :Tags<CR>
-" nnoremap <silent><Leader>? :History<CR>
-" nnoremap <silent><Leader><space> :Buffers<CR>
-" nnoremap <silent><Leader>w :Windows<CR>
-" nnoremap <silent><Leader>s :Rg
-" nnoremap <silent><leader>W :Rg! <C-R><C-W><CR>
-" vnoremap <silent><leader>W <Esc>:Rg! <C-R>=<SID>getVisualSelection()<CR><CR>
-"
-" nnoremap <silent> <leader>ol :<C-u>CocFzfList outline<CR>
-" nnoremap <silent> <leader>cd :<C-u>CocFzfList diagnostics --current<CR>
-" nnoremap <silent> <leader>cc :<C-u>CocFzfList commands<CR>
-" nnoremap <silent> <leader>cs :<C-u>CocFzfList symbols<CR>
-" nnoremap <silent> <leader>cl :<C-u>CocFzfList location<CR>
-" endif
-
 " Telescope
 " nnoremap <leader><leader> <cmd>Telescope frecency<cr>
 nnoremap <leader><leader> <cmd>Telescope git_files<cr>
