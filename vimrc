@@ -459,11 +459,6 @@ let g:vim_markdown_toc_autofit = 1
 " let g:qf_mapping_ack_style = 1
 " }}}
 
-" nvimtree {{{
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_highlight_opened_files = 1
-" }}}
-
 " emmet {{{
 let g:user_emmet_install_global=0
 autocmd FileType html,css,liquid,eelixir,heex EmmetInstall

@@ -170,6 +170,19 @@ return require('packer').startup({ function(use)
   use 'tpope/vim-speeddating' -- increase/decrease dates with ctrl-a/x
   use 'christianrondeau/vim-base64' -- encode using b64
 
+  -- Add colors to modes
+  use({
+    'mvllow/modes.nvim',
+    config = function()
+      require('modes').setup({
+       colors = {
+         -- insert = "#718e3f",
+         visual = "#ffffff"
+       }
+     })
+    end
+  })
+
   -- use 'kassio/neoterm'
   use {
     "akinsho/toggleterm.nvim",
@@ -188,7 +201,11 @@ return require('packer').startup({ function(use)
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require'nvim-tree'.setup {
-        open_on_tab = true,
+        -- open_on_tab = true,
+        renderer = {
+          highlight_git = true,
+          -- highlight_opened_files = true,
+        },
         filters = {
           dotfiles = false,
           custom = {'.git', 'node_modules', '.cache'}
