@@ -1,6 +1,8 @@
 " BaSS vimrc's 2015
 " vim: fdm=marker fdl=0
 
+lua require('pluginsList')
+
 " General {{{
 filetype on
 
@@ -85,10 +87,6 @@ augroup filetypedetect
   autocmd BufRead,BufNewFile Dockerfile.* setf dockerfile
   " autocmd BufNewFile,BufRead *.json setf javascript
 augroup END
-" }}}
-
-" Plugins {{{
-lua require('pluginsList')
 " }}}
 
 " Functions {{{
@@ -533,4 +531,4 @@ let g:smartgf_auto_refresh_ctags = 0
 " }}}
 " }}}
 
-lua require('config')
+lua require('config') -- This include basic confis in lua + keymaps

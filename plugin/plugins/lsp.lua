@@ -1,3 +1,8 @@
+local status_ok, lspconfig = pcall(require, "lspconfig")
+if not status_ok then
+  return
+end
+
 -- LSP
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -23,7 +28,7 @@ local function setup_servers()
   require("nvim-lsp-installer").setup {
     automatic_installation = true,
   }
-  local lspconfig = require("lspconfig")
+  -- local lspconfig = require("lspconfig")
   -- local lsp_installer = require "nvim-lsp-installer"
   local servers = { "elixirls", "solargraph", "html", "cssls", "dockerls", "graphql", "jsonls", "sumneko_lua", "vuels", "yamlls", "diagnosticls", "emmet_ls", "quick_lint_js", "tsserver" }
 
