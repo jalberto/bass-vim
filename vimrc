@@ -88,7 +88,7 @@ augroup END
 " }}}
 
 " Plugins {{{
-lua require('plugins')
+lua require('pluginsList')
 " }}}
 
 " Functions {{{

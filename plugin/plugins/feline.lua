@@ -1,71 +1,76 @@
+local status_ok, feline = pcall(require, "feline")
+if not status_ok then
+  return
+end
+
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 local gps = require("nvim-gps")
 
 local force_inactive = {
   filetypes = {},
-  buftypes = {},
-  bufnames = {}
+  buftypes  = {},
+  bufnames  = {}
 }
 
 local components = {
-  active = {{}, {}, {}},
+  active   = {{}, {}, {}},
   inactive = {{}, {}, {}},
 }
 
 local colors = {
-  bg = '#28282d',
-  black = '#28282d',
-  yellow = '#ffc552',
-  cyan = '#bfdaff',
+  bg        = '#28282d',
+  black     = '#28282d',
+  yellow    = '#ffc552',
+  cyan      = '#bfdaff',
   oceanblue = '##99a4bc',
-  green = '#718e3f',
-  orange = '#ff761a',
-  violet = '#9f97cc',
-  magenta = '#635196',
-  white = '#ddcfbf',
-  fg = '#ddcfbf',
-  skyblue = '#747e8c',
-  red = '#ff2600',
+  green     = '#718e3f',
+  orange    = '#ff761a',
+  violet    = '#9f97cc',
+  magenta   = '#635196',
+  white     = '#ddcfbf',
+  fg        = '#ddcfbf',
+  skyblue   = '#747e8c',
+  red       = '#ff2600',
 }
 
 local vi_mode_colors = {
-  NORMAL = 'white',
-  OP = 'green',
-  INSERT = 'green',
-  CONFIRM = 'red',
-  -- VISUAL = 'skyblue',
-  VISUAL = 'white',
-  LINES = 'skyblue',
-  BLOCK = 'skyblue',
-  REPLACE = 'violet',
+  NORMAL        = 'white',
+  OP            = 'green',
+  INSERT        = 'green',
+  CONFIRM       = 'red',
+  -- VISUAL     = 'skyblue',
+  VISUAL        = 'white',
+  LINES         = 'skyblue',
+  BLOCK         = 'skyblue',
+  REPLACE       = 'violet',
   ['V-REPLACE'] = 'violet',
-  ENTER = 'cyan',
-  MORE = 'cyan',
-  SELECT = 'orange',
-  COMMAND = 'green',
-  SHELL = 'green',
-  TERM = 'green',
-  NONE = 'yellow'
+  ENTER         = 'cyan',
+  MORE          = 'cyan',
+  SELECT        = 'orange',
+  COMMAND       = 'green',
+  SHELL         = 'green',
+  TERM          = 'green',
+  NONE          = 'yellow'
 }
 
 local vi_mode_text = {
-  NORMAL = 'N',
-  OP = 'OP',
-  INSERT = 'I',
-  VISUAL = '<>',
-  LINES = '<>',
-  BLOCK = '<>',
-  REPLACE = '<>',
+  NORMAL        = 'N',
+  OP            = 'OP',
+  INSERT        = 'I',
+  VISUAL        = '<>',
+  LINES         = '<>',
+  BLOCK         = '<>',
+  REPLACE       = '<>',
   ['V-REPLACE'] = '<>',
-  ENTER = '<>',
-  MORE = '<>',
-  SELECT = '<>',
-  COMMAND = 'CMD',
-  SHELL = 'SH',
-  TERM = 'T',
-  NONE = '<>',
-  CONFIRM = '?'
+  ENTER         = '<>',
+  MORE          = '<>',
+  SELECT        = '<>',
+  COMMAND       = 'CMD',
+  SHELL         = 'SH',
+  TERM          = 'T',
+  NONE          = '<>',
+  CONFIRM       = '?'
 }
 
 local buffer_not_empty = function()
@@ -168,18 +173,18 @@ components.active[1][3] = {
 -- nvimGps
 components.active[1][4] = {
   provider = function() return gps.get_location() end,
-  enabled = function() return gps.is_available() end,
+  enabled  = function() return gps.is_available() end,
   truncate_hide = true,
   hl = {
-    fg = 'white',
-    bg = 'bg',
+    fg    = 'white',
+    bg    = 'bg',
     style = 'bold'
   },
   left_sep = {
     str = ' > ',
-    hl = {
-      fg = 'white',
-      bg = 'bg',
+    hl  = {
+      fg    = 'white',
+      bg    = 'bg',
       style = 'bold'
     },
   }
@@ -460,12 +465,13 @@ components.inactive[1][1] = {
 --   }
 -- }
 
-require('feline').setup({
-  theme = colors,
-  default_bg = bg,
-  default_fg = fg,
-  vi_mode_colors = vi_mode_colors,
-  components = components,
-  force_inactive = force_inactive,
-})
+gps.setup{ disable_icons = true }
 
+feline.setup {
+  theme          = colors,
+  default_bg     = bg,
+  default_fg     = fg,
+  vi_mode_colors = vi_mode_colors,
+  components     = components,
+  force_inactive = force_inactive,
+}

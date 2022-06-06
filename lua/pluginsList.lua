@@ -47,48 +47,16 @@ return require('packer').startup({ function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function() require('nvim-treesitter.configs').setup({
-      ensure_installed = {"elixir", "ruby", "javascript", "heex", "eex", "lua", "css", "vue", "json", "html", "vim", "scss", "yaml", "regex", "dockerfile", "surface"},
-      highlight = { enable = true },
-      context_commentstring = { enable = true },
-    }) end
   }
-  use { 'p00f/nvim-ts-rainbow',
-    config = function() require("nvim-treesitter.configs").setup({
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-      }
-    }) end
-  }
-  use {
-    "SmiteshP/nvim-gps",
-    requires = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require('nvim-gps').setup{
-        -- preset = 'noicon'
-      }
-    end
-  }
-  use { "JoosepAlviste/nvim-ts-context-commentstring", }
-  use {
-    "ziontee113/syntax-tree-surfer",
-    requires = "nvim-treesitter/nvim-treesitter",
-  }
-  -- Lua
-  use {
-    "folke/twilight.nvim",
-    config = function()
-      require("twilight").setup {
-      }
-    end
-  }
+  use { 'p00f/nvim-ts-rainbow' }
+  use { "SmiteshP/nvim-gps" } -- is used in feline
+  use { "JoosepAlviste/nvim-ts-context-commentstring" }
+  use { "ziontee113/syntax-tree-surfer" }
 
   -- Themes
   use 'fenetikm/falcon'
   use 'lighthaus-theme/vim-lighthaus'
   use 'Domeee/mosel.nvim'
-  use 'rmehri01/onenord.nvim'
 
   -- Syntax & other helpers for specific files
 
@@ -97,20 +65,16 @@ return require('packer').startup({ function(use)
   use { 'slashmili/alchemist.vim', ft = 'elixir' }
   use { 'c-brenn/phoenix.vim', ft = 'elixir' }
 
-  -- use 'sheerun/vim-polyglot'
   use { 'amadeus/vim-mjml', ft = {'mjml'} }
-  -- use { 'dNitro/vim-pug-complete', ft = {'pug'} }
   use { 'ixru/nvim-markdown' }
   use { 'andrewstuart/vim-kubernetes', ft = {'yaml'} }
   use { 'towolf/vim-helm', ft = {'yaml'} }
-  -- use 'robbles/logstash.vim'
-  -- use 'itkq/fluentd-vim'
-  -- use 'tpope/vim-liquid'
   use {
     'norcalli/nvim-colorizer.lua',
     opt = true, ft = {'css', 'html', 'javascript', 'vim', 'scss'},
     config = function() require('colorizer').setup() end
   }
+  use { 'mvllow/modes.nvim' } -- Add colors to modes
 
   use 'andymass/vim-matchup' -- add more selectors to %
   use 'kana/vim-textobj-user'
@@ -131,30 +95,9 @@ return require('packer').startup({ function(use)
   use {
     'numToStr/Comment.nvim',
     -- tag = 'v0.6',
-    config = function()
-      require('Comment').setup()
-    end
+    config = function() require('Comment').setup() end
   }
-  use {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("indent_blankline").setup{
-        show_current_context = true,
-        show_current_context_start = true,
-        buftype_exclude = {"terminal", "TelescopePrompt", "man", "nofile", "NvimTree"},
-        filetype_exclude = {"help", "packer", "NvimTree"}
-      }
-    end
-  }
-  use {
-    'edluffy/specs.nvim',
-    config = function()
-      require("specs").setup{
-        show_jumps  = true,
-        min_jump = 5
-      }
-    end
-  } -- display flash on cursor jumps
+  use { "lukas-reineke/indent-blankline.nvim" }
   use 'RRethy/vim-illuminate' -- higlite word under cursor
   use 'AndrewRadev/splitjoin.vim' -- sinle/multiline format with gS gJ
   use 'conradIrwin/vim-bracketed-paste' -- Auto set paste
@@ -170,68 +113,23 @@ return require('packer').startup({ function(use)
   use 'tpope/vim-speeddating' -- increase/decrease dates with ctrl-a/x
   use 'christianrondeau/vim-base64' -- encode using b64
 
-  -- Add colors to modes
-  use({
-    'mvllow/modes.nvim',
-    config = function()
-      require('modes').setup({
-       colors = {
-         -- insert = "#718e3f",
-         visual = "#ffffff"
-       }
-     })
-    end
-  })
-
-  -- use 'kassio/neoterm'
-  use {
-    "akinsho/toggleterm.nvim",
-    config = function ()
-      require("toggleterm").setup{
-        size = 10,
-        open_mapping = [[<c-\>]]
-      }
-    end
-  }
+  use { "akinsho/toggleterm.nvim" }
   use 'roxma/vim-tmux-clipboard'
   use 'christoomey/vim-tmux-navigator'
 
   use {
     'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require'nvim-tree'.setup {
-        -- open_on_tab = true,
-        renderer = {
-          highlight_git = true,
-          -- highlight_opened_files = true,
-        },
-        filters = {
-          dotfiles = false,
-          custom = {'.git', 'node_modules', '.cache'}
-        },
-      }
-    end
+    requires = 'kyazdani42/nvim-web-devicons'
   }
 
   use {
     'famiu/feline.nvim',
-    config = lua_path"feline"
+    requires = "SmiteshP/nvim-gps"
   }
-  -- use {
-  --   'famiu/feline.nvim',
-  --   config = function()
-  --     require('feline').setup{
-  --       -- preset = 'noicon'
-  --     }
-  --   end
-  -- }
   use {
     'seblj/nvim-tabline',
     config = function()
-      require('tabline').setup{
-        close_icon = ''
-      }
+      require('tabline').setup{ close_icon = '' }
     end
   }
 
@@ -240,22 +138,13 @@ return require('packer').startup({ function(use)
     'nvim-telescope/telescope.nvim',
     -- tag = 'nvim-0.6',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-    config = [[require('config.telescope')]]
   }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {'stevearc/dressing.nvim'} -- UI improvements
   use {'nvim-telescope/telescope-ui-select.nvim' }
   use {
-    "nvim-telescope/telescope-frecency.nvim",
-    config = function()
-      require"telescope".load_extension("frecency")
-    end,
-    requires = {"tami5/sqlite.lua"}
-  }
-  use {
     'sudormrfbin/cheatsheet.nvim',
-    requires = { {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'},
-    }
+    requires = { {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, }
   }
 
   -- Git stuff
@@ -268,12 +157,7 @@ return require('packer').startup({ function(use)
   } -- <leader>gy to copy git link
   use {
     'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function() require('gitsigns').setup({
-      watch_gitdir = { interval = 2000 },
-      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts = {delay = 2000}
-    }) end
+    requires = { 'nvim-lua/plenary.nvim' }
   }
 
   -- Ruby stuff
@@ -291,10 +175,7 @@ return require('packer').startup({ function(use)
   use { 'janko-m/vim-test', opt = true, cmd = {'TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'} }
 
   -- LSP
-  use {
-    "neovim/nvim-lspconfig",
-    config = [[require('config.nvim-lspconfig')]],
-  }
+  use { "neovim/nvim-lspconfig" }
   use {
     'williamboman/nvim-lsp-installer',
     requires = { "neovim/nvim-lspconfig" },
@@ -320,30 +201,11 @@ return require('packer').startup({ function(use)
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        position = "right",
-        mode = "document_diagnostics",
-        auto_open = false,
-        auto_close = true,
-        use_diagnostic_signs = true,
-        auto_fold = false
-      }
-    end
   }
   use 'kosayoda/nvim-lightbulb'
   use 'simrat39/symbols-outline.nvim'
 
-  use {
-    'rmagatti/auto-session',
-    config = function()
-      require("auto-session").setup {
-        log_level = 'error',
-        auto_session_suppress_dirs = {'~/', '~/Projects'}
-      }
-    end
-  }
-
+  use { 'rmagatti/auto-session' }
 end,
 
 config = {

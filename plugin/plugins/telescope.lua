@@ -1,5 +1,11 @@
+local status_ok, telescope = pcall(require, "telescope")
+if not status_ok then
+  return
+end
+
 local actions = require('telescope.actions')
-require('telescope').setup{
+
+telescope.setup{
   defaults = {
     -- show_line = false,
     color_devicons = false,
@@ -9,9 +15,9 @@ require('telescope').setup{
     preview_title = '',
     path_display = { "truncate" },
     file_ignore_patterns = { "node_modules", "*.git/*", "*/tmp/*", ".cache"},
-  --   sorting_strategy = "ascending",
-  --   initial_mode = "insert",
-  --   selection_strategy = "reset",
+    -- sorting_strategy = "ascending",
+    -- initial_mode = "insert",
+    -- selection_strategy = "reset",
     -- file_sorter = mysorter.frecency_sorter,
     vimgrep_arguments = {
       "rg",
