@@ -34,6 +34,7 @@ local function setup_servers()
 
   local function on_attach(client, bufnr)
     require 'illuminate'.on_attach(client)
+    require 'nvim-navic'.attach(client, bufnr)
     -- require "lsp-format".on_attach(client)
 
     -- Set up buffer-local keymaps (vim.api.nvim_buf_set_keymap()), etc.

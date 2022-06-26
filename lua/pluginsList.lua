@@ -49,7 +49,11 @@ return require('packer').startup({ function(use)
     run = ':TSUpdate',
   }
   use { 'p00f/nvim-ts-rainbow' }
-  use { "SmiteshP/nvim-gps" } -- is used in feline
+  -- use { "SmiteshP/nvim-gps" } -- is used in feline
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use { "ziontee113/syntax-tree-surfer" }
 
@@ -103,13 +107,15 @@ return require('packer').startup({ function(use)
   use 'conradIrwin/vim-bracketed-paste' -- Auto set paste
   use 'dhruvasagar/vim-zoom' -- zoom in/out <C-w>m
   use "kevinhwang91/nvim-bqf" -- Quickfix improvementss
-  use 'junegunn/vim-easy-align' -- <ldr><CR> for auto align
+  -- use 'junegunn/vim-easy-align' -- <ldr><CR> for auto align
+  use 'Vonr/align.nvim'
   use 'mg979/vim-visual-multi' -- ctrl+n for multi cursor
   use 'machakann/vim-sandwich' -- manipulate surround-ings (sa/sdb/srb)
 
   -- use 'junegunn/vim-peekaboo' -- see registers
   use 'kshenoy/vim-signature' -- toggle/display/navigate marks
-  use 'sjl/gundo.vim' -- Display undo tree with <leader>u
+  -- use 'sjl/gundo.vim' -- Display undo tree with <leader>u
+  use { "jiaoshijie/undotree" }
   use 'tpope/vim-speeddating' -- increase/decrease dates with ctrl-a/x
   use 'christianrondeau/vim-base64' -- encode using b64
 

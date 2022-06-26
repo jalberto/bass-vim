@@ -515,8 +515,8 @@ let g:indent_guides_guide_size = 1
 
 " Gundo {{{
 " toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
-let g:gundo_prefer_python3 = 1
+" nnoremap <leader>u :GundoToggle<CR>
+" let g:gundo_prefer_python3 = 1
 " }}}
 
 " :TOhtml {{{
