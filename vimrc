@@ -135,23 +135,6 @@ function! ReadScratchFile()
 endfunction
 " }}}
 
-" Get visual selection (used in fzf)
-" function! s:getVisualSelection()
-"   let [line_start, column_start] = getpos("'<")[1:2]
-"   let [line_end, column_end] = getpos("'>")[1:2]
-"   let lines = getline(line_start, line_end)
-" 
-"   if len(lines) == 0
-"       return ""
-"   endif
-" 
-"   let lines[-1] = lines[-1][:column_end - (&selection == "inclusive" ? 1 : 2)]
-"   let lines[0] = lines[0][column_start - 1:]
-" 
-"   return join(lines, "\n")
-" endfunction
-" }}}
-
 " when numbering is on, toggle relative to active buffer {{{
 augroup numbertoggle
   autocmd!
@@ -225,8 +208,6 @@ vmap <Leader>p "+p
 vmap <Leader>P "+P
 
 nnoremap <leader>r :call Rotate()<CR>
-
-nnoremap <silent> <leader>x :NvimTreeToggle<CR>
 
 " Plugins {{{
 
@@ -313,7 +294,7 @@ vnoremap > >gv
 nnoremap n nzz
 nnoremap N Nzz
 
-nnoremap gs :call ReadScratchFile()<CR>
+" nnoremap gs :call ReadScratchFile()<CR>
 
 " resize panels
 noremap <A-up>    <C-W>+

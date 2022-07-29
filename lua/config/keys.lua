@@ -25,7 +25,11 @@ vim.keymap.set('x', 'aw', function() require'align'.align_to_string(false, true,
 vim.keymap.set('x', 'ar', function() require'align'.align_to_string(true, true, true)  end, NS) -- Aligns to a Lua pattern, looking left and with previews
 
 -- Undo
-vim.api.nvim_set_keymap('n', '<leader>u', '<cmd>UndotreeToggle<cr>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>u', '<cmd>UndotreeToggle<cr>', NS)
 
 -- Don't touch unnamed register when pasting over visual selection
 -- vim.keymap.set("x", "p", function() return 'pgv"' .. vim.v.register .. "y" end, { remap = false, expr = true })
+
+-- Tree explorer
+vim.api.nvim_set_keymap('n', '<leader>x', '<cmd>Neotree toggle=true<cr>', NS)
+vim.api.nvim_set_keymap('n', '<leader>gs', '<cmd>Neotree source=git_status position=float toggle=true<cr>', NS)
