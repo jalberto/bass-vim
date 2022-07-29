@@ -190,11 +190,17 @@ return require('packer').startup({ function(use)
   use { 'janko-m/vim-test', opt = true, cmd = {'TestFile', 'TestLast', 'TestNearest', 'TestSuite', 'TestVisit'} }
 
   -- LSP
-  use { "neovim/nvim-lspconfig" }
+  -- use { "neovim/nvim-lspconfig" }
+  -- use { "williamboman/mason.nvim" }
   use {
-    'williamboman/nvim-lsp-installer',
-    requires = { "neovim/nvim-lspconfig" },
-  }
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+}
+  -- use {
+  --   'williamboman/nvim-lsp-installer',
+  --   requires = { "neovim/nvim-lspconfig" },
+  -- }
   -- use {
   --   'lukas-reineke/lsp-format.nvim',
   --   config = function()
