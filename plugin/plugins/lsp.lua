@@ -69,7 +69,7 @@ local function setup_servers()
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.get_next()<CR>', opts)
     -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<space>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('n', '<space>cf', '<cmd>lua vim.lsp.buf.format({async=true})<CR>', opts)
     buf_set_keymap('n', '<space>ct', '<cmd>TroubleToggle<CR>', opts)
   end
 
@@ -93,9 +93,9 @@ local function setup_servers()
       ["html"] = function()
         default_opts.filetypes = { "html","heex" }
       end,
-      ["elixirls"] = function()
-        default_opts.cmd = { "/home/ja/Projects/elixir-ls/language_server.sh" }
-      end,
+      -- ["elixirls"] = function()
+      --   default_opts.cmd = { "/home/ja/Projects/elixir-ls/language_server.sh" }
+      -- end,
     }
 
     -- Use the server's custom settings, if they exist, otherwise default to the default options
