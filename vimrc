@@ -389,9 +389,9 @@ let g:falcon_inactive=1
 
 colorscheme falcon
 
-if has("gui_running")
-  set guifont=JetBrains\ Mono\ Variable\ 14
-endif
+" if has("gui_running")
+set guifont=JetBrains\ Mono\ Variable\ 14
+" endif
 
 " Cursorline color
 highlight CursorLine guibg=#28282d
@@ -513,3 +513,6 @@ let g:smartgf_auto_refresh_ctags = 0
 " }}}
 
 lua require('config') -- This include basic confis in lua + keymaps
+if exists("g:neovide")
+  g:neovide_transparency=0.9
+endif

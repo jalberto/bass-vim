@@ -49,11 +49,11 @@ return require('packer').startup({ function(use)
     run = ':TSUpdate',
   }
   use { 'p00f/nvim-ts-rainbow' }
-  -- use { "SmiteshP/nvim-gps" } -- is used in feline
-  use {
-    "SmiteshP/nvim-navic",
-    requires = "neovim/nvim-lspconfig"
-  }
+  -- show code path in status line
+  -- use {
+  --   "SmiteshP/nvim-navic",
+  --   requires = "neovim/nvim-lspconfig"
+  -- }
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use { "ziontee113/syntax-tree-surfer" }
 
@@ -104,7 +104,7 @@ return require('packer').startup({ function(use)
   use { "lukas-reineke/indent-blankline.nvim" }
   use 'RRethy/vim-illuminate' -- higlite word under cursor
   use 'AndrewRadev/splitjoin.vim' -- sinle/multiline format with gS gJ
-  use 'conradIrwin/vim-bracketed-paste' -- Auto set paste
+  -- use 'conradIrwin/vim-bracketed-paste' -- Auto set paste
   use 'dhruvasagar/vim-zoom' -- zoom in/out <C-w>m
   use "kevinhwang91/nvim-bqf" -- Quickfix improvementss
   -- use 'junegunn/vim-easy-align' -- <ldr><CR> for auto align
