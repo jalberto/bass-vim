@@ -66,7 +66,7 @@ return require('packer').startup({ function(use)
 
   -- Elixir
   use { 'elixir-editors/vim-elixir' }
-  use { 'slashmili/alchemist.vim', ft = 'elixir' }
+  -- use { 'slashmili/alchemist.vim', ft = 'elixir' }
   use { 'c-brenn/phoenix.vim', ft = 'elixir' }
 
   use { 'amadeus/vim-mjml', ft = {'mjml'} }
