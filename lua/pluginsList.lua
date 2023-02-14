@@ -225,6 +225,8 @@ return require('packer').startup({ function(use)
   use 'simrat39/symbols-outline.nvim'
 
   use { 'rmagatti/auto-session' }
+
+  -- use 'Exafunction/codeium.vim'
 end,
 
 config = {
