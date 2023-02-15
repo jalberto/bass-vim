@@ -1,11 +1,5 @@
-local status_ok, feline = pcall(require, "feline")
-if not status_ok then
-  return
-end
-
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
--- local navic = require("nvim-navic")
 
 local force_inactive = {
   filetypes = {},
@@ -467,11 +461,23 @@ components.inactive[1][1] = {
 
 -- gps.setup{ disable_icons = true }
 
-feline.setup {
-  theme          = colors,
-  default_bg     = bg,
-  default_fg     = fg,
-  vi_mode_colors = vi_mode_colors,
-  components     = components,
-  force_inactive = force_inactive,
+return {
+  {
+    'famiu/feline.nvim',
+    lazy = false,
+    dependencies = {
+      "SmiteshP/nvim-gps",
+      "nvim-tree/nvim-web-devicons"
+    },
+    config = function()
+      require('feline').setup {
+        theme          = colors,
+        default_bg     = bg,
+        default_fg     = fg,
+        vi_mode_colors = vi_mode_colors,
+        components     = components,
+        force_inactive = force_inactive,
+      }
+    end
+  }
 }
