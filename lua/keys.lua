@@ -16,10 +16,10 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
-map("n", "<A-h>", "<C-w>h", { desc = "Go to left window" })
-map("n", "<A-j>", "<C-w>j", { desc = "Go to lower window" })
-map("n", "<A-k>", "<C-w>k", { desc = "Go to upper window" })
-map("n", "<A-l>", "<C-w>l", { desc = "Go to right window" })
+-- map("n", "<A-h>", "<C-w>h", { desc = "Go to left window" })
+-- map("n", "<A-j>", "<C-w>j", { desc = "Go to lower window" })
+-- map("n", "<A-k>", "<C-w>k", { desc = "Go to upper window" })
+-- map("n", "<A-l>", "<C-w>l", { desc = "Go to right window" })
 map('n', '<tab><tab>', '<C-w>w', { desc = "Cycle buffers" })
 map({'n','i'}, '<silent> <C-h>', ':tabprevious<cr>', {desc = 'Go to prev Tab'})
 map({'n','i'}, '<silent> <C-l>', ':tabnext<cr>', {desc = 'Go to next Tab'})
@@ -45,6 +45,10 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
+
+map("n", "gV", "gV `[v`]", { noremap = true, desc = "Visually select the text that was last edited/pasted" })
+ 
+map("n", "gp", "gp `[v`]", { noremap = true,desc = "Select what you've just pasted" })
 
 -- lazy
 map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })

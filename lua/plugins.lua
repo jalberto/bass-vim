@@ -44,9 +44,5 @@ return {
   { "jiaoshijie/undotree" },
   'christianrondeau/vim-base64', -- encode using b64
 
-  { "akinsho/toggleterm.nvim" },
-  'roxma/vim-tmux-clipboard',
-  'christoomey/vim-tmux-navigator',
-
   { 'seblj/nvim-tabline', opts = { close_icon = '' }, lazy = false },
 }

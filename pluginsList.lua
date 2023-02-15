@@ -133,10 +133,6 @@ return require('packer').startup({ function(use)
   use 'tpope/vim-speeddating' -- increase/decrease dates with ctrl-a/x
   use 'christianrondeau/vim-base64' -- encode using b64
 
-  use { "akinsho/toggleterm.nvim" }
-  use 'roxma/vim-tmux-clipboard'
-  use 'christoomey/vim-tmux-navigator'
-
   -- use {
   --   'kyazdani42/nvim-tree.lua',
   --   requires = 'kyazdani42/nvim-web-devicons'
