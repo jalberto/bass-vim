@@ -1,5 +1,11 @@
 return {
 
+  -- sinle/multiline format with gS gJ
+  {
+    'AndrewRadev/splitjoin.vim',
+    cmd = {'SplitjoinSplit', 'SplitjoinJoin'}
+  },
+
   -- snippets
   {
     "L3MON4D3/LuaSnip",
@@ -132,7 +138,7 @@ return {
     },
     config = function(_, opts)
       -- se gz mappings instead of s to prevent conflict with leap
-      reqire("mini.srrond").setup(opts)
+      require("mini.srrond").setup(opts)
     end,
   },
 
