@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    -- version = false, -- last release is way too old and doesn't work on Windows
+    version = false, -- last release is way too old and doesn't work on Windows
     dependencies = {
       'p00f/nvim-ts-rainbow',
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -15,6 +15,7 @@ return {
     },
     ---@type TSConfig
     opts = {
+      sync_install = false,
       highlight = { enable = true },
       indent = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },

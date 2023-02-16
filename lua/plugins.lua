@@ -44,24 +44,13 @@ return {
     ft = {'css', 'html', 'javascript', 'vim', 'scss'},
     config = true
   },
-
-  { 'kana/vim-textobj-user', lazy = false },
-  { 'windwp/nvim-autopairs', config = true, lazy = false },
   { 'tpope/vim-ragtag', ft = 'xml,html'}, -- xml & friends tags helpers
-  { 'numToStr/Comment.nvim', lazy = false, config = true },
 
-  {
-    'AndrewRadev/splitjoin.vim',
-    cmd = {'SplitjoinSplit', 'SplitjoinJoin'}
-  }, -- sinle/multiline format with gS gJ
   {"kevinhwang91/nvim-bqf", ft = 'qf'}, -- Quickfix improvementss
   'Vonr/align.nvim',
   'mg979/vim-visual-multi', -- ctrl+n for multi cursor
-  'machakann/vim-sandwich', -- manipulate surround-ings (sa/sdb/srb)
 
   'kshenoy/vim-signature', -- toggle/display/navigate marks
   { "jiaoshijie/undotree" },
   'christianrondeau/vim-base64', -- encode using b64
-
-  { 'seblj/nvim-tabline', opts = { close_icon = '' }, lazy = false },
 }
