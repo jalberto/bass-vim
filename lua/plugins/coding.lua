@@ -45,6 +45,11 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
     opts = function()
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
       local cmp = require("cmp")
       return {
         completion = {
@@ -66,8 +71,8 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            elseif require('luasnip').expand_or_jumpable() then
+              require('luasnip').luasnip.expand_or_jump()
             elseif has_words_before() then
               cmp.complete()
             else
@@ -77,8 +82,8 @@ return {
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
+            elseif require('luasnip').luasnip.jumpable(-1) then
+              require('luasnip').luasnip.jump(-1)
             else
               fallback()
             end
@@ -92,9 +97,8 @@ return {
           { name = "path" },
         }),
         -- formatting = {
-        --   format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+        --   format = require('lspkind').cmp_format({with_text = false, maxwidth = 50})
         -- },
-          
         experimental = {
           ghost_text = {
             hl_group = "LspCodeLens",
@@ -137,15 +141,15 @@ return {
       },
     },
     config = function(_, opts)
-      -- se gz mappings instead of s to prevent conflict with leap
-      require("mini.srrond").setup(opts)
+      -- use gz mappings instead of s to prevent conflict wit leap
+      require("mini.surround").setup(opts)
     end,
   },
 
   -- comments
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
   {
-    "echasnovski/mini.comment",
+    "ecasnovski/mini.comment",
     event = "VeryLazy",
     opts = {
       hooks = {
