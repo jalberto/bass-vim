@@ -20,8 +20,6 @@ return {
       -- Automatically format on save
       autoformat = false,
       -- options for vim.lsp.buf.format
-      -- `bufnr` and `filter` is handled by the LazyVim formatter,
-      -- but can be also overridden when specified
       -- format = {
       --   formatting_options = nil,
       --   timeout_ms = nil,
@@ -53,49 +51,61 @@ return {
           },
         },
       },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {
-        -- example to setup with typescript.nvim
-        -- tsserver = function(_, opts)
-        --   require("typescript").setup({ server = opts })
-        --   return true
-        -- end,
-        -- Specify * to use this function as a fallback for any server
-        -- ["*"] = function(server, opts) end,
+      keys =  {
+        { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+        { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+        { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition" },
+        { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+        { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+        { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
+        { "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" },
+        { "K", vim.lsp.buf.hover, desc = "Hover" },
+        { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+        { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+        { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+        -- { "cf", vim.lsp.buf.format({async=true}), desc = "Code Format", mode = {"n", "v"}},
+        -- { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
+        -- { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
       },
     },
     ---@param opts PluginLspOpts
     config = function(plugin, opts)
 
       -- diagnostics
-      -- vim.diagnostic.config(opts.diagnostics)
+      vim.diagnostic.config(opts.diagnostics)
 
+      local keymaps = opts.keys
       local servers = opts.servers
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-      local function setup(server)
-        local server_opts = vim.tbl_deep_extend("force", {
-          capabilities = vim.deepcopy(capabilities),
-        }, servers[server] or {})
+      local function on_attach(client, bufnr)
+        -- require 'illuminate'.on_attach(client)
+        -- require 'nvim-navic'.attach(client, bufnr)
+        -- require "lsp-format".on_attach(client)
 
-        if opts.setup[server] then
-          if opts.setup[server](server, server_opts) then
-            return
-          end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then
-            return
-          end
+        -- Mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local kopts = { noremap=true, silent=true, buffer=bufnr }
+        for _, keys in pairs(keymaps) do
+          vim.keymap.set(keys.mode or 'n', keys[1], keys[2], kopts)
         end
+
+      end
+
+      local function setup(server)
+        local server_opts = vim.tbl_deep_extend("force",
+          { capabilities = vim.deepcopy(capabilities), },
+          servers[server] or {},
+          {on_attach = on_attach}
+        )
+
         require("lspconfig")[server].setup(server_opts)
       end
 
       local mlsp = require("mason-lspconfig")
       local available = mlsp.get_available_servers()
-
       local ensure_installed = {} ---@type string[]
+
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
@@ -108,8 +118,8 @@ return {
         end
       end
 
-      require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
-      require("mason-lspconfig").setup_handlers({ setup })
+      mlsp.setup({ ensure_installed = ensure_installed })
+      mlsp.setup_handlers({ setup })
     end,
   },
 

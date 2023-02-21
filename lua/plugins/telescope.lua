@@ -83,6 +83,9 @@ return {
             ["<C-b>"] = function(...)
               return require("telescope.actions").preview_scrolling_up(...)
             end,
+            ["<C-s>"] = function(...)
+              return require("telescope.actions").select_vertical(...)
+            end,
             ["<esc>"] = function(...)
               return require("telescope.actions").close(...)
             end,

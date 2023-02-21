@@ -43,6 +43,8 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
+      'ray-x/cmp-treesitter',
+      'onsails/lspkind-nvim'
     },
     opts = function()
       local has_words_before = function()
@@ -149,7 +151,7 @@ return {
   -- comments
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
   {
-    "ecasnovski/mini.comment",
+    "echasnovski/mini.comment",
     event = "VeryLazy",
     opts = {
       hooks = {

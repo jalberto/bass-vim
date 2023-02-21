@@ -58,9 +58,9 @@ opt.switchbuf = 'usetab,newtab' -- if buffer is in tab use that tab
 
 opt.synmaxcol = 1000 -- Syntax coloring lines that are too long just slows down the world
 
-opt.foldenable = true
-opt.foldmethod = 'syntax'
 opt.foldlevelstart = 1 -- open most folds by default
+opt.foldenable = true
+-- opt.foldmethod = 'syntax'
 
 opt.number = true
 opt.relativenumber = true
