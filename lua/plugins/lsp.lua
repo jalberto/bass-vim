@@ -14,8 +14,10 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
+        -- virtual_text = { spacing = 4, prefix = "●" },
+        virtual_text = false,
         severity_sort = true,
+        signs = true,
       },
       -- Automatically format on save
       autoformat = false,
@@ -73,6 +75,12 @@ return {
 
       -- diagnostics
       vim.diagnostic.config(opts.diagnostics)
+      vim.api.nvim_create_autocmd({'CursorHold','CursorHoldI'}, {
+        pattern = '*',
+        callback = function()
+          vim.diagnostic.open_float(nil, {focus=false,scope=cursor})
+        end
+      })
 
       local keymaps = opts.keys
       local servers = opts.servers
@@ -96,6 +104,7 @@ return {
         local server_opts = vim.tbl_deep_extend("force",
           { capabilities = vim.deepcopy(capabilities), },
           servers[server] or {},
+          { flags = { debounce_text_changes = 200 } },
           {on_attach = on_attach}
         )
 

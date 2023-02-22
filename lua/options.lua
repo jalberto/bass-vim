@@ -54,6 +54,9 @@ opt.shortmess = 'aI'
 opt.cmdheight = 2
 vim.g.bufferline_echo = 0
 
+-- You will likely want to reduce updatetime which affects CursorHold
+vim.o.updatetime = 250
+
 opt.switchbuf = 'usetab,newtab' -- if buffer is in tab use that tab
 
 opt.synmaxcol = 1000 -- Syntax coloring lines that are too long just slows down the world
