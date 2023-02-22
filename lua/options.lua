@@ -70,7 +70,7 @@ opt.relativenumber = true
 opt.signcolumn = 'yes:1'
 
 -- opt.sessionoptions:append('winpos,terminal,folds') -- Autosessions recommendation
-opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
+-- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 
 opt.lazyredraw = true       -- Speed up macros
 opt.winminheight = 1        -- 1 height windows

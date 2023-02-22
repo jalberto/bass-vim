@@ -1,4 +1,13 @@
 return {
+  -- buffers
+  {
+    'kazhala/close-buffers.nvim',
+    lazy = false,
+    config = function ()
+      require('close_buffers').setup()
+    end
+  },
+
   -- file explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -47,7 +56,7 @@ return {
       end
     end,
     opts = {
-      close_if_last_window = false,
+      close_if_last_window = true,
       popup_border_style = "solid",
       enable_git_status = true,
       enable_diagnostics = true,
@@ -57,6 +66,7 @@ return {
         follow_current_file = true,
       },
       window = {
+        width = 30,
         mappings = {
           ["<space>"] = "none",
         },

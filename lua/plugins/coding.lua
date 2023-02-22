@@ -100,7 +100,7 @@ return {
 					{ name = "path" },
 				}),
 				formatting = {
-				  format = require('lspkind').cmp_format({with_text = false, maxwidth = 50})
+				  format = require('lspkind').cmp_format({mode = 'symbol', maxwidth = 50})
 				},
 				experimental = {
 					ghost_text = {
