@@ -142,6 +142,12 @@ return {
       return {
         sources = {
           nls.builtins.formatting.stylua,
+          nls.builtins.diagnostics.credo,
+          nls.builtins.formatting.mix,
+          nls.builtins.formatting.surface,
+          nls.builtins.diagnostics.rubocop,
+          nls.builtins.diagnostics.tidy,
+          nls.builtins.formatting.prettierd
         },
       }
     end,
