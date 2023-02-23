@@ -462,22 +462,22 @@ components.inactive[1][1] = {
 -- gps.setup{ disable_icons = true }
 
 return {
-  {
-    'famiu/feline.nvim',
-    lazy = false,
-    dependencies = {
-      "SmiteshP/nvim-gps",
-      "nvim-tree/nvim-web-devicons"
-    },
-    config = function()
-      require('feline').setup {
-        theme          = colors,
-        default_bg     = bg,
-        default_fg     = fg,
-        vi_mode_colors = vi_mode_colors,
-        components     = components,
-        force_inactive = force_inactive,
-      }
-    end
-  }
+  -- {
+  --   'famiu/feline.nvim',
+  --   lazy = false,
+  --   dependencies = {
+  --     "SmiteshP/nvim-gps",
+  --     "nvim-tree/nvim-web-devicons"
+  --   },
+  --   config = function()
+  --     require('feline').setup {
+  --       theme          = colors,
+  --       default_bg     = bg,
+  --       default_fg     = fg,
+  --       vi_mode_colors = vi_mode_colors,
+  --       components     = components,
+  --       force_inactive = force_inactive,
+  --     }
+  --   end
+  -- }
 }

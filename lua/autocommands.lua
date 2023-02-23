@@ -95,4 +95,4 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- fix folding when using telescope https://github.com/nvim-treesitter/nvim-treesitter/issues/1337
-vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*" }, command = "normal zx", })
+-- vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*" }, command = "normal zx", })

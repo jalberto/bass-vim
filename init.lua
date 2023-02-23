@@ -46,6 +46,3 @@ vim.api.nvim_create_autocmd("User", {
   require("autocommands")
  end,
 })
--- require('lua.config')       -- additional config & plugins
--- require('lua.autocommands') -- yep
--- require('lua.keys')         -- keybindings

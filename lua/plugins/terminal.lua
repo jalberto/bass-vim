@@ -1,14 +1,16 @@
 return {
   {
     "akinsho/toggleterm.nvim",
+    keys = {[[<c-\>]]},
     cmd = 'ToggleTerm',
-    keys = {[[C-\]]},
     opts = {
       size = 10,
       insert_mapping = true,
-      open_mapping = [[<C-\>]]
+      open_mapping = [[<c-\>]]
     },
   },
+
+  -- tmux integration
   {
     'numToStr/Navigator.nvim',
     lazy = false,
@@ -22,6 +24,4 @@ return {
       require('Navigator').setup()
     end
   },
-  -- { 'roxma/vim-tmux-clipboard' },
-  -- { 'christoomey/vim-tmux-navigator' },
 }
