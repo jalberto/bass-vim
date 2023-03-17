@@ -40,6 +40,7 @@ return {
         emmet_ls = {},
         quick_lint_js = {},
         jsonls = {},
+        stylua - {},
         lua_ls = {
           settings = {
             Lua = {
@@ -160,7 +161,6 @@ return {
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ensure_installed = {
-        "stylua",
         "shellcheck",
         "shfmt",
       },

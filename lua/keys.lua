@@ -21,10 +21,10 @@ map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- map("n", "<A-k>", "<C-w>k", { desc = "Go to upper window" })
 -- map("n", "<A-l>", "<C-w>l", { desc = "Go to right window" })
 map('n', '<tab><tab>', '<C-w>w', { desc = "Cycle buffers" })
-map({'n','i'}, '<silent> <C-h>', ':tabprevious<cr>', {desc = 'Go to prev Tab'})
-map({'n','i'}, '<silent> <C-l>', ':tabnext<cr>', {desc = 'Go to next Tab'})
+map({'n','i'}, '<C-h>', ':tabprevious<cr>', {desc = 'Go to prev Tab'})
+map({'n','i'}, '<C-l>', ':tabnext<cr>', {desc = 'Go to next Tab'})
 
--- Resize window using <ctrl> arrow keys
+-- Resize window using <alt> arrow keys
 map("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
