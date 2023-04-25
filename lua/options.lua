@@ -75,7 +75,7 @@ opt.signcolumn = 'yes:1'
 opt.lazyredraw = true       -- Speed up macros
 opt.winminheight = 1        -- 1 height windows
 opt.winminwidth = 5
-opt.popt:append('syntax:y') -- Syntax when printing
+-- opt.popt:append('syntax:y') -- Syntax when printing
 
 opt.linespace = 0     -- number of pixels between the lines
 opt.splitright = true -- open vertical splits on the right
