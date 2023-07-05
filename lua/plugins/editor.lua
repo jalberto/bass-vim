@@ -9,70 +9,84 @@ return {
   },
 
   -- file explorer
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    dependencies = { 
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-    cmd = "Neotree",
+  { 
+    'echasnovski/mini.files', version = false,
+    cmd = "MiniFiles",
     keys = {
       {
-        "<leader>fe",
+        "<leader>e",
         function()
-          require("neo-tree.command").execute({ toggle = true })
+          require("mini.files").open()
         end,
-        desc = "Explorer NeoTree",
+        desc = "Explorer",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree", remap = true },
-      -- {
-      --   "<leader>gs",
-      --   function()
-      --     require("neo-tree.command").execute({ source = 'git_status', position = 'float', toggle = true})
-      --   end,
-      --   desc = "Explore Git Status"
-      -- },
-    },
-    deactivate = function()
-      vim.cmd([[Neotree close]])
-    end,
-    init = function()
-      vim.g.neo_tree_remove_legacy_commands = 1
-      vim.fn.sign_define("DiagnosticSignError",
-        {text = " ", texthl = "DiagnosticSignError"})
-      vim.fn.sign_define("DiagnosticSignWarn",
-        {text = " ", texthl = "DiagnosticSignWarn"})
-      vim.fn.sign_define("DiagnosticSignInfo",
-        {text = " ", texthl = "DiagnosticSignInfo"})
-      vim.fn.sign_define("DiagnosticSignHint",
-        {text = " ", texthl = "DiagnosticSignHint"})
-      if vim.fn.argc() == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == "directory" then
-          require("neo-tree")
-        end
-      end
-    end,
-    opts = {
-      close_if_last_window = true,
-      popup_border_style = "solid",
-      enable_git_status = true,
-      enable_diagnostics = true,
-      sort_case_insensitive = true,
-      filesystem = {
-        bind_to_cwd = false,
-        follow_current_file = true,
-      },
-      window = {
-        width = 30,
-        mappings = {
-          ["<space>"] = "none",
-        },
-      },
-    },
+    }
   },
+
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   branch = "v2.x",
+  --   dependencies = { 
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   cmd = "Neotree",
+  --   keys = {
+  --     {
+  --       "<leader>fe",
+  --       function()
+  --         require("neo-tree.command").execute({ toggle = true })
+  --       end,
+  --       desc = "Explorer NeoTree",
+  --     },
+  --     { "<leader>e", "<leader>fe", desc = "Explorer NeoTree", remap = true },
+  --     -- {
+  --     --   "<leader>gs",
+  --     --   function()
+  --     --     require("neo-tree.command").execute({ source = 'git_status', position = 'float', toggle = true})
+  --     --   end,
+  --     --   desc = "Explore Git Status"
+  --     -- },
+  --   },
+  --   deactivate = function()
+  --     vim.cmd([[Neotree close]])
+  --   end,
+  --   init = function()
+  --     vim.g.neo_tree_remove_legacy_commands = 1
+  --     vim.fn.sign_define("DiagnosticSignError",
+  --       {text = " ", texthl = "DiagnosticSignError"})
+  --     vim.fn.sign_define("DiagnosticSignWarn",
+  --       {text = " ", texthl = "DiagnosticSignWarn"})
+  --     vim.fn.sign_define("DiagnosticSignInfo",
+  --       {text = " ", texthl = "DiagnosticSignInfo"})
+  --     vim.fn.sign_define("DiagnosticSignHint",
+  --       {text = " ", texthl = "DiagnosticSignHint"})
+  --     if vim.fn.argc() == 1 then
+  --       local stat = vim.loop.fs_stat(vim.fn.argv(0))
+  --       if stat and stat.type == "directory" then
+  --         require("neo-tree")
+  --       end
+  --     end
+  --   end,
+  --   opts = {
+  --     close_if_last_window = true,
+  --     popup_border_style = "solid",
+  --     enable_git_status = true,
+  --     enable_diagnostics = true,
+  --     sort_case_insensitive = true,
+  --     filesystem = {
+  --       bind_to_cwd = false,
+  --       follow_current_file = true,
+  --     },
+  --     window = {
+  --       width = 30,
+  --       mappings = {
+  --         ["<space>"] = "none",
+  --       },
+  --     },
+  --   },
+  -- },
 
   -- keybindings helper
   {
