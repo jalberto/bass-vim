@@ -22,7 +22,7 @@ return {
       rainbow = { enable = true, extended_mode = true },
       ensure_installed = {
         "bash",
-        "help",
+        -- "help",
         "html",
         "javascript",
         "json",
