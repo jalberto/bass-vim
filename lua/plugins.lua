@@ -17,7 +17,7 @@ return {
     lazy = false,
     opts = {
       autoload = true,
-      allowed_dirs ={'~/Projects','~/.vim'},
+      allowed_dirs ={'~/Projects'},
     },
     config = function (_, opts)
       vim.o.sessionoptions = "buffers,curdir,folds,winpos,winsize"
@@ -25,14 +25,14 @@ return {
 
       local group = vim.api.nvim_create_augroup("PersistedHooks", {})
 
-      vim.api.nvim_create_autocmd({ "User" }, {
-        pattern = "PersistedSavePre",
-        group = group,
-        callback = function()
-          pcall(vim.cmd, "Neotree close")
-          pcall(vim.cmd, "BDelete! hidden")
-        end,
-      })
+      -- vim.api.nvim_create_autocmd({ "User" }, {
+      --   pattern = "PersistedSavePre",
+      --   group = group,
+      --   callback = function()
+      --     pcall(vim.cmd, "Neotree close")
+      --     pcall(vim.cmd, "BDelete! hidden")
+      --   end,
+      -- })
     end
   },
 

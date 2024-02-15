@@ -1,11 +1,16 @@
 return {
   -- buffers
+  -- {
+  --   'kazhala/close-buffers.nvim',
+  --   lazy = false,
+  --   config = function ()
+  --     require('close_buffers').setup()
+  --   end
+  -- },
   {
-    'kazhala/close-buffers.nvim',
-    lazy = false,
-    config = function ()
-      require('close_buffers').setup()
-    end
+    "chrisgrieser/nvim-early-retirement",
+    config = true,
+    event = "VeryLazy",
   },
 
   -- file explorer
@@ -244,4 +249,13 @@ return {
       { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
     },
   },
+
+  -- Show tips for commands
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   cmd = { "Hardtime" },
+  --   event = { "BufReadPost" },
+  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  --   opts = {}
+  -- },
 }

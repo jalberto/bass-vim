@@ -36,8 +36,10 @@ return {
         dockerls = {},
         graphql = {},
         yamlls = {},
+        emmet_language_server = {
+          filetypes = {"css","eruby","html","sass","scss","heex","liquid"}
+        },
         diagnosticls = {},
-        emmet_ls = {},
         quick_lint_js = {},
         jsonls = {},
         lua_ls = {
@@ -138,25 +140,25 @@ return {
   },
 
   -- formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        sources = {
-          nls.builtins.formatting.stylua,
-          nls.builtins.diagnostics.credo,
-          nls.builtins.formatting.mix,
-          nls.builtins.formatting.surface,
-          nls.builtins.diagnostics.rubocop,
-          nls.builtins.diagnostics.tidy,
-          nls.builtins.formatting.prettierd
-        },
-      }
-    end,
-  },
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = { "mason.nvim" },
+  --   opts = function()
+  --     local nls = require("null-ls")
+  --     return {
+  --       sources = {
+  --         nls.builtins.formatting.stylua,
+  --         nls.builtins.diagnostics.credo,
+  --         nls.builtins.formatting.mix,
+  --         nls.builtins.formatting.surface,
+  --         nls.builtins.diagnostics.rubocop,
+  --         nls.builtins.diagnostics.tidy,
+  --         nls.builtins.formatting.prettierd
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- cmdline tools and lsp servers
   {

@@ -20,12 +20,17 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
+    main = "ibl",
     opts = {
-      char = "│",
-      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
-      show_trailing_blankline_indent = false,
-      show_current_context = true,
-      show_current_context_start = true,
+      indent = {
+        char = "│",
+      },
+      exclude = {
+        filetypes = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+      },
+      scope = {
+        enabled = true
+      },
     }
   },
 
@@ -149,7 +154,7 @@ return {
             -- end,
           },
         },
-        extensions = { "neo-tree", "toggleterm", "quickfix" },
+        extensions = { "toggleterm", "quickfix" },
       }
     end,
   },
