@@ -75,7 +75,7 @@ return {
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
-    -- statusline
+  -- statusline
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -158,4 +158,19 @@ return {
       }
     end,
   },
+
+  -- Predefined windows
+  {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.opt.laststatus = 3
+      vim.opt.splitkeep = "screen"
+    end,
+    opts = {
+      right = {
+        { ft = "codecompanion", title = "Code Companion Chat", size = { width = 0.45 } },
+      }
+    }
+  }
 }
