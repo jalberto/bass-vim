@@ -13,15 +13,15 @@ return {
 
   -- session management
   {
-    'echasnovski/mini.sessions', version = false,
+    'echasnovski/mini.sessions',
+    version = false,
     lazy = false,
-  --   opts = {
-  --     autoread = false,
-  --   },
-    config = true,
-    -- config = function(_, opts)
-    --   require("mini.sessions").setup(opts)
-    -- end,
+    opts = {
+      autoread = true,
+    },
+    config = function(_, opts)
+      require("mini.sessions").setup(opts)
+    end,
   },
   -- {
   --   "olimorris/persisted.nvim",
