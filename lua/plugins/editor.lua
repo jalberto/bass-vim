@@ -1,12 +1,4 @@
 return {
-  -- buffers
-  -- {
-  --   'kazhala/close-buffers.nvim',
-  --   lazy = false,
-  --   config = function ()
-  --     require('close_buffers').setup()
-  --   end
-  -- },
   {
     "chrisgrieser/nvim-early-retirement",
     config = true,
@@ -14,7 +6,7 @@ return {
   },
 
   -- file explorer
-  { 
+  {
     'echasnovski/mini.files', version = false,
     cmd = "MiniFiles",
     keys = {
@@ -26,7 +18,7 @@ return {
         desc = "Explorer",
       },
     },
-    config = function()
+   config = function()
       require("mini.files").setup()
       -- Create mapping to show/hide dot-files
       local show_dotfiles = true
@@ -77,77 +69,17 @@ return {
     end,
   },
 
-  -- {
-  --   "nvim-neo-tree/neo-tree.nvim",
-  --   branch = "v2.x",
-  --   dependencies = { 
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-tree/nvim-web-devicons",
-  --     "MunifTanjim/nui.nvim",
-  --   },
-  --   cmd = "Neotree",
-  --   keys = {
-  --     {
-  --       "<leader>fe",
-  --       function()
-  --         require("neo-tree.command").execute({ toggle = true })
-  --       end,
-  --       desc = "Explorer NeoTree",
-  --     },
-  --     { "<leader>e", "<leader>fe", desc = "Explorer NeoTree", remap = true },
-  --     -- {
-  --     --   "<leader>gs",
-  --     --   function()
-  --     --     require("neo-tree.command").execute({ source = 'git_status', position = 'float', toggle = true})
-  --     --   end,
-  --     --   desc = "Explore Git Status"
-  --     -- },
-  --   },
-  --   deactivate = function()
-  --     vim.cmd([[Neotree close]])
-  --   end,
-  --   init = function()
-  --     vim.g.neo_tree_remove_legacy_commands = 1
-  --     vim.fn.sign_define("DiagnosticSignError",
-  --       {text = " ", texthl = "DiagnosticSignError"})
-  --     vim.fn.sign_define("DiagnosticSignWarn",
-  --       {text = " ", texthl = "DiagnosticSignWarn"})
-  --     vim.fn.sign_define("DiagnosticSignInfo",
-  --       {text = " ", texthl = "DiagnosticSignInfo"})
-  --     vim.fn.sign_define("DiagnosticSignHint",
-  --       {text = " ", texthl = "DiagnosticSignHint"})
-  --     if vim.fn.argc() == 1 then
-  --       local stat = vim.loop.fs_stat(vim.fn.argv(0))
-  --       if stat and stat.type == "directory" then
-  --         require("neo-tree")
-  --       end
-  --     end
-  --   end,
-  --   opts = {
-  --     close_if_last_window = true,
-  --     popup_border_style = "solid",
-  --     enable_git_status = true,
-  --     enable_diagnostics = true,
-  --     sort_case_insensitive = true,
-  --     filesystem = {
-  --       bind_to_cwd = false,
-  --       follow_current_file = true,
-  --     },
-  --     window = {
-  --       width = 30,
-  --       mappings = {
-  --         ["<space>"] = "none",
-  --       },
-  --     },
-  --   },
-  -- },
-
   -- keybindings helper
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
-      plugins = { spelling = true },
+      plugins = {
+        spelling = true,
+        presets = {
+          g = false,
+        }
+      },
     },
     config = function(_, opts)
       vim.o.timeout = true
@@ -156,16 +88,16 @@ return {
       wk.setup(opts)
       local keymaps = {
         mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
-        ["gz"] = { name = "+surround" },
+        -- ["g"] = { name = "+goto" },
+        ["gz"] = {  name  = "+surround" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
         ["<leader><tab>"] = { name = "+tabs" },
         ["<leader>b"] = { name = "+buffer" },
         ["<leader>c"] = { name = "+code" },
         ["<leader>f"] = { name = "+file/find" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunks" },
+        -- ["<leader>g"] = { name = "+git" },
+        -- ["<leader>gh"] = { name = "+hunks" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
         ["<leader>u"] = { name = "+ui" },
@@ -219,7 +151,6 @@ return {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
     opts = {
-      use_diagnostic_signs = true,
       -- position = "right",
       mode = "document_diagnostics",
       auto_open = false,

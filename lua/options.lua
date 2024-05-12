@@ -66,7 +66,8 @@ opt.foldenable = true
 -- opt.foldmethod = 'syntax'
 
 opt.number = true
-opt.relativenumber = true
+-- opt.relativenumber = true
+vim.wo.relativenumber = true
 opt.signcolumn = 'yes:1'
 
 -- opt.sessionoptions:append('winpos,terminal,folds') -- Autosessions recommendation

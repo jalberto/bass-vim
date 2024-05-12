@@ -13,28 +13,42 @@ return {
 
   -- session management
   {
-    "olimorris/persisted.nvim",
+    'echasnovski/mini.sessions', version = false,
     lazy = false,
-    opts = {
-      autoload = true,
-      allowed_dirs ={'~/Projects'},
-    },
-    config = function (_, opts)
-      vim.o.sessionoptions = "buffers,curdir,folds,winpos,winsize"
-      require('persisted').setup(opts)
-
-      local group = vim.api.nvim_create_augroup("PersistedHooks", {})
-
-      -- vim.api.nvim_create_autocmd({ "User" }, {
-      --   pattern = "PersistedSavePre",
-      --   group = group,
-      --   callback = function()
-      --     pcall(vim.cmd, "Neotree close")
-      --     pcall(vim.cmd, "BDelete! hidden")
-      --   end,
-      -- })
-    end
+  --   opts = {
+  --     autoread = false,
+  --   },
+    config = true,
+    -- config = function(_, opts)
+    --   require("mini.sessions").setup(opts)
+    -- end,
   },
+  -- {
+  --   "olimorris/persisted.nvim",
+  --   lazy = false,
+  --   opts = {
+  --     autoload = true,
+  --     allowed_dirs ={'~/Projects'},
+  --   },
+  --   config = function (_, opts)
+  --     vim.o.sessionoptions = "buffers,curdir,folds,winpos,winsize"
+  --     require('persisted').setup(opts)
+  --
+  --     local group = vim.api.nvim_create_augroup("PersistedHooks", {})
+  --
+  --     -- vim.api.nvim_create_autocmd({ "User" }, {
+  --     --   pattern = "PersistedSavePre",
+  --     --   group = group,
+  --     --   callback = function()
+  --     --     pcall(vim.cmd, "Neotree close")
+  --     --     pcall(vim.cmd, "BDelete! hidden")
+  --     --   end,
+  --     -- })
+  --   end
+  -- },
+
+  -- suto toggle relative line number
+  { "cpea2506/relative-toggle.nvim", event = "VeryLazy" },
 
   -- library used by other plugins
   { "nvim-lua/plenary.nvim", lazy = true },
