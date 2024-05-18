@@ -19,6 +19,7 @@ return {
   -- nice indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
+    version = "3.5.4",
     event = "BufReadPre",
     main = "ibl",
     opts = {
