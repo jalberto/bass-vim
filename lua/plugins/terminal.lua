@@ -2,14 +2,13 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    keys = {[[<c-\>]]},
+    keys = {[[<c-\>]], '<leader>gl'},
     cmd = 'ToggleTerm',
     opts = {
       size = 10,
       insert_mapping = true,
       open_mapping = [[<c-\>]]
     },
-    -- config = true
     config = function(_, opts)
       require('toggleterm').setup(opts)
 
@@ -20,7 +19,7 @@ return {
         lazygit:toggle()
       end
 
-      vim.api.nvim_set_keymap("n", "<leader>1", "<cmd>lua _lazygit_toggle()<CR>", {desc = "LazyGit", noremap = true, silent = true})
+      vim.keymap.set("n", "<leader>gl", "<cmd>lua _lazygit_toggle()<CR>", {desc = "LazyGit"})
     end
   },
 
