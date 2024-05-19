@@ -2,7 +2,11 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    keys = {[[<c-\>]], '<leader>gl'},
+    keys = {
+      { [[<c-\>]] },
+      { '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>',  desc = "LazyGit" },
+      { '<leader>ge', '<cmd>lua _explorer_toggle()<CR>', desc = "Explorer"}
+    },
     cmd = 'ToggleTerm',
     opts = {
       size = 10,
@@ -13,13 +17,16 @@ return {
       require('toggleterm').setup(opts)
 
       local Terminal  = require('toggleterm.terminal').Terminal
-      local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
+      local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
       function _lazygit_toggle()
         lazygit:toggle()
       end
 
-      vim.keymap.set("n", "<leader>gl", "<cmd>lua _lazygit_toggle()<CR>", {desc = "LazyGit"})
+      local explorer = Terminal:new({ cmd = "spf", hidden = true, direction = "float" })
+      function _explorer_toggle()
+        explorer:toggle()
+      end
     end
   },
 
