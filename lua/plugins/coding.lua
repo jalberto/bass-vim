@@ -265,36 +265,4 @@ return {
       })
     end,
   },
-
-  -- AI
-  {
-    "olimorris/codecompanion.nvim",
-    cmd = "CodeCompanionActions",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- Optional
-      {
-        "stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
-        opts = {},
-      },
-    },
-    config = function()
-      require("codecompanion").setup({
-        -- adapters = {
-        --   ollama = require("codecompanion.adapters").use("ollama", {
-        --     schema = {
-        --       model = {
-        --         default = "llama3:latest",
-        --       },
-        --     },
-        --   }),
-        -- },
-        strategies = {
-          chat = "ollama",
-          inline = "ollama"
-        },
-      })
-    end,
-  }
 }
