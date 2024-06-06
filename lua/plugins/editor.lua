@@ -146,47 +146,31 @@ return {
     },
   },
 
-  -- better diagnostics list and others
-  {
-    "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    opts = {
-      -- position = "right",
-      mode = "document_diagnostics",
-      auto_open = false,
-      auto_close = true,
-      use_diagnostic_signs = true,
-      auto_fold = false
-    },
-    keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
-      { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
-    },
-  },
-
-  {
-    "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
-    event = { "BufReadPost", "BufNewFile" },
-    config = true,
-    -- stylua: ignore
-    keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-    },
-  },
-
-  -- Show tips for commands
+  -- Yank highlite and goodies{
+  -- NOTE: it is too intrusive, I cannot make it works smoothly
   -- {
-  --   "m4xshen/hardtime.nvim",
-  --   cmd = { "Hardtime" },
-  --   event = { "BufReadPost" },
-  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-  --   opts = {}
+  --   "gbprod/yanky.nvim",
+  --   -- event = "VeryLazy",
+  --   lazy = false,
+  --   config = true,
+  --   -- config = function()
+  --   --   require("yanky")
+  --   --   require("telescope").load_extension("yank_history")
+  --   -- end,
+  --   dependencies = {"nvim-telescope/telescope.nvim"},
+  --   keys = {
+  --     { 'p', '<Plug>>(YankPutAfter)', mode = 'n'},
+  --     -- { 'p', '<Plug>>(YankPutAfter)', mode = 'x'},
+  --     { 'P', '<Plug>>(YankPutBefore)', mode = 'n'},
+  --     -- { 'P', '<Plug>>(YankPutBefore)', mode = 'x'},
+  --     { 'gp', '<Plug>>(YankGPutAfter)', mode = 'n'},
+  --     -- { 'gp', '<Plug>>(YankGPutAfter)', mode = 'x'},
+  --     { 'gP', '<Plug>>(YankGPutBefore)', mode = 'n'},
+  --     -- { 'gP', '<Plug>>(YankGPutBefore)', mode = 'x'},
+  --     { '<c-p>', '<Plug>>(YankyPreviousEntry)'},
+  --     { '<c-n>', '<Plug>>(YankyNextEntry)'},
+  --     { '<leader>fy', '<cmd>Telescope yank_history<cr>', desc = 'Yank ring'}
+  --   },
   -- },
+
 }

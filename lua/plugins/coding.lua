@@ -173,21 +173,22 @@ return {
   },
 
   -- comments
-  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
-  {
-    "echasnovski/mini.comment",
-    event = "VeryLazy",
-    opts = {
-      hooks = {
-        pre = function()
-          require("ts_context_commentstring.internal").update_commentstring({})
-        end,
-      },
-    },
-    config = function(_, opts)
-      require("mini.comment").setup(opts)
-    end,
-  },
+  -- NOTE: included in 0.10
+  -- { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+  -- {
+  --   "echasnovski/mini.comment",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     hooks = {
+  --       pre = function()
+  --         require("ts_context_commentstring.internal").update_commentstring({})
+  --       end,
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require("mini.comment").setup(opts)
+  --   end,
+  -- },
 
   -- better text-objects
   {
@@ -265,4 +266,40 @@ return {
       })
     end,
   },
+
+  -- better diagnostics list and others
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble" },
+    opts = {
+      auto_open = false,
+      auto_close = true,
+      use_diagnostic_signs = true,
+      auto_fold = false
+    },
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics" },
+      -- { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xL", "<cmd>Trouble lsp toggle focus=false win.position=right filter.buf=0 pinned=true<cr>", desc = "LSP (Trouble)" },
+      { "<leader>xQ", "<cmd>Trouble quickfix toggle<cr>", desc = "Quickfix List (Trouble)" },
+    },
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
+    -- stylua: ignore
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xT", "<cmd>TodoTrouble<cr>", desc = "Todo" },
+      { "<leader>xt", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME,NOTE}} focus=true<cr>", desc = "Todo/Fix/Fixme" },
+      { "<leader>ft", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo" },
+    },
+  },
+
 }

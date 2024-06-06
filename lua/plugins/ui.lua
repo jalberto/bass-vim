@@ -19,7 +19,7 @@ return {
   -- nice indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
-    version = "3.5.4",
+    -- version = "3.5.4", -- this was required before 0.10
     event = "BufReadPre",
     main = "ibl",
     opts = {
@@ -56,7 +56,7 @@ return {
 
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
-        hover = {            
+        hover = {
           enabled = true,
           delay = 200,
           reveal = {'close'}
@@ -161,42 +161,38 @@ return {
   },
 
   -- Predefined windows
-  {
-    "folke/edgy.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.opt.laststatus = 3
-      vim.opt.splitkeep = "screen"
-    end,
-    opts = {
-      right = {
-        { ft = "codecompanion", title = "Code Companion Chat", size = { width = 0.45 } },
-      }
-    }
-  },
+  -- {
+  --   "folke/edgy.nvim",
+  --   event = "VeryLazy",
+  --   init = function()
+  --     vim.opt.laststatus = 3
+  --     vim.opt.splitkeep = "screen"
+  --   end,
+  --   opts = {
+  --     right = {
+  --       { ft = "codecompanion", title = "Code Companion Chat", size = { width = 0.45 } },
+  --     }
+  --   }
+  -- },
 
   -- Note per repo
   {
     'yujinyuz/gitpad.nvim',
     config = function()
-      require('gitpad').setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
+      require('gitpad').setup()
     end,
     keys = {
       {
         '<leader>pp',
         function()
-          require('gitpad').toggle_gitpad() -- or require('gitpad').toggle_gitpad({ title = 'Project notes' })
+          require('gitpad').toggle_gitpad({title = 'Project notes'})
         end,
         desc = 'gitpad project',
       },
       {
         '<leader>pb',
         function()
-          require('gitpad').toggle_gitpad_branch() -- or require('gitpad').toggle_gitpad_branch({ title = 'Branch notes' })
+          require('gitpad').toggle_gitpad_branch({title = 'Branch notes'})
         end,
         desc = 'gitpad branch',
       },
@@ -205,23 +201,9 @@ return {
         '<leader>pd',
         function()
           local date_filename = 'daily-' .. os.date('%Y-%m-%d.md')
-          require('gitpad').toggle_gitpad({ filename = date_filename }) -- or require('gitpad').toggle_gitpad({ filename = date_filename, title = 'Daily notes' })
+          require('gitpad').toggle_gitpad({ filename = date_filename, title = 'Daily notes' })
         end,
         desc = 'gitpad daily notes',
-      },
-      -- Per file notes
-      {
-        '<leader>pf',
-        function()
-          local filename = vim.fn.expand('%:p') -- or just use vim.fn.bufname()
-          if filename == '' then
-            vim.notify('empty bufname')
-            return
-          end
-          filename = vim.fn.pathshorten(filename, 2) .. '.md'
-          require('gitpad').toggle_gitpad({ filename = filename }) -- or require('gitpad').toggle_gitpad({ filename = filename, title = 'Current file notes' })
-        end,
-        desc = 'gitpad per file notes',
       },
     },
   }

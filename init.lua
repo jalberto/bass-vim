@@ -16,6 +16,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- 1st param merge/require `lua/plugins.lua` & `lua/plugins/*.lua`
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
   checker = { enabled = true },
@@ -23,6 +24,7 @@ require("lazy").setup("plugins", {
   change_detection = {
     notify = false,
   },
+  ui = { border = "rounded"},
   performance = {
     rtp = {
       disabled_plugins = {

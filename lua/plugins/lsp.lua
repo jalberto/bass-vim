@@ -68,7 +68,7 @@ return {
         { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
         { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
         { "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" },
-        { "K", vim.lsp.buf.hover, desc = "Hover" },
+        -- { "K", vim.lsp.buf.hover, desc = "Hover" },
         { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
         { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
         { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
@@ -85,7 +85,7 @@ return {
       vim.api.nvim_create_autocmd({'CursorHold','CursorHoldI'}, {
         pattern = '*',
         callback = function()
-          vim.diagnostic.open_float(nil, {focus=false,scope=cursor})
+          vim.diagnostic.open_float(nil, {focus=false,scope='cursor'})
         end
       })
 
@@ -166,6 +166,7 @@ return {
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
+      ui = { border = "rounded"},
       ensure_installed = {
         "shellcheck",
         "shfmt",

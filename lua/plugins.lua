@@ -48,13 +48,11 @@ return {
     ft = {'css', 'html', 'javascript', 'vim', 'scss'},
     config = true
   },
+
   { 'tpope/vim-ragtag', ft = 'xml,html'}, -- xml & friends tags helpers
 
   {"kevinhwang91/nvim-bqf", ft = 'qf'}, -- Quickfix improvementss
 
-  'Vonr/align.nvim',
-  'mg979/vim-visual-multi', -- ctrl+n for multi cursor
-
-  { "jiaoshijie/undotree" },
-  'christianrondeau/vim-base64', -- encode using b64
+  { 'Vonr/align.nvim' },
+  -- { 'mg979/vim-visual-multi' }, -- ctrl+n for multi cursor
 }

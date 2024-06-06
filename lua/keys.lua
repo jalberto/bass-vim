@@ -48,7 +48,8 @@ map("v", ">", ">gv")
 
 map("n", "gV", "gV `[v`]", { noremap = true, desc = "Visually select the text that was last edited/pasted" })
  
-map("n", "gp", "gp `[v`]", { noremap = true,desc = "Select what you've just pasted" })
+-- FIX: doesnt works, it just paste
+-- map("n", "gp", "gp `[v`]", { noremap = true,desc = "Select what you've just pasted" })
 
 -- lazy
 map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })

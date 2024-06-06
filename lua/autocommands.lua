@@ -1,3 +1,4 @@
+-- Scope augroups to avoid conflicts
 local function augroup(name)
   return vim.api.nvim_create_augroup("bass_" .. name, { clear = true })
 end
@@ -15,7 +16,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 -- when numbering is on, toggle relative to active buffer
--- TODO: This stopped workign for som ereason, so I installed a plugin :(
+-- NOTE: This stopped workign for som ereason, so I installed a plugin :(
 -- vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter", "CmdlineLeave"}, {
 --   pattern = "*",
 --   group = augroup('numbertoggle'),
@@ -46,7 +47,7 @@ vim.api.nvim_create_autocmd({'WinLeave'}, {
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = augroup("highlight_yank"),
   callback = function()
-    vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+    vim.highlight.on_yank {higroup="IncSearch", timeout=200, on_visual=true}
   end
 })
 

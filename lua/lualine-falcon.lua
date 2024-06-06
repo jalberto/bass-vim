@@ -1,3 +1,4 @@
+-- required in ui.lua
 local function color_pattern(fg, bg, gui)
   local result = {}
   if type(fg) ~= 'nil' then

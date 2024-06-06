@@ -20,5 +20,16 @@ return {
         "ruby-3.2"
       }
     }
-  }
+  },
+
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = {
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", {desc = 'Undo tree'} },
+    },
+  },
+
+  { 'christianrondeau/vim-base64' }, -- encode using b64
 }

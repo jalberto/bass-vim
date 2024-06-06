@@ -41,7 +41,7 @@ return {
         color_devicons = false,
         prompt_title = '',
         results_title = '',
-        preview_title = '',
+        preview_title = 'true',
         path_display = { "truncate" },
         file_ignore_patterns = { "node_modules", "*.git/*", "*/tmp/*", ".cache"},
         vimgrep_arguments = {
