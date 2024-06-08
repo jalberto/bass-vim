@@ -1,10 +1,16 @@
 return {
+  -- Close tags for HTML & cia.
+  {
+    "windwp/nvim-ts-autotag",
+    config = true
+  },
+
   {
     "nvim-treesitter/nvim-treesitter",
     -- version = false, -- last release is way too old and doesn't work on Windows
     dependencies = {
-      'p00f/nvim-ts-rainbow',
-      "ziontee113/syntax-tree-surfer"
+      "ziontee113/syntax-tree-surfer",
+      "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
@@ -17,7 +23,6 @@ return {
       sync_install = false,
       highlight = { enable = true },
       indent = { enable = true },
-      rainbow = { enable = true, extended_mode = true },
       ensure_installed = {
         "bash",
         "html",
