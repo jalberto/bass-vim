@@ -30,6 +30,7 @@ return {
     end
   },
 
+  -- tmux navigation
   {
     'numToStr/Navigator.nvim',
     lazy = false,

@@ -39,7 +39,17 @@ return {
   'xolox/vim-misc',
   'tpope/vim-sleuth', -- Try to detect correct indentation
 
-  { 'ixru/nvim-markdown', ft = 'markdown' },
+  -- { 'ixru/nvim-markdown', ft = 'markdown' },
+  {
+    'lukas-reineke/headlines.nvim',
+    ft = 'markdown',
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = {
+      markdown = {
+        bullets ={"󰉫", "󰉬", "󰉭", "󰉮", "󰉯"}
+      }
+    },
+  },
   { 'amadeus/vim-mjml', ft = {'mjml'} },
   { 'andrewstuart/vim-kubernetes', ft = {'yaml'} },
   { 'towolf/vim-helm', ft = {'yaml'} },

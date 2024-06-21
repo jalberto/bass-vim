@@ -97,8 +97,8 @@ opt.autoread = true  -- Automatically re-read files if unmodified inside Vim.
 opt.autowrite = true -- Writes on make/shell commands
 
 -- NOTE: 0.10 defaults to OSC52 when unset
--- use "+ to accss system clipboard
--- opt.clipboard = 'unnamedplus' -- Yanks go on clipboard instead.
+--   use "+ to accss system clipboard
+opt.clipboard = 'unnamedplus' -- Yanks go on clipboard instead.
 
 opt.visualbell = true -- don't beep
 -- opt.noerrorbells = true -- don't beep
