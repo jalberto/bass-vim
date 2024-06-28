@@ -19,7 +19,6 @@ return {
   -- nice indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
-    -- version = "3.5.4", -- this was required before 0.10
     event = "BufReadPre",
     main = "ibl",
     opts = {
