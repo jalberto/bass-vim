@@ -123,9 +123,9 @@ opt.termguicolors = true
 opt.background = 'dark'
 vim.g.enable_bold_font = 1
 opt.guifont = 'JetBrains Mono Variable 14'
--- vim.cmd('colorscheme falcon')
+-- vim.cmd('colorscheme sweet-fusion')
 
-vim.cmd('highlight CursorLine guibg=#28282d')
+-- vim.cmd('highlight CursorLine guibg=#28282d')
 vim.cmd('highlight link GitSignsCurrentLineBlame Comment')
 vim.cmd('highlight RedundantSpaces term=standout ctermbg=red guibg=red') -- highlight Problematic whitespaces
 -- vim.cmd('match RedundantSpaces /\s\+$\| \+\ze\t/') -- \ze sets end of match so only spaces highlighted

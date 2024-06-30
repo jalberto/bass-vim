@@ -1,4 +1,26 @@
 return {
+
+  {
+    'fenetikm/falcon',
+    -- lazy = false,
+    -- priority = 1000,
+    config = function()
+      -- vim.cmd([[colorscheme falcon]])
+      vim.g.falcon_background = 1
+      vim.g.falcon_inactive = 1
+    end
+  },
+  {
+    'DanielEliasib/sweet-fusion',
+    lazy = false,
+    name = 'sweet-fusion',
+    priority = 1000,
+    opts = {
+      transparency = true,
+      dim_inactive = true,
+    }
+  },
+
   -- better vim.ui
   {
     "stevearc/dressing.nvim",
@@ -92,7 +114,7 @@ return {
 
       return {
         options = {
-          theme = require('lualine-falcon').theme(),
+          -- theme = require('lualine-falcon').theme(),
           globalstatus = true,
           component_separators = '',
           section_separators = '',

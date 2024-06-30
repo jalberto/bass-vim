@@ -19,8 +19,8 @@ vim.opt.rtp:prepend(lazypath)
 -- 1st param merge/require `lua/plugins.lua` & `lua/plugins/*.lua`
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  checker = { enabled = true },
-  colorscheme = 'falcon',
+  checker = { enabled = false },
+  colorscheme = 'sweet-fusion',
   change_detection = {
     notify = false,
   },
@@ -55,6 +55,8 @@ require("lazy").setup("plugins", {
     server = "https://nvim-neorocks.github.io/rocks-binaries/",
   },
 })
+
+vim.cmd('colorscheme sweet-fusion')
 
 vim.api.nvim_create_autocmd("User", {
  pattern = "VeryLazy",

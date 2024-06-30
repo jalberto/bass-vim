@@ -1,16 +1,5 @@
 return {
 
-  {
-    'fenetikm/falcon',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme falcon]])
-      vim.g.falcon_background = 1
-      vim.g.falcon_inactive = 1
-    end
-  },
-
   -- session management
   {
     'echasnovski/mini.sessions',
@@ -39,17 +28,28 @@ return {
   'xolox/vim-misc',
   'tpope/vim-sleuth', -- Try to detect correct indentation
 
-  -- { 'ixru/nvim-markdown', ft = 'markdown' },
   {
-    'lukas-reineke/headlines.nvim',
+    "OXY2DEV/markview.nvim",
     ft = 'markdown',
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = {
-      markdown = {
-        bullets ={"󰉫", "󰉬", "󰉭", "󰉮", "󰉯"}
-      }
+    dependencies = {
+      "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
     },
+
+    config = function ()
+      require("markview").setup();
+    end
   },
+  -- { 'ixru/nvim-markdown', ft = 'markdown' },
+  -- {
+  --   'lukas-reineke/headlines.nvim',
+  --   ft = 'markdown',
+  --   dependencies = "nvim-treesitter/nvim-treesitter",
+  --   opts = {
+  --     markdown = {
+  --       bullets ={"󰉫", "󰉬", "󰉭", "󰉮", "󰉯"}
+  --     }
+  --   },
+  -- },
   { 'amadeus/vim-mjml', ft = {'mjml'} },
   { 'andrewstuart/vim-kubernetes', ft = {'yaml'} },
   { 'towolf/vim-helm', ft = {'yaml'} },

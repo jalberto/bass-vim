@@ -16,20 +16,19 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 -- when numbering is on, toggle relative to active buffer
--- NOTE: This stopped workign for som ereason, so I installed a plugin :(
--- vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter", "CmdlineLeave"}, {
---   pattern = "*",
---   group = augroup('numbertoggle'),
---   desc = "turn relative number on",
---   command = 'if &nu | set rnu | endif'
--- })
--- -- vim.api.nvim_create_autocmd({'BufLeave', 'FocusLost','InsertEnter','WinLeave'}, {
--- vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter", "WinLeave", "CmdlineEnter"}, {
---   pattern = "*",
---   group = augroup('numbertoggle'),
---   desc = "turn relative number off",
---   command = 'if &nu | set nornu | endif'
--- })
+vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter", "CmdlineLeave"}, {
+  pattern = "*",
+  group = augroup('numbertoggle'),
+  desc = "turn relative number on",
+  command = 'if &nu | set rnu | endif'
+})
+-- vim.api.nvim_create_autocmd({'BufLeave', 'FocusLost','InsertEnter','WinLeave'}, {
+vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter", "WinLeave", "CmdlineEnter"}, {
+  pattern = "*",
+  group = augroup('numbertoggle'),
+  desc = "turn relative number off",
+  command = 'if &nu | set nornu | endif'
+})
 
 -- Auto highlite current panel
 vim.api.nvim_create_autocmd({'WinEnter'}, {

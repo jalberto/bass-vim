@@ -5,8 +5,9 @@ return {
     opts = {
       colors = {
         -- insert = "#718e3f",
-        visual = "#ffffff"
-      }
+        -- visual = "#ffffff"
+      },
+      line_opacity = 0.15,
     }
   } -- Add colors to modes
 }
