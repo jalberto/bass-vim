@@ -5,14 +5,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       watch_gitdir = { interval = 2000 },
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "契" },
-        topdelete = { text = "契" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
       on_attach = function(bufnr)
         local gitsigns = require('gitsigns')
 

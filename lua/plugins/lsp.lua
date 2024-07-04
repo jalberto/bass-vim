@@ -14,8 +14,8 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        -- virtual_text = { spacing = 4, prefix = "●" },
-        virtual_text = false,
+        virtual_text = { spacing = 4, prefix = "●" },
+        -- virtual_text = false,
         severity_sort = true,
         signs = true,
       },
@@ -82,12 +82,12 @@ return {
 
       -- diagnostics
       vim.diagnostic.config(opts.diagnostics)
-      vim.api.nvim_create_autocmd({'CursorHold','CursorHoldI'}, {
-        pattern = '*',
-        callback = function()
-          vim.diagnostic.open_float(nil, {focus=false,scope='cursor'})
-        end
-      })
+      -- vim.api.nvim_create_autocmd({'CursorHold','CursorHoldI'}, {
+      --   pattern = '*',
+      --   callback = function()
+      --     vim.diagnostic.open_float(nil, {focus=false,scope='cursor'})
+      --   end
+      -- })
 
       local keymaps = opts.keys
       local servers = opts.servers
@@ -138,27 +138,6 @@ return {
       mlsp.setup_handlers({ setup })
     end,
   },
-
-  -- formatters
-  -- {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   dependencies = { "mason.nvim" },
-  --   opts = function()
-  --     local nls = require("null-ls")
-  --     return {
-  --       sources = {
-  --         nls.builtins.formatting.stylua,
-  --         nls.builtins.diagnostics.credo,
-  --         nls.builtins.formatting.mix,
-  --         nls.builtins.formatting.surface,
-  --         nls.builtins.diagnostics.rubocop,
-  --         nls.builtins.diagnostics.tidy,
-  --         nls.builtins.formatting.prettierd
-  --       },
-  --     }
-  --   end,
-  -- },
 
   -- cmdline tools and lsp servers
   {
