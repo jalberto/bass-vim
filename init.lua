@@ -20,7 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
   checker = { enabled = false },
-  colorscheme = 'sweet-fusion',
+  -- colorscheme = 'cyberdream',
   change_detection = {
     notify = false,
   },
@@ -56,7 +56,7 @@ require("lazy").setup("plugins", {
   },
 })
 
-vim.cmd('colorscheme sweet-fusion')
+vim.cmd('colorscheme cyberdream')
 
 vim.api.nvim_create_autocmd("User", {
  pattern = "VeryLazy",

@@ -20,6 +20,18 @@ return {
       dim_inactive = true,
     }
   },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = true,
+      borderless_telescope = false,
+      theme = {
+        variant = "auto",
+      }
+    }
+  },
 
   -- better vim.ui
   {
@@ -132,6 +144,7 @@ return {
       return {
         options = {
           -- theme = require('lualine-falcon').theme(),
+          theme = "auto",
           globalstatus = true,
           component_separators = '',
           section_separators = '',
@@ -164,7 +177,7 @@ return {
             --   cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
             --   color = fg("Constant") ,
             -- },
-            -- { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
             {
               "diff",
               -- symbols = {

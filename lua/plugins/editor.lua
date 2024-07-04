@@ -13,12 +13,13 @@ return {
       {
         "<leader>e",
         function()
-          require("mini.files").open()
+          local path = vim.bo.buftype ~= "nofile" and vim.api.nvim_buf_get_name(0) or nil
+          require("mini.files").open(path)
         end,
         desc = "Explorer",
       },
     },
-   config = function()
+    config = function()
       require("mini.files").setup()
       -- Create mapping to show/hide dot-files
       local show_dotfiles = true
