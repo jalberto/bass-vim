@@ -32,30 +32,19 @@ return {
     "OXY2DEV/markview.nvim",
     ft = 'markdown',
     dependencies = {
-      "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
+      -- "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
     },
 
     config = function ()
       require("markview").setup();
     end
   },
-  -- { 'ixru/nvim-markdown', ft = 'markdown' },
-  -- {
-  --   'lukas-reineke/headlines.nvim',
-  --   ft = 'markdown',
-  --   dependencies = "nvim-treesitter/nvim-treesitter",
-  --   opts = {
-  --     markdown = {
-  --       bullets ={"󰉫", "󰉬", "󰉭", "󰉮", "󰉯"}
-  --     }
-  --   },
-  -- },
   { 'amadeus/vim-mjml', ft = {'mjml'} },
   { 'andrewstuart/vim-kubernetes', ft = {'yaml'} },
   { 'towolf/vim-helm', ft = {'yaml'} },
   {
     'norcalli/nvim-colorizer.lua',
-    ft = {'css', 'html', 'javascript', 'vim', 'scss'},
+    ft = {'css', 'html', 'javascript', 'vim', 'scss', 'markdown'},
     config = true
   },
 
@@ -64,5 +53,4 @@ return {
   {"kevinhwang91/nvim-bqf", ft = 'qf'}, -- Quickfix improvementss
 
   { 'Vonr/align.nvim' },
-  -- { 'mg979/vim-visual-multi' }, -- ctrl+n for multi cursor
 }

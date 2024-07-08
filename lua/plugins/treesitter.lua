@@ -1,9 +1,9 @@
 return {
   -- Close tags for HTML & cia.
-  {
-    "windwp/nvim-ts-autotag",
-    config = true
-  },
+  -- {
+  --   "windwp/nvim-ts-autotag",
+  --   config = true
+  -- },
 
   {
     "nvim-treesitter/nvim-treesitter",
