@@ -1,27 +1,4 @@
 return {
-  -- DevDocs browser
-  {
-    "luckasRanarison/nvim-devdocs",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    cmd = { "DevdocsFetch", "DevdocsInstall", "DevdocsUpdate", "DevdocsUpdateAll", "DevdocsUninstall", "DevdocsOpen", "DevdocsOpenFloat", },
-    opts = {
-      previewer_cmd = "glow",
-      picker_cmd = true,
-      -- picker_cmd_args = {"-p"},
-      ensure_installed = {
-        "css",
-        "elixir-1.15",
-        "phoenix",
-        "kubernetes",
-        "ruby-3.2"
-      }
-    }
-  },
-
   {
     "jiaoshijie/undotree",
     dependencies = "nvim-lua/plenary.nvim",
@@ -31,5 +8,17 @@ return {
     },
   },
 
-  { 'christianrondeau/vim-base64' }, -- encode using b64
+  {
+    "deponian/nvim-base64",
+    version = "*",
+    keys = {
+      -- Decode/encode selected sequence from/to base64
+      -- (mnemonic: [b]ase64)
+      { "<Leader>B", "<Plug>(FromBase64)", mode = "x", desc = "Decode base64" },
+      { "<Leader>D", "<Plug>(ToBase64)", mode = "x", desc = "Encode base64" },
+    },
+    config = function()
+      require("nvim-base64").setup()
+    end,
+  }
 }

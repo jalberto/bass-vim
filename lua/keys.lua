@@ -63,10 +63,6 @@ map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 map('n', '<Leader>dbl', ':g/^$/d<CR>:nohls<CR>', {desc = "Delete Blank Lines"})
 -- map('n', '<Leader>dts', ":%s/\s\+$//e<CR>", {desc = "Delete trailing spaces"})
 
--- Base64
-map('v', '<Leader>d64', '<leader>atob', {desc = 'Decode Base64'})
-map('v', '<Leader>e64', '<leader>btoa', {desc = 'Encode Base64'})
-
 map('n', '<Leader>gg', 'ggVG', {desc = 'Select all'})
 
 map('n', '<Leader>jq', ":%!jq '.'<CR>", {desc = 'Beurify json'})
