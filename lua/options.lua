@@ -64,6 +64,9 @@ opt.synmaxcol = 1000 -- Syntax coloring lines that are too long just slows down 
 opt.foldlevelstart = 1 -- open most folds by default
 opt.foldenable = true
 -- opt.foldmethod = 'syntax'
+-- opt.foldcolumn = '1'
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 opt.number = true
 -- opt.relativenumber = true

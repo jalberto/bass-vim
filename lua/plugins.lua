@@ -44,7 +44,7 @@ return {
   { 'towolf/vim-helm', ft = {'yaml'} },
   {
     'norcalli/nvim-colorizer.lua',
-    ft = {'css', 'html', 'javascript', 'vim', 'scss', 'markdown'},
+    ft = {'css', 'html', 'javascript', 'vim', 'scss', 'markdown', 'toml', 'ini', 'config', 'yaml'},
     config = true
   },
 

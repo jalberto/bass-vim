@@ -5,3 +5,7 @@ vim.filetype.add({
     ['.*.{md,markdown,mdown,mkd,mkdn,txt}'] = 'markdown'
   }
 })
+
+
+vim.opt.foldlevelstart = 99 --ble initial folding
+-- vim.opt.foldlevel = 99 --ble initial folding
