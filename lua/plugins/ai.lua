@@ -1,18 +1,38 @@
 return {
 
   {
-    "Aaronik/GPTModels.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-telescope/telescope.nvim"
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    build = "make BUILD_FROM_SOURCE=true luajit",
+    opts = {
+      -- add any opts here
     },
-    keys = {
-      {'<leader>k', ':GPTModelsCode<CR>', mode = 'v', { noremap = true }},
-      {'<leader>k', ':GPTModelsCode<CR>', { noremap = true, mode = 'n' }},
-      {'<leader>kc', ':GPTModelsChat<CR>', mode = 'v', { noremap = true }},
-      {'<leader>kc', ':GPTModelsChat<CR>', { noremap = true }},
-    }
+    dependencies = {
+      -- "nvim-tree/nvim-web-devicons",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      {
+        "grapp-dev/nui-components.nvim",
+        dependencies = {
+          "MunifTanjim/nui.nvim"
+        }
+      },
+    },
   },
+
+  -- {
+  --   "Aaronik/GPTModels.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-telescope/telescope.nvim"
+  --   },
+  --   keys = {
+  --     {'<leader>k', ':GPTModelsCode<CR>', mode = 'v', { noremap = true }},
+  --     {'<leader>k', ':GPTModelsCode<CR>', { noremap = true, mode = 'n' }},
+  --     {'<leader>kc', ':GPTModelsChat<CR>', mode = 'v', { noremap = true }},
+  --     {'<leader>kc', ':GPTModelsChat<CR>', { noremap = true }},
+  --   }
+  -- },
 
   -- {
   --   "olimorris/codecompanion.nvim",
