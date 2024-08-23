@@ -77,36 +77,33 @@ return {
     opts = {
       plugins = {
         spelling = true,
-        presets = {
-          g = false,
-        }
+        -- presets = {
+        --   g = false,
+        -- }
       },
     },
-    config = function(_, opts)
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      local wk = require("which-key")
-      wk.setup(opts)
-      local keymaps = {
-        mode = { "n", "v" },
-        -- ["g"] = { name = "+goto" },
-        ["gz"] = {  name  = "+surround" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader><tab>"] = { name = "+tabs" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>c"] = { name = "+code" },
-        ["<leader>f"] = { name = "+file/find" },
-        -- ["<leader>g"] = { name = "+git" },
-        -- ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>q"] = { name = "+quit/session" },
-        ["<leader>s"] = { name = "+search" },
-        ["<leader>u"] = { name = "+ui" },
-        ["<leader>w"] = { name = "+windows" },
-        ["<leader>x"] = { name = "+diagnostics/quickfix" },
-      }
-      wk.register(keymaps)
-    end,
+    -- config = function(_, opts)
+    --   vim.o.timeout = true
+    --   vim.o.timeoutlen = 300
+    --   local wk = require("which-key")
+    --   wk.setup(opts)
+    --   -- local keymaps = {
+    --   --   mode = { "n", "v" },
+    --   --   ["gz"] = {  name  = "+surround" },
+    --   --   ["]"] = { name = "+next" },
+    --   --   ["["] = { name = "+prev" },
+    --   --   ["<leader><tab>"] = { name = "+tabs" },
+    --   --   ["<leader>b"] = { name = "+buffer" },
+    --   --   ["<leader>c"] = { name = "+code" },
+    --   --   ["<leader>f"] = { name = "+file/find" },
+    --   --   ["<leader>q"] = { name = "+quit/session" },
+    --   --   ["<leader>s"] = { name = "+search" },
+    --   --   ["<leader>u"] = { name = "+ui" },
+    --   --   ["<leader>w"] = { name = "+windows" },
+    --   --   ["<leader>x"] = { name = "+diagnostics/quickfix" },
+    --   -- }
+    --   -- wk.register(keymaps)
+    -- end,
   },
 
   -- easily jump to any location and enhanced f/t motions for Leap
