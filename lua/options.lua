@@ -42,6 +42,9 @@ opt.spelllang = { "en" }
 
 
 opt.laststatus = 3 -- set global status line
+-- Default splitting will cause your main splits to jump when opening an edgebar.
+-- To prevent this, set `splitkeep` to either `screen` or `topline`.
+vim.opt.splitkeep = "screen"
 
 -- Enable a nice big viminfo file
 -- opt.viminfo = '1000,f1,:1000,/1000'

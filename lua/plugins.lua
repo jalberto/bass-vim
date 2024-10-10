@@ -29,16 +29,23 @@ return {
   'tpope/vim-sleuth', -- Try to detect correct indentation
 
   {
-    "OXY2DEV/markview.nvim",
+    'MeanderingProgrammer/render-markdown.nvim',
     ft = 'markdown',
-    dependencies = {
-      -- "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
-    },
-
-    config = function ()
-      require("markview").setup();
-    end
+    opts = {},
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
+    config = true
   },
+  -- {
+  --   "OXY2DEV/markview.nvim",
+  --   ft = 'markdown',
+  --   dependencies = {
+  --     -- "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
+  --   },
+  --
+  --   config = function ()
+  --     require("markview").setup();
+  --   end
+  -- },
   { 'amadeus/vim-mjml', ft = {'mjml'} },
   { 'andrewstuart/vim-kubernetes', ft = {'yaml'} },
   { 'towolf/vim-helm', ft = {'yaml'} },

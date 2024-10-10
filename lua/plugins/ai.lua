@@ -14,7 +14,17 @@ return {
       {
         "grapp-dev/nui-components.nvim",
         dependencies = {
-          "MunifTanjim/nui.nvim"
+          "MunifTanjim/nui.nvim",
+          "echasnovski/mini.icons",
+          "nvim-lua/plenary.nvim",
+          "stevearc/dressing.nvim",
+          {
+            'MeanderingProgrammer/render-markdown.nvim',
+            opts = {
+              file_types = { "markdown", "Avante" },
+            },
+            ft = { "markdown", "Avante" },
+          },
         }
       },
     },
