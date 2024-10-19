@@ -29,6 +29,7 @@ return {
       borderless_telescope = false,
       theme = {
         variant = "auto",
+        saturation = 1,
       }
     }
   },

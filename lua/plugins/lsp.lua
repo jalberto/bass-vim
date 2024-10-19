@@ -29,7 +29,7 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
-        elixirls = {},
+        -- elixirls = {},
         solargraph = {},
         html = {},
         cssls = {},
@@ -39,7 +39,7 @@ return {
         emmet_language_server = {
           filetypes = {"css","eruby","html","sass","scss","heex","liquid"}
         },
-        diagnosticls = {},
+        -- diagnosticls = {},
         quick_lint_js = {},
         jsonls = {},
         lua_ls = {

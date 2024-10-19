@@ -9,12 +9,12 @@ return {
       local elixirls = require("elixir.elixirls")
 
       elixir.setup {
-        nextls = {enable = true},
+        nextls = {enable = false},
         elixirls = {
-          enable = false,
+          enable = true,
           settings = elixirls.settings {
-            dialyzerEnabled = false,
-            enableTestLenses = false,
+            dialyzerEnabled = true,
+            enableTestLenses = true,
           },
           on_attach = function(client, bufnr)
             vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
