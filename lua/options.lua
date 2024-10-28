@@ -38,7 +38,7 @@ opt.grepprg = "rg --vimgrep"
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.spelllang = { "en" }
+opt.spelllang = { "en_gb" }
 
 
 opt.laststatus = 3 -- set global status line
@@ -101,6 +101,7 @@ opt.cf = true -- Enable error files & error jumping.
 
 opt.autoread = true  -- Automatically re-read files if unmodified inside Vim.
 opt.autowrite = true -- Writes on make/shell commands
+opt.hidden = true -- Allow buffer switching without saving
 
 -- NOTE: 0.10 defaults to OSC52 when unset
 --   use "+ to accss system clipboard
@@ -129,7 +130,6 @@ opt.termguicolors = true
 opt.background = 'dark'
 vim.g.enable_bold_font = 1
 opt.guifont = 'JetBrains Mono Variable 14'
--- vim.cmd('colorscheme sweet-fusion')
 
 -- vim.cmd('highlight CursorLine guibg=#28282d')
 vim.cmd('highlight link GitSignsCurrentLineBlame Comment')

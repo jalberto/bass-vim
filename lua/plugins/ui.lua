@@ -1,4 +1,16 @@
 return {
+  -- Add colors to modes
+  {
+    'mvllow/modes.nvim',
+    lazy = false,
+    opts = {
+      colors = {
+        -- insert = "#718e3f",
+        -- visual = "#ffffff"
+      },
+      line_opacity = 0.20,
+    }
+  },
 
   {
     'fenetikm/falcon',
@@ -10,16 +22,16 @@ return {
       vim.g.falcon_inactive = 1
     end
   },
-  {
-    'DanielEliasib/sweet-fusion',
-    lazy = false,
-    name = 'sweet-fusion',
-    priority = 1000,
-    opts = {
-      transparency = true,
-      dim_inactive = true,
-    }
-  },
+  -- {
+  --   'DanielEliasib/sweet-fusion',
+  --   lazy = false,
+  --   name = 'sweet-fusion',
+  --   priority = 1000,
+  --   opts = {
+  --     transparency = true,
+  --     dim_inactive = true,
+  --   }
+  -- },
   {
     "scottmckendry/cyberdream.nvim",
     lazy = false,
@@ -104,14 +116,14 @@ return {
           delay = 200,
           reveal = {'close'}
         },
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "Directory",
-            text_align = "left",
-          },
-        },
+        -- offsets = {
+        --   {
+        --     filetype = "neo-tree",
+        --     text = "Neo-tree",
+        --     highlight = "Directory",
+        --     text_align = "left",
+        --   },
+        -- },
       },
     },
   },
@@ -140,9 +152,9 @@ return {
 
       local function fg(name)
         return function()
-          ---@type {foreground?:number}?
-          local hl = vim.api.nvim_get_hl_by_name(name, true)
-          return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
+          ---@type table<string, any>
+          local hl = vim.api.nvim_get_hl(0, { name = name })
+          return hl and hl.fg and { fg = string.format("#%06x", hl.fg) }
         end
       end
 
@@ -153,7 +165,7 @@ return {
           globalstatus = true,
           component_separators = '',
           section_separators = '',
-          disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
           lualine_a = {
@@ -211,7 +223,7 @@ return {
             -- end,
           },
         },
-        extensions = { "toggleterm", "quickfix" },
+        extensions = { "toggleterm", "quickfix", "trouble", "toggleterm", "mason", "man", "lazy"},
       }
     end,
   },
@@ -231,36 +243,4 @@ return {
   --   }
   -- },
 
-  -- Note per repo
-  {
-    'yujinyuz/gitpad.nvim',
-    config = function()
-      require('gitpad').setup()
-    end,
-    keys = {
-      {
-        '<leader>pp',
-        function()
-          require('gitpad').toggle_gitpad({title = 'Project notes'})
-        end,
-        desc = 'gitpad project',
-      },
-      {
-        '<leader>pb',
-        function()
-          require('gitpad').toggle_gitpad_branch({title = 'Branch notes'})
-        end,
-        desc = 'gitpad branch',
-      },
-      -- Daily notes
-      {
-        '<leader>pd',
-        function()
-          local date_filename = 'daily-' .. os.date('%Y-%m-%d.md')
-          require('gitpad').toggle_gitpad({ filename = date_filename, title = 'Daily notes' })
-        end,
-        desc = 'gitpad daily notes',
-      },
-    },
-  }
 }

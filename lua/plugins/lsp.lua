@@ -42,6 +42,8 @@ return {
         -- diagnosticls = {},
         quick_lint_js = {},
         jsonls = {},
+        ts_ls = {},
+        eslint = {},
         lua_ls = {
           settings = {
             Lua = {

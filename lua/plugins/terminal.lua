@@ -11,6 +11,8 @@ return {
     opts = {
       size = 10,
       insert_mapping = true,
+      hide_numbers = true,
+      start_in_insert = true,
       open_mapping = [[<c-\>]]
     },
     config = function(_, opts)
