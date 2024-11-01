@@ -45,7 +45,22 @@ return {
       }
     }
   },
-
+  {
+    "zenbones-theme/zenbones.nvim",
+    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+    -- In Vim, compat mode is turned on as Lush only works in Neovim.
+    dependencies = "rktjmp/lush.nvim",
+    lazy = false,
+    priority = 1000,
+    -- you can set set configuration options here
+    config = function()
+        vim.g.zenbones_darken_comments = 45
+        vim.g.zenbones_darkness = 'stark'
+        vim.g.zenbones_transparent_background = true
+        -- vim.cmd.colorscheme('zenbones')
+    end
+  },
   -- better vim.ui
   {
     "stevearc/dressing.nvim",
@@ -97,19 +112,33 @@ return {
     init = function()
       vim.keymap.set("n", "<s-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
       vim.keymap.set("n", "<s-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
-      vim.keymap.set("n", "<leader>b[", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous" })
-      vim.keymap.set("n", "<leader>b]", "<cmd>BufferLineCycleNext<cr>", { desc = "Next" })
+      vim.keymap.set("n", "<leader>bx", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close other buffers" })
+      -- vim.keymap.set("n", "<leader>b[", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous" })
+      -- vim.keymap.set("n", "<leader>b]", "<cmd>BufferLineCycleNext<cr>", { desc = "Next" })
     end,
     opts = {
       options = {
         -- mode = 'tabs',
-        indicator = 'underline',
+        indicator = {
+          icon = '▎', -- this should be omitted if indicator style is not 'icon'
+          -- icon = ' ',
+          style = 'underline', -- 'icon' | 'underline' | 'none',
+        },
         show_buffer_icons = false,
         -- show_buffer_default_icon = false,
         show_buffer_close_icon = false,
         show_close_icon = false,
+        separator_style = {'¦', '¦'}, -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
 
         diagnostics = "nvim_lsp",
+        -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        --   if context.buffer:current() then
+        --     local icon = level:match("error") and " " or " "
+        --     return " " .. icon .. count
+        --     -- return ' '
+        --   end
+        --   return ''
+        -- end,
         always_show_bufferline = false,
         hover = {
           enabled = true,
@@ -127,9 +156,6 @@ return {
       },
     },
   },
-
-  -- icons
-  -- { "nvim-tree/nvim-web-devicons", lazy = true },
 
   {
     "echasnovski/mini.icons",
@@ -194,26 +220,12 @@ return {
             --   cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
             --   color = fg("Constant") ,
             -- },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
-            {
-              "diff",
-              -- symbols = {
-              --   added = icons.git.added,
-              --   modified = icons.git.modified,
-              --   removed = icons.git.removed,
-              -- },
-            },
+            -- { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+            { "diff" },
           },
           lualine_y = {
-            {
-              "diagnostics",
-              -- symbols = {
-              --   error = icons.diagnostics.Error,
-              --   warn = icons.diagnostics.Warn,
-              --   info = icons.diagnostics.Info,
-              --   hint = icons.diagnostics.Hint,
-              -- },
-            },
+            { "diagnostics" },
           },
           lualine_z = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
