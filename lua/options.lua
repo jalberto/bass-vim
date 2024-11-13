@@ -39,6 +39,7 @@ opt.inccommand = "nosplit" -- preview incremental substitute
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.spelllang = { "en_gb" }
+opt.spelloptions = "camel"
 
 
 opt.laststatus = 3 -- set global status line

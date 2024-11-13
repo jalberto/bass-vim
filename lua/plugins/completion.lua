@@ -5,7 +5,10 @@ return {
   -- use a release tag to download pre-built binaries
   version = 'v0.*',
 
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
   opts = {
+    keymap = { preset = 'super-tab' },
     highlight = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
       -- useful for when your theme doesn't support blink.cmp
@@ -31,7 +34,10 @@ return {
       },
       signature_help = {
         border = 'rounded'
-      }
+      },
+      -- allows extending the enabled_providers array elsewhere in your config
+      -- without having to redefining it
+      opts_extend = { "sources.completion.enabled_providers" }
     }
   }
 

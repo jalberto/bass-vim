@@ -80,7 +80,9 @@ return {
       },
     },
     ---@param opts PluginLspOpts
-    config = function(plugin, opts)
+    config = function(_, opts)
+
+      local lspconfig = require('lspconfig')
 
       -- diagnostics
       vim.diagnostic.config(opts.diagnostics)
@@ -94,6 +96,7 @@ return {
       local keymaps = opts.keys
       local servers = opts.servers
       -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      -- local capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
 
       local function on_attach(client, bufnr)
         -- require 'illuminate'.on_attach(client)
@@ -111,13 +114,14 @@ return {
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force",
-          { capabilities = vim.deepcopy(capabilities), },
+          -- { capabilities = vim.deepcopy(capabilities), },
+          { capabilities = require('blink.cmp').get_lsp_capabilities(server.capabilities) },
           servers[server] or {},
           { flags = { debounce_text_changes = 200 } },
           {on_attach = on_attach}
         )
 
-        require("lspconfig")[server].setup(server_opts)
+        lspconfig[server].setup(server_opts)
       end
 
       local mlsp = require("mason-lspconfig")
