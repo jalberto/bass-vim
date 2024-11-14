@@ -4,7 +4,7 @@ return {
   {
     'echasnovski/mini.splitjoin',
     version = false,
-    keys ={{'gS', desc = "toggle Split/Join"}},
+    keys = { { 'gS', desc = "toggle Split/Join" } },
     config = function(_, opts) require("mini.splitjoin").setup(opts) end,
   },
 
@@ -21,7 +21,7 @@ return {
   {
     "echasnovski/mini.surround",
     keys = {
-      { "gza", desc = "Add surrounding", mode = { "n", "v" } },
+      { "gza", desc = "Add surrounding",                     mode = { "n", "v" } },
       { "gzd", desc = "Delete surrounding" },
       { "gzf", desc = "Find right surrounding" },
       { "gzF", desc = "Find left surrounding" },
@@ -31,12 +31,12 @@ return {
     },
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
+        add = "gza",            -- Add surrounding in Normal and Visual modes
+        delete = "gzd",         -- Delete surrounding
+        find = "gzf",           -- Find surrounding (to the right)
+        find_left = "gzF",      -- Find surrounding (to the left)
+        highlight = "gzh",      -- Highlight surrounding
+        replace = "gzr",        -- Replace surrounding
         update_n_lines = "gzn", -- Update `n_lines`
       },
     },
@@ -123,25 +123,6 @@ return {
     -- end,
   },
 
-  -- better diagnostics list and others
-  {
-    "folke/trouble.nvim",
-    cmd = { "Trouble" },
-    opts = {
-      auto_open = false,
-      auto_close = true,
-      use_diagnostic_signs = true,
-      auto_fold = false
-    },
-    keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics" },
-      -- { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-      { "<leader>xL", "<cmd>Trouble lsp toggle focus=false win.position=right filter.buf=0 pinned=true<cr>", desc = "LSP (Trouble)" },
-      { "<leader>xQ", "<cmd>Trouble quickfix toggle<cr>", desc = "Quickfix List (Trouble)" },
-    },
-  },
-
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
@@ -150,11 +131,11 @@ return {
     config = true,
     -- stylua: ignore
     keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xT", "<cmd>TodoTrouble<cr>", desc = "Todo" },
+      { "]t",         function() require("todo-comments").jump_next() end,                              desc = "Next todo comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end,                              desc = "Previous todo comment" },
+      { "<leader>xT", "<cmd>TodoTrouble<cr>",                                                           desc = "Todo" },
       { "<leader>xt", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME,NOTE}} focus=true<cr>", desc = "Todo/Fix/Fixme" },
-      { "<leader>ft", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo" },
+      { "<leader>ft", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",                                 desc = "Todo" },
     },
   },
 
