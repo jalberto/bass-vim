@@ -1,4 +1,9 @@
 return {
+
+  {
+    'rcarriga/nvim-notify'
+  },
+
   -- Add colors to modes
   {
     'mvllow/modes.nvim',
