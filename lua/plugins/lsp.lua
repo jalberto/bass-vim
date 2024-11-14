@@ -82,7 +82,6 @@ return {
         },
       },
       -- LSP Server Settings
-      ---@type lspconfig.options
       servers = {
         elixirls = {},
         solargraph = {},
@@ -158,6 +157,11 @@ return {
       end
 
       vim.diagnostic.config(opts.diagnostics)
+      local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      end
 
       for server, config in pairs(opts.servers or {}) do
         -- for aucompletion
