@@ -1,89 +1,49 @@
 return {
+  -- Mason + LSP requires a specific dependency order
   {
     "williamboman/mason.nvim",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-    },
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-
-    -- opts = {
-    --   ui = { border = "rounded"},
-    --   ensure_installed = {
-    --     "shellcheck",
-    --     "shfmt",
-    --   },
-    -- },
-
-    config = function()
-      local mason = require("mason")
-      local mason_lspconfig = require("mason-lspconfig")
-      local mason_tool_installer = require("mason-tool-installer")
-
-      -- enable mason and configure icons
-      mason.setup({
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-          },
+    opts = {
+      ui = {
+        border = "rounded",
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
         },
-      })
-      mason_lspconfig.setup({
-        -- list of servers for mason to install
-        ensure_installed = {
-          -- "html",
-          -- "cssls",
-          -- "tailwindcss",
-          -- "lua_ls",
-          -- "pyright",
-          -- "bashls",
-        },
-        automatic_installation = true, -- not the same as ensure_installed
-      })
+      },
+    },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
 
-      -- mason_lspconfig.setup_handlers {
-      --   -- The first entry (without a key) will be the default handler
-      --   -- and will be called for each installed server that doesn't have
-      --   -- a dedicated handler.
-      --   function (server_name) -- default handler (optional)
-      --     require("lspconfig")[server_name].setup {}
-      --   end,
-      --   -- Next, you can provide a dedicated handler for specific servers.
-      --   -- For example, a handler override for the `rust_analyzer`:
-      --   -- ["rust_analyzer"] = function ()
-      --   --   require("rust-tools").setup {}
-      --   -- end
-      -- }
-
-      mason_tool_installer.setup({
-        ensure_installed = {
-          "prettier", -- prettier formatter
-        },
-      })
-    end,
+    opts ={
+      -- list of servers for mason to install
+      -- the list is in lspconfig and installed by `automatic_installation`
+      ensure_installed = {
+        -- "lua_ls",
+      },
+      automatic_installation = true, -- installs LSPs on demand
+    }
   },
 
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      'saghen/blink.cmp',
+      {
+        'williamboman/mason-lspconfig.nvim',
+        dependencies = { 'williamboman/mason.nvim' },
+      },
       { "antosha417/nvim-lsp-file-operations", config = true },
+      'saghen/blink.cmp',
     },
     opts = {
-      -- options for vim.diagnostic.config()
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
-        -- virtual_text = false,
-        severity_sort = true,
-        signs = true,
-      },
       -- Automatically format on save
       autoformat = false,
       -- options for vim.lsp.buf.format
@@ -91,10 +51,19 @@ return {
       --   formatting_options = nil,
       --   timeout_ms = nil,
       -- },
+      -- options for vim.diagnostic.config()
+      -- diagnostics = {
+      --   underline = true,
+      --   update_in_insert = false,
+      --   virtual_text = { spacing = 4, prefix = "●" },
+      --   -- virtual_text = false,
+      --   severity_sort = true,
+      --   signs = true,
+      -- },
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
-        -- elixirls = {},
+        elixirls = {},
         solargraph = {},
         ruby_lsp = {},
         html = {},
@@ -107,7 +76,6 @@ return {
         emmet_language_server = {
           filetypes = {"css","eruby","html","sass","scss","heex","liquid"}
         },
-        -- diagnosticls = {},
         quick_lint_js = {},
         jsonls = {},
         ts_ls = {},
@@ -115,6 +83,9 @@ return {
         lua_ls = {
           settings = {
             Lua = {
+              runtime = {
+                version = 'LuaJIT'
+              },
               diagnostics = {
                 globals = {'vim'}
               },
@@ -130,17 +101,43 @@ return {
           },
         },
       },
+      keys =  {
+        { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+        { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+        { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition" },
+        { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+        { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+        { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
+        { "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" },
+        -- { "K", vim.lsp.buf.hover, desc = "Hover" },
+        { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+        { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+        { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Actionss", mode = { "n", "v" }, has = "codeAction" },
+        { "<leader>cr", vim.lsp.buf.rename, desc = "Code Rename" },
+        -- { "cf", vim.lsp.buf.format({async=true}), desc = "Code Format", mode = {"n", "v"}},
+        -- { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
+        -- { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
+      },
     },
     config = function(_, opts)
+      local mason = require("mason")
+      local mason_lspconfig = require("mason-lspconfig")
+      local mason_tool_installer = require("mason-tool-installer")
       local lspconfig = require("lspconfig")
-
       local keymap = vim.keymap -- for conciseness
 
       for server, config in pairs(opts.servers or {}) do
+        -- for aucompletion
         config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+
         lspconfig[server].setup(config)
       end
 
+      mason_tool_installer.setup({
+        ensure_installed = {
+          "prettier", -- prettier formatter
+        },
+      })
     end
   },
 

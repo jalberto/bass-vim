@@ -31,7 +31,7 @@ return {
       { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
       -- Code
-      { "<leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Apply Code Actions" },
+      -- { "<leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Apply Code Actions" },
       { "<leader>cs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Goto Symbol" },
     },
     opts = {
