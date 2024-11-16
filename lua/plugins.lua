@@ -1,5 +1,8 @@
 return {
 
+  -- library used by other plugins
+  { "nvim-lua/plenary.nvim", lazy = true },
+
   -- session management
   {
     'echasnovski/mini.sessions',
@@ -16,9 +19,6 @@ return {
 
   -- suto toggle relative line number
   { "cpea2506/relative-toggle.nvim", event = "VeryLazy" },
-
-  -- library used by other plugins
-  { "nvim-lua/plenary.nvim", lazy = true },
 
   -- makes some plugins dot-repeatable like leap
   { "tpope/vim-repeat", event = "VeryLazy" },

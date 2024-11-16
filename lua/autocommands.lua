@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
-  pattern = { "gitcommit", "markdown" },
+  pattern = { "gitcommit", "markdown", "txt" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
@@ -103,7 +103,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- fix folding when using telescope https://github.com/nvim-treesitter/nvim-treesitter/issues/1337
 -- vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*" }, command = "normal zx", })
 
--- Open diagnostics on float
+-- Open diagnostics on hover in a float
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
     pattern = "*",
     callback = function()
