@@ -3,11 +3,15 @@ return {
     "chrisgrieser/nvim-early-retirement",
     config = true,
     event = "VeryLazy",
+    opts = {
+      deleteBufferWhenFileDeleted = true,
+    }
   },
 
   -- file explorer
   {
-    'echasnovski/mini.files', version = false,
+    'echasnovski/mini.files',
+    version = false,
     cmd = "MiniFiles",
     keys = {
       {
@@ -123,52 +127,41 @@ return {
   },
 
   -- highlighting other uses of the word under the cursor
+  -- <a-n> & <a-p>
   {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
-    opts = { delay = 500 },
+    opts = { delay = 300 },
     config = function(_, opts)
       require("illuminate").configure(opts)
-      -- vim.api.nvim_create_autocmd("FileType", {
-      --   callback = function()
-      --     local buffer = vim.api.nvim_get_current_buf()
-      --     pcall(vim.keymap.del, "n", "]]", { buffer = buffer })
-      --     pcall(vim.keymap.del, "n", "[[", { buffer = buffer })
-      --   end,
-      -- })
     end,
-    -- stylua: ignore
-    keys = {
-      { "]]", function() require("illuminate").goto_next_reference() end, desc = "Next Reference", },
-      { "[[", function() require("illuminate").goto_prev_reference() end, desc = "Prev Reference" },
-    },
   },
 
-  -- Yank highlite and goodies{
-  -- NOTE: it is too intrusive, I cannot make it works smoothly
-  -- {
-  --   "gbprod/yanky.nvim",
-  --   -- event = "VeryLazy",
-  --   lazy = false,
-  --   config = true,
-  --   -- config = function()
-  --   --   require("yanky")
-  --   --   require("telescope").load_extension("yank_history")
-  --   -- end,
-  --   dependencies = {"nvim-telescope/telescope.nvim"},
-  --   keys = {
-  --     { 'p', '<Plug>>(YankPutAfter)', mode = 'n'},
-  --     -- { 'p', '<Plug>>(YankPutAfter)', mode = 'x'},
-  --     { 'P', '<Plug>>(YankPutBefore)', mode = 'n'},
-  --     -- { 'P', '<Plug>>(YankPutBefore)', mode = 'x'},
-  --     { 'gp', '<Plug>>(YankGPutAfter)', mode = 'n'},
-  --     -- { 'gp', '<Plug>>(YankGPutAfter)', mode = 'x'},
-  --     { 'gP', '<Plug>>(YankGPutBefore)', mode = 'n'},
-  --     -- { 'gP', '<Plug>>(YankGPutBefore)', mode = 'x'},
-  --     { '<c-p>', '<Plug>>(YankyPreviousEntry)'},
-  --     { '<c-n>', '<Plug>>(YankyNextEntry)'},
-  --     { '<leader>fy', '<cmd>Telescope yank_history<cr>', desc = 'Yank ring'}
-  --   },
-  -- },
-
+  -- Yank highlite and goodies
+  -- NOTE: it is very intrusive
+  {
+    "gbprod/yanky.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    opts = {},
+    keys = {
+      { "<leader>p", function() require("telescope").extensions.yank_history.yank_history({}) end, desc = "Open Yank History" },
+      { "y",         "<Plug>(YankyYank)",                                                          mode = { "n", "x" },                                desc = "Yank text" },
+      { "p",         "<Plug>(YankyPutAfter)",                                                      mode = { "n", "x" },                                desc = "Put yanked text after cursor" },
+      { "P",         "<Plug>(YankyPutBefore)",                                                     mode = { "n", "x" },                                desc = "Put yanked text before cursor" },
+      { "gp",        "<Plug>(YankyGPutAfter)",                                                     mode = { "n", "x" },                                desc = "Put yanked text after selection" },
+      { "gP",        "<Plug>(YankyGPutBefore)",                                                    mode = { "n", "x" },                                desc = "Put yanked text before selection" },
+      { "<c-p>",     "<Plug>(YankyPreviousEntry)",                                                 desc = "Select previous entry through yank history" },
+      { "<c-n>",     "<Plug>(YankyNextEntry)",                                                     desc = "Select next entry through yank history" },
+      { "]p",        "<Plug>(YankyPutIndentAfterLinewise)",                                        desc = "Put indented after cursor (linewise)" },
+      { "[p",        "<Plug>(YankyPutIndentBeforeLinewise)",                                       desc = "Put indented before cursor (linewise)" },
+      { "]P",        "<Plug>(YankyPutIndentAfterLinewise)",                                        desc = "Put indented after cursor (linewise)" },
+      { "[P",        "<Plug>(YankyPutIndentBeforeLinewise)",                                       desc = "Put indented before cursor (linewise)" },
+      { ">p",        "<Plug>(YankyPutIndentAfterShiftRight)",                                      desc = "Put and indent right" },
+      { "<p",        "<Plug>(YankyPutIndentAfterShiftLeft)",                                       desc = "Put and indent left" },
+      { ">P",        "<Plug>(YankyPutIndentBeforeShiftRight)",                                     desc = "Put before and indent right" },
+      { "<P",        "<Plug>(YankyPutIndentBeforeShiftLeft)",                                      desc = "Put before and indent left" },
+      { "=p",        "<Plug>(YankyPutAfterFilter)",                                                desc = "Put after applying a filter" },
+      { "=P",        "<Plug>(YankyPutBeforeFilter)",                                               desc = "Put before applying a filter" },
+    },
+  }
 }

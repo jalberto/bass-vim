@@ -62,7 +62,6 @@ return {
     },
     config = function(_, opts)
       local dv = require("diffview")
-      local actions = require 'diffview.actions'
       local custom_keys = {
         -- instead of cycle through another buffer, move around window
         ['<tab>'] = '<Cmd>wincmd w<CR>',
@@ -83,10 +82,10 @@ return {
     'ruifm/gitlinker.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     keys = {
-      { "<leader>ghy", desc = "Get Git link" }
+      { "<leader>hy", desc = "Get Git link" }
     },
     opts = {
-      mappings = "<leader>ghy"
+      mappings = "<leader>hy"
     }
   }
 }
