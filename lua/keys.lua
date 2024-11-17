@@ -11,6 +11,10 @@ end
 
 local NS = { noremap = true, silent = true }
 
+-- Insert empty line without entering insert mode
+map('n', '<leader>o', ':<C-u>call append(line("."), repeat([""], v:count1))<CR>', NS)
+map('n', '<leader>O', ':<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>', NS)
+
 -- better up/down
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -21,8 +25,8 @@ map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- map("n", "<A-k>", "<C-w>k", { desc = "Go to upper window" })
 -- map("n", "<A-l>", "<C-w>l", { desc = "Go to right window" })
 map('n', '<tab><tab>', '<C-w>w', { desc = "Cycle buffers" })
-map({'n','i'}, '<C-h>', ':tabprevious<cr>', {desc = 'Go to prev Tab'})
-map({'n','i'}, '<C-l>', ':tabnext<cr>', {desc = 'Go to next Tab'})
+map({ 'n', 'i' }, '<C-h>', ':tabprevious<cr>', { desc = 'Go to prev Tab' })
+map({ 'n', 'i' }, '<C-l>', ':tabnext<cr>', { desc = 'Go to next Tab' })
 
 -- Resize window using <alt> arrow keys
 map("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -47,7 +51,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 map("n", "gV", "gV `[v`]", { noremap = true, desc = "Visually select the text that was last edited/pasted" })
- 
+
 -- FIX: doesnt works, it just paste
 -- map("n", "gp", "gp `[v`]", { noremap = true,desc = "Select what you've just pasted" })
 
@@ -60,37 +64,13 @@ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
-map('n', '<Leader>dbl', ':g/^$/d<CR>:nohls<CR>', {desc = "Delete Blank Lines"})
+map('n', '<Leader>dbl', ':g/^$/d<CR>:nohls<CR>', { desc = "Delete Blank Lines" })
 -- map('n', '<Leader>dts', ":%s/\s\+$//e<CR>", {desc = "Delete trailing spaces"})
 
-map('n', '<Leader>gg', 'ggVG', {desc = 'Select all'})
+map('n', '<Leader>gg', 'ggVG', { desc = 'Select all' })
 
-map('n', '<Leader>jq', ":%!jq '.'<CR>", {desc = 'Beurify json'})
+map('n', '<Leader>jq', ":%!jq '.'<CR>", { desc = 'Beurify json' })
 
--- -- Normal Mode Swapping
--- vim.api.nvim_set_keymap("n", "vd", '<cmd>lua require("syntax-tree-surfer").move("n", false)<cr>', NS)
--- vim.api.nvim_set_keymap("n", "vu", '<cmd>lua require("syntax-tree-surfer").move("n", true)<cr>', NS)
--- -- .select() will show you what you will be swapping with .move(), you'll get used to .select() and .move() behavior quite soon!
--- vim.api.nvim_set_keymap("n", "vx", '<cmd>lua require("syntax-tree-surfer").select()<cr>', NS)
--- -- .select_current_node() will select the current node at your cursor
--- vim.api.nvim_set_keymap("n", "vn", '<cmd>lua require("syntax-tree-surfer").select_current_node()<cr>', NS)
---
--- -- NAVIGATION: Only change the keymap to your liking. I would not recommend changing anything about the .surf() parameters!
--- vim.api.nvim_set_keymap("x", "J", '<cmd>lua require("syntax-tree-surfer").surf("next", "visual")<cr>', NS)
--- vim.api.nvim_set_keymap("x", "K", '<cmd>lua require("syntax-tree-surfer").surf("prev", "visual")<cr>', NS)
--- vim.api.nvim_set_keymap("x", "H", '<cmd>lua require("syntax-tree-surfer").surf("parent", "visual")<cr>', NS)
--- vim.api.nvim_set_keymap("x", "L", '<cmd>lua require("syntax-tree-surfer").surf("child", "visual")<cr>', NS)
---
--- -- SWAPPING WITH VISUAL SELECTION: Only change the keymap to your liking. Don't change the .surf() parameters!
--- vim.api.nvim_set_keymap("x", "<A-j>", '<cmd>lua require("syntax-tree-surfer").surf("next", "visual", true)<cr>', NS)
--- vim.api.nvim_set_keymap("x", "<A-k>", '<cmd>lua require("syntax-tree-surfer").surf("prev", "visual", true)<cr>', NS)
---
--- -- Align
--- vim.keymap.set('x', 'aa', function() require'align'.align_to_char(1, true)             end, NS) -- Aligns to 1 character, looking left
--- vim.keymap.set('x', 'as', function() require'align'.align_to_char(2, true, true)       end, NS) -- Aligns to 2 characters, looking left and with previews
--- vim.keymap.set('x', 'aw', function() require'align'.align_to_string(false, true, true) end, NS) -- Aligns to a string, looking left and with previews
--- vim.keymap.set('x', 'ar', function() require'align'.align_to_string(true, true, true)  end, NS) -- Aligns to a Lua pattern, looking left and with previews
---
 -- -- Undo
 -- vim.api.nvim_set_keymap('n', '<leader>u', '<cmd>UndotreeToggle<cr>', NS)
 
