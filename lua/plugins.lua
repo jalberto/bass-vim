@@ -1,8 +1,4 @@
 return {
-
-  -- library used by other plugins
-  { "nvim-lua/plenary.nvim", lazy = true },
-
   -- session management
   {
     'echasnovski/mini.sessions',
@@ -21,7 +17,7 @@ return {
   { "cpea2506/relative-toggle.nvim", event = "VeryLazy" },
 
   -- makes some plugins dot-repeatable like leap
-  { "tpope/vim-repeat", event = "VeryLazy" },
+  { "tpope/vim-repeat",              event = "VeryLazy" },
 
   'clones/vim-genutils',
   'eparreno/vim-l9',
@@ -46,18 +42,18 @@ return {
   --     require("markview").setup();
   --   end
   -- },
-  { 'amadeus/vim-mjml', ft = {'mjml'} },
-  { 'andrewstuart/vim-kubernetes', ft = {'yaml'} },
-  { 'towolf/vim-helm', ft = {'yaml'} },
+  { 'amadeus/vim-mjml',            ft = { 'mjml' } },
+  { 'andrewstuart/vim-kubernetes', ft = { 'yaml' } },
+  { 'towolf/vim-helm',             ft = { 'yaml' } },
   {
     'norcalli/nvim-colorizer.lua',
-    ft = {'css', 'html', 'javascript', 'vim', 'scss', 'markdown', 'toml', 'ini', 'config', 'yaml'},
+    ft = { 'css', 'html', 'javascript', 'vim', 'scss', 'markdown', 'toml', 'ini', 'config', 'yaml' },
     config = true
   },
 
-  { 'tpope/vim-ragtag', ft = 'xml,html'}, -- xml & friends tags helpers
+  { 'tpope/vim-ragtag',      ft = 'xml,html' }, -- xml & friends tags helpers
 
-  {"kevinhwang91/nvim-bqf", ft = 'qf'}, -- Quickfix improvementss
+  { "kevinhwang91/nvim-bqf", ft = 'qf' }, -- Quickfix improvementss
 
   { 'Vonr/align.nvim' },
 }
