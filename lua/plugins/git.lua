@@ -78,15 +78,4 @@ return {
     end,
   },
 
-  -- Now in Snacks
-  -- {
-  --   'ruifm/gitlinker.nvim',
-  --   dependencies = 'nvim-lua/plenary.nvim',
-  --   keys = {
-  --     { "<leader>hy", desc = "Get Git link" }
-  --   },
-  --   opts = {
-  --     mappings = "<leader>hy"
-  --   }
-  -- }
 }
