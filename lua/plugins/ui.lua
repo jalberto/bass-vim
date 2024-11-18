@@ -4,6 +4,27 @@ return {
     'rcarriga/nvim-notify'
   },
 
+  -- NOTE: not really sure if it is working
+  {
+    'echasnovski/mini.animate',
+    version = '*',
+    config = function()
+      require('mini.animate').setup()
+    end
+  },
+
+  {
+    "echasnovski/mini.icons",
+    lazy = true,
+    opts = {},
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
+
   -- Add colors to modes
   {
     'mvllow/modes.nvim',
@@ -99,7 +120,8 @@ return {
     init = function()
       vim.keymap.set("n", "<s-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
       vim.keymap.set("n", "<s-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
-      vim.keymap.set("n", "<leader>bx", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close other buffers" })
+      -- now in Snacks
+      -- vim.keymap.set("n", "<leader>bx", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close other buffers" })
       -- vim.keymap.set("n", "<leader>b[", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous" })
       -- vim.keymap.set("n", "<leader>b]", "<cmd>BufferLineCycleNext<cr>", { desc = "Next" })
     end,
@@ -114,7 +136,7 @@ return {
         -- show_buffer_default_icon = false,
         show_buffer_close_icon = false,
         show_close_icon = false,
-        separator_style = {'¦', '¦'}, -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+        separator_style = { '¦', '¦' }, -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
 
         diagnostics = "nvim_lsp",
         -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -129,7 +151,7 @@ return {
         hover = {
           enabled = true,
           delay = 200,
-          reveal = {'close'}
+          reveal = { 'close' }
         },
         -- offsets = {
         --   {
@@ -141,18 +163,6 @@ return {
         -- },
       },
     },
-  },
-
-  {
-    "echasnovski/mini.icons",
-    lazy = true,
-    opts = {},
-    init = function()
-      package.preload["nvim-web-devicons"] = function()
-        require("mini.icons").mock_nvim_web_devicons()
-        return package.loaded["nvim-web-devicons"]
-      end
-    end,
   },
 
   -- statusline
@@ -181,7 +191,7 @@ return {
         },
         sections = {
           lualine_a = {
-            { 'mode', fmt = function(str) return str:sub(1,1) end }
+            { 'mode', fmt = function(str) return str:sub(1, 1) end }
           },
           lualine_b = { "branch" },
           lualine_c = {
@@ -214,14 +224,14 @@ return {
             { "diagnostics" },
           },
           lualine_z = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
             -- function()
             --   return " " .. os.date("%R")
             -- end,
           },
         },
-        extensions = { "toggleterm", "quickfix", "trouble", "toggleterm", "mason", "man", "lazy"},
+        extensions = { "toggleterm", "quickfix", "trouble", "toggleterm", "mason", "man", "lazy" },
       }
     end,
   },

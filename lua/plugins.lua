@@ -1,4 +1,5 @@
 return {
+
   -- session management
   {
     'echasnovski/mini.sessions',
@@ -53,7 +54,7 @@ return {
 
   { 'tpope/vim-ragtag',      ft = 'xml,html' }, -- xml & friends tags helpers
 
-  { "kevinhwang91/nvim-bqf", ft = 'qf' }, -- Quickfix improvementss
+  { "kevinhwang91/nvim-bqf", ft = 'qf' },       -- Quickfix improvementss
 
   { 'Vonr/align.nvim' },
 }
