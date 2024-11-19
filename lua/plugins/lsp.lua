@@ -1,24 +1,24 @@
 return {
   -- Mason + LSP requires a specific dependency order
   {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    build = ":MasonUpdate",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    'williamboman/mason.nvim',
+    cmd = 'Mason',
+    build = ':MasonUpdate',
+    keys = { { '<leader>cm', '<cmd>Mason<cr>', desc = 'Mason' } },
     opts = {
       ui = {
-        border = "rounded",
+        border = 'rounded',
         icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗',
         },
       },
     },
   },
   {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    dependencies = { 'williamboman/mason.nvim' },
     opts = {
       -- ensure_installed = {
       --   "prettier", -- prettier formatter
@@ -35,10 +35,10 @@ return {
     -- end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    'williamboman/mason-lspconfig.nvim',
     dependencies = {
-      "williamboman/mason.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      'williamboman/mason.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
     },
 
     opts = {
@@ -52,15 +52,15 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    'neovim/nvim-lspconfig',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim" },
+        'williamboman/mason-lspconfig.nvim',
+        dependencies = { 'williamboman/mason.nvim' },
       },
-      { "antosha417/nvim-lsp-file-operations", config = true },
-      "saghen/blink.cmp",
+      { 'antosha417/nvim-lsp-file-operations', config = true },
+      'saghen/blink.cmp',
     },
     opts = {
       -- options for vim.lsp.buf.format
@@ -83,8 +83,8 @@ return {
         severity_sort = true,
         signs = true,
         float = {
-          border = "rounded",
-          source = "always",
+          border = 'rounded',
+          source = 'always',
         },
       },
       -- LSP Server Settings
@@ -100,7 +100,7 @@ return {
         graphql = {},
         yamlls = {},
         emmet_language_server = {
-          filetypes = { "css", "eruby", "html", "sass", "scss", "heex", "liquid" },
+          filetypes = { 'css', 'eruby', 'html', 'sass', 'scss', 'heex', 'liquid' },
         },
         quick_lint_js = {},
         jsonls = {},
@@ -110,17 +110,17 @@ return {
           settings = {
             Lua = {
               runtime = {
-                version = "LuaJIT",
+                version = 'LuaJIT',
               },
               diagnostics = {
-                globals = { "vim" },
+                globals = { 'vim' },
               },
               workspace = {
                 checkThirdParty = false,
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = vim.api.nvim_get_runtime_file('', true),
               },
               completion = {
-                callSnippet = "Replace",
+                callSnippet = 'Replace',
               },
               telemetry = { enable = false },
             },
@@ -128,24 +128,24 @@ return {
         },
       },
       keys = {
-        { "<leader>cd", "<cmd>Telescope lsp_definitions<cr>",      desc = "Goto Definition" },
-        { "<leader>cr", "<cmd>Telescope lsp_references<cr>",       desc = "References" },
-        { "<leader>cI", "<cmd>Telescope lsp_implementations<cr>",  desc = "Goto Implementation" },
-        { "<leader>ct", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" },
-        { "<leader>cs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Goto Symbol" },
-        { "<leader>cd", vim.lsp.buf.declaration,                   desc = "Goto Declaration" },
+        { '<leader>cd', '<cmd>Telescope lsp_definitions<cr>', desc = 'Goto Definition' },
+        { '<leader>cr', '<cmd>Telescope lsp_references<cr>', desc = 'References' },
+        { '<leader>cI', '<cmd>Telescope lsp_implementations<cr>', desc = 'Goto Implementation' },
+        { '<leader>ct', '<cmd>Telescope lsp_type_definitions<cr>', desc = 'Goto Type Definition' },
+        { '<leader>cs', '<cmd>Telescope lsp_document_symbols<cr>', desc = 'Goto Symbol' },
+        { '<leader>cd', vim.lsp.buf.declaration, desc = 'Goto Declaration' },
         -- { "K", vim.lsp.buf.hover, desc = "Hover" },
         -- { "gK",         vim.lsp.buf.signature_help,                desc = "Signature Help" },
-        { "<c-k>",      vim.lsp.buf.signature_help,                desc = "Signature Help",      mode = "i" },
-        { "<leader>cl", "<cmd>LspInfo<cr>",                        desc = "Lsp Info" },
+        { '<c-k>', vim.lsp.buf.signature_help, desc = 'Signature Help', mode = 'i' },
+        { '<leader>cl', '<cmd>LspInfo<cr>', desc = 'Lsp Info' },
         {
-          "<leader>ca",
+          '<leader>ca',
           vim.lsp.buf.code_action,
-          desc = "Code Actions",
-          mode = { "n", "v" },
+          desc = 'Code Actions',
+          mode = { 'n', 'v' },
         },
-        { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-        { "<leader>cr", vim.lsp.buf.rename,        desc = "Code Rename" },
+        { '<leader>cd', vim.diagnostic.open_float, desc = 'Line Diagnostics' },
+        { '<leader>cr', vim.lsp.buf.rename, desc = 'Code Rename' },
         -- { "<leader>cf", vim.lsp.buf.format({ async = true }),      desc = "Code Format",         mode = { "n", "v" } },
         -- { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
         -- { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
@@ -154,8 +154,8 @@ return {
     config = function(_, opts)
       -- local mason = require("mason")
       -- local mason_lspconfig = require("mason-lspconfig")
-      local mason_tool_installer = require("mason-tool-installer")
-      local lspconfig = require("lspconfig")
+      local mason_tool_installer = require('mason-tool-installer')
+      local lspconfig = require('lspconfig')
 
       local function on_attach(_, bufnr) -- (client, bufnr)
         -- Mappings.
@@ -163,7 +163,7 @@ return {
         for _, keys in pairs(opts.keys) do
           if keys[2] then -- Only set keybinding if the command/function exists
             kopts.desc = keys.desc
-            vim.keymap.set(keys.mode or "n", keys[1], keys[2], kopts)
+            vim.keymap.set(keys.mode or 'n', keys[1], keys[2], kopts)
           end
         end
       end
@@ -172,15 +172,15 @@ return {
       vim.g.autoformat = false
 
       vim.diagnostic.config(opts.diagnostics)
-      local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+      local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
       for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+        local hl = 'DiagnosticSign' .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
       end
 
       for server, config in pairs(opts.servers or {}) do
         -- for aucompletion
-        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
         config.flags = { debounce_text_changes = 200 }
         config.on_attach = on_attach
 
@@ -189,13 +189,13 @@ return {
 
       mason_tool_installer.setup({
         ensure_installed = {
-          "prettier",   -- prettier formatter
-          { "stylua" }, -- lua formatter
-          "eslint_d",   -- js/ts linter
-          "shellcheck", -- shell script linter
-          "shfmt",      -- shell script formatter
-          "erb-formatter",
-          "rubocop",
+          'prettier', -- prettier formatter
+          { 'stylua' }, -- lua formatter
+          'eslint_d', -- js/ts linter
+          'shellcheck', -- shell script linter
+          'shfmt', -- shell script formatter
+          'erb-formatter',
+          'rubocop',
         },
       })
     end,
@@ -204,55 +204,54 @@ return {
   -- trying to avoid autoformat issues
   -- NOTE: for some reason withtou this I am not able to disable auto format
   {
-    "stevearc/conform.nvim",
-    event = { "BufWritePre" },
-    cmd = { "ConformInfo" },
+    'stevearc/conform.nvim',
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
     keys = {
       {
-        "<leader>cf",
+        '<leader>cf',
         function()
-          require("conform").format({ async = true })
+          require('conform').format({ async = true })
         end,
-        mode = "n",
-        desc = "Format buffer",
+        mode = 'n',
+        desc = 'Format buffer',
       },
       {
-        "<leader>cf",
+        '<leader>cf',
         function()
-          require("conform").format({ async = false })
+          require('conform').format({ async = false })
         end,
-        mode = "v",
-        desc = "Format selection",
+        mode = 'v',
+        desc = 'Format selection',
       },
     },
     -- This will provide type hinting with LuaLS
-    ---@module "conform"
-    ---@type conform.setupOpts
     opts = {
+      log_level = vim.log.levels.DEBUG,
       -- Define your formatters
       formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "isort", "black" },
-        javascript = { "prettierd", "prettier", stop_after_first = true },
-        typescript = { "prettier" },
-        css = { "prettier" },
-        html = { "prettier" },
-        json = { "prettier" },
-        yaml = { "prettier" },
-        markdown = { "prettier" },
-        graphql = { "prettier" },
-        ruby = { "rubocop", "erb-formatter" },
-        -- erb = { "erb-lint" },
+        lua = { 'stylua' },
+        python = { 'isort', 'black' },
+        javascript = { 'prettier', stop_after_first = true },
+        typescript = { 'prettier' },
+        css = { 'prettier' },
+        html = { 'prettier' },
+        json = { 'prettier' },
+        yaml = { 'prettier' },
+        markdown = { 'prettier' },
+        graphql = { 'prettier' },
+        ruby = { 'rubocop' },
+        erb = { 'erb-formatter' },
       },
       -- Set default options
       default_format_opts = {
-        lsp_format = "fallback",
+        lsp_format = 'fallback',
       },
       -- Set up format-on-save
       -- format_on_save = { timeout_ms = 500 },
       format_on_save = function(bufnr)
         -- Disable autoformat on certain filetypes
-        local ignore_filetypes = { "java" }
+        local ignore_filetypes = { 'java', 'ruby' }
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
           return
         end
@@ -260,19 +259,18 @@ return {
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        -- Disable autoformat for files in a certain path
+        -- Disable autoformat for files in certain paths
         local bufname = vim.api.nvim_buf_get_name(bufnr)
-        if bufname:match("/node_modules/") then
+        if bufname:match('/node_modules/') or bufname:match('/vendor/') then
           return
         end
         -- ...additional logic...
-        return { timeout_ms = 500, lsp_format = "fallback" }
+        return { timeout_ms = 500, lsp_format = 'fallback' }
       end,
       -- Customize formatters
       formatters = {
-        shfmt = {
-          prepend_args = { "-i", "2" },
-        },
+        -- shfmt = { prepend_args = { "-i", "2" }, },
+        stylua = { prepend_args = { '--indent-type', 'Spaces', '--indent-width', vim.o.shiftwidth } },
       },
     },
     init = function()
@@ -280,9 +278,9 @@ return {
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
     config = function(_, opts)
-      require("conform").setup(opts)
+      require('conform').setup(opts)
 
-      vim.api.nvim_create_user_command("FormatDisable", function(args)
+      vim.api.nvim_create_user_command('FormatDisable', function(args)
         if args.bang then
           -- FormatDisable! will disable formatting just for this buffer
           vim.b.disable_autoformat = true
@@ -290,22 +288,22 @@ return {
           vim.g.disable_autoformat = true
         end
       end, {
-        desc = "Disable autoformat-on-save",
+        desc = 'Disable autoformat-on-save',
         bang = true,
       })
-      vim.api.nvim_create_user_command("FormatEnable", function()
+      vim.api.nvim_create_user_command('FormatEnable', function()
         vim.b.disable_autoformat = false
         vim.g.disable_autoformat = false
       end, {
-        desc = "Re-enable autoformat-on-save",
+        desc = 'Re-enable autoformat-on-save',
       })
     end,
   },
 
   -- better diagnostics list and others
   {
-    "folke/trouble.nvim",
-    cmd = { "Trouble" },
+    'folke/trouble.nvim',
+    cmd = { 'Trouble' },
     opts = {
       auto_open = false,
       auto_close = true,
@@ -315,7 +313,7 @@ return {
       max_items = 50,
       modes = {
         cascade = {
-          mode = "diagnostics", -- inherit from diagnostics mode
+          mode = 'diagnostics', -- inherit from diagnostics mode
           filter = function(items)
             local severity = vim.diagnostic.severity.HINT
             for _, item in ipairs(items) do
@@ -330,25 +328,25 @@ return {
     },
     keys = {
       {
-        "<leader>xx",
-        "<cmd>Trouble cascade toggle<cr>",
-        desc = "Diagnostics",
+        '<leader>xx',
+        '<cmd>Trouble cascade toggle<cr>',
+        desc = 'Diagnostics',
       },
       {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics",
+        '<leader>xX',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        desc = 'Buffer Diagnostics',
       },
       -- { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       {
-        "<leader>xL",
-        "<cmd>Trouble lsp toggle focus=false win.position=right filter.buf=0 pinned=true<cr>",
-        desc = "LSP (Trouble)",
+        '<leader>xL',
+        '<cmd>Trouble lsp toggle focus=false win.position=right filter.buf=0 pinned=true<cr>',
+        desc = 'LSP (Trouble)',
       },
       {
-        "<leader>xQ",
-        "<cmd>Trouble quickfix toggle<cr>",
-        desc = "Quickfix List (Trouble)",
+        '<leader>xQ',
+        '<cmd>Trouble quickfix toggle<cr>',
+        desc = 'Quickfix List (Trouble)',
       },
     },
   },

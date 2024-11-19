@@ -65,8 +65,8 @@ vim.o.updatetime = 250
 opt.switchbuf = "usetab,newtab" -- if buffer is in tab use that tab
 
 opt.synmaxcol = 200 -- Limit syntax highlighting for long lines to improve performance
-opt.redrawtime = 1500 -- Time in milliseconds for redrawing the display
-opt.maxmempattern = 2000 -- Maximum amount of memory in Kbyte used for pattern matching
+opt.redrawtime = 2000 -- Time in milliseconds for redrawing the display
+opt.maxmempattern = 5000 -- Maximum amount of memory in Kbyte used for pattern matching
 
 opt.foldenable = true
 -- opt.foldmethod = 'syntax'
@@ -140,7 +140,7 @@ vim.cmd("highlight RedundantSpaces term=standout ctermbg=red guibg=red") -- high
 -- vim.cmd('match RedundantSpaces /\s\+$\| \+\ze\t/') -- \ze sets end of match so only spaces highlighted
 opt.list = true
 if vim.fn.has("multi_byte") == 1 then
-	opt.listchars = "precedes:<,tab:⭾ ,trail:␠,extends:…,nbsp:⎵,eol:⏎"
+  opt.listchars = "precedes:<,tab:⭾ ,trail:␠,extends:…,nbsp:⎵,eol:⏎"
 else
-	opt.listchars = "precedes:<,tab:>-,trail:.,extends:>,nbsp:_,eol:$"
+  opt.listchars = "precedes:<,tab:>-,trail:.,extends:>,nbsp:_,eol:$"
 end
