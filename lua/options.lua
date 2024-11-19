@@ -64,7 +64,9 @@ vim.o.updatetime = 250
 
 opt.switchbuf = "usetab,newtab" -- if buffer is in tab use that tab
 
-opt.synmaxcol = 1000 -- Syntax coloring lines that are too long just slows down the world
+opt.synmaxcol = 200 -- Limit syntax highlighting for long lines to improve performance
+opt.redrawtime = 1500 -- Time in milliseconds for redrawing the display
+opt.maxmempattern = 2000 -- Maximum amount of memory in Kbyte used for pattern matching
 
 opt.foldenable = true
 -- opt.foldmethod = 'syntax'
@@ -81,7 +83,6 @@ opt.signcolumn = "yes:1"
 -- opt.sessionoptions:append('winpos,terminal,folds') -- Autosessions recommendation
 -- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 
-opt.lazyredraw = true -- Speed up macros
 opt.winminheight = 1 -- 1 height windows
 opt.winminwidth = 5
 -- opt.popt:append('syntax:y') -- Syntax when printing
@@ -93,7 +94,7 @@ opt.wrap = true -- wrap long lines
 opt.linebreak = true -- break lines at word end
 opt.sidescroll = 5
 -- Try to show at least three lines and two columns of context when scrolling
-opt.scrolloff = 99
+opt.scrolloff = 8
 opt.sidescrolloff = 3
 -- Improve vim's scrolling speed
 opt.ttyfast = true

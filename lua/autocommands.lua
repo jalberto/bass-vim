@@ -103,25 +103,38 @@ vim.api.nvim_create_autocmd("FileType", {
 -- fix folding when using telescope https://github.com/nvim-treesitter/nvim-treesitter/issues/1337
 -- vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*" }, command = "normal zx", })
 
--- Open diagnostics on hover in a float
+-- Open diagnostics on hover in a float with debounce
+local diagnostic_hover_timer
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
     pattern = "*",
     callback = function()
-        for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-            if vim.api.nvim_win_get_config(winid).zindex then
-                return
-            end
+        if diagnostic_hover_timer then
+            vim.fn.timer_stop(diagnostic_hover_timer)
         end
-        vim.diagnostic.open_float({
-            scope = "cursor",
-            focusable = false,
-            close_events = {
-                "CursorMoved",
-                "CursorMovedI",
-                "BufHidden",
-                "InsertCharPre",
-                "WinLeave",
-            },
-        })
+        diagnostic_hover_timer = vim.fn.timer_start(300, function()
+            -- Check if there's already a float visible
+            for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+                if vim.api.nvim_win_get_config(winid).zindex then
+                    return
+                end
+            end
+            -- Only show float if there are diagnostics
+            local line = vim.fn.line(".")
+            local bufnr = vim.api.nvim_get_current_buf()
+            local diagnostics = vim.diagnostic.get(bufnr, { lnum = line - 1 })
+            if #diagnostics > 0 then
+                vim.diagnostic.open_float({
+                    scope = "cursor",
+                    focusable = false,
+                    close_events = {
+                        "CursorMoved",
+                        "CursorMovedI",
+                        "BufHidden",
+                        "InsertCharPre",
+                        "WinLeave",
+                    },
+                })
+            end
+        end)
     end
 })
