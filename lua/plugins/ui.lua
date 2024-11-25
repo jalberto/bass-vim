@@ -1,7 +1,7 @@
 return {
 
   {
-    'rcarriga/nvim-notify'
+    'rcarriga/nvim-notify',
   },
 
   -- NOTE: not really sure if it is working
@@ -10,17 +10,17 @@ return {
     version = '*',
     config = function()
       require('mini.animate').setup()
-    end
+    end,
   },
 
   {
-    "echasnovski/mini.icons",
+    'echasnovski/mini.icons',
     lazy = true,
     opts = {},
     init = function()
-      package.preload["nvim-web-devicons"] = function()
-        require("mini.icons").mock_nvim_web_devicons()
-        return package.loaded["nvim-web-devicons"]
+      package.preload['nvim-web-devicons'] = function()
+        require('mini.icons').mock_nvim_web_devicons()
+        return package.loaded['nvim-web-devicons']
       end
     end,
   },
@@ -35,7 +35,14 @@ return {
         -- visual = "#ffffff"
       },
       line_opacity = 0.20,
-    }
+    },
+  },
+
+  {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup({})
+    end,
   },
 
   {
@@ -46,28 +53,28 @@ return {
       -- vim.cmd([[colorscheme falcon]])
       vim.g.falcon_background = 1
       vim.g.falcon_inactive = 1
-    end
+    end,
   },
 
   {
-    "scottmckendry/cyberdream.nvim",
+    'scottmckendry/cyberdream.nvim',
     lazy = false,
     priority = 1000,
     opts = {
       transparent = true,
       borderless_telescope = false,
       theme = {
-        variant = "auto",
+        variant = 'auto',
         saturation = 1,
-      }
-    }
+      },
+    },
   },
   {
-    "zenbones-theme/zenbones.nvim",
+    'zenbones-theme/zenbones.nvim',
     -- Optionally install Lush. Allows for more configuration or extending the colorscheme
     -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
     -- In Vim, compat mode is turned on as Lush only works in Neovim.
-    dependencies = "rktjmp/lush.nvim",
+    dependencies = 'rktjmp/lush.nvim',
     lazy = false,
     priority = 1000,
     -- you can set set configuration options here
@@ -76,20 +83,20 @@ return {
       vim.g.zenbones_darkness = 'stark'
       vim.g.zenbones_transparent_background = true
       -- vim.cmd.colorscheme('zenbones')
-    end
+    end,
   },
   -- better vim.ui
   {
-    "stevearc/dressing.nvim",
+    'stevearc/dressing.nvim',
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
+        require('lazy').load({ plugins = { 'dressing.nvim' } })
         return vim.ui.select(...)
       end
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.input = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
+        require('lazy').load({ plugins = { 'dressing.nvim' } })
         return vim.ui.input(...)
       end
     end,
@@ -97,29 +104,29 @@ return {
 
   -- nice indent guides
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    main = "ibl",
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPre',
+    main = 'ibl',
     opts = {
       indent = {
-        char = "│",
+        char = '│',
       },
       exclude = {
-        filetypes = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+        filetypes = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' },
       },
       scope = {
-        enabled = true
+        enabled = true,
       },
-    }
+    },
   },
 
   -- bufferline / tabline
   {
-    "akinsho/nvim-bufferline.lua",
-    event = "VeryLazy",
+    'akinsho/nvim-bufferline.lua',
+    event = 'VeryLazy',
     init = function()
-      vim.keymap.set("n", "<s-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
-      vim.keymap.set("n", "<s-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+      vim.keymap.set('n', '<s-h>', '<cmd>BufferLineCyclePrev<cr>', { desc = 'Prev Buffer' })
+      vim.keymap.set('n', '<s-l>', '<cmd>BufferLineCycleNext<cr>', { desc = 'Next Buffer' })
       -- now in Snacks
       -- vim.keymap.set("n", "<leader>bx", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close other buffers" })
       -- vim.keymap.set("n", "<leader>b[", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous" })
@@ -138,7 +145,7 @@ return {
         show_close_icon = false,
         separator_style = { '¦', '¦' }, -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
 
-        diagnostics = "nvim_lsp",
+        diagnostics = 'nvim_lsp',
         -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
         --   if context.buffer:current() then
         --     local icon = level:match("error") and " " or " "
@@ -151,7 +158,7 @@ return {
         hover = {
           enabled = true,
           delay = 200,
-          reveal = { 'close' }
+          reveal = { 'close' },
         },
         -- offsets = {
         --   {
@@ -167,8 +174,8 @@ return {
 
   -- statusline
   {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    'nvim-lualine/lualine.nvim',
+    event = 'VeryLazy',
     opts = function(plugin)
       -- local icons = require("lazyvim.config").icons
 
@@ -176,27 +183,32 @@ return {
         return function()
           ---@type table<string, any>
           local hl = vim.api.nvim_get_hl(0, { name = name })
-          return hl and hl.fg and { fg = string.format("#%06x", hl.fg) }
+          return hl and hl.fg and { fg = string.format('#%06x', hl.fg) }
         end
       end
 
       return {
         options = {
           -- theme = require('lualine-falcon').theme(),
-          theme = "auto",
+          theme = 'auto',
           globalstatus = true,
           component_separators = '',
           section_separators = '',
-          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
+          disabled_filetypes = { statusline = { 'dashboard', 'alpha' } },
         },
         sections = {
           lualine_a = {
-            { 'mode', fmt = function(str) return str:sub(1, 1) end }
+            {
+              'mode',
+              fmt = function(str)
+                return str:sub(1, 1)
+              end,
+            },
           },
-          lualine_b = { "branch" },
+          lualine_b = { 'branch' },
           lualine_c = {
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+            { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
+            { 'filename', path = 1, symbols = { modified = '  ', readonly = '', unnamed = '' } },
             -- stylua: ignore
             -- {
             --   function() return require("nvim-navic").get_location() end,
@@ -218,20 +230,20 @@ return {
             -- },
             -- { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
-            { "diff" },
+            { 'diff' },
           },
           lualine_y = {
-            { "diagnostics" },
+            { 'diagnostics' },
           },
           lualine_z = {
-            { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
-            { "location", padding = { left = 0, right = 1 } },
+            { 'progress', separator = ' ', padding = { left = 1, right = 0 } },
+            { 'location', padding = { left = 0, right = 1 } },
             -- function()
             --   return " " .. os.date("%R")
             -- end,
           },
         },
-        extensions = { "toggleterm", "quickfix", "trouble", "toggleterm", "mason", "man", "lazy" },
+        extensions = { 'toggleterm', 'quickfix', 'trouble', 'toggleterm', 'mason', 'man', 'lazy' },
       }
     end,
   },
@@ -250,5 +262,4 @@ return {
   --     }
   --   }
   -- },
-
 }
