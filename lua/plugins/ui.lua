@@ -46,6 +46,12 @@ return {
   },
 
   {
+    'folke/twilight.nvim',
+    cmd = 'Twilight',
+    opts = { context = 20 },
+  },
+
+  {
     'fenetikm/falcon',
     -- lazy = false,
     -- priority = 1000,
