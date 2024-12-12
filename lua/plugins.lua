@@ -10,15 +10,15 @@ return {
       autowrite = true,
     },
     config = function(_, opts)
-      require("mini.sessions").setup(opts)
+      require('mini.sessions').setup(opts)
     end,
   },
 
   -- suto toggle relative line number
-  { "cpea2506/relative-toggle.nvim", event = "VeryLazy" },
+  { 'cpea2506/relative-toggle.nvim', event = 'VeryLazy' },
 
   -- makes some plugins dot-repeatable like leap
-  { "tpope/vim-repeat",              event = "VeryLazy" },
+  { 'tpope/vim-repeat', event = 'VeryLazy' },
 
   'clones/vim-genutils',
   'eparreno/vim-l9',
@@ -30,7 +30,7 @@ return {
     ft = 'markdown',
     opts = {},
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
-    config = true
+    config = true,
   },
   -- {
   --   "OXY2DEV/markview.nvim",
@@ -43,18 +43,18 @@ return {
   --     require("markview").setup();
   --   end
   -- },
-  { 'amadeus/vim-mjml',            ft = { 'mjml' } },
+  { 'amadeus/vim-mjml', ft = { 'mjml' } },
   { 'andrewstuart/vim-kubernetes', ft = { 'yaml' } },
-  { 'towolf/vim-helm',             ft = { 'yaml' } },
-  {
-    'norcalli/nvim-colorizer.lua',
-    ft = { 'css', 'html', 'javascript', 'vim', 'scss', 'markdown', 'toml', 'ini', 'config', 'yaml' },
-    config = true
-  },
+  { 'towolf/vim-helm', ft = { 'yaml' } },
+  -- {
+  --   'norcalli/nvim-colorizer.lua',
+  --   ft = { 'css', 'html', 'javascript', 'vim', 'scss', 'markdown', 'toml', 'ini', 'config', 'yaml' },
+  --   config = true
+  -- },
 
-  { 'tpope/vim-ragtag',      ft = 'xml,html' }, -- xml & friends tags helpers
+  { 'tpope/vim-ragtag', ft = 'xml,html' }, -- xml & friends tags helpers
 
-  { "kevinhwang91/nvim-bqf", ft = 'qf' },       -- Quickfix improvementss
+  { 'kevinhwang91/nvim-bqf', ft = 'qf' }, -- Quickfix improvementss
 
   { 'Vonr/align.nvim' },
 }
