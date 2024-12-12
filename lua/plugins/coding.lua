@@ -140,4 +140,15 @@ return {
       { "<leader>ft", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",                                 desc = "Todo" },
     },
   },
+
+  {
+    'eero-lehtinen/oklch-color-picker.nvim',
+    keys = { '<leader>cc' },
+    config = function()
+      require('oklch-color-picker').setup({})
+      vim.keymap.set('n', '<leader>cc', function()
+        require('oklch-color-picker').pick_under_cursor()
+      end, { desc = 'Color pick under cursor' })
+    end,
+  },
 }
