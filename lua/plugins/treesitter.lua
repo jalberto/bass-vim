@@ -37,6 +37,7 @@ return {
         'dockerfile',
         'vimdoc',
         'surface',
+        'astro',
       },
       incremental_selection = {
         enable = true,

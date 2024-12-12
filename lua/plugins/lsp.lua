@@ -93,19 +93,32 @@ return {
         solargraph = {},
         ruby_lsp = {},
         html = {},
-        cssls = {},
-        tailwindcss = {},
+        cssls = {
+          filetypes = { 'css', 'sass', 'scss' },
+        },
+        emmet_language_server = {
+          filetypes = { 'css', 'eruby', 'html', 'sass', 'scss', 'heex', 'liquid' },
+        },
         bashls = {},
         dockerls = {},
         graphql = {},
         yamlls = {},
-        emmet_language_server = {
-          filetypes = { 'css', 'eruby', 'html', 'sass', 'scss', 'heex', 'liquid' },
-        },
         quick_lint_js = {},
         jsonls = {},
         ts_ls = {},
-        eslint = {},
+        eslint = {
+          -- filetypes = {
+          --   'javascript',
+          --   'javascriptreact',
+          --   'javascript.jsx',
+          --   'typescript',
+          --   'typescriptreact',
+          --   'typescript.tsx',
+          --   'vue',
+          --   'svelte',
+          --   'astro',
+          -- },
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -251,7 +264,7 @@ return {
       -- format_on_save = { timeout_ms = 500 },
       format_on_save = function(bufnr)
         -- Disable autoformat on certain filetypes
-        local ignore_filetypes = { 'java', 'ruby' }
+        local ignore_filetypes = { 'java', 'ruby', 'sass' }
         if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
           return
         end
