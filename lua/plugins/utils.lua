@@ -4,14 +4,14 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile = { enabled = true },
-      notifier = {
-        enabled = true,
-        timeout = 3000,
-      },
-      quickfile = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
+      bigfile = {},
+      notifier = { timeout = 3000 },
+      quickfile = {},
+      statuscolumn = {},
+      words = {},
+      dim = {},
+      indent = {},
+      scroll = {},
       styles = {
         notification = {
           wo = { wrap = true }, -- Wrap notifications
@@ -136,6 +136,27 @@ return {
             },
           })
         end,
+      },
+      {
+        '<leader>.',
+        function()
+          Snacks.scratch()
+        end,
+        desc = 'Toggle Scratch Buffer',
+      },
+      {
+        '<leader>S',
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = 'Select Scratch Buffer',
+      },
+      {
+        '<leader>F',
+        function()
+          Snacks.toggle.dim()
+        end,
+        desc = 'Enable Focus mode',
       },
     },
     init = function()

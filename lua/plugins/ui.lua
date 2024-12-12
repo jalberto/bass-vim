@@ -38,18 +38,11 @@ return {
     },
   },
 
-  {
-    'karb94/neoscroll.nvim',
-    config = function()
-      require('neoscroll').setup({})
-    end,
-  },
-
-  {
-    'folke/twilight.nvim',
-    cmd = 'Twilight',
-    opts = { context = 20 },
-  },
+  -- {
+  --   'folke/twilight.nvim',
+  --   cmd = 'Twilight',
+  --   opts = { context = 20 },
+  -- },
 
   {
     'fenetikm/falcon',
@@ -109,22 +102,22 @@ return {
   },
 
   -- nice indent guides
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    event = 'BufReadPre',
-    main = 'ibl',
-    opts = {
-      indent = {
-        char = '│',
-      },
-      exclude = {
-        filetypes = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' },
-      },
-      scope = {
-        enabled = true,
-      },
-    },
-  },
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   event = 'BufReadPre',
+  --   main = 'ibl',
+  --   opts = {
+  --     indent = {
+  --       char = '│',
+  --     },
+  --     exclude = {
+  --       filetypes = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' },
+  --     },
+  --     scope = {
+  --       enabled = true,
+  --     },
+  --   },
+  -- },
 
   -- bufferline / tabline
   {
