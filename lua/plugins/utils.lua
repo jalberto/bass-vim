@@ -69,7 +69,6 @@ return {
         end,
         desc = 'Git open Browser',
       },
-      -- { "<leader>gl", function() Snacks.lazygit.log() end,             desc = "Lazygit Log (cwd)" },
       {
         '<leader>cR',
         function()
@@ -85,11 +84,11 @@ return {
         desc = 'Toggle Terminal',
       },
       {
-        '<c-_>',
+        '<leader>ge',
         function()
-          Snacks.terminal()
+          Snacks.terminal('spf ' .. vim.fn.getcwd())
         end,
-        desc = 'which_key_ignore',
+        desc = 'Toggle file Explorer',
       },
       {
         ']]',
