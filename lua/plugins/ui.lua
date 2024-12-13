@@ -34,7 +34,7 @@ return {
         -- insert = "#718e3f",
         -- visual = "#ffffff"
       },
-      line_opacity = 0.20,
+      line_opacity = 0.30,
     },
   },
 
