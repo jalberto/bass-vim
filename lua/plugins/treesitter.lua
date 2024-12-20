@@ -51,6 +51,7 @@ return {
     },
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
+      require('nvim-ts-autotag').setup()
       vim.g.skip_ts_context_commentstring_module = true
       vim.opt.foldmethod = 'expr'
       vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

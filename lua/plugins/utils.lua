@@ -17,6 +17,9 @@ return {
           wo = { wrap = true }, -- Wrap notifications
         },
       },
+      win = {
+        border = 'rounded',
+      },
     },
     keys = {
       {
@@ -77,18 +80,18 @@ return {
         desc = 'Rename File',
       },
       {
-        '<c-/>',
-        function()
-          Snacks.terminal()
-        end,
-        desc = 'Toggle Terminal',
-      },
-      {
         '<leader>ge',
         function()
-          Snacks.terminal('spf ' .. vim.fn.getcwd())
+          Snacks.terminal.get('spf ' .. vim.fn.getcwd())
         end,
         desc = 'Toggle file Explorer',
+      },
+      {
+        '¬',
+        function()
+          Snacks.terminal.toggle()
+        end,
+        desc = 'Toggle Terminal',
       },
       {
         ']]',

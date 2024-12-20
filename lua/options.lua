@@ -102,9 +102,8 @@ opt.ttyfast = true
 
 opt.cf = true -- Enable error files & error jumping.
 
--- FIXME: when true it crashes on external file modification?
 opt.autowrite = true -- Writes on make/shell commands
-opt.autoread = false -- Automatically re-read files if unmodified inside Vim.
+opt.autoread = true -- Automatically re-read files if unmodified inside Vim.
 opt.hidden = true -- Allow buffer switching without saving
 
 -- NOTE: 0.10 defaults to OSC52 when unset

@@ -106,6 +106,7 @@ return {
         quick_lint_js = {},
         jsonls = {},
         ts_ls = {},
+        astro = {},
         eslint = {
           -- filetypes = {
           --   'javascript',
@@ -209,6 +210,7 @@ return {
           'shfmt', -- shell script formatter
           'erb-formatter',
           'rubocop',
+          'astro',
         },
       })
     end,
@@ -247,6 +249,7 @@ return {
         python = { 'isort', 'black' },
         javascript = { 'prettier', stop_after_first = true },
         typescript = { 'prettier' },
+        astro = { 'prettier' },
         css = { 'prettier' },
         html = { 'prettier' },
         json = { 'prettier' },
@@ -284,6 +287,19 @@ return {
       formatters = {
         -- shfmt = { prepend_args = { "-i", "2" }, },
         stylua = { prepend_args = { '--indent-type', 'Spaces', '--indent-width', vim.o.shiftwidth } },
+        prettier = {
+          args = function(self, ctx)
+            if vim.endswith(ctx.filename, '.astro') then
+              return {
+                '--stdin-filepath',
+                '$FILENAME',
+                '--plugin',
+                'prettier-plugin-astro',
+              }
+            end
+            return { '--stdin-filepath', '$FILENAME', '--plugin', 'prettier-plugin-astro' }
+          end,
+        },
       },
     },
     init = function()
