@@ -3,22 +3,17 @@ return {
   lazy = false, -- lazy loading handled internally
   dependencies = { 'rafamadriz/friendly-snippets', 'mikavilpas/blink-ripgrep.nvim' },
   -- use a release tag to download pre-built binaries
-  version = 'v0.*',
+  version = '*',
 
   opts_extend = { 'sources.default' },
-
   ---@module 'blink.cmp'
-  ---@type blink.cmp.config
+  ---@type blink.cmp.Config
   opts = {
     keymap = { preset = 'super-tab' },
-    appearence = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = 'mono',
-    },
-    signature = {
-      enabled = true,
-      window = { border = 'rounded', winblend = 0 },
-    },
+    -- appearence = {
+    --   use_nvim_cmp_as_default = true,
+    --   nerd_font_variant = 'mono',
+    -- },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' },
       providers = {
@@ -35,13 +30,13 @@ return {
           },
         },
       },
-      keymap = {
-        ['<c-g>'] = {
-          function()
-            require('blink-cmp').show({ sources = { 'ripgrep' } })
-          end,
-        },
-      },
+      -- keymap = {
+      --   ['<c-g>'] = {
+      --     function()
+      --       require('blink-cmp').show({ sources = { 'ripgrep' } })
+      --     end,
+      --   },
+      -- },
     },
     completion = {
       list = { max_items = 400 },
@@ -51,9 +46,14 @@ return {
         draw = { treesitter = { 'lsp' } },
       },
       documentation = {
+        window = { border = 'rounded' },
         auto_show = true,
-        window = { border = 'rounded', winblend = 0 },
       },
+      ghost_text = { enabled = true },
+    },
+    signature = {
+      enabled = true,
+      window = { border = 'rounded', winblend = 0 },
     },
   },
 }
