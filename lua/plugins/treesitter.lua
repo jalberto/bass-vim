@@ -5,6 +5,7 @@ return {
     dependencies = {
       'ziontee113/syntax-tree-surfer',
       'windwp/nvim-ts-autotag',
+      'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },

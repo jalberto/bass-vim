@@ -97,7 +97,7 @@ return {
           filetypes = { 'css', 'sass', 'scss' },
         },
         emmet_language_server = {
-          filetypes = { 'css', 'eruby', 'html', 'sass', 'scss', 'heex', 'liquid' },
+          filetypes = { 'css', 'eruby', 'html', 'sass', 'scss', 'heex', 'liquid', 'javascript', 'elixir' },
         },
         bashls = {},
         dockerls = {},
