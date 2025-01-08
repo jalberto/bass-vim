@@ -1,6 +1,6 @@
 return {
   {
-    "nvim-telescope/telescope.nvim",
+    'nvim-telescope/telescope.nvim',
     dependencies = {
       { 'nvim-lua/popup.nvim' },
       { 'nvim-lua/plenary.nvim' },
@@ -8,54 +8,54 @@ return {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
         config = function()
-          require("telescope").load_extension("fzf")
-        end
+          require('telescope').load_extension('fzf')
+        end,
       },
       {
         'nvim-telescope/telescope-ui-select.nvim',
         config = function()
-          require("telescope").load_extension("ui-select")
-        end
+          require('telescope').load_extension('ui-select')
+        end,
       },
     },
-    cmd = "Telescope",
+    cmd = 'Telescope',
     version = false, -- telescope did only one release, so use HEAD for now
     keys = {
-      { "<leader><leader>", "<cmd>Telescope git_files<cr>",                     desc = "File selector (git)" },
-      { "<leader>ff",       "<cmd>Telescope find_files<cr>",                    desc = "File selector" },
-      { "<leader>fg",       "<cmd>Telescope live_grep<cr>",                     desc = "Find in Files (Grep)" },
-      { "<leader>fr",       "<cmd>Telescope oldfiles<cr>",                      desc = "Recent Files" },
-      { "<leader>,",        "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-      { "<leader>:",        "<cmd>Telescope command_history<cr>",               desc = "Command History" },
+      { '<leader><leader>', '<cmd>Telescope git_files<cr>', desc = 'File selector (git)' },
+      { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'File selector' },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Find in Files (Grep)' },
+      { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent Files' },
+      { '<leader>,', '<cmd>Telescope buffers show_all_buffers=true<cr>', desc = 'Switch Buffer' },
+      { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command History' },
       -- git
       -- { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
       -- { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
       -- search
-      { "<leader>sh",       "<cmd>Telescope help_tags<cr>",                     desc = "Help Pages" },
-      { "<leader>sm",       "<cmd>Telescope marks<cr>",                         desc = "Jump to Mark" },
+      { '<leader>sh', '<cmd>Telescope help_tags<cr>', desc = 'Help Pages' },
+      { '<leader>sm', '<cmd>Telescope marks<cr>', desc = 'Jump to Mark' },
       -- Code
       -- { "<leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Apply Code Actions" },
       -- { "<leader>cs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Goto Symbol" },
     },
     opts = {
       defaults = {
-        prompt_prefix = " ",
-        selection_caret = " ",
+        prompt_prefix = ' ',
+        selection_caret = ' ',
         color_devicons = false,
         prompt_title = '',
         results_title = '',
         preview_title = 'true',
-        path_display = { "truncate" },
-        file_ignore_patterns = { "node_modules", "*.git/*", "*/tmp/*", ".cache" },
+        path_display = { 'truncate' },
+        file_ignore_patterns = { 'node_modules', '*.git/*', '*/tmp/*', '.cache' },
         vimgrep_arguments = {
-          "rg",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--trim",
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--trim',
         },
         mappings = {
           i = {
@@ -68,34 +68,34 @@ return {
             -- ["<a-h>"] = function()
             --   Util.telescope("find_files", { hidden = true })()
             -- end,
-            ["<C-Down>"] = function(...)
-              return require("telescope.actions").cycle_history_next(...)
+            ['<C-Down>'] = function(...)
+              return require('telescope.actions').cycle_history_next(...)
             end,
-            ["<C-Up>"] = function(...)
-              return require("telescope.actions").cycle_history_prev(...)
+            ['<C-Up>'] = function(...)
+              return require('telescope.actions').cycle_history_prev(...)
             end,
-            ["<C-j>"] = function(...)
-              return require("telescope.actions").cycle_history_next(...)
+            ['<C-j>'] = function(...)
+              return require('telescope.actions').cycle_history_next(...)
             end,
-            ["<C-k>"] = function(...)
-              return require("telescope.actions").cycle_history_prev(...)
+            ['<C-k>'] = function(...)
+              return require('telescope.actions').cycle_history_prev(...)
             end,
-            ["<C-f>"] = function(...)
-              return require("telescope.actions").preview_scrolling_down(...)
+            ['<C-f>'] = function(...)
+              return require('telescope.actions').preview_scrolling_down(...)
             end,
-            ["<C-b>"] = function(...)
-              return require("telescope.actions").preview_scrolling_up(...)
+            ['<C-b>'] = function(...)
+              return require('telescope.actions').preview_scrolling_up(...)
             end,
-            ["<C-s>"] = function(...)
-              return require("telescope.actions").select_vertical(...)
+            ['<C-s>'] = function(...)
+              return require('telescope.actions').select_vertical(...)
             end,
-            ["<esc>"] = function(...)
-              return require("telescope.actions").close(...)
+            ['<esc>'] = function(...)
+              return require('telescope.actions').close(...)
             end,
           },
           n = {
-            ["q"] = function(...)
-              return require("telescope.actions").close(...)
+            ['q'] = function(...)
+              return require('telescope.actions').close(...)
             end,
           },
         },
@@ -103,33 +103,32 @@ return {
     },
   },
   {
-    "debugloop/telescope-undo.nvim",
+    'debugloop/telescope-undo.nvim',
     dependencies = { -- note how they're inverted to above example
       {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
       },
     },
     keys = {
       { -- lazy style key map
-        "<leader>U",
-        "<cmd>Telescope undo<cr>",
-        desc = "undo history",
+        '<leader>U',
+        '<cmd>Telescope undo<cr>',
+        desc = 'undo history',
       },
     },
     opts = {
       -- don't use `defaults = { }` here, do this in the main telescope spec
       extensions = {
-        undo = {
-        },
+        undo = {},
       },
     },
     config = function(_, opts)
       -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
       -- configs for us. We won't use data, as everything is in it's own namespace (telescope
       -- defaults, as well as each extension).
-      require("telescope").setup(opts)
-      require("telescope").load_extension("undo")
+      require('telescope').setup(opts)
+      require('telescope').load_extension('undo')
     end,
   },
 }

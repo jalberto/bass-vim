@@ -12,6 +12,8 @@ return {
       dim = {},
       indent = {},
       scroll = {},
+      input = {},
+      scope = {},
       styles = {
         notification = {
           wo = { wrap = true }, -- Wrap notifications
