@@ -42,6 +42,7 @@
   "nvim-treesitter-context": { "branch": "master", "commit": "d0dd7ce5a9d0be1f28086e818e52fdc5c78975df" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "ad8f0a472148c3e0ae9851e26a722ee4e29b1595" },
   "nvim-ts-autotag": { "branch": "main", "commit": "1cca23c9da708047922d3895a71032bc0449c52d" },
+  "nvim-ts-context-commentstring": { "branch": "main", "commit": "1b212c2eee76d787bbea6aa5e92a2b534e7b4f8f" },
   "oklch-color-picker.nvim": { "branch": "master", "commit": "24f46c92c2d8228843a4628530ec873469650d16" },
   "phoenix.vim": { "branch": "master", "commit": "723be122f14a97246023190cee5f2f473ee8ec7b" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
