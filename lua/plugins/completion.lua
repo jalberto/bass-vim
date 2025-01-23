@@ -50,6 +50,7 @@ return {
         auto_show = true,
       },
       ghost_text = { enabled = true },
+      trigger = { show_in_snippet = false },
     },
     signature = {
       enabled = true,

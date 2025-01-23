@@ -14,7 +14,19 @@ return {
       scroll = {},
       input = {},
       scope = {},
-      picker = {},
+      picker = {
+        actions = require('trouble.sources.snacks').actions,
+        win = {
+          input = {
+            keys = {
+              ['<c-t>'] = {
+                'trouble_open',
+                mode = { 'n', 'i' },
+              },
+            },
+          },
+        },
+      },
       styles = {
         notification = {
           wo = { wrap = true }, -- Wrap notifications
@@ -227,8 +239,20 @@ return {
         desc = 'Recent',
       },
       -- git
-      -- { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
-      -- { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+      {
+        '<leader>gc',
+        function()
+          Snacks.picker.git_log()
+        end,
+        desc = 'Git Log',
+      },
+      {
+        '<leader>gs',
+        function()
+          Snacks.picker.git_status()
+        end,
+        desc = 'Git Status',
+      },
       -- Grep
       {
         '<leader>sb',
