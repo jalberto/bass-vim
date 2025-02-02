@@ -9,18 +9,14 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- keymap = { preset = 'super-tab' },
-    keymap = {
-      preset = 'super-tab',
-      -- Manually invoke minuet completion.
-      ['<A-y>'] = require('minuet').make_blink_map(),
-    },
+    keymap = { preset = 'super-tab' },
     -- appearence = {
     --   use_nvim_cmp_as_default = true,
     --   nerd_font_variant = 'mono',
     -- },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep', 'minuet' },
+      def
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' },
       providers = {
         ripgrep = {
           name = 'Ripgrep',
@@ -33,12 +29,6 @@ return {
             search_casing = '--smart-case',
             additional_rg_options = {},
           },
-        },
-        minuet = {
-          name = 'minuet',
-          module = 'minuet.blink',
-          enabled = true,
-          score_offset = 8, -- Gives minuet higher priority among suggestions
         },
       },
     },

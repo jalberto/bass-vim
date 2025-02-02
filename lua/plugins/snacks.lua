@@ -15,6 +15,9 @@ return {
       input = {},
       scope = {},
       picker = {
+        matcher = {
+          frecency = true,
+        },
         actions = require('trouble.sources.snacks').actions,
         win = {
           input = {
