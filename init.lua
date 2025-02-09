@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 local lazy_opts = {
   defaults = { lazy = true },
   checker = { enabled = false },
-  colorscheme = 'cyberdream',
+  colorscheme = 'rose-pine',
   change_detection = {
     notify = false,
   },
@@ -74,7 +74,7 @@ lazy.setup('plugins', lazy_opts)
 -- Set colorscheme
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'
-vim.cmd.colorscheme('cyberdream')
+-- vim.cmd.colorscheme('cyberdream')
 
 -- Load keymaps and autocommands after all plugins are loaded
 vim.api.nvim_create_autocmd('User', {

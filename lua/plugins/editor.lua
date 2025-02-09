@@ -8,7 +8,13 @@ return {
       retirementAgeMins = 10,
     },
   },
-
+  {
+    'echasnovski/mini.comment',
+    version = '*',
+    config = function()
+      require('mini.comment').setup()
+    end,
+  },
   -- file explorer
   {
     'echasnovski/mini.files',
@@ -108,16 +114,8 @@ return {
   -- NOTE: it is very intrusive
   {
     'gbprod/yanky.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim' },
     opts = {},
     keys = {
-      {
-        '<leader>p',
-        function()
-          require('telescope').extensions.yank_history.yank_history({})
-        end,
-        desc = 'Open Yank History',
-      },
       {
         'y',
         '<Plug>(YankyYank)',

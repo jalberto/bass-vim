@@ -142,11 +142,6 @@ return {
         },
       },
       keys = {
-        { '<leader>cd', '<cmd>Telescope lsp_definitions<cr>', desc = 'Goto Definition' },
-        { '<leader>cr', '<cmd>Telescope lsp_references<cr>', desc = 'References' },
-        { '<leader>cI', '<cmd>Telescope lsp_implementations<cr>', desc = 'Goto Implementation' },
-        { '<leader>ct', '<cmd>Telescope lsp_type_definitions<cr>', desc = 'Goto Type Definition' },
-        { '<leader>cs', '<cmd>Telescope lsp_document_symbols<cr>', desc = 'Goto Symbol' },
         { '<leader>cd', vim.lsp.buf.declaration, desc = 'Goto Declaration' },
         -- { "K", vim.lsp.buf.hover, desc = "Hover" },
         -- { "gK",         vim.lsp.buf.signature_help,                desc = "Signature Help" },

@@ -15,7 +15,6 @@ return {
     --   nerd_font_variant = 'mono',
     -- },
     sources = {
-      def
       default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' },
       providers = {
         ripgrep = {

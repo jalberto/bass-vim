@@ -49,41 +49,54 @@ return {
     -- lazy = false,
     -- priority = 1000,
     config = function()
-      -- vim.cmd([[colorscheme falcon]])
-      vim.g.falcon_background = 1
-      vim.g.falcon_inactive = 1
+      vim.g.falcon_background = 0
+      vim.g.falcon_inactive = 0
+      -- vim.cmd.colorscheme('falcon')
+    end,
+  },
+  -- lua/plugins/rose-pine.lua
+  {
+    'rose-pine/neovim',
+    lazy = false,
+    priority = 1000,
+    name = 'rose-pine',
+    config = function()
+      require('rose-pine').setup({
+        styles = { transparency = true },
+        variant = 'moon',
+      })
+      vim.cmd('colorscheme rose-pine')
     end,
   },
 
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = true,
+    },
+  },
+  {
+    'wtfox/jellybeans.nvim',
+    -- priority = 1000,
+    config = function()
+      require('jellybeans').setup({ transparent = true })
+      -- vim.cmd.colorscheme('jellybeans')
+    end,
+  },
   {
     'scottmckendry/cyberdream.nvim',
     lazy = false,
     priority = 1000,
     opts = {
       transparent = true,
-      borderless_telescope = false,
-      theme = {
-        variant = 'auto',
-        saturation = 1,
-      },
+      borderless_pickers = false,
+      variant = 'auto',
+      saturation = 1,
     },
   },
-  {
-    'zenbones-theme/zenbones.nvim',
-    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
-    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
-    -- In Vim, compat mode is turned on as Lush only works in Neovim.
-    dependencies = 'rktjmp/lush.nvim',
-    lazy = false,
-    priority = 1000,
-    -- you can set set configuration options here
-    config = function()
-      vim.g.zenbones_darken_comments = 45
-      vim.g.zenbones_darkness = 'stark'
-      vim.g.zenbones_transparent_background = true
-      -- vim.cmd.colorscheme('zenbones')
-    end,
-  },
+
   -- better vim.ui
   {
     'stevearc/dressing.nvim',
