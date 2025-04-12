@@ -6,7 +6,6 @@ return {
       'ziontee113/syntax-tree-surfer',
       'windwp/nvim-ts-autotag',
       'nvim-treesitter/nvim-treesitter-context',
-      'JoosepAlviste/nvim-ts-context-commentstring',
     },
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
@@ -57,17 +56,6 @@ return {
       vim.g.skip_ts_context_commentstring_module = true
       vim.opt.foldmethod = 'expr'
       vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-
-      -- Integrate context commentstring with native comment tool
-      -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#native-commenting-in-neovim-010
-      require('ts_context_commentstring').setup({
-        enable_autocmd = false,
-      })
-      local get_option = vim.filetype.get_option
-      vim.filetype.get_option = function(filetype, option)
-        return option == 'commentstring' and require('ts_context_commentstring.internal').calculate_commentstring()
-          or get_option(filetype, option)
-      end
     end,
   },
 }

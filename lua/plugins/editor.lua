@@ -1,4 +1,12 @@
 return {
+
+  -- Selectio mode web/WEB
+  {
+    'luiscassih/AniMotion.nvim',
+    event = 'VeryLazy',
+    config = true,
+  },
+
   {
     'chrisgrieser/nvim-early-retirement',
     config = true,

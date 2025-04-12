@@ -4,16 +4,17 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile = {},
+      terminal = { enabled = true },
+      bigfile = { enabled = true },
       notifier = { timeout = 3000 },
-      quickfile = {},
-      statuscolumn = {},
-      words = {},
-      dim = {},
-      indent = {},
-      scroll = {},
-      input = {},
-      scope = {},
+      quickfile = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+      dim = { enabled = true },
+      indent = { enabled = true },
+      scroll = { enabled = true },
+      input = { enabled = true },
+      scope = { enabled = true },
       styles = {
         notification = {
           wo = { wrap = true }, -- Wrap notifications

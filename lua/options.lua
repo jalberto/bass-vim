@@ -46,7 +46,7 @@ opt.spelloptions = 'camel'
 opt.laststatus = 3 -- set global status line
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
-vim.opt.splitkeep = 'screen'
+opt.splitkeep = 'screen'
 
 -- Enable a nice big viminfo file
 -- opt.viminfo = '1000,f1,:1000,/1000'
@@ -71,8 +71,8 @@ opt.maxmempattern = 5000 -- Maximum amount of memory in Kbyte used for pattern m
 opt.foldenable = true
 -- opt.foldmethod = 'syntax'
 -- opt.foldcolumn = '1'
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldlevelstart = 1 -- open most folds by default
 
 opt.number = true

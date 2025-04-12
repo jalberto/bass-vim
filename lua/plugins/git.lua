@@ -65,6 +65,7 @@ return {
     keys = {
       { '<leader>gh', '<cmd>DiffviewFileHistory %<cr>', desc = 'Diff File' },
       { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Diff all' },
+      { '<leader>v' },
     },
     config = function(_, opts)
       local dv = require('diffview')
@@ -81,6 +82,14 @@ return {
           file_history_panel = custom_keys,
         },
       })
+
+      vim.keymap.set('n', '<leader>v', function()
+        if next(require('diffview.lib').views) == nil then
+          vim.cmd('DiffviewOpen')
+        else
+          vim.cmd('DiffviewClose')
+        end
+      end)
     end,
   },
 }
