@@ -46,11 +46,6 @@ return {
   { 'amadeus/vim-mjml', ft = { 'mjml' } },
   { 'andrewstuart/vim-kubernetes', ft = { 'yaml' } },
   { 'towolf/vim-helm', ft = { 'yaml' } },
-  -- {
-  --   'norcalli/nvim-colorizer.lua',
-  --   ft = { 'css', 'html', 'javascript', 'vim', 'scss', 'markdown', 'toml', 'ini', 'config', 'yaml' },
-  --   config = true
-  -- },
 
   { 'tpope/vim-ragtag', ft = 'xml,html' }, -- xml & friends tags helpers
 
