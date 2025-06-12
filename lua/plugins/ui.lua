@@ -85,17 +85,17 @@ return {
       -- vim.cmd.colorscheme('jellybeans')
     end,
   },
-  {
-    'scottmckendry/cyberdream.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent = true,
-      borderless_pickers = false,
-      variant = 'auto',
-      saturation = 1,
-    },
-  },
+  -- {
+  --   'scottmckendry/cyberdream.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --     transparent = true,
+  --     borderless_pickers = false,
+  --     variant = 'auto',
+  --     saturation = 1,
+  --   },
+  -- },
 
   -- better vim.ui
   {

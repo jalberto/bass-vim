@@ -1,7 +1,7 @@
 return {
   -- Mason + LSP requires a specific dependency order
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
     cmd = 'Mason',
     build = ':MasonUpdate',
     keys = { { '<leader>cm', '<cmd>Mason<cr>', desc = 'Mason' } },
@@ -16,6 +16,7 @@ return {
       },
     },
   },
+
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     dependencies = { 'williamboman/mason.nvim' },
@@ -35,9 +36,9 @@ return {
     -- end,
   },
   {
-    'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason-lspconfig.nvim',
     dependencies = {
-      'williamboman/mason.nvim',
+      'mason-org/mason.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
     },
 
@@ -47,7 +48,6 @@ return {
       ensure_installed = {
         -- "lua_ls",
       },
-      automatic_installation = true, -- installs LSPs on demand
     },
   },
 
@@ -56,8 +56,8 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       {
-        'williamboman/mason-lspconfig.nvim',
-        dependencies = { 'williamboman/mason.nvim' },
+        'mason-org/mason-lspconfig.nvim',
+        dependencies = { 'mason-org/mason.nvim' },
       },
       { 'antosha417/nvim-lsp-file-operations', config = true },
       'saghen/blink.cmp',
