@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "tldr-mcp": {
+      "enabled": true,
+      "type": "local",
+      "timeout": 15000,
+      "command": ["tldr-mcp", "--project", "."]
+    }
+  },
+  "tools": {
+    "tldr-mcp": false
+  }
+}

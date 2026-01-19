@@ -52,4 +52,29 @@ return {
   { 'kevinhwang91/nvim-bqf', ft = 'qf' }, -- Quickfix improvementss
 
   { 'Vonr/align.nvim' },
+
+  {
+    "mason-org/mason-lspconfig.nvim",
+    cmd = { 'LspInstall' },
+    opts = {
+      ensure_installed = { "lua_ls" },
+    },
+    dependencies = {
+      {
+        "mason-org/mason.nvim",
+        cmd = { 'Mason' },
+        opts = {
+          ui = {
+            border = 'rounded',
+            icons = {
+              package_installed = '✓',
+              package_pending = '➜',
+              package_uninstalled = '✗',
+            },
+          },
+        },
+      },
+      "neovim/nvim-lspconfig",
+    },
+  }
 }
